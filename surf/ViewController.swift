@@ -189,7 +189,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let widthPixels = 150 * waveHeightDigitCount + 100
         
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
-        waveHeightLabel.text = String(waveHeightMax)
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        waveHeightLabel.text = formatter.string(from: (waveHeightMax as NSNumber))
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
         waveHeightLabel.center = CGPoint(x: self.view.frame.width - offset, y: 90)
