@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "surf/ViewController.swift"
-            timestampString = "545161609.841656"
+            timestampString = "545163970.95629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "findDataWithUserLocation()"
             landmarkType = "7">
          </BreakpointContent>

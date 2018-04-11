@@ -23,6 +23,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var waveHeightMin = 0
     var windSpeed = ""
     var windDirection = ""
+    var waveDirection = ""
     var windUnit = ""
     var path: UIBezierPath!
     var forecast: [Snapshot] = []
@@ -117,6 +118,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
                     waveHeightMax = currentWaveHeight * 3.28
                 }
+                //wave direction
+                if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
+                    waveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+                }
+                //wind direction
+                if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
+                    windDirection = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
+                }
+                //wind speed
+                if let currentWindSpeed = Int(firstBouy[6]) as Int?{
+                    windSpeed = String(currentWindSpeed)
+                }
             }
 
             
@@ -190,7 +203,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
+        formatter.maximumFractionDigits = 1
         waveHeightLabel.text = formatter.string(from: (waveHeightMax as NSNumber))
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
@@ -218,7 +231,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(label)
         
         let waveLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        waveLabel.text =  windDirection + " SWELL"
+        waveLabel.text =  waveDirection + " SWELL"
         waveLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
         waveLabel.center = CGPoint(x: self.view.frame.width/2, y:yValue + 20)
@@ -236,6 +249,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(titleLabel)
     }
     
+    
+    //
+    //Animation Components
+    //
 
     
     /// Start the display link
@@ -291,6 +308,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         return path
     }
+    
+    //
+    // Carinal Direction Conversion
+    //
+    
+    func windDirectionFromDegrees(degrees : Float) -> String {
+        
+        let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+        let i: Int = Int((degrees + 11.25)/22.5)
+        return directions[i % 16]
+    }
+    
+
+    
     
     ////
     //Location Services
