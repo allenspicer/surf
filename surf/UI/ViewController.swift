@@ -250,7 +250,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         waterTempLabel.text =  String(waterTemp) + "°F WATER"
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
         waterTempLabel.textColor =  waterColor
-        waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y: (2 * self.view.frame.height/5))
+        waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y: yValue + 40)
         waterTempLabel.textAlignment = .center
         view.addSubview(waterTempLabel)
     }
