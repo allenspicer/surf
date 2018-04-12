@@ -36,9 +36,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     /// The `CAShapeLayer` that will contain the animated path
     
-    private let shapeLayer: CAShapeLayer = {
+     let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
-        _layer.strokeColor = waterColor.cgColor
+        _layer.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         _layer.fillColor = UIColor.clear.cgColor
         _layer.lineWidth = 4
         return _layer
@@ -136,8 +136,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     print(windSpeed)
                 }
                 //water temp
-                if let currentWaterTemp = Float(firstBouy[14]) as Float?{
-                    waterTemp = Double(currentWaterTemp)
+                if let currentWaterTemp = Double(firstBouy[14]) as Double?{
+                    let waterTempTuple = fahrenheitFromCelcius(temp: currentWaterTemp)
+                    waterTemp = waterTempTuple.temp
+                    shapeLayer.strokeColor = waterTempTuple.waterColor.cgColor
                     print(waterTemp)
                 }
             }
