@@ -338,10 +338,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func fahrenheitFromCelcius(temp : Double) {
         
-        print(temp)
-        
         let tempInF = (9.0 / 5.0 * (temp)) + 32.0
-        print(tempInF)
         var tempIndex = Int()
         
         switch tempInF {
