@@ -35,6 +35,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var userLongitude = 0.0
     var userLatitude = 0.0
     var latitudeLongitudeArray = [(Double,Double)]()
+    var waterTemp = 0.0
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -139,9 +140,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     print(windSpeed)
                 }
                 //water temp
-                if let currentWindSpeed = Float(firstBouy[14]) as Float?{
-                    windSpeed = String(currentWindSpeed)
-                    print(windSpeed)
+                if let currentWaterTemp = Float(firstBouy[14]) as Float?{
+                    waterTemp = Double(currentWaterTemp)
+                    print(waterTemp)
                 }
             }
 
