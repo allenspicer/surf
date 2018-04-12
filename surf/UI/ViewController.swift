@@ -65,6 +65,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestLocation();
         }
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,6 +135,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 //wind speed
                 if let currentWindSpeed = Int(firstBouy[6]) as Int?{
+                    windSpeed = String(currentWindSpeed)
+                    print(windSpeed)
+                }
+                //water temp
+                if let currentWindSpeed = Float(firstBouy[14]) as Float?{
                     windSpeed = String(currentWindSpeed)
                     print(windSpeed)
                 }

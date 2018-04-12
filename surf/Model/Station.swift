@@ -14,16 +14,15 @@ struct Station: Decodable {
     let lon: String
     let owner: String?
     let name: String?
-    let snapshots: [Snapshot]
+//    let snapshots: [Snapshot]
     
-    init(id: String, lat: String, lon: String) {
+    init(id: String, lat: String, lon: String, owner: String?, name: String?) {
         self.id = id
         self.lat = lat
         self.lon = lon
         self.owner = owner
         self.name = name
-        self.snapshots = snapshots
-        
+//        self.snapshots = snapshots
     }
 }
 
