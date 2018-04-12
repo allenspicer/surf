@@ -10,12 +10,6 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-    
-    
-    // #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1) 4B9BD3 blue
-    // #colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1) 6658DA
-    // #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1) 45DE79
-    // #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1) FFB350
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
@@ -36,13 +30,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var userLatitude = 0.0
     var latitudeLongitudeArray = [(Double,Double)]()
     var waterTemp = 0.0
+    let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
+    static var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 
     
     /// The `CAShapeLayer` that will contain the animated path
     
     private let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
-        _layer.strokeColor = #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        _layer.strokeColor = waterColor.cgColor
         _layer.fillColor = UIColor.clear.cgColor
         _layer.lineWidth = 4
         return _layer
@@ -67,14 +63,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.requestLocation();
         }
         
-        
+
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.view.backgroundColor = #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1)
+//        self.view.backgroundColor = #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1)
         view.layer.addSublayer(shapeLayer)
         self.startDisplayLink()
         
@@ -220,7 +216,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         formatter.maximumFractionDigits = 1
         waveHeightLabel.text = formatter.string(from: (waveHeightMax as NSNumber))
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
-        waveHeightLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.center = CGPoint(x: self.view.frame.width - offset, y: 90)
         waveHeightLabel.textAlignment = .center
         view.addSubview(waveHeightLabel)
@@ -228,7 +224,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let feetLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         feetLabel.text = "ft"
         feetLabel.font = UIFont(name:"Damascus", size: 20.0)
-        feetLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        feetLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         feetLabel.center = CGPoint(x: (self.view.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
         feetLabel.textAlignment = .center
         view.addSubview(feetLabel)
@@ -238,7 +234,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         label.text = windSpeed + " " + windUnit + " " + windDirection + " WIND"
         label.font = UIFont(name:"Damascus", size: 10.0)
-        label.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         let yValue = (self.view.frame.height/5) + 20
         label.center = CGPoint(x: self.view.frame.width/2, y:yValue)
         label.textAlignment = .center
@@ -247,17 +243,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let waveLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         waveLabel.text =  waveDirection + " SWELL"
         waveLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waveLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        waveLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveLabel.center = CGPoint(x: self.view.frame.width/2, y:yValue + 20)
         waveLabel.textAlignment = .center
         view.addSubview(waveLabel)
+        
+        let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        waterTempLabel.text =  waveDirection + " SWELL"
+        waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
+        waterTempLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y:yValue + 20)
+        waterTempLabel.textAlignment = .center
+        view.addSubview(waterTempLabel)
     }
     
     func addSpotTitleLabel(){
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
         titleLabel.text = "Crystal Pier"
         titleLabel.font = UIFont(name:"Damascus", size: 40.0)
-        titleLabel.textColor =  #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1)
+        titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         titleLabel.center = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/5)
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
@@ -324,7 +328,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //
-    // Carinal Direction Conversion
+    // Helpers
     //
     
     func windDirectionFromDegrees(degrees : Float) -> String {
@@ -334,6 +338,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         return directions[i % 16]
     }
     
+    func fahrenheitFromCelcius(temp : Double) -> (temp: Double, waterColor: UIColor) {
+        
+        let tempInF = 5.0 / 9.0 * (temp) - 32.0
+        var tempIndex = Int()
+        
+        switch tempInF {
+        case -140..<40:
+            tempIndex = 0
+        case 40..<65:
+            tempIndex = 1
+        case 65..<80:
+            tempIndex = 2
+        case 80..<1000:
+            tempIndex = 0
+        default:
+            tempIndex = 2
+        }
+        return (tempInF, colorArray[tempIndex])
+    }
 
     
     
