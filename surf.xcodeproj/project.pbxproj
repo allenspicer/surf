@@ -64,8 +64,8 @@
 		9576FF5B207FDA62006240AD /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
 				95EEECDD204CF40600308E73 /* Info.plist */,
+				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
 				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
 			);
 			path = Other;
@@ -312,7 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
-				INFOPLIST_FILE = surf/Info.plist;
+				INFOPLIST_FILE = surf/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allenspicer.surf;
@@ -328,7 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
-				INFOPLIST_FILE = surf/Info.plist;
+				INFOPLIST_FILE = surf/Other/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.allenspicer.surf;
