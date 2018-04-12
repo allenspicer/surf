@@ -26,11 +26,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var waveDirection = ""
     var windUnit = ""
     var path: UIBezierPath!
-    var forecast: [Snapshot] = []
+//    var forecast: [Snapshot] = []
     var width: CGFloat = 0
     var height: CGFloat = 0
     var finalStats : [String] = []
-    var stationReport: BreakSnapshot? = nil
+//    var stationReport: BreakSnapshot? = nil
     var locationManager = CLLocationManager()
     var userLongitude = 0.0
     var userLatitude = 0.0

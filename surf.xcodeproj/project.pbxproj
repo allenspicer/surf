@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		950A2A4D2056BA1E008DE32F /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Snapshot.swift */; };
-		95713FF02075912300745FC7 /* BouySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* BouySnapshot.swift */; };
+		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
+		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
@@ -18,8 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		950A2A4C2056BA1E008DE32F /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
-		95713FEF2075912300745FC7 /* BouySnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouySnapshot.swift; sourceTree = "<group>"; };
+		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		95EEECCB204CF40600308E73 /* surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +41,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9576FF59207FDA41006240AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				950A2A4C2056BA1E008DE32F /* Station.swift */,
+				95713FEF2075912300745FC7 /* Snapshot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9576FF5A207FDA52006240AD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				95EEECD0204CF40600308E73 /* ViewController.swift */,
+				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
+				95EEECD8204CF40600308E73 /* Assets.xcassets */,
+				95EEECD2204CF40600308E73 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9576FF5B207FDA62006240AD /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
+				95EEECDD204CF40600308E73 /* Info.plist */,
+				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		95EEECC2204CF40600308E73 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +90,9 @@
 		95EEECCD204CF40600308E73 /* surf */ = {
 			isa = PBXGroup;
 			children = (
-				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
-				95EEECD0204CF40600308E73 /* ViewController.swift */,
-				950A2A4C2056BA1E008DE32F /* Snapshot.swift */,
-				95713FEF2075912300745FC7 /* BouySnapshot.swift */,
-				95EEECD2204CF40600308E73 /* Main.storyboard */,
-				95EEECD8204CF40600308E73 /* Assets.xcassets */,
-				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
-				95EEECDD204CF40600308E73 /* Info.plist */,
-				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
+				9576FF59207FDA41006240AD /* Model */,
+				9576FF5A207FDA52006240AD /* UI */,
+				9576FF5B207FDA62006240AD /* Other */,
 			);
 			path = surf;
 			sourceTree = "<group>";
@@ -148,8 +172,8 @@
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
-				95713FF02075912300745FC7 /* BouySnapshot.swift in Sources */,
-				950A2A4D2056BA1E008DE32F /* Snapshot.swift in Sources */,
+				95713FF02075912300745FC7 /* Snapshot.swift in Sources */,
+				950A2A4D2056BA1E008DE32F /* Station.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

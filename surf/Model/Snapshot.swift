@@ -1,5 +1,5 @@
 //
-//  BouySnapshot.swift
+//  Snapshot.swift
 //  surf
 //
 //  Created by uBack on 3/12/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BouySnapshot {
+struct Snapshot {
     let id: String
     let year: String
     let month: String
@@ -29,9 +29,6 @@ struct BouySnapshot {
     let DEWP: String?
     let VIS: String?
     let tide: String?
-//        let lat: String
-//        let lon: String
-
 }
 
 
