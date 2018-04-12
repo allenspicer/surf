@@ -115,20 +115,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             if let firstBouy = bouyDictionary[2]{
+                print(firstBouy)
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
                     waveHeightMax = currentWaveHeight * 3.28
+                    print(waveHeightMax)
                 }
                 //wave direction
                 if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
                     waveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+                    print(waveDirection)
                 }
                 //wind direction
                 if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
                     windDirection = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
+                    print(windDirection)
                 }
                 //wind speed
                 if let currentWindSpeed = Int(firstBouy[6]) as Int?{
                     windSpeed = String(currentWindSpeed)
+                    print(windSpeed)
                 }
             }
 
@@ -153,7 +158,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             for coord in latitudeLongitudeArray{
                 
                 //square root of difference in lats squared + difference in longs squared
-                if let distanceFromNewPoint = sqrt(pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2)) as Double?{
+                if let distanceFromNewPoint = pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2) as Double?{
                     
                     //calculate distance from point to user and previous point to user
                     
