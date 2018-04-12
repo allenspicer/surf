@@ -31,7 +31,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var latitudeLongitudeArray = [(Double,Double)]()
     var waterTemp = 0.0
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
-    static var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    var bouyDictionary : [Int : [String]] = [Int: [String]]()
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -104,8 +105,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             var rawStatArray : [String] = []
             
             
-            var bouyDictionary : [Int : [String]] = [Int: [String]]()
-            
             for (index, line) in lines.enumerated(){
                 if (index < 10 && index > 1){
                     rawStatArray = line.components(separatedBy: " ")
@@ -137,19 +136,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 }
                 //water temp
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
-                    let waterTempTuple = fahrenheitFromCelcius(temp: currentWaterTemp)
-                    waterTemp = waterTempTuple.temp
-                    shapeLayer.strokeColor = waterTempTuple.waterColor.cgColor
+                    fahrenheitFromCelcius(temp: currentWaterTemp)
+                    shapeLayer.strokeColor = waterColor.cgColor
                     print(waterTemp)
                 }
             }
-
             
-
-        DispatchQueue.main.async{
-            self.setDataModel()
-            self.setUIValuesWithBouyData()
-        }
+            DispatchQueue.main.async{
+                self.setDataModel()
+                self.setUIValuesWithBouyData()
+            }
             
         }catch{
             print("Bouy Data Retreival Error: \(error)")
@@ -251,10 +247,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(waveLabel)
         
         let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        waterTempLabel.text =  waveDirection + " SWELL"
+        waterTempLabel.text =  String(waterTemp) + "°F WATER"
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waterTempLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y:yValue + 20)
+        waterTempLabel.textColor =  waterColor
+        waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y: (2 * self.view.frame.height/5))
         waterTempLabel.textAlignment = .center
         view.addSubview(waterTempLabel)
     }
@@ -340,9 +336,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         return directions[i % 16]
     }
     
-    func fahrenheitFromCelcius(temp : Double) -> (temp: Double, waterColor: UIColor) {
+    func fahrenheitFromCelcius(temp : Double) {
         
-        let tempInF = 5.0 / 9.0 * (temp) - 32.0
+        print(temp)
+        
+        let tempInF = (9.0 / 5.0 * (temp)) + 32.0
+        print(tempInF)
         var tempIndex = Int()
         
         switch tempInF {
@@ -357,7 +356,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         default:
             tempIndex = 2
         }
-        return (tempInF, colorArray[tempIndex])
+        waterTemp = tempInF
+        waterColor = colorArray[tempIndex]
     }
 
     
