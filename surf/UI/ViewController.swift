@@ -109,33 +109,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             if let firstBouy = bouyDictionary[2]{
                 
+                var dataDictionary = [ String : Any ]()
                 
-                print(firstBouy)
+                //wave height
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
-                    waveHeightMax = currentWaveHeight * 3.28
-                    print(waveHeightMax)
+                    dataDictionary["waveHgt"] = currentWaveHeight * 3.28
                 }
                 //wave direction
                 if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
-                    waveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
-                    print(waveDirection)
+                    dataDictionary["meanWaveDirection"] = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
                 }
                 //wind direction
                 if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
-                    windDirection = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
-                    print(windDirection)
+                    dataDictionary["windDir"] = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
                 }
                 //wind speed
                 if let currentWindSpeed = Int(firstBouy[6]) as Int?{
-                    windSpeed = String(currentWindSpeed)
-                    print(windSpeed)
+                    dataDictionary["windSpd"] = currentWindSpeed
                 }
                 //water temp
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
-                    fahrenheitFromCelcius(temp: currentWaterTemp)
-                    shapeLayer.strokeColor = waterColor.cgColor
-                    print(waterTemp)
+                    dataDictionary["waterTemp"] = fahrenheitFromCelcius(temp: currentWaterTemp)
                 }
+                
+                let curr = Station.init(from: <#T##Decoder#>)
+                
+//                let currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: dataDictionary["windDir"] "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "")
+                
             }
             
             DispatchQueue.main.async{
@@ -333,7 +333,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         return directions[i % 16]
     }
     
-    func fahrenheitFromCelcius(temp : Double) {
+    func fahrenheitFromCelcius(temp : Double) -> Double{
         
         let tempInF = (9.0 / 5.0 * (temp)) + 32.0
         var tempIndex = Int()
@@ -352,6 +352,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         waterTemp = tempInF
         waterColor = colorArray[tempIndex]
+        return tempInF
     }
 
     
