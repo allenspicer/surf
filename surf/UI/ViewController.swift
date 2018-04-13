@@ -32,7 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
     var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
-//    var snapshot : Snapshot? = nil
+    var currentSnapShot : Snapshot? = nil
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -109,31 +109,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             if let firstBouy = bouyDictionary[2]{
                 
-                var dataDictionary = [ String : Any ]()
+                currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "")
                 
                 //wave height
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
-                    dataDictionary["waveHgt"] = currentWaveHeight * 3.28
+                    currentSnapShot.waveHgt = String(currentWaveHeight * 3.28)
                 }
                 //wave direction
                 if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
-                    dataDictionary["meanWaveDirection"] = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+                    currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
                 }
                 //wind direction
                 if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
-                    dataDictionary["windDir"] = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
+                    currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
                 }
                 //wind speed
                 if let currentWindSpeed = Int(firstBouy[6]) as Int?{
-                    dataDictionary["windSpd"] = currentWindSpeed
+                    currentSnapShot.windSpd = String(currentWindSpeed)
                 }
                 //water temp
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
-                    dataDictionary["waterTemp"] = fahrenheitFromCelcius(temp: currentWaterTemp)
+                    currentSnapShot.waterTemp = String(fahrenheitFromCelcius(temp: currentWaterTemp))
                 }
-                                
-//                let currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: dataDictionary["windDir"] "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "")
-                
             }
             
             DispatchQueue.main.async{
