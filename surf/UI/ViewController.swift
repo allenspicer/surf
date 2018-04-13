@@ -113,23 +113,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
                 //wave height
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
-                    currentSnapShot.waveHgt = String(currentWaveHeight * 3.28)
+                    currentSnapShot?.waveHgt = String(currentWaveHeight * 3.28)
                 }
                 //wave direction
                 if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
-                    currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+                    currentSnapShot?.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
                 }
                 //wind direction
                 if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
-                    currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
+                    currentSnapShot?.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
                 }
                 //wind speed
                 if let currentWindSpeed = Int(firstBouy[6]) as Int?{
-                    currentSnapShot.windSpd = String(currentWindSpeed)
+                    currentSnapShot?.windSpd = String(currentWindSpeed)
                 }
                 //water temp
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
-                    currentSnapShot.waterTemp = String(fahrenheitFromCelcius(temp: currentWaterTemp))
+                    currentSnapShot?.waterTemp = String(fahrenheitFromCelcius(temp: currentWaterTemp))
                 }
             }
             
