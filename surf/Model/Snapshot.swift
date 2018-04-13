@@ -9,26 +9,26 @@
 import Foundation
 
 struct Snapshot {
-    let id: String
-    let year: String
-    let month: String
-    let day: String
-    let hour: String
-    let minute: String
-    let windDir: String?
-    let windSpd: String?
-    let gusts: String?
-    let waveHgt: String?
-    let dominantWavePeriod: String?
-    let waveAveragePeriod: String?
-    let meanWaveDirection: String?
-    let PRES: String?
-    let PTDY: String?
-    let airTemp: String?
-    let waterTemp: String?
-    let DEWP: String?
-    let VIS: String?
-    let tide: String?
+    var id: String
+    var year: String
+    var month: String
+    var day: String
+    var hour: String
+    var minute: String
+    var windDir: String?
+    var windSpd: String?
+    var gusts: String?
+    var waveHgt: String?
+    var dominantWavePeriod: String?
+    var waveAveragePeriod: String?
+    var meanWaveDirection: String?
+    var PRES: String?
+    var PTDY: String?
+    var airTemp: String?
+    var waterTemp: String?
+    var DEWP: String?
+    var VIS: String?
+    var tide: String?
     
     
     
