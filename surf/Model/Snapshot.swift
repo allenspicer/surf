@@ -29,6 +29,9 @@ struct Snapshot {
     let DEWP: String?
     let VIS: String?
     let tide: String?
+    
+    
+    
 }
 
 
