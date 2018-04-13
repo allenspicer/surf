@@ -131,9 +131,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
                     dataDictionary["waterTemp"] = fahrenheitFromCelcius(temp: currentWaterTemp)
                 }
-                
-                let curr = Station.init(from: <#T##Decoder#>)
-                
+                                
 //                let currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: dataDictionary["windDir"] "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "")
                 
             }
