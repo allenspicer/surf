@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
@@ -20,11 +21,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var waveDirection = ""
     var windUnit = ""
     var path: UIBezierPath!
-//    var forecast: [Snapshot] = []
     var width: CGFloat = 0
     var height: CGFloat = 0
     var finalStats : [String] = []
-//    var stationReport: BreakSnapshot? = nil
     var locationManager = CLLocationManager()
     var userLongitude = 0.0
     var userLatitude = 0.0
@@ -33,6 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
     var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
+//    var snapshot : Snapshot? = nil
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -84,14 +84,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         stopDisplayLink()
     }
     
-    struct StationStat {
-        let value: String
-        var isEmpty: Bool { if (value == ""){ return true}else{return false}}
-        var desc: String {
-            return value
-        }
-    }
-    
     func bouyDataServiceRequest(){
         
         // 41110 Masenboro Inlet ILM2
@@ -113,7 +105,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 }
             }
             
+            
+            
             if let firstBouy = bouyDictionary[2]{
+                
+                
                 print(firstBouy)
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
                     waveHeightMax = currentWaveHeight * 3.28
@@ -145,6 +141,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             DispatchQueue.main.async{
                 self.setDataModel()
                 self.setUIValuesWithBouyData()
+                
             }
             
         }catch{
