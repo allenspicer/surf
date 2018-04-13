@@ -14,11 +14,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
-    var waveHeightMax = 0.0
+//    var waveHeightMax = 0.0
     var waveHeightMin = 0
-    var windSpeed = ""
-    var windDirection = ""
-    var waveDirection = ""
+//    var windSpeed = ""
+//    var windDirection = ""
+//    var waveDirection = ""
     var windUnit = ""
     var path: UIBezierPath!
     var width: CGFloat = 0
@@ -28,7 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var userLongitude = 0.0
     var userLatitude = 0.0
     var latitudeLongitudeArray = [(Double,Double)]()
-    var waterTemp = 0.0
+//    var waterTemp = 0.0
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
     var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
@@ -187,7 +187,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func addWaveHeightLabels(){
         
         var waveHeightDigitCount = CGFloat(0)
-        switch waveHeightMax {
+        var waveHeight = 0.0
+        if let wHeight = currentSnapShot?.waveHgt as String?{
+            waveHeight = Double(wHeight) ?? 0.0
+        }
+        
+        switch waveHeight{
         case ...9:
             waveHeightDigitCount = 2
         case 10...99:
@@ -204,7 +209,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
-        waveHeightLabel.text = formatter.string(from: (waveHeightMax as NSNumber))
+        if let waveHeight = currentSnapShot?.waveHgt as String?{
+            waveHeightLabel.text = waveHeight
+        }
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.center = CGPoint(x: self.view.frame.width - offset, y: 90)
@@ -222,7 +229,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        label.text = windSpeed + " " + windUnit + " " + windDirection + " WIND"
+        if  let speed = currentSnapShot?.windSpd as String?{
+            if let direction = currentSnapShot?.windDir as String?{
+                label.text = speed + " " + windUnit + " " + direction + " WIND"
+            }
+        }
         label.font = UIFont(name:"Damascus", size: 10.0)
         label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         let yValue = (self.view.frame.height/5) + 20
@@ -231,7 +242,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(label)
         
         let waveLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        waveLabel.text =  waveDirection + " SWELL"
+        if let direction = currentSnapShot?.meanWaveDirection as String?{
+            waveLabel.text =  direction + " SWELL"
+        }
         waveLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveLabel.center = CGPoint(x: self.view.frame.width/2, y:yValue + 20)
@@ -239,7 +252,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(waveLabel)
         
         let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        waterTempLabel.text =  String(waterTemp) + "°F WATER"
+        if let temp = currentSnapShot?.waterTemp {
+            waterTempLabel.text =  temp + "°F WATER"
+        }
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
         waterTempLabel.textColor =  waterColor
         waterTempLabel.center = CGPoint(x: self.view.frame.width/2, y: yValue + 40)
@@ -285,7 +300,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func handleDisplayLink(_ displayLink: CADisplayLink) {
         let elapsed = CFAbsoluteTimeGetCurrent() - startTime!
-        let waveHeightMaxInt = Int(waveHeightMax * 10)
+        var waveHeightMaxInt = 0
+        if let waveHeight = currentSnapShot?.waveHgt as String?{
+            if let intValue = Int(Double(waveHeight)! * 10) as Int?{
+                waveHeightMaxInt = intValue
+            }
+        }
+        
         if let path = wave(at: elapsed, waveHeightMax: waveHeightMaxInt, waveHeightMin: (waveHeightMin * 10)).cgPath as CGPath?{
             shapeLayer.path = path
         }
@@ -345,7 +366,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         default:
             tempIndex = 2
         }
-        waterTemp = tempInF
         waterColor = colorArray[tempIndex]
         return tempInF
     }
