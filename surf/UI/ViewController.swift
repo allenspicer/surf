@@ -275,7 +275,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 waveHeightMaxInt = intValue
             }
         }
-        let waveTop = centerY - waveHeightMaxInt - 15
+        let waveTop = centerY - waveHeightMaxInt - 14
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
         if let waveHeight = currentSnapShot?.waveHgt as String?{
             waveHeightLabel.text = "__ \(waveHeight)ft"
