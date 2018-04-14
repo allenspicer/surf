@@ -72,8 +72,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
         
 //        self.view.backgroundColor = #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1)
-        view.layer.addSublayer(shapeLayer)
-        self.startDisplayLink()
         
         self.width = self.view.frame.width
         self.height = self.view.frame.height
@@ -104,8 +102,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     bouyDictionary[index] = rawStatArray
                 }
             }
-            
-            
+
             
             if let firstBouy = bouyDictionary[2]{
                 
@@ -113,7 +110,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
                 //wave height
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
-                    currentSnapShot?.waveHgt = String(currentWaveHeight * 3.28)
+                    let formatter = NumberFormatter()
+                    formatter.maximumFractionDigits = 1
+                    let heightInFeet = currentWaveHeight * 3.28
+                    currentSnapShot?.waveHgt = formatter.string(from: heightInFeet as NSNumber)
+                        
                 }
                 //wave direction
                 if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
@@ -130,12 +131,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 //water temp
                 if let currentWaterTemp = Double(firstBouy[14]) as Double?{
                     currentSnapShot?.waterTemp = String(fahrenheitFromCelcius(temp: currentWaterTemp))
+                    self.shapeLayer.strokeColor = waterColor.cgColor
                 }
             }
             
             DispatchQueue.main.async{
-                self.setDataModel()
                 self.setUIValuesWithBouyData()
+                self.view.layer.addSublayer(self.shapeLayer)
+                self.startDisplayLink()
                 
             }
             
@@ -171,13 +174,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    
-    func setDataModel(){
-        
-
-    }
-    
-    
     func setUIValuesWithBouyData(){
         self.addWaveHeightLabels()
         self.addSpotTitleLabel()
@@ -207,8 +203,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let widthPixels = 150 * waveHeightDigitCount + 100
         
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 1
         if let waveHeight = currentSnapShot?.waveHgt as String?{
             waveHeightLabel.text = waveHeight
         }
