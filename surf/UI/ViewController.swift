@@ -33,6 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
+    var waveIsLabeled = false
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -282,6 +283,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.textAlignment = .left
+        waveHeightLabel.tag = 100
         view.addSubview(waveHeightLabel)
     }
     
@@ -294,8 +296,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func tap(_ sender: UITapGestureRecognizer) {
-        print("Hello Museer")
-        addWaveHeightIndicator()
+        
+        if (waveIsLabeled){
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+                waveIsLabeled = false
+            }
+        }else{
+            addWaveHeightIndicator()
+            waveIsLabeled = true
+        }
     }
     
     //
