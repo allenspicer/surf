@@ -53,6 +53,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addGestureRecognizer()
         isAuthorizedtoGetUserLocation()
         
         if CLLocationManager.locationServicesEnabled() {
@@ -63,9 +64,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestLocation();
         }
-        
-
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -267,6 +265,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    func addWaveHeightIndicator(){
+        
+        let centerY = view.bounds.height / 2
+        var waveHeightMaxInt: CGFloat = 0
+        if let waveHeight = currentSnapShot?.waveHgt as String?{
+            if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
+                waveHeightMaxInt = intValue
+            }
+        }
+        let waveTop = centerY - waveHeightMaxInt
+        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 100))
+        if let waveHeight = currentSnapShot?.waveHgt as String?{
+            waveHeightLabel.text = "__ \(waveHeight)ft"
+        }
+        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
+        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        waveHeightLabel.center = CGPoint(x: self.view.frame.width - offset, y: 90)
+        waveHeightLabel.textAlignment = .left
+        view.addSubview(waveHeightLabel)
+    }
+    
+    
+    func addGestureRecognizer(){
+        let startTouch = UITapGestureRecognizer(target: self, action: #selector(self.touchStarted(_:)))
+        view.addGestureRecognizer(startTouch)
+        view.isUserInteractionEnabled = true
+
+    }
+    
+    @objc func touchStarted(_ sender: UITapGestureRecognizer) {
+        print("Hello Museer")
+        addWaveHeightIndicator()
+    }
+    
     //
     //Animation Components
     //
@@ -301,7 +333,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
         
-        if let path = wave(at: elapsed, waveHeightMax: waveHeightMaxInt, waveHeightMin: (waveHeightMin * 10)).cgPath as CGPath?{
+        if let path = wave(at: elapsed, waveHeightMax: waveHeightMaxInt).cgPath as CGPath?{
             shapeLayer.path = path
         }
     }
@@ -313,7 +345,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     /// - Parameter elapsed: How many seconds have elapsed.
     /// - Returns: The `UIBezierPath` for a particular point of time.
     
-    private func wave(at elapsed: Double, waveHeightMax: Int, waveHeightMin: Int) -> UIBezierPath {
+    private func wave(at elapsed: Double, waveHeightMax: Int) -> UIBezierPath {
         let centerY = view.bounds.height / 2
         var amplitude = CGFloat(0)
         let shorten = fabs(fmod(CGFloat(elapsed), 3) - 1.5) * 40
