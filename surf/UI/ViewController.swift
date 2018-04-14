@@ -274,27 +274,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 waveHeightMaxInt = intValue
             }
         }
-        let waveTop = centerY - waveHeightMaxInt
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 100))
+        let waveTop = centerY - waveHeightMaxInt - 15
+        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
         if let waveHeight = currentSnapShot?.waveHgt as String?{
             waveHeightLabel.text = "__ \(waveHeight)ft"
         }
         waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        waveHeightLabel.center = CGPoint(x: self.view.frame.width - offset, y: 90)
         waveHeightLabel.textAlignment = .left
         view.addSubview(waveHeightLabel)
     }
     
     
     func addGestureRecognizer(){
-        let startTouch = UITapGestureRecognizer(target: self, action: #selector(self.touchStarted(_:)))
-        view.addGestureRecognizer(startTouch)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        view.addGestureRecognizer(tap)
         view.isUserInteractionEnabled = true
 
     }
     
-    @objc func touchStarted(_ sender: UITapGestureRecognizer) {
+    @objc func tap(_ sender: UITapGestureRecognizer) {
         print("Hello Museer")
         addWaveHeightIndicator()
     }
