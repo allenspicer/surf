@@ -14,11 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
-//    var waveHeightMax = 0.0
     var waveHeightMin = 0
-//    var windSpeed = ""
-//    var windDirection = ""
-//    var waveDirection = ""
     var windUnit = ""
     var path: UIBezierPath!
     var width: CGFloat = 0
@@ -28,7 +24,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var userLongitude = 0.0
     var userLatitude = 0.0
     var latitudeLongitudeArray = [(Double,Double)]()
-//    var waterTemp = 0.0
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
     var waterColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
