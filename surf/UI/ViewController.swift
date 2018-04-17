@@ -100,7 +100,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             if let firstBouy = bouyDictionary[2]{
                 
-                currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "")
+                currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "", timeStamp: Date())
                 
                 //wave height
                 if let currentWaveHeight = Double(firstBouy[8]) as Double?{
