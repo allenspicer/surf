@@ -29,8 +29,7 @@ struct Snapshot {
     var DEWP: String?
     var VIS: String?
     var tide: String?
-    
-    
+    var timeStamp: Date
     
 }
 
