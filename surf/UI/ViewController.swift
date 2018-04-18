@@ -76,6 +76,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         stopDisplayLink()
     }
     
+    
+// TODO: bouyDataServiceRequest is networking and parsing and needs to be moved to the model layer or to its own file
+    
     func bouyDataServiceRequest(){
         
         // 41110 Masenboro Inlet ILM2
@@ -131,9 +134,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             
             DispatchQueue.main.async{
                 self.setUIValuesWithBouyData()
-                self.view.layer.addSublayer(self.shapeLayer)
-                self.startDisplayLink()
-                
             }
             
         }catch{
@@ -168,10 +168,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    //TODO: The five functions contained in setUIValuesWithBouyData are all UI. They need to be moved to a view layer
+    
     func setUIValuesWithBouyData(){
         self.addWaveHeightLabels()
         self.addSpotTitleLabel()
         self.addSpotDetails()
+        self.view.layer.addSublayer(self.shapeLayer)
+        self.startDisplayLink()
     }
     
     func addWaveHeightLabels(){
