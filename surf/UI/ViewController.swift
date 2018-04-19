@@ -24,7 +24,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
     var waveIsLabeled = false
-
     
     /// The `CAShapeLayer` that will contain the animated path
     
@@ -74,17 +73,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if (userLatitude != 0 && userLongitude != 0) {
             for coord in latitudeLongitudeArray{
                 
-                //square root of difference in lats squared + difference in longs squared
-                if let distanceFromNewPoint = pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2) as Double?{
-                    
+                guard let distanceFromNewPoint = pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2) as Double? else {
+                    return
+                }
                     //calculate distance from point to user and previous point to user
-                    
                     //if new point is closer than previous point
-                    if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
-                        //save coorindates of new point over top
-                        minDistance = distanceFromNewPoint
+                if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
+                    //save coorindates of new point over top
+                    minDistance = distanceFromNewPoint
 //                        coordAtMinDistance = coord
-                    }
                 }
             }
         }
