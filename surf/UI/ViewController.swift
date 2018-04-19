@@ -14,11 +14,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
-    var waveHeightMin = 0
-    var windUnit = ""
+    var windUnit = "MPH"
     var path: UIBezierPath!
-    var width: CGFloat = 0
-    var height: CGFloat = 0
     var finalStats : [String] = []
     var locationManager = CLLocationManager()
     var userLongitude = 0.0
@@ -60,16 +57,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestLocation();
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        self.view.backgroundColor = #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1)
-        
-        self.width = self.view.frame.width
-        self.height = self.view.frame.height
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -144,7 +131,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func findDataWithUserLocation(){
         var minDistance = 0.0
-        var coordAtMinDistance = (0.0,0.0)
+//        var coordAtMinDistance = (0.0,0.0)
         
         if (userLatitude != 0 && userLongitude != 0) {
             for coord in latitudeLongitudeArray{
@@ -158,13 +145,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
                         //save coorindates of new point over top
                         minDistance = distanceFromNewPoint
-                        coordAtMinDistance = coord
+//                        coordAtMinDistance = coord
                     }
                 }
             }
         }
-        print(minDistance)
-        print(coordAtMinDistance)
         
     }
     
