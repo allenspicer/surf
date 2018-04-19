@@ -26,8 +26,17 @@ class surfTests: XCTestCase {
         XCTAssertNotNil(controller.windUnit)
     }
     
+    func test_initial_view_is_not_nil(){
+        let  controller = ViewController()
+        let view = controller.view
+        XCTAssertNotNil(view)
+    }
     
-    
+    func test_initial_subviews_are_less_than_one(){
+        let  controller = ViewController()
+        let view = controller.view
+        XCTAssertGreaterThan(1, view!.subviews.count)
+    }
     
     
     
