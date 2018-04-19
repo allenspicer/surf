@@ -104,28 +104,27 @@ func addUIComponentsToView(currentSnapShot : Snapshot, view : UIView){
     }
     addSpotTitleLabel()
     
-    func addWaveHeightIndicator(){
-        
-        let centerY = view.bounds.height / 2
-        var waveHeightMaxInt: CGFloat = 0
-        if let waveHeight = currentSnapShot.waveHgt as String?{
-            if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
-                waveHeightMaxInt = intValue
-            }
-        }
-        let waveTop = centerY - waveHeightMaxInt - 14
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        if let waveHeight = currentSnapShot.waveHgt as String?{
-            waveHeightLabel.text = "__ \(waveHeight)ft"
-        }
-        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveHeightLabel.textAlignment = .left
-        waveHeightLabel.tag = 100
-        view.addSubview(waveHeightLabel)
-    }
-    addWaveHeightIndicator()
-    
 }
 
+
+func addWaveHeightIndicator(viewController : ViewController){
+    
+    let centerY = viewController.view.bounds.height / 2
+    var waveHeightMaxInt: CGFloat = 0
+    if let waveHeight = viewController.currentSnapShot?.waveHgt as String?{
+        if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
+            waveHeightMaxInt = intValue
+        }
+    }
+    let waveTop = centerY - waveHeightMaxInt - 14
+    let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
+    if let waveHeight = viewController.currentSnapShot?.waveHgt as String?{
+        waveHeightLabel.text = "__ \(waveHeight)ft"
+    }
+    waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
+    waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    waveHeightLabel.textAlignment = .left
+    waveHeightLabel.tag = 100
+    viewController.view.addSubview(waveHeightLabel)
+}
 

@@ -106,7 +106,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 waveIsLabeled = false
             }
         }else{
-//            addWaveHeightIndicator()
+            addWaveHeightIndicator(viewController: self)
             waveIsLabeled = true
         }
     }
