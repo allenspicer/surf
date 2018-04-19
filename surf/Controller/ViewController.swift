@@ -88,46 +88,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func setUIValuesWithBouyData(){
         
         guard let currentSnapShot  = currentSnapShot else {return}
-        addWaveHeightLabels(currentSnapShot: currentSnapShot, view: self.view)
-        self.addSpotTitleLabel()
+        addUIComponentsToView(currentSnapShot: currentSnapShot, view: self.view)
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
     }
-    
-
-    
-    func addSpotTitleLabel(){
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 200))
-        titleLabel.text = "Crystal Pier"
-        titleLabel.font = UIFont(name:"Damascus", size: 40.0)
-        titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        titleLabel.center = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/5)
-        titleLabel.textAlignment = .center
-        view.addSubview(titleLabel)
-    }
-    
-    
-    func addWaveHeightIndicator(){
-    
-        let centerY = view.bounds.height / 2
-        var waveHeightMaxInt: CGFloat = 0
-        if let waveHeight = currentSnapShot?.waveHgt as String?{
-            if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
-                waveHeightMaxInt = intValue
-            }
-        }
-        let waveTop = centerY - waveHeightMaxInt - 14
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        if let waveHeight = currentSnapShot?.waveHgt as String?{
-            waveHeightLabel.text = "__ \(waveHeight)ft"
-        }
-        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveHeightLabel.textAlignment = .left
-        waveHeightLabel.tag = 100
-        view.addSubview(waveHeightLabel)
-    }
-    
     
     func addGestureRecognizer(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
