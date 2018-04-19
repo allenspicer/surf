@@ -40,8 +40,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        self.shapeLayer.strokeColor = waterColor
-        
         DispatchQueue.main.async{
             let dataTuple = bouyDataServiceRequest{}
             self.currentSnapShot = dataTuple.0
@@ -69,10 +67,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         stopDisplayLink()
     }
-    
-    
-// TODO: bouyDataServiceRequest is networking and parsing and needs to be moved to the model layer or to its own file
-    
     
     func findDataWithUserLocation(){
         var minDistance = 0.0
