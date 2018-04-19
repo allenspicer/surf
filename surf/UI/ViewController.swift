@@ -16,7 +16,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private var startTime: CFAbsoluteTime?
     var windUnit = "MPH"
     var path: UIBezierPath!
-    var finalStats : [String] = []
     var locationManager = CLLocationManager()
     var userLongitude = 0.0
     var userLatitude = 0.0
@@ -26,7 +25,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var waveIsLabeled = false
     
     /// The `CAShapeLayer` that will contain the animated path
-    
      let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
         _layer.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -34,7 +32,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         _layer.lineWidth = 4
         return _layer
     }()
-
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -68,7 +65,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func findDataWithUserLocation(){
         var minDistance = 0.0
-//        var coordAtMinDistance = (0.0,0.0)
+        var coordAtMinDistance = (0.0,0.0)
         
         if (userLatitude != 0 && userLongitude != 0) {
             for coord in latitudeLongitudeArray{
@@ -81,11 +78,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
                     //save coorindates of new point over top
                     minDistance = distanceFromNewPoint
-//                        coordAtMinDistance = coord
+                        coordAtMinDistance = coord
                 }
             }
         }
-        
     }
     
     //TODO: The five functions contained in setUIValuesWithBouyData are all UI. They need to be moved to a view layer
