@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 
-
 var windUnit = "MPH"
 
 func addUIComponentsToView(currentSnapShot : Snapshot, view : UIView){
