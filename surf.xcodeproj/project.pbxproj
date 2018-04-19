@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
@@ -17,9 +18,22 @@
 		95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		95E1BEA02088C7AD0096ECA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95EEECC3204CF40600308E73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 95EEECCA204CF40600308E73;
+			remoteInfo = surf;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfTests.swift; sourceTree = "<group>"; };
+		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95EEECCB204CF40600308E73 /* surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +45,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		95E1BE982088C7AC0096ECA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95EEECC8204CF40600308E73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +92,20 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		95E1BE9C2088C7AC0096ECA3 /* surfTests */ = {
+			isa = PBXGroup;
+			children = (
+				95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */,
+				95E1BE9F2088C7AD0096ECA3 /* Info.plist */,
+			);
+			path = surfTests;
+			sourceTree = "<group>";
+		};
 		95EEECC2204CF40600308E73 = {
 			isa = PBXGroup;
 			children = (
 				95EEECCD204CF40600308E73 /* surf */,
+				95E1BE9C2088C7AC0096ECA3 /* surfTests */,
 				95EEECCC204CF40600308E73 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				95EEECCB204CF40600308E73 /* surf.app */,
+				95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +132,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		95E1BE9A2088C7AC0096ECA3 /* surfTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95E1BEA42088C7AD0096ECA3 /* Build configuration list for PBXNativeTarget "surfTests" */;
+			buildPhases = (
+				95E1BE972088C7AC0096ECA3 /* Sources */,
+				95E1BE982088C7AC0096ECA3 /* Frameworks */,
+				95E1BE992088C7AC0096ECA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				95E1BEA12088C7AD0096ECA3 /* PBXTargetDependency */,
+			);
+			name = surfTests;
+			productName = surfTests;
+			productReference = 95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		95EEECCA204CF40600308E73 /* surf */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95EEECE0204CF40600308E73 /* Build configuration list for PBXNativeTarget "surf" */;
@@ -123,10 +173,15 @@
 		95EEECC3204CF40600308E73 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = surf;
 				TargetAttributes = {
+					95E1BE9A2088C7AC0096ECA3 = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 95EEECCA204CF40600308E73;
+					};
 					95EEECCA204CF40600308E73 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -147,11 +202,19 @@
 			projectRoot = "";
 			targets = (
 				95EEECCA204CF40600308E73 /* surf */,
+				95E1BE9A2088C7AC0096ECA3 /* surfTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		95E1BE992088C7AC0096ECA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95EEECC9204CF40600308E73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +228,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		95E1BE972088C7AC0096ECA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95EEECC7204CF40600308E73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -178,6 +249,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		95E1BEA12088C7AD0096ECA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 95EEECCA204CF40600308E73 /* surf */;
+			targetProxy = 95E1BEA02088C7AD0096ECA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		95EEECD2204CF40600308E73 /* Main.storyboard */ = {
@@ -199,6 +278,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		95E1BEA22088C7AD0096ECA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = surfTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VideoCropper.surfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/surf.app/surf";
+			};
+			name = Debug;
+		};
+		95E1BEA32088C7AD0096ECA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = surfTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VideoCropper.surfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/surf.app/surf";
+			};
+			name = Release;
+		};
 		95EEECDE204CF40600308E73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -341,6 +460,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		95E1BEA42088C7AD0096ECA3 /* Build configuration list for PBXNativeTarget "surfTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95E1BEA22088C7AD0096ECA3 /* Debug */,
+				95E1BEA32088C7AD0096ECA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		95EEECC6204CF40600308E73 /* Build configuration list for PBXProject "surf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
