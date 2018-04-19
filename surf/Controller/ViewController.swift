@@ -83,8 +83,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    //TODO: The five functions contained in setUIValuesWithBouyData are all UI. They need to be moved to a view layer
-    
     func setUIValuesWithBouyData(){
         
         guard let currentSnapShot  = currentSnapShot else {return}
