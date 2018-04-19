@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfTests.swift; sourceTree = "<group>"; };
 		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,15 +73,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9576FF5A207FDA52006240AD /* UI */ = {
+		9576FF5A207FDA52006240AD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				95EEECD0204CF40600308E73 /* ViewController.swift */,
+				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
 				95EEECD8204CF40600308E73 /* Assets.xcassets */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
 			);
-			path = UI;
+			path = View;
 			sourceTree = "<group>";
 		};
 		9576FF5B207FDA62006240AD /* Other */ = {
@@ -90,6 +92,14 @@
 				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		95B9A2B020893CBA00F911F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				95EEECD0204CF40600308E73 /* ViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		95E1BE9C2088C7AC0096ECA3 /* surfTests */ = {
@@ -123,7 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				9576FF59207FDA41006240AD /* Model */,
-				9576FF5A207FDA52006240AD /* UI */,
+				95B9A2B020893CBA00F911F3 /* Controller */,
+				9576FF5A207FDA52006240AD /* View */,
 				9576FF5B207FDA62006240AD /* Other */,
 			);
 			path = surf;
@@ -240,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
