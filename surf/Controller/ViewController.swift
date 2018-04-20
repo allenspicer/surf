@@ -45,7 +45,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addGestureRecognizer()
+        setupTap()
         isAuthorizedtoGetUserLocation()
         
         if CLLocationManager.locationServicesEnabled() {
@@ -91,11 +91,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.startDisplayLink()
     }
     
-    func addGestureRecognizer(){
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
-        view.addGestureRecognizer(tap)
-        view.isUserInteractionEnabled = true
-
+    func setupTap() {
+        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+        touchDown.minimumPressDuration = 0
+        view.addGestureRecognizer(touchDown)
+    }
+    
+    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+        if (gesture.state == .began){
+            addWaveHeightIndicator(viewController: self)
+            waveIsLabeled = true
+        }
+        if (gesture.state == .ended){
+            if let subview = view.viewWithTag(100){
+                subview.removeFromSuperview()
+            }
+        }
     }
     
     @objc func tap(_ sender: UITapGestureRecognizer) {
