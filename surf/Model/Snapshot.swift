@@ -32,14 +32,36 @@ struct Snapshot {
     var tide: String?
     var timeStamp: Date
     
+    init(emptyWithTimeStamp: Date) {
+        id = "1"
+        year = ""
+        month = ""
+        day =  ""
+        hour = ""
+        minute = ""
+        windDir = ""
+        windSpd = ""
+        gusts = ""
+        waveHgt = ""
+        dominantWavePeriod = ""
+        waveAveragePeriod = ""
+        meanWaveDirection = ""
+        PRES = ""
+        PTDY = ""
+        airTemp = ""
+        waterTemp = ""
+        DEWP = ""
+        VIS = ""
+        tide = ""
+        timeStamp = emptyWithTimeStamp
+    }
 }
 
 func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
     
-    var  currentSnapShot = Snapshot.init(id: "", year: "", month: "", day: "", hour: "", minute: "", windDir: "", windSpd: "", gusts: "", waveHgt: "", dominantWavePeriod: "", waveAveragePeriod: "", meanWaveDirection: "", PRES: "", PTDY: "", airTemp: "", waterTemp: "", DEWP: "", VIS: "", tide: "", timeStamp: Date())
+    var  currentSnapShot = Snapshot.init(emptyWithTimeStamp: Date())
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-
     
     // 41110 Masenboro Inlet ILM2
     // 41038 Wrightsville Beach Nearshore ILM2
