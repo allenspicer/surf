@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+final class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
@@ -24,7 +24,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     private var waveIsLabeled = false
     
     /// The `CAShapeLayer` that will contain the animated path
-     let shapeLayer: CAShapeLayer = {
+     private let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
         _layer.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         _layer.fillColor = UIColor.clear.cgColor
