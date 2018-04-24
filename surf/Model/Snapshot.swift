@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 struct Snapshot {
-    var id: String
-    var year: String
-    var month: String
-    var day: String
-    var hour: String
-    var minute: String
+    var id: String = ""
+    var year: String = ""
+    var month: String = ""
+    var day: String = ""
+    var hour: String = ""
+    var minute: String = ""
     var windDir: String?
     var windSpd: String?
     var gusts: String?
@@ -30,36 +30,13 @@ struct Snapshot {
     var DEWP: String?
     var VIS: String?
     var tide: String?
-    var timeStamp: Date
-    
-    init(emptyWithTimeStamp: Date) {
-        id = "1"
-        year = ""
-        month = ""
-        day =  ""
-        hour = ""
-        minute = ""
-        windDir = ""
-        windSpd = ""
-        gusts = ""
-        waveHgt = ""
-        dominantWavePeriod = ""
-        waveAveragePeriod = ""
-        meanWaveDirection = ""
-        PRES = ""
-        PTDY = ""
-        airTemp = ""
-        waterTemp = ""
-        DEWP = ""
-        VIS = ""
-        tide = ""
-        timeStamp = emptyWithTimeStamp
-    }
+    var timeStamp: Date = Date()
+
 }
 
 func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
     
-    var  currentSnapShot = Snapshot.init(emptyWithTimeStamp: Date())
+    var  currentSnapShot = Snapshot.init()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
