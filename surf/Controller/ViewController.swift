@@ -14,14 +14,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
-    var path: UIBezierPath!
-    var locationManager = CLLocationManager()
-    var userLongitude = 0.0
-    var userLatitude = 0.0
-    var latitudeLongitudeArray = [(Double,Double)]()
-    var bouyDictionary : [Int : [String]] = [Int: [String]]()
+    private var path: UIBezierPath!
+    private var locationManager = CLLocationManager()
+    private var userLongitude = 0.0
+    private var userLatitude = 0.0
+    private var latitudeLongitudeArray = [(Double,Double)]()
+    private var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
-    var waveIsLabeled = false
+    private var waveIsLabeled = false
     
     /// The `CAShapeLayer` that will contain the animated path
      let shapeLayer: CAShapeLayer = {

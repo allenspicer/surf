@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 
-var windUnit = "MPH"
+private var windUnit = "MPH"
 
-func addUIComponentsToView(currentSnapShot : Snapshot, view : UIView){
+ func addUIComponentsToView(currentSnapShot : Snapshot, view : UIView){
     
-    func addWaveHeightLabels(){
+     func addWaveHeightLabels(){
     
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
