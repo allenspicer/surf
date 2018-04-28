@@ -35,14 +35,6 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         startActivityIndicator()
-        
-        DispatchQueue.main.async{
-            let dataTuple = bouyDataServiceRequest{}
-            self.currentSnapShot = dataTuple.0
-            self.shapeLayer.strokeColor = dataTuple.1
-            self.stopActivityIndicator()
-            self.setUIValuesWithBouyData()
-        }
     }
     
     override func viewDidLoad() {
@@ -58,6 +50,14 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestLocation();
+        }
+        
+        DispatchQueue.main.async{
+            let dataTuple = bouyDataServiceRequest{}
+            self.currentSnapShot = dataTuple.0
+            self.shapeLayer.strokeColor = dataTuple.1
+            self.stopActivityIndicator()
+            self.setUIValuesWithBouyData()
         }
     }
     
