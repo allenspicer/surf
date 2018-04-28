@@ -96,6 +96,14 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
         print("Bouy Data Retreival Error: \(error)")
     }
     
+//    print(snapshotArray.count)
+//    for sa in snapshotArray {
+//        print(sa.waveHgt)
+//        print(sa.waterTemp)
+//        print(sa.meanWaveDirection)
+//        print(sa.waveAveragePeriod)
+//    }
+    
     finished()
     return (snapshotArray.first ?? Snapshot.init(), waterColor)
 }
