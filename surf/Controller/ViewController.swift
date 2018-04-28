@@ -34,10 +34,13 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        startActivityIndicator()
+        
         DispatchQueue.main.async{
             let dataTuple = bouyDataServiceRequest{}
             self.currentSnapShot = dataTuple.0
             self.shapeLayer.strokeColor = dataTuple.1
+            self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
         }
     }
@@ -220,6 +223,22 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    
+    func startActivityIndicator(){
+        let ai = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        ai.tag = 200
+        ai.color = .black
+        view.addSubview(ai)
+        ai.frame = view.bounds
+        ai.startAnimating()
+    }
+    
+    func stopActivityIndicator(){
+        if let ai = view.viewWithTag(200) as? UIActivityIndicatorView{
+            ai.stopAnimating()
+            ai.removeFromSuperview()
+        }
+    }
     
 }
 

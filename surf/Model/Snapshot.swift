@@ -36,7 +36,7 @@ struct Snapshot {
 
 func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
     
-    var  currentSnapShot = Snapshot.init()
+    var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
@@ -59,11 +59,12 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
             }
         }
         
-        
-        if let firstBouy = bouyDictionary[2]{
+        for index in 2..<bouyDictionary.count {
+            var currentSnapShot = Snapshot.init()
+            guard let bouy = bouyDictionary[index] else {return (currentSnapShot , waterColor)}
             
             //wave height
-            if let currentWaveHeight = Double(firstBouy[8]) as Double?{
+            if let currentWaveHeight = Double(bouy[8]) as Double?{
                 let formatter = NumberFormatter()
                 formatter.maximumFractionDigits = 1
                 let heightInFeet = currentWaveHeight * 3.28
@@ -71,32 +72,32 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
                 
             }
             //wave direction
-            if let currentWaveDirectionDegrees = Float(firstBouy[11]) as Float?{
+            if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
                 currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
             }
             //wind direction
-            if let currentWindDirectionDegrees = Float(firstBouy[5]) as Float?{
+            if let currentWindDirectionDegrees = Float(bouy[5]) as Float?{
                 currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
             }
             //wind speed
-            if let currentWindSpeed = Int(firstBouy[6]) as Int?{
+            if let currentWindSpeed = Int(bouy[6]) as Int?{
                 currentSnapShot.windSpd = String(currentWindSpeed)
             }
             //water temp
-            if let currentWaterTemp = Double(firstBouy[14]) as Double?{
+            if let currentWaterTemp = Double(bouy[14]) as Double?{
                 let tuple = fahrenheitFromCelcius(temp: currentWaterTemp)
                 currentSnapShot.waterTemp = String(tuple.0)
                 waterColor = tuple.1
             }
+            snapshotArray.append(currentSnapShot)
         }
         
     }catch{
         print("Bouy Data Retreival Error: \(error)")
     }
     
-//    return waterColor
     finished()
-    return (currentSnapShot, waterColor)
+    return (snapshotArray.first ?? Snapshot.init(), waterColor)
 }
 
 func windDirectionFromDegrees(degrees : Float) -> String {
