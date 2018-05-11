@@ -26,7 +26,7 @@ struct Snapshot {
     var PRES: String?
     var PTDY: String?
     var airTemp: String?
-    var waterTemp: String?
+    var waterTemp: Double?
     var DEWP: String?
     var VIS: String?
     var tide: String?

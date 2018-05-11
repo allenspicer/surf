@@ -22,6 +22,8 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     private var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
     private var waveIsLabeled = false
+    private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+
     
     /// The `CAShapeLayer` that will contain the animated path
      private let shapeLayer: CAShapeLayer = {
@@ -53,9 +55,13 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         DispatchQueue.main.async{
-            let dataTuple = bouyDataServiceRequest(stationId: 41110, finished: {})
-            self.currentSnapShot = dataTuple.0
-            self.shapeLayer.strokeColor = dataTuple.1
+            let data = bouyDataServiceRequest(stationId: 41110, finished: {})
+            self.currentSnapShot = data
+            if let temp = self.currentSnapShot?.waterTemp {
+                if let color = getWaterColorFromTempInF(temp) as? CGColor{
+                    self.shapeLayer.strokeColor = color
+                }
+            }
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
         }

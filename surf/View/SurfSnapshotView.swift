@@ -83,7 +83,7 @@ private var windUnit = "MPH"
         
         let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         if let temp = currentSnapShot.waterTemp {
-            waterTempLabel.text =  temp + "°F WATER"
+            waterTempLabel.text =  String(temp) + "°F WATER"
         }
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
         waterTempLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

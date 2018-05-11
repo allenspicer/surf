@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 
-func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot, CGColor){
+func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
-    var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     // 41110 Masenboro Inlet ILM2
     // 41038 Wrightsville Beach Nearshore ILM2
@@ -35,7 +34,7 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot, 
     
     for index in 2..<bouyDictionary.count {
         var currentSnapShot = Snapshot.init()
-        guard let bouy = bouyDictionary[index] else {return (currentSnapShot , waterColor)}
+        guard let bouy = bouyDictionary[index] else {return (currentSnapShot)}
         
         //wave height
         if let currentWaveHeight = Double(bouy[8]) as Double?{
@@ -60,13 +59,12 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot, 
         //water temp
         if let currentWaterTemp = Double(bouy[14]) as Double?{
             let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
-            currentSnapShot.waterTemp = "\(currentWaterTempInFahrenheit)"
-            waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit)
+            currentSnapShot.waterTemp = currentWaterTempInFahrenheit
         }
         snapshotArray.append(currentSnapShot)
     }
     
     finished()
-    return (snapshotArray.first ?? Snapshot.init(), waterColor)
+    return (snapshotArray.first ?? Snapshot.init())
 }
 
