@@ -23,7 +23,8 @@ func fahrenheitFromCelcius(temp : Double) -> (Double){
     return (tempInF)
 }
 
-func getWaterColorFromTempInF(_ temp: Double) -> (CGColor){
+func getWaterColorFromTempInF(_ temp: Double) -> CGColor?{
+    var color : CGColor? = nil
     var tempIndex = Int()
     
     switch temp {
@@ -40,6 +41,8 @@ func getWaterColorFromTempInF(_ temp: Double) -> (CGColor){
     }
     
     let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
-    return colorArray[tempIndex].cgColor
+    color = colorArray[tempIndex].cgColor
+    
+    return color
 }
 

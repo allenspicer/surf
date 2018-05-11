@@ -57,8 +57,9 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         DispatchQueue.main.async{
             let data = bouyDataServiceRequest(stationId: 41110, finished: {})
             self.currentSnapShot = data
+            
             if let temp = self.currentSnapShot?.waterTemp {
-                if let color = getWaterColorFromTempInF(temp) as? CGColor{
+                if let color = getWaterColorFromTempInF(temp){
                     self.shapeLayer.strokeColor = color
                 }
             }
