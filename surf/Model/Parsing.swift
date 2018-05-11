@@ -59,9 +59,9 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
         }
         //water temp
         if let currentWaterTemp = Double(bouy[14]) as Double?{
-            let tuple = fahrenheitFromCelcius(temp: currentWaterTemp)
-            currentSnapShot.waterTemp = String(tuple.0)
-            waterColor = tuple.1
+            let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
+            currentSnapShot.waterTemp = "\(currentWaterTempInFahrenheit)"
+            waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit)
         }
         snapshotArray.append(currentSnapShot)
     }
