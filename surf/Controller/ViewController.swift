@@ -53,7 +53,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         DispatchQueue.main.async{
-            let dataTuple = bouyDataServiceRequest{}
+            let dataTuple = bouyDataServiceRequest(stationId: 41110, finished: {})
             self.currentSnapShot = dataTuple.0
             self.shapeLayer.strokeColor = dataTuple.1
             self.stopActivityIndicator()

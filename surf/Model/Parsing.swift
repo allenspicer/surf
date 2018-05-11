@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
+func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot, CGColor){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
@@ -20,7 +20,7 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
     // JMPN7 Johnny Mercer Pier
     
     
-    let list = getBouyData(41110)
+    let list = getBouyData(stationId)
     let lines = list.components(separatedBy: "\n")
     var rawStatArray : [String] = []
     
