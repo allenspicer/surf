@@ -14,11 +14,8 @@ import Foundation
 func getBouyData (_ stationId: Int) -> String{
     
     var dataString = String()
-    
     do {
-        
-        dataString = try String(contentsOf: URL(string: "http://www.ndbc.noaa.gov/data/realtime2/41110.txt")!)
-    
+        dataString = try String(contentsOf: URL(string: "http://www.ndbc.noaa.gov/data/realtime2/\(stationId).txt")!)
     }catch{
         print("Bouy Data Retreival Error: \(error)")
     }

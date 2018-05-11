@@ -44,65 +44,52 @@ func bouyDataServiceRequest(finished: () -> Void) -> (Snapshot, CGColor){
     // 41038 Wrightsville Beach Nearshore ILM2
     // JMPN7 Johnny Mercer Pier
     
-    do {
         
-        let list = try String(contentsOf: URL(string: "http://www.ndbc.noaa.gov/data/realtime2/41110.txt")!)
-        let lines = list.components(separatedBy: "\n")
-        var rawStatArray : [String] = []
-        
-        
-        for (index, line) in lines.enumerated(){
-            if (index < 10 && index > 1){
-                rawStatArray = line.components(separatedBy: " ")
-                rawStatArray = rawStatArray.filter { $0 != "" }
-                bouyDictionary[index] = rawStatArray
-            }
+    let list = getBouyData(41110)
+    let lines = list.components(separatedBy: "\n")
+    var rawStatArray : [String] = []
+    
+    
+    for (index, line) in lines.enumerated(){
+        if (index < 10 && index > 1){
+            rawStatArray = line.components(separatedBy: " ")
+            rawStatArray = rawStatArray.filter { $0 != "" }
+            bouyDictionary[index] = rawStatArray
         }
-        
-        for index in 2..<bouyDictionary.count {
-            var currentSnapShot = Snapshot.init()
-            guard let bouy = bouyDictionary[index] else {return (currentSnapShot , waterColor)}
-            
-            //wave height
-            if let currentWaveHeight = Double(bouy[8]) as Double?{
-                let formatter = NumberFormatter()
-                formatter.maximumFractionDigits = 1
-                let heightInFeet = currentWaveHeight * 3.28
-                currentSnapShot.waveHgt = formatter.string(from: heightInFeet as NSNumber)
-                
-            }
-            //wave direction
-            if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
-                currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
-            }
-            //wind direction
-            if let currentWindDirectionDegrees = Float(bouy[5]) as Float?{
-                currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
-            }
-            //wind speed
-            if let currentWindSpeed = Int(bouy[6]) as Int?{
-                currentSnapShot.windSpd = String(currentWindSpeed)
-            }
-            //water temp
-            if let currentWaterTemp = Double(bouy[14]) as Double?{
-                let tuple = fahrenheitFromCelcius(temp: currentWaterTemp)
-                currentSnapShot.waterTemp = String(tuple.0)
-                waterColor = tuple.1
-            }
-            snapshotArray.append(currentSnapShot)
-        }
-        
-    }catch{
-        print("Bouy Data Retreival Error: \(error)")
     }
     
-//    print(snapshotArray.count)
-//    for sa in snapshotArray {
-//        print(sa.waveHgt)
-//        print(sa.waterTemp)
-//        print(sa.meanWaveDirection)
-//        print(sa.waveAveragePeriod)
-//    }
+    for index in 2..<bouyDictionary.count {
+        var currentSnapShot = Snapshot.init()
+        guard let bouy = bouyDictionary[index] else {return (currentSnapShot , waterColor)}
+        
+        //wave height
+        if let currentWaveHeight = Double(bouy[8]) as Double?{
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 1
+            let heightInFeet = currentWaveHeight * 3.28
+            currentSnapShot.waveHgt = formatter.string(from: heightInFeet as NSNumber)
+            
+        }
+        //wave direction
+        if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
+            currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+        }
+        //wind direction
+        if let currentWindDirectionDegrees = Float(bouy[5]) as Float?{
+            currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
+        }
+        //wind speed
+        if let currentWindSpeed = Int(bouy[6]) as Int?{
+            currentSnapShot.windSpd = String(currentWindSpeed)
+        }
+        //water temp
+        if let currentWaterTemp = Double(bouy[14]) as Double?{
+            let tuple = fahrenheitFromCelcius(temp: currentWaterTemp)
+            currentSnapShot.waterTemp = String(tuple.0)
+            waterColor = tuple.1
+        }
+        snapshotArray.append(currentSnapShot)
+    }
     
     finished()
     return (snapshotArray.first ?? Snapshot.init(), waterColor)
