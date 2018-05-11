@@ -9,8 +9,6 @@
 import Foundation
 
 
-
-
 func getBouyData (_ stationId: Int) -> String{
     
     var dataString = String()
