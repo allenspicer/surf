@@ -23,6 +23,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     var currentSnapShot : Snapshot? = nil
     private var waveIsLabeled = false
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    var stationId = Int()
 
     
     /// The `CAShapeLayer` that will contain the animated path
