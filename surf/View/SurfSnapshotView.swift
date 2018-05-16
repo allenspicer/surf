@@ -15,6 +15,7 @@ private var windUnit = "MPH"
 class SurfSnapshotView: UIView {
 
     var currentSnapShot : Snapshot
+    var label = UILabel()
 
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
@@ -135,8 +136,13 @@ class SurfSnapshotView: UIView {
         waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.textAlignment = .left
-        waveHeightLabel.tag = 100
         self.addSubview(waveHeightLabel)
+        label = waveHeightLabel
     }
+    
+    func removeWaveHeightIndicator(){
+        label.removeFromSuperview()
+    }
+      
 }
 

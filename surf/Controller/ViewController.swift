@@ -109,10 +109,19 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
         if (gesture.state == .began){
-//            SurfSnapshotView.addWaveHeightIndicator()
+            for view in self.view.subviews as [UIView] {
+                if let snapshotView = view as? SurfSnapshotView {
+                    snapshotView.addWaveHeightIndicator()
+                }
+            }
         }
         
         if (gesture.state == .ended){
+            for view in self.view.subviews as [UIView] {
+                if let snapshotView = view as? SurfSnapshotView {
+                    snapshotView.removeWaveHeightIndicator()
+                }
+            }
         }
     }
     
