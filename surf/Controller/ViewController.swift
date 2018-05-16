@@ -24,7 +24,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     private var waveIsLabeled = false
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var stationId = Int()
-
+    var aiView = UIView()
     
     /// The `CAShapeLayer` that will contain the animated path
      private let shapeLayer: CAShapeLayer = {
@@ -58,6 +58,8 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
         DispatchQueue.main.async{
             let data = bouyDataServiceRequest(stationId: 41110, finished: {})
             self.currentSnapShot = data
+            let snapshotView = SurfSnapshotView.init(snapshot: data)
+            self.view.addSubview(snapshotView)
             
             if let temp = self.currentSnapShot?.waterTemp {
                 if let color = getWaterColorFromTempInF(temp){
@@ -96,8 +98,8 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func setUIValuesWithBouyData(){
         
-        guard let currentSnapShot  = currentSnapShot else {return}
-        addUIComponentsToView(currentSnapShot: currentSnapShot, view: self.view)
+//        guard let currentSnapShot  = currentSnapShot else {return}
+//        addUIComponentsToView(currentSnapShot: currentSnapShot, view: self.view)
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
     }
@@ -110,7 +112,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
         if (gesture.state == .began){
-            addWaveHeightIndicator(viewController: self)
+//            addWaveHeightIndicator(viewController: self)
             waveIsLabeled = true
         }
         if (gesture.state == .ended){
@@ -226,26 +228,28 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
             userLatitude = currentLocation.coordinate.latitude
             userLongitude = currentLocation.coordinate.latitude
             findDataWithUserLocation()
-//            self.setDataModel()
-//            self.setUIValuesWithBouyData()
+            //user location is available now, can modify or trigger here with it
         }
     }
     
     
     func startActivityIndicator(){
+        self.aiView.backgroundColor = UIColor.clear.withAlphaComponent(0.4)
         let ai = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        ai.tag = 200
         ai.color = .black
-        view.addSubview(ai)
         ai.frame = view.bounds
         ai.startAnimating()
+        self.aiView.addSubview(ai)
     }
     
     func stopActivityIndicator(){
-        if let ai = view.viewWithTag(200) as? UIActivityIndicatorView{
+        if let ai = self.aiView.subviews.last as? UIActivityIndicatorView {
+            ai.color = .red
+            ai.hidesWhenStopped = true
+            ai.isHidden = true
             ai.stopAnimating()
-            ai.removeFromSuperview()
         }
+        self.aiView.removeFromSuperview()
     }
     
 }

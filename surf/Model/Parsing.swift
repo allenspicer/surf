@@ -20,9 +20,9 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
     
     
     let list = getBouyData(stationId)
+    
     let lines = list.components(separatedBy: "\n")
     var rawStatArray : [String] = []
-    
     
     for (index, line) in lines.enumerated(){
         if (index < 10 && index > 1){
@@ -31,6 +31,8 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
             bouyDictionary[index] = rawStatArray
         }
     }
+    
+    guard bouyDictionary.count > 2 else {return Snapshot()}
     
     for index in 2..<bouyDictionary.count {
         var currentSnapShot = Snapshot.init()

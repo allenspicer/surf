@@ -12,7 +12,26 @@ import UIKit
 
 private var windUnit = "MPH"
 
- func addUIComponentsToView(currentSnapShot : Snapshot, view : UIView){
+class SurfSnapshotView: UIView {
+
+    var currentSnapShot : Snapshot
+
+    init(snapshot: Snapshot) {
+        
+        self.currentSnapShot = snapshot
+        
+        super.init(frame: UIScreen.main.bounds)
+        addWaveHeightLabels()
+        addSpotDetails()
+        addSpotTitleLabel()
+        
+        return
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     
      func addWaveHeightLabels(){
     
@@ -42,19 +61,18 @@ private var windUnit = "MPH"
         }
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveHeightLabel.center = CGPoint(x: view.frame.width - offset, y: 90)
+        waveHeightLabel.center = CGPoint(x: self.frame.width - offset, y: 90)
         waveHeightLabel.textAlignment = .center
-        view.addSubview(waveHeightLabel)
+        self.addSubview(waveHeightLabel)
         
         let feetLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         feetLabel.text = "ft"
         feetLabel.font = UIFont(name:"Damascus", size: 20.0)
         feetLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        feetLabel.center = CGPoint(x: (view.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
+        feetLabel.center = CGPoint(x: (self.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
         feetLabel.textAlignment = .center
-        view.addSubview(feetLabel)
+        self.addSubview(feetLabel)
     }
-    addWaveHeightLabels()
 
     
     func addSpotDetails(){
@@ -66,10 +84,10 @@ private var windUnit = "MPH"
         }
         label.font = UIFont(name:"Damascus", size: 10.0)
         label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        let yValue = (view.frame.height/5) + 20
-        label.center = CGPoint(x: view.frame.width/2, y:yValue)
+        let yValue = (self.frame.height/5) + 20
+        label.center = CGPoint(x: self.frame.width/2, y:yValue)
         label.textAlignment = .center
-        view.addSubview(label)
+        self.addSubview(label)
         
         let waveLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         if let direction = currentSnapShot.meanWaveDirection as String?{
@@ -77,9 +95,9 @@ private var windUnit = "MPH"
         }
         waveLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveLabel.center = CGPoint(x: view.frame.width/2, y:yValue + 20)
+        waveLabel.center = CGPoint(x: self.frame.width/2, y:yValue + 20)
         waveLabel.textAlignment = .center
-        view.addSubview(waveLabel)
+        self.addSubview(waveLabel)
         
         let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         if let temp = currentSnapShot.waterTemp {
@@ -87,44 +105,41 @@ private var windUnit = "MPH"
         }
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
         waterTempLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waterTempLabel.center = CGPoint(x: view.frame.width/2, y: yValue + 40)
+        waterTempLabel.center = CGPoint(x: self.frame.width/2, y: yValue + 40)
         waterTempLabel.textAlignment = .center
-        view.addSubview(waterTempLabel)
+        self.addSubview(waterTempLabel)
     }
-    addSpotDetails()
     
     func addSpotTitleLabel(){
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
         titleLabel.text = "Crystal Pier"
         titleLabel.font = UIFont(name:"Damascus", size: 40.0)
         titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        titleLabel.center = CGPoint(x: view.frame.width/2, y: view.frame.height/5)
+        titleLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
         titleLabel.textAlignment = .center
-        view.addSubview(titleLabel)
+        self.addSubview(titleLabel)
     }
-    addSpotTitleLabel()
     
-}
 
-
-func addWaveHeightIndicator(viewController : ViewController){
-    
-    let centerY = viewController.view.bounds.height / 2
-    var waveHeightMaxInt: CGFloat = 0
-    if let waveHeight = viewController.currentSnapShot?.waveHgt as String?{
-        if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
-            waveHeightMaxInt = intValue
+    func addWaveHeightIndicator(){
+        
+        let centerY = self.bounds.height / 2
+        var waveHeightMaxInt: CGFloat = 0
+        if let waveHeight = self.currentSnapShot.waveHgt as String?{
+            if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
+                waveHeightMaxInt = intValue
+            }
         }
+        let waveTop = centerY - waveHeightMaxInt - 14
+        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
+        if let waveHeight = self.currentSnapShot.waveHgt as String?{
+            waveHeightLabel.text = "__ \(waveHeight)ft"
+        }
+        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
+        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        waveHeightLabel.textAlignment = .left
+        waveHeightLabel.tag = 100
+        self.addSubview(waveHeightLabel)
     }
-    let waveTop = centerY - waveHeightMaxInt - 14
-    let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-    if let waveHeight = viewController.currentSnapShot?.waveHgt as String?{
-        waveHeightLabel.text = "__ \(waveHeight)ft"
-    }
-    waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
-    waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    waveHeightLabel.textAlignment = .left
-    waveHeightLabel.tag = 100
-    viewController.view.addSubview(waveHeightLabel)
 }
 
