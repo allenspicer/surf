@@ -21,10 +21,11 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     private var latitudeLongitudeArray = [(Double,Double)]()
     private var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
-    private var waveIsLabeled = false
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var stationId = Int()
     private var aiView = UIView()
+    private var wlView = UIView()
+
     
     /// The `CAShapeLayer` that will contain the animated path
      private let shapeLayer: CAShapeLayer = {
@@ -108,13 +109,10 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
         if (gesture.state == .began){
-//            addWaveHeightIndicator(viewController: self)
-            waveIsLabeled = true
+//            SurfSnapshotView.addWaveHeightIndicator()
         }
+        
         if (gesture.state == .ended){
-            if let subview = view.viewWithTag(100){
-                subview.removeFromSuperview()
-            }
         }
     }
     

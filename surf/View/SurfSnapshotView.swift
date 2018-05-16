@@ -30,7 +30,7 @@ class SurfSnapshotView: UIView {
     }
 
     
-     func addWaveHeightLabels(){
+     private func addWaveHeightLabels(){
     
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
@@ -72,7 +72,7 @@ class SurfSnapshotView: UIView {
     }
 
     
-    func addSpotDetails(){
+    private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         if  let speed = currentSnapShot.windSpd as String?{
             if let direction = currentSnapShot.windDir as String?{
@@ -107,7 +107,7 @@ class SurfSnapshotView: UIView {
         self.addSubview(waterTempLabel)
     }
     
-    func addSpotTitleLabel(){
+    private func addSpotTitleLabel(){
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
         titleLabel.text = "Crystal Pier"
         titleLabel.font = UIFont(name:"Damascus", size: 40.0)
