@@ -24,7 +24,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     private var waveIsLabeled = false
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var stationId = Int()
-    var aiView = UIView()
+    private var aiView = UIView()
     
     /// The `CAShapeLayer` that will contain the animated path
      private let shapeLayer: CAShapeLayer = {
@@ -60,12 +60,6 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
             self.currentSnapShot = data
             let snapshotView = SurfSnapshotView.init(snapshot: data)
             self.view.addSubview(snapshotView)
-            
-            if let temp = self.currentSnapShot?.waterTemp {
-                if let color = getWaterColorFromTempInF(temp){
-                    self.shapeLayer.strokeColor = color
-                }
-            }
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
         }
@@ -97,9 +91,11 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setUIValuesWithBouyData(){
-        
-//        guard let currentSnapShot  = currentSnapShot else {return}
-//        addUIComponentsToView(currentSnapShot: currentSnapShot, view: self.view)
+        if let temp = self.currentSnapShot?.waterTemp {
+            if let color = getWaterColorFromTempInF(temp){
+                self.shapeLayer.strokeColor = color
+            }
+        }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
     }

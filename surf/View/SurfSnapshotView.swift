@@ -17,14 +17,11 @@ class SurfSnapshotView: UIView {
     var currentSnapShot : Snapshot
 
     init(snapshot: Snapshot) {
-        
         self.currentSnapShot = snapshot
-        
         super.init(frame: UIScreen.main.bounds)
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
-        
         return
     }
     
