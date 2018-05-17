@@ -10,12 +10,6 @@ import UIKit
 import CoreLocation
 
 
-//protocol ViewControllerDelegate {
-//    func returnToTableView(
-//    )
-//}
-
-
 final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     private var displayLink: CADisplayLink?
@@ -104,6 +98,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
+        addReturnToTableViewButton()
     }
     
     func setupGestureRecognizer() {
@@ -113,16 +108,11 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         view.addGestureRecognizer(touchDown)
     }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldReceive touch: UITouch) -> Bool {
-        
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let viewTouched = touch.view{
-            if viewTouched is UIButton{
-                return false
-            }
+            if viewTouched is UIButton { return false }
         }
         return true
-        
     }
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
@@ -271,7 +261,21 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
             ai.stopAnimating()
         }
         self.aiView.removeFromSuperview()
-    }    
+    }
+    
+    func addReturnToTableViewButton(){
+        let rButton = UIButton(frame: CGRect(x: self.view.frame.width - 40, y: self.view.frame.height - 50, width: 40, height: 40))
+        rButton.setTitle("EE", for: .normal)
+        rButton.setTitleColor(.black, for: .normal)
+        rButton.titleLabel?.font = UIFont(name: "Damascus", size: 15.0)
+        rButton.titleLabel?.textColor = .black
+        rButton.addTarget(self, action: #selector(returnToTableView), for: .touchUpInside)
+        self.view.addSubview(rButton)
+    }
+    
+    @objc func returnToTableView(){
+        self.performSegue(withIdentifier: "returnToTableView", sender: self)
+    }
     
 }
 

@@ -24,7 +24,6 @@ class SurfSnapshotView: UIView {
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
-        addReturnToTableViewButton()
         return
     }
     
@@ -118,22 +117,6 @@ class SurfSnapshotView: UIView {
         titleLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
-    }
-    
-    private func addReturnToTableViewButton(){
-        let rButton = UIButton(frame: CGRect(x: self.frame.width - 40, y: self.frame.height - 50, width: 40, height: 40))
-        rButton.setTitle("EE", for: .normal)
-        rButton.setTitleColor(.black, for: .normal)
-        rButton.titleLabel?.font = UIFont(name: "Damascus", size: 15.0)
-        rButton.titleLabel?.textColor = .black
-        rButton.addTarget(self, action: #selector(returnToTableView), for: .touchUpInside)
-        
-        self.addSubview(rButton)
-    }
-    
-    @objc func returnToTableView(){
-        print("button was tapped")
-        
     }
     
 
