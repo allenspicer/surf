@@ -10,7 +10,13 @@ import UIKit
 import CoreLocation
 
 
-final class ViewController: UIViewController, CLLocationManagerDelegate {
+//protocol ViewControllerDelegate {
+//    func returnToTableView(
+//    )
+//}
+
+
+final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
@@ -19,7 +25,6 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var latitudeLongitudeArray = [(Double,Double)]()
-    private var bouyDictionary : [Int : [String]] = [Int: [String]]()
     var currentSnapShot : Snapshot? = nil
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var stationId = Int()
@@ -104,7 +109,20 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
     func setupGestureRecognizer() {
         let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
         touchDown.minimumPressDuration = 0
+        touchDown.delegate = self
         view.addGestureRecognizer(touchDown)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldReceive touch: UITouch) -> Bool {
+        
+        if let viewTouched = touch.view{
+            if viewTouched is UIButton{
+                return false
+            }
+        }
+        return true
+        
     }
     
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
@@ -253,7 +271,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate {
             ai.stopAnimating()
         }
         self.aiView.removeFromSuperview()
-    }
+    }    
     
 }
 
