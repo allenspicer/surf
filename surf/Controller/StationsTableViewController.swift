@@ -2,7 +2,7 @@
 //  StationsTableViewController.swift
 //  surf
 //
-//  Created by uBack on 5/14/18.
+//  Created by Allen Spicer on 5/14/18.
 //  Copyright © 2018 surf. All rights reserved.
 //
 
@@ -77,6 +77,8 @@ class StationsTableViewController: UITableViewController{
         let selectedStation = tableData[selectedStationIndex]
         let destinationVC : ViewController = ViewController()
         destinationVC.stationId = selectedStation.id
+        print(destinationVC.stationId)
+        print(selectedStation.id)
 
     }
  

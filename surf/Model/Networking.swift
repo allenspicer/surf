@@ -2,7 +2,7 @@
 //  Networking.swift
 //  surf
 //
-//  Created by uBack on 5/11/18.
+//  Created by Allen Spicer on 5/11/18.
 //  Copyright © 2018 surf. All rights reserved.
 //
 

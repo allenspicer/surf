@@ -2,7 +2,7 @@
 //  SurfSnapshotView.swift
 //  surf
 //
-//  Created by uBack on 4/19/18.
+//  Created by Allen Spicer on 4/19/18.
 //  Copyright © 2018 surf. All rights reserved.
 //
 
@@ -16,7 +16,6 @@ class SurfSnapshotView: UIView {
 
     var currentSnapShot : Snapshot
     var label = UILabel()
-//    var delegate : ViewControllerDelegate?
 
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
