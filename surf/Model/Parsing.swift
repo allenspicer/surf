@@ -13,12 +13,6 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
-    
-    // 41110 Masenboro Inlet ILM2
-    // 41038 Wrightsville Beach Nearshore ILM2
-    // JMPN7 Johnny Mercer Pier
-    
-    
     let list = getBouyData(stationId)
     
     let lines = list.components(separatedBy: "\n")
