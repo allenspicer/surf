@@ -35,8 +35,8 @@ class SurfSnapshotView: UIView {
     
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
-        if let wHeight = currentSnapShot.waveHgt as String?{
-            waveHeight = Double(wHeight) ?? 0.0
+        if let wHeight = currentSnapShot.waveHgt{
+            waveHeight = wHeight
         }
         
         switch waveHeight{
@@ -54,9 +54,7 @@ class SurfSnapshotView: UIView {
         let widthPixels = 150 * waveHeightDigitCount + 100
         
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
-        if let waveHeight = currentSnapShot.waveHgt as String?{
-            waveHeightLabel.text = waveHeight
-        }
+        waveHeightLabel.text = "\(currentSnapShot.waveHgt ?? 0.0)"
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.center = CGPoint(x: self.frame.width - offset, y: 90)
@@ -110,7 +108,9 @@ class SurfSnapshotView: UIView {
     
     private func addSpotTitleLabel(){
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
-        titleLabel.text = "Crystal Pier"
+        if let name = currentSnapShot.stationName {
+            titleLabel.text = "\(name)"
+        }
         titleLabel.font = UIFont(name:"Damascus", size: 40.0)
         titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         titleLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
@@ -122,15 +122,13 @@ class SurfSnapshotView: UIView {
     func addWaveHeightIndicator(){
         
         let centerY = self.bounds.height / 2
-        var waveHeightMaxInt: CGFloat = 0
-        if let waveHeight = self.currentSnapShot.waveHgt as String?{
-            if let intValue = CGFloat(Double(waveHeight)! * 10) as CGFloat?{
-                waveHeightMaxInt = intValue
-            }
+        var waveHeightMaxFloat: CGFloat = 0
+        if let waveHeight = self.currentSnapShot.waveHgt{
+            waveHeightMaxFloat = CGFloat(waveHeight * 10)
         }
-        let waveTop = centerY - waveHeightMaxInt - 14
+        let waveTop = centerY - waveHeightMaxFloat - 14
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        if let waveHeight = self.currentSnapShot.waveHgt as String?{
+        if let waveHeight = self.currentSnapShot.waveHgt{
             waveHeightLabel.text = "__ \(waveHeight)ft"
         }
         waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)

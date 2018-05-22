@@ -28,13 +28,14 @@ class StationsTableViewController: UITableViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         let stationIdArray = [41110, 41038]
-        for id in stationIdArray {
-            addStationWithId(id)
+        let stationNameArray = ["Masenboro Inlet", "Wrightsville Beach Nearshore"]
+        for index in 0...1 {
+            addStationWithId(id: stationIdArray[index], name: stationNameArray[index])
         }
     }
     
-    func addStationWithId(_ id :Int){
-        let station : Station = Station(id: id, lat: "", lon: "", owner: "", name: "")
+    func addStationWithId(id :Int, name: String){
+        let station : Station = Station(id: id, lat: "", lon: "", owner: "", name: name)
         tableData.append(station)
     }
     
@@ -75,11 +76,11 @@ class StationsTableViewController: UITableViewController{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedStation = tableData[selectedStationIndex]
-        let destinationVC : ViewController = ViewController()
-        destinationVC.stationId = selectedStation.id
-        print(destinationVC.stationId)
-        print(selectedStation.id)
-
+        
+        if let destinationVC = segue.destination as? ViewController {
+            destinationVC.stationId = selectedStation.id
+            destinationVC.stationName = selectedStation.name
+        }
     }
  
 

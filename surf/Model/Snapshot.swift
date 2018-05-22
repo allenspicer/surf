@@ -19,7 +19,7 @@ struct Snapshot {
     var windDir: String?
     var windSpd: String?
     var gusts: String?
-    var waveHgt: String?
+    var waveHgt: Double?
     var dominantWavePeriod: String?
     var waveAveragePeriod: String?
     var meanWaveDirection: String?
@@ -31,7 +31,8 @@ struct Snapshot {
     var VIS: String?
     var tide: String?
     var timeStamp: Date = Date()
-
+    var stationName : String?
+    var stationId : Int?
 }
 
 

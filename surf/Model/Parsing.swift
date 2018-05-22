@@ -37,8 +37,9 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
             let formatter = NumberFormatter()
             formatter.maximumFractionDigits = 1
             let heightInFeet = currentWaveHeight * 3.28
-            currentSnapShot.waveHgt = formatter.string(from: heightInFeet as NSNumber)
-            
+            if let heightWithPlaces = formatter.string(from: heightInFeet as NSNumber){
+                currentSnapShot.waveHgt = Double(heightWithPlaces)
+            }
         }
         //wave direction
         if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{

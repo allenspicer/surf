@@ -13,7 +13,7 @@ struct Station: Decodable {
     let lat: String
     let lon: String
     let owner: String?
-    let name: String?
+    let name: String
 //    let snapshots: [Snapshot]
     
 }

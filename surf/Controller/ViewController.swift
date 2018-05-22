@@ -19,11 +19,13 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var latitudeLongitudeArray = [(Double,Double)]()
-    var currentSnapShot : Snapshot? = nil
-    private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    var currentSnapShot = Snapshot()
     var stationId = Int()
+    var stationName = String()
+    private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
     private var wlView = UIView()
+    
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -56,8 +58,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         }
         
         DispatchQueue.main.async{
-            print(self.stationId)
-            let data = bouyDataServiceRequest(stationId: 41110, finished: {})
+            let data = bouyDataServiceRequest(stationId: self.stationId, finished: {})
             self.currentSnapShot = data
             let snapshotView = SurfSnapshotView.init(snapshot: data)
             self.view.addSubview(snapshotView)
@@ -92,10 +93,8 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
     }
     
     func setUIValuesWithBouyData(){
-        if let temp = self.currentSnapShot?.waterTemp {
-            if let color = getWaterColorFromTempInF(temp){
-                self.shapeLayer.strokeColor = color
-            }
+        if let color = getWaterColorFromTempInF(self.currentSnapShot.waterTemp!){
+            self.shapeLayer.strokeColor = color
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
@@ -162,10 +161,8 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
     @objc func handleDisplayLink(_ displayLink: CADisplayLink) {
         let elapsed = CFAbsoluteTimeGetCurrent() - startTime!
         var waveHeightMaxInt = 0
-        if let waveHeight = currentSnapShot?.waveHgt as String?{
-            if let intValue = Int(Double(waveHeight)! * 10) as Int?{
-                waveHeightMaxInt = intValue
-            }
+        if let wHeight = currentSnapShot.waveHgt {
+           waveHeightMaxInt = Int(wHeight) * 10
         }
         
         if let path = wave(at: elapsed, waveHeightMax: waveHeightMaxInt).cgPath as CGPath?{
