@@ -83,7 +83,7 @@ class StationsTableViewController: UITableViewController{
             let data = bouyDataServiceRequest(stationId: selectedId, finished: {})
             
             //remove spinner for response:
-            if data.waveHgt != nil {
+            if data.waveHgt != nil && data.waterTemp != nil {
                 self.selectedSnapshot = data
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
