@@ -110,21 +110,39 @@ class StationsTableViewController: UITableViewController{
  
     // MARK: - Parse Data from JSON
 
-
+//    Parsing for full data set: bouys.json
+//    func parseStationList(){
+//        if let path = Bundle.main.path(forResource: "staticStationList", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                if let metaData = jsonResult as? Dictionary<String, AnyObject>{
+//                    if let stationDataArray = metaData["station"] as? [[String : String]]{
+//                        for station in stationDataArray{
+//                            if let stationId = station["-id"]{
+//                                addStationWithId(id: stationId)
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            } catch {
+//                // handle error
+//            }
+//        }
+//    }
+    
     func parseStationList(){
-        if let path = Bundle.main.path(forResource: "bouys", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "staticStationList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let metaData = jsonResult as? Dictionary<String, AnyObject>{
-                    if let stationDataArray = metaData["station"] as? [[String : String]]{
-                        for station in stationDataArray{
-                            if let stationId = station["-id"]{
-                                addStationWithId(id: stationId)
-                            }
+                if let metaData = jsonResult as? [[String : AnyObject]]{
+                    for station in metaData {
+                        if let stationId = station["station"]{
+                            addStationWithId(id: "\(stationId)")
                         }
                     }
-                    
                 }
             } catch {
                 // handle error
