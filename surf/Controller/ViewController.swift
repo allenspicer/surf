@@ -20,7 +20,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
     private var userLatitude = 0.0
     private var latitudeLongitudeArray = [(Double,Double)]()
     var currentSnapShot = Snapshot()
-    var stationId = Int()
+    var stationId = String()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
@@ -58,9 +58,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         }
         
         DispatchQueue.main.async{
-            let data = bouyDataServiceRequest(stationId: self.stationId, finished: {})
-            self.currentSnapShot = data
-            let snapshotView = SurfSnapshotView.init(snapshot: data)
+            let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             self.view.addSubview(snapshotView)
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()

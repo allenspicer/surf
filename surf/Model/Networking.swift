@@ -9,7 +9,7 @@
 import Foundation
 
 
-func getBouyData (_ stationId: Int) -> String{
+func getBouyData (_ stationId: String) -> String{
     
     var dataString = String()
     do {
