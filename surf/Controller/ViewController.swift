@@ -7,18 +7,12 @@
 //
 
 import UIKit
-import CoreLocation
 
-
-final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
+final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
-    private var locationManager = CLLocationManager()
-    private var userLongitude = 0.0
-    private var userLatitude = 0.0
-    private var latitudeLongitudeArray = [(Double,Double)]()
     var currentSnapShot = Snapshot()
     var stationId = String()
     var stationName = String()
@@ -46,16 +40,6 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         super.viewDidLoad()
         
         setupGestureRecognizer()
-        isAuthorizedtoGetUserLocation()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        }
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestLocation();
-        }
         
         DispatchQueue.main.async{
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
@@ -69,26 +53,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
         stopDisplayLink()
     }
     
-    func findDataWithUserLocation(){
-        var minDistance = 0.0
-        var coordAtMinDistance = (0.0,0.0)
-        
-        if (userLatitude != 0 && userLongitude != 0) {
-            for coord in latitudeLongitudeArray{
-                
-                guard let distanceFromNewPoint = pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2) as Double? else {
-                    return
-                }
-                    //calculate distance from point to user and previous point to user
-                    //if new point is closer than previous point
-                if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
-                    //save coorindates of new point over top
-                    minDistance = distanceFromNewPoint
-                        coordAtMinDistance = coord
-                }
-            }
-        }
-    }
+
     
     func setUIValuesWithBouyData(){
         if let color = getWaterColorFromTempInF(self.currentSnapShot.waterTemp!){
@@ -218,49 +183,7 @@ final class ViewController: UIViewController, CLLocationManagerDelegate, UIGestu
     }
     
     
-    ////
-    //Location Services
-    ////
-    
-    
-    //if we have no permission to access user location, then ask user for permission.
-    func isAuthorizedtoGetUserLocation() {
-        
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    
-    //this method will be called each time when a user change his location access preference.
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            print("User allowed us to access location")
-            locationManager.requestLocation();
-        }
-    }
-    
-    
-    //this method is called by the framework on         locationManager.requestLocation();
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Did location updates is called")
-        print(locations)
-        setLocationDataFromResponse()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Did location updates is called but failed getting location \(error)")
-    }
-    
-    
-    func setLocationDataFromResponse(){
-        if  let currentLocation = locationManager.location{
-            userLatitude = currentLocation.coordinate.latitude
-            userLongitude = currentLocation.coordinate.latitude
-            findDataWithUserLocation()
-            //user location is available now, can modify or trigger here with it
-        }
-    }
+  
     
     
     func startActivityIndicator(){

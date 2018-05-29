@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "surf/Controller/ViewController.swift"
-            timestampString = "549317862.929808"
+            timestampString = "549320431.3616689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "setUIValuesWithBouyData()"
             landmarkType = "7">
          </BreakpointContent>

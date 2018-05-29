@@ -7,46 +7,43 @@
 //
 
 import UIKit
+import CoreLocation
 
-class StationsTableViewController: UITableViewController{
+class StationsTableViewController: UITableViewController, CLLocationManagerDelegate{
     
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
+    private var locationManager = CLLocationManager()
+    private var userLongitude = 0.0
+    private var userLatitude = 0.0
+    private var latitudeLongitudeArray = [(Double,Double)]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        isAuthorizedtoGetUserLocation()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestLocation();
+        }
         
         parseStationList()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-
-        
-//        let stationIdArray = [41110, 41038]
-//        let stationNameArray = ["Masenboro Inlet", "Wrightsville Beach Nearshore"]
-//        for index in 0...1 {
-//            addStationWithId(id: stationIdArray[index], name: stationNameArray[index])
-//        }
-    }
     
     func addStationWithId(id :String){
         let station : Station = Station(id: id, lat: "", lon: "", owner: "", name: "")
         tableData.append(station)
     }
-    
-    // 41110 Masenboro Inlet ILM2
-    // 41038 Wrightsville Beach Nearshore ILM2
-    // JMPN7 Johnny Mercer Pier
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,5 +146,70 @@ class StationsTableViewController: UITableViewController{
             }
         }
     }
+    
+    // MARK: - User Location
+
+    func findDataWithUserLocation(){
+        var minDistance = 0.0
+        var coordAtMinDistance = (0.0,0.0)
+        
+        if (userLatitude != 0 && userLongitude != 0) {
+            for coord in latitudeLongitudeArray{
+                
+                guard let distanceFromNewPoint = pow((coord.0 - userLatitude), 2) + pow((coord.1 - userLongitude), 2) as Double? else {
+                    return
+                }
+                
+                
+                //calculate distance from point to user and previous point to user
+                //if new point is closer than previous point
+                if (minDistance == 0.0 || minDistance > distanceFromNewPoint){
+                    //save coorindates of new point over top
+                    minDistance = distanceFromNewPoint
+                    coordAtMinDistance = coord
+                }
+            }
+        }
+    }
+    
+    //if we have no permission to access user location, then ask user for permission.
+    func isAuthorizedtoGetUserLocation() {
+        
+        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    
+    //this method will be called each time when a user change his location access preference.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            print("User allowed us to access location")
+            locationManager.requestLocation();
+        }
+    }
+    
+    
+    //this method is called by the framework on         locationManager.requestLocation();
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Did location updates is called")
+        print(locations)
+        setLocationDataFromResponse()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Did location updates is called but failed getting location \(error)")
+    }
+    
+    
+    func setLocationDataFromResponse(){
+        if  let currentLocation = locationManager.location{
+            userLatitude = currentLocation.coordinate.latitude
+            userLongitude = currentLocation.coordinate.latitude
+            findDataWithUserLocation()
+            //user location is available now, can modify or trigger here with it
+        }
+    }
+    
     
 }
