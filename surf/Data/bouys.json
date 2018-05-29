@@ -1,7 +1,6 @@
 {
-  "stations": {
-    "-created": "2018-04-11T13:40:01UTC",
-    "-count": "1372",
+    "-created": "2018-05-29T13:40:01UTC",
+    "-count": "1370",
     "station": [
       {
         "-id": "00922",
@@ -728,7 +727,7 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "y"
+        "-dart": "n"
       },
       {
         "-id": "23219",
@@ -1018,20 +1017,6 @@
         "-dart": "n"
       },
       {
-        "-id": "32012",
-        "-lat": "-19.425",
-        "-lon": "-85.078",
-        "-elev": "0",
-        "-name": "Woods Hole Stratus Wave Station ",
-        "-owner": "Woods Hole Oceanographic Institution",
-        "-pgm": "IOOS Partners",
-        "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
-        "-dart": "n"
-      },
-      {
         "-id": "32066",
         "-lat": "-1.136",
         "-lon": "-81.765",
@@ -1256,8 +1241,8 @@
       },
       {
         "-id": "32412",
-        "-lat": "-17.984",
-        "-lon": "-86.374",
+        "-lat": "-16.8045",
+        "-lon": "-87.1512",
         "-name": "SOUTHWEST LIMA - 645 NM SW of Lima, Peru",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -1265,11 +1250,11 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "y"
+        "-dart": "n"
       },
       {
         "-id": "32413",
-        "-lat": "-7.406",
+        "-lat": "-7.409",
         "-lon": "-93.517",
         "-name": "NORTHWEST LIMA - 1000 NM WNW of Lima, Peru",
         "-owner": "NDBC",
@@ -1295,16 +1280,16 @@
       },
       {
         "-id": "32st0",
-        "-lat": "-19.43",
-        "-lon": "-85.074",
+        "-lat": "-19.639",
+        "-lon": "-84.918",
         "-elev": "0",
         "-name": "Stratus",
         "-owner": "Woods Hole Oceanographic Institution",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -1316,9 +1301,9 @@
         "-owner": "Ocean Observatories Initiative",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -1406,8 +1391,8 @@
       },
       {
         "-id": "41010",
-        "-lat": "28.872",
-        "-lon": "-78.493",
+        "-lat": "28.878",
+        "-lon": "-78.485",
         "-elev": "0",
         "-name": "CANAVERAL EAST - 120NM East of Cape Canaveral",
         "-owner": "NDBC",
@@ -1435,7 +1420,7 @@
       {
         "-id": "41024",
         "-lat": "33.837",
-        "-lon": "-78.484",
+        "-lon": "-78.477",
         "-elev": "0",
         "-name": "Sunset Nearshore, NC (SUN2)",
         "-owner": "CORMP",
@@ -1482,15 +1467,15 @@
         "-owner": "CORMP",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
         "-id": "41033",
         "-lat": "32.279",
-        "-lon": "-80.41",
+        "-lon": "-80.406",
         "-elev": "0",
         "-name": "Fripp Nearshore, SC (FRP2)",
         "-owner": "CORMP",
@@ -1503,8 +1488,8 @@
       },
       {
         "-id": "41037",
-        "-lat": "33.989",
-        "-lon": "-77.361",
+        "-lat": "33.988",
+        "-lon": "-77.362",
         "-elev": "0",
         "-name": "Wrightsville Beach Offshore, NC (ILM3)",
         "-owner": "CORMP",
@@ -1517,8 +1502,8 @@
       },
       {
         "-id": "41038",
-        "-lat": "34.142",
-        "-lon": "-77.719",
+        "-lat": "34.141",
+        "-lon": "-77.715",
         "-elev": "0",
         "-name": "Wrightsville Beach Nearshore, NC (ILM2)",
         "-owner": "CORMP",
@@ -1671,16 +1656,16 @@
       },
       {
         "-id": "41056",
-        "-lat": "18.26",
-        "-lon": "-65.457",
+        "-lat": "18.261",
+        "-lon": "-65.464",
         "-elev": "0",
         "-name": "Vieques Island, PR",
         "-owner": "Caribbean Integrated Coastal Ocean Observing System (CarICoos)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
         "-met": "y",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -1789,7 +1774,7 @@
         "-owner": "SCRIPPS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -1852,7 +1837,7 @@
       },
       {
         "-id": "41115",
-        "-lat": "18.379",
+        "-lat": "18.377",
         "-lon": "-67.28",
         "-elev": "0",
         "-name": "Rincon, Puerto Rico (181)",
@@ -1920,8 +1905,8 @@
       },
       {
         "-id": "41159",
-        "-lat": "34.21",
-        "-lon": "-76.948",
+        "-lat": "34.213",
+        "-lon": "-76.946",
         "-elev": "0",
         "-name": "Onslow Bay Outer, NC (217)",
         "-owner": "CORMP",
@@ -1947,8 +1932,8 @@
       },
       {
         "-id": "41420",
-        "-lat": "23.425",
-        "-lon": "-67.308",
+        "-lat": "26.0950",
+        "-lon": "-70.0539",
         "-name": "NORTH SANTO DOMINGO - 328NM NNE of Santo Domingo, DO",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -1956,7 +1941,7 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "y"
+        "-dart": "n"
       },
       {
         "-id": "41421",
@@ -2098,7 +2083,7 @@
       },
       {
         "-id": "42022",
-        "-lat": "27.504",
+        "-lat": "27.505",
         "-lon": "-83.741",
         "-elev": "0",
         "-name": "C12 - WFS Central Buoy, 50m Isobath",
@@ -2133,7 +2118,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -2217,7 +2202,7 @@
         "-owner": "TABS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -2238,7 +2223,7 @@
       },
       {
         "-id": "42047",
-        "-lat": "27.896",
+        "-lat": "27.897",
         "-lon": "-93.597",
         "-elev": "0",
         "-name": "GERG Flower Gardens Buoy V",
@@ -2254,19 +2239,21 @@
         "-id": "42048",
         "-lat": "27.939",
         "-lon": "-96.843",
+        "-elev": "0",
         "-name": "TABS D",
         "-owner": "TABS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
         "-id": "42049",
         "-lat": "28.351",
         "-lon": "-96.006",
+        "-elev": "0",
         "-name": "TABS W",
         "-owner": "TABS",
         "-pgm": "IOOS Partners",
@@ -2279,20 +2266,22 @@
       {
         "-id": "42050",
         "-lat": "28.842",
-        "-lon": "-94.241",
+        "-lon": "-94.242",
+        "-elev": "0",
         "-name": "TABS F",
         "-owner": "TABS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
         "-id": "42051",
         "-lat": "29.635",
         "-lon": "-93.642",
+        "-elev": "0",
         "-name": "TABS R",
         "-owner": "TABS",
         "-pgm": "IOOS Partners",
@@ -2367,7 +2356,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -2409,8 +2398,8 @@
         "-owner": "U.S. Army Corps of Engineers",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
-        "-currents": "y",
+        "-met": "n",
+        "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
       },
@@ -2500,7 +2489,7 @@
       },
       {
         "-id": "42098",
-        "-lat": "27.589",
+        "-lat": "27.59",
         "-lon": "-82.931",
         "-elev": "0",
         "-name": "Egmont Channel Entrance, FL (214)",
@@ -2579,7 +2568,7 @@
         "-type": "oilrig",
         "-met": "n",
         "-currents": "y",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -2660,7 +2649,7 @@
         "-type": "oilrig",
         "-met": "n",
         "-currents": "y",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -2673,8 +2662,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -2699,8 +2688,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -2845,7 +2834,7 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
+        "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
       },
@@ -2871,8 +2860,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -2884,8 +2873,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -2898,8 +2887,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "y",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -2965,7 +2954,7 @@
         "-owner": "Shell Oil",
         "-pgm": "Oil and Gas Industry",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -3096,8 +3085,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -3232,9 +3221,9 @@
       },
       {
         "-id": "42864",
-        "-lat": "28.038",
-        "-lon": "-89.444",
-        "-name": "Thalassa - MC934",
+        "-lat": "26.103",
+        "-lon": "-94.896",
+        "-name": "Thalassa - AC857",
         "-owner": "Shell Oil",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
@@ -3245,15 +3234,15 @@
       },
       {
         "-id": "42865",
-        "-lat": "28.859",
-        "-lon": "-88.044",
-        "-name": "BlackHornet - MC38",
+        "-lat": "27.397",
+        "-lon": "-94.451",
+        "-name": "BlackHornet - EB602",
         "-owner": "Anadarko",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -3349,15 +3338,15 @@
       },
       {
         "-id": "42874",
-        "-lat": "28.408",
-        "-lon": "-89.46",
-        "-name": "Deepwater Asgard - Mississippi Canyon 538",
+        "-lat": "27.357",
+        "-lon": "-90.167",
+        "-name": "Deepwater Asgard - Green Canyon 432",
         "-owner": "Murphy",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -3408,8 +3397,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -3526,8 +3515,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -3571,9 +3560,9 @@
       },
       {
         "-id": "42891",
-        "-lat": "28.168",
-        "-lon": "-88.487",
-        "-name": "West Vela - Mississippi Canyon 322",
+        "-lat": "28.193",
+        "-lon": "-88.61",
+        "-name": "West Vela - Mississippi Canyon 775",
         "-owner": "BP Inc",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
@@ -3701,15 +3690,15 @@
       },
       {
         "-id": "42901",
-        "-lat": "28.195",
-        "-lon": "-88.605",
-        "-name": "Q5000 - Mississippi Canyon 776",
+        "-lat": "28.164",
+        "-lon": "-88.477",
+        "-name": "Q5000 - Mississippi Canyon 822",
         "-owner": "BP Inc",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -3722,7 +3711,7 @@
         "-type": "oilrig",
         "-met": "n",
         "-currents": "y",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -3766,9 +3755,9 @@
       },
       {
         "-id": "42906",
-        "-lat": "28.387",
-        "-lon": "-88.002",
-        "-name": "Deepwater Poseidon - Mississippi Canyon 612",
+        "-lat": "28.009",
+        "-lon": "-89.163",
+        "-name": "Deepwater Poseidon - Mississippi Canyon 940",
         "-owner": "Shell Oil",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
@@ -4000,10 +3989,10 @@
       },
       {
         "-id": "42924",
-        "-lat": "28.115",
-        "-lon": "-90.282",
-        "-name": "ENSCO 8503 - Ewing Bank 871",
-        "-owner": "Walter Oil and Gas",
+        "-lat": "28.785",
+        "-lon": "-88.089",
+        "-name": "ENSCO 8503 - Mississippi Gulf 214",
+        "-owner": "Deep Gulf Energy",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
@@ -4052,15 +4041,15 @@
       },
       {
         "-id": "42928",
-        "-lat": "28.917",
-        "-lon": "-88.589",
-        "-name": "ENSCO 8505 - Mississippi Canyon 72",
-        "-owner": "Deep Gulf Energy",
+        "-lat": "28.2",
+        "-lon": "-88.75",
+        "-name": "ENSCO 8505 - Mississippi Canyon 772",
+        "-owner": "ENI Petroleum",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -4111,8 +4100,8 @@
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "y",
-        "-waterquality": "y",
+        "-currents": "n",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -4208,15 +4197,15 @@
       },
       {
         "-id": "42940",
-        "-lat": "26.905",
-        "-lon": "-90.835",
-        "-name": "West Neptune - Walker Ridge 67",
+        "-lat": "26.183",
+        "-lon": "-92.115",
+        "-name": "West Neptune - Keathley Canyon 829",
         "-owner": "LLOG",
         "-pgm": "Oil and Gas Industry",
         "-type": "oilrig",
         "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4395,22 +4384,22 @@
       },
       {
         "-id": "44018",
-        "-lat": "42.119",
-        "-lon": "-69.7",
+        "-lat": "42.206",
+        "-lon": "-70.143",
         "-elev": "0",
-        "-name": "CAPE COD - 24 NM East of Provincetown, MA",
+        "-name": "CAPE COD - 9 NM North of Provincetown, MA",
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
       },
       {
         "-id": "44020",
-        "-lat": "41.439",
-        "-lon": "-70.186",
+        "-lat": "41.493",
+        "-lon": "-70.279",
         "-elev": "0",
         "-name": "NANTUCKET SOUND",
         "-owner": "NDBC",
@@ -4465,8 +4454,8 @@
       },
       {
         "-id": "44027",
-        "-lat": "44.273",
-        "-lon": "-67.314",
+        "-lat": "44.283",
+        "-lon": "-67.3",
         "-elev": "0",
         "-name": "Jonesport, ME - 20 NM SE of Jonesport, ME",
         "-owner": "NDBC",
@@ -4493,8 +4482,8 @@
       },
       {
         "-id": "44030",
-        "-lat": "43.181",
-        "-lon": "-70.428",
+        "-lat": "43.179",
+        "-lon": "-70.426",
         "-elev": "0",
         "-name": "Buoy B01 - Western Maine Shelf",
         "-owner": "Northeastern Regional Association of Coastal Ocean Observing Systems",
@@ -4507,7 +4496,7 @@
       },
       {
         "-id": "44032",
-        "-lat": "43.716",
+        "-lat": "43.715",
         "-lon": "-69.355",
         "-elev": "0",
         "-name": "Buoy E01 - Central Maine Shelf",
@@ -4515,14 +4504,14 @@
         "-pgm": "IOOS Partners",
         "-type": "buoy",
         "-met": "y",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
         "-id": "44033",
         "-lat": "44.055",
-        "-lon": "-68.998",
+        "-lon": "-68.996",
         "-elev": "0",
         "-name": "Buoy F01 - Penobscot Bay",
         "-owner": "Northeastern Regional Association of Coastal Ocean Observing Systems",
@@ -4535,8 +4524,8 @@
       },
       {
         "-id": "44034",
-        "-lat": "44.106",
-        "-lon": "-68.109",
+        "-lat": "44.103",
+        "-lon": "-68.112",
         "-elev": "0",
         "-name": "Buoy I01 - Eastern Maine Shelf",
         "-owner": "Northeastern Regional Association of Coastal Ocean Observing Systems",
@@ -4558,7 +4547,7 @@
         "-type": "buoy",
         "-met": "y",
         "-currents": "y",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4584,7 +4573,7 @@
         "-owner": "MYSOUND",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -4612,9 +4601,9 @@
         "-owner": "Chesapeake Bay Interpretive Buoy System (CBIBS)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4633,8 +4622,8 @@
       },
       {
         "-id": "44056",
-        "-lat": "36.2",
-        "-lon": "-75.714",
+        "-lat": "36.199",
+        "-lon": "-75.715",
         "-elev": "0",
         "-name": "Duck FRF, NC",
         "-owner": "U.S. Army Corps of Engineers",
@@ -4668,9 +4657,9 @@
         "-owner": "Chesapeake Bay Interpretive Buoy System (CBIBS)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4703,16 +4692,16 @@
       },
       {
         "-id": "44063",
-        "-lat": "38.963",
-        "-lon": "-76.448",
+        "-lat": "38.971",
+        "-lon": "-76.443",
         "-elev": "0",
         "-name": "Annapolis, MD",
         "-owner": "Chesapeake Bay Interpretive Buoy System (CBIBS)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4724,9 +4713,9 @@
         "-owner": "Chesapeake Bay Interpretive Buoy System (CBIBS)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -4780,9 +4769,9 @@
         "-owner": "Chesapeake Bay Interpretive Buoy System (CBIBS)",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5109,8 +5098,8 @@
       },
       {
         "-id": "44401",
-        "-lat": "36.3175",
-        "-lon": "-37.7823",
+        "-lat": "35.0490",
+        "-lon": "-37.6848",
         "-elev": "0",
         "-name": "NORTHEAST CASTLE ROCK SEAMOUNT - 620NM South of St John's Newfoundland, CN",
         "-owner": "NDBC",
@@ -5144,7 +5133,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5158,7 +5147,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5172,7 +5161,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5186,7 +5175,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5200,7 +5189,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5214,7 +5203,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5228,7 +5217,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5242,7 +5231,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5256,7 +5245,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5270,9 +5259,9 @@
         "-owner": "University of Wisconsin-Milwaukee",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5354,7 +5343,7 @@
         "-owner": "University of Michigan CILER",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5368,8 +5357,8 @@
         "-owner": "Michigan Technological University",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
+        "-met": "y",
+        "-currents": "y",
         "-waterquality": "n",
         "-dart": "n"
       },
@@ -5382,9 +5371,9 @@
         "-owner": "University of Michigan CILER",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5396,9 +5385,9 @@
         "-owner": "Michigan Technological University",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5410,9 +5399,9 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5424,9 +5413,9 @@
         "-owner": "University of Minnesota, Duluth",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5438,9 +5427,9 @@
         "-owner": "University of Minnesota, Duluth",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5452,9 +5441,9 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5466,7 +5455,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5480,7 +5469,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5508,7 +5497,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5522,7 +5511,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5536,7 +5525,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5578,7 +5567,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5592,7 +5581,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5662,7 +5651,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5704,7 +5693,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5759,7 +5748,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5773,9 +5762,9 @@
         "-owner": "GLERL",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5787,9 +5776,9 @@
         "-owner": "GLERL",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5801,9 +5790,9 @@
         "-owner": "GLERL",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5815,9 +5804,9 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5829,8 +5818,8 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
+        "-met": "y",
+        "-currents": "y",
         "-waterquality": "n",
         "-dart": "n"
       },
@@ -5843,9 +5832,9 @@
         "-owner": "Vermont EPSCOR",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5857,9 +5846,9 @@
         "-owner": "Regional Science Consortium",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5871,9 +5860,9 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5899,9 +5888,9 @@
         "-owner": "Illinois-Indiana Sea Grant and Purdue Civil Engineering",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5955,7 +5944,7 @@
         "-owner": "Illinois-Indiana Sea Grant and Purdue Civil Engineering",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -5969,9 +5958,9 @@
         "-owner": "Michigan Technological University",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -5983,9 +5972,9 @@
         "-owner": "Limno Tech",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -6032,14 +6021,14 @@
       },
       {
         "-id": "45180",
-        "-lat": "48.019",
-        "-lon": "-87.8",
+        "-lat": "48.034",
+        "-lon": "-87.73",
         "-elev": "0",
         "-name": "Isle of Royale East, MI (230)",
         "-owner": "U.S. Army Corps of Engineers",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -6214,7 +6203,7 @@
       },
       {
         "-id": "46026",
-        "-lat": "37.755",
+        "-lat": "37.754",
         "-lon": "-122.839",
         "-elev": "0",
         "-name": "SAN FRANCISCO - 18NM West of San Francisco, CA",
@@ -6277,7 +6266,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "other",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -6417,7 +6406,7 @@
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -6704,8 +6693,8 @@
       },
       {
         "-id": "46092",
-        "-lat": "36.75",
-        "-lon": "-122.03",
+        "-lat": "36.751",
+        "-lon": "-122.029",
         "-elev": "0",
         "-name": "MBM1",
         "-owner": "MBARI",
@@ -6795,7 +6784,7 @@
         "-owner": "Alaska Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -6816,8 +6805,8 @@
       },
       {
         "-id": "46116",
-        "-lat": "46.286",
-        "-lon": "-124.015",
+        "-lat": "46.287",
+        "-lon": "-124.016",
         "-elev": "0",
         "-name": "SATURN Estuary Station #07, Baker Bay, WA",
         "-owner": "Center for Coastal Margin Observation and Prediction",
@@ -6825,7 +6814,7 @@
         "-type": "buoy",
         "-met": "n",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -6873,7 +6862,7 @@
       {
         "-id": "46121",
         "-lat": "47.28",
-        "-lon": "-122.728",
+        "-lon": "-122.73",
         "-elev": "0",
         "-name": "Carr Inlet, WA (U of Wash) ",
         "-owner": "University of Washington",
@@ -6881,7 +6870,7 @@
         "-type": "buoy",
         "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -6935,9 +6924,9 @@
         "-owner": "University of Washington",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -6956,16 +6945,16 @@
       },
       {
         "-id": "46128",
-        "-lat": "43.295",
+        "-lat": "43.293",
         "-lon": "-124.537",
         "-elev": "0",
         "-name": "Buoy CB-06 - West of Coos Bay, OR",
         "-owner": "Northwest Association of Networked Ocean Observing Systems",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
+        "-met": "y",
+        "-currents": "y",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -6991,7 +6980,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7173,7 +7162,7 @@
         "-owner": "Environment and Climate Change Canada",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7201,21 +7190,21 @@
         "-owner": "SCRIPPS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
       },
       {
         "-id": "46214",
-        "-lat": "37.948",
-        "-lon": "-123.468",
+        "-lat": "37.95",
+        "-lon": "-123.472",
         "-elev": "0",
         "-name": "Point Reyes, CA (029)",
         "-owner": "SCRIPPS",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7376,8 +7365,8 @@
       },
       {
         "-id": "46239",
-        "-lat": "36.341",
-        "-lon": "-122.102",
+        "-lat": "36.343",
+        "-lon": "-122.096",
         "-elev": "0",
         "-name": "Point Sur, CA (157)",
         "-owner": "SCRIPPS",
@@ -7460,8 +7449,8 @@
       },
       {
         "-id": "46248",
-        "-lat": "46.134",
-        "-lon": "-124.64",
+        "-lat": "46.129",
+        "-lon": "-124.647",
         "-elev": "0",
         "-name": "Astoria Canyon, OR  (179)",
         "-owner": "SCRIPPS",
@@ -7474,8 +7463,8 @@
       },
       {
         "-id": "46251",
-        "-lat": "33.76",
-        "-lon": "-119.55",
+        "-lat": "33.761",
+        "-lon": "-119.559",
         "-elev": "0",
         "-name": "Santa Cruz Basin, CA (203)",
         "-owner": "SCRIPPS",
@@ -7530,8 +7519,8 @@
       },
       {
         "-id": "46258",
-        "-lat": "32.75",
-        "-lon": "-117.5",
+        "-lat": "32.752",
+        "-lon": "-117.501",
         "-elev": "0",
         "-name": "Mission Bay West, CA (220)",
         "-owner": "SCRIPPS",
@@ -7565,7 +7554,7 @@
         "-owner": "National Renewable Energy Laboratory",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7579,7 +7568,7 @@
         "-owner": "National Renewable Energy Laboratory",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7600,13 +7589,14 @@
       },
       {
         "-id": "46263",
-        "-lat": "39.368",
-        "-lon": "-123.91",
+        "-lat": "39.37",
+        "-lon": "-123.912",
+        "-elev": "0",
         "-name": "Fort Bragg South, CA (235)",
         "-owner": "National Renewable Energy Laboratory",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -7653,8 +7643,8 @@
       },
       {
         "-id": "46404",
-        "-lat": "45.853",
-        "-lon": "-128.733",
+        "-lat": "45.848",
+        "-lon": "-128.775",
         "-name": "WEST ASTORIA - 230 NM West of Astoria, OR",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -7662,12 +7652,12 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "n"
+        "-dart": "y"
       },
       {
         "-id": "46407",
-        "-lat": "42.682",
-        "-lon": "-128.832",
+        "-lat": "42.708",
+        "-lon": "-128.825",
         "-name": "NEWPORT - 210NM West of Coos Bay, OR",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -7675,7 +7665,7 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "n"
+        "-dart": "y"
       },
       {
         "-id": "46408",
@@ -7731,8 +7721,8 @@
       },
       {
         "-id": "46412",
-        "-lat": "32.2121",
-        "-lon": "-120.6130",
+        "-lat": "32.4",
+        "-lon": "-120.582",
         "-name": "San Diego - 175 NM West of San Diego, CA",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -7740,13 +7730,26 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "n"
+        "-dart": "y"
       },
       {
         "-id": "46413",
         "-lat": "48",
         "-lon": "-174.228",
         "-name": "SOUTH-SOUTHEAST ADAK - 243NM SSE of Adak Island, AK",
+        "-owner": "NDBC",
+        "-pgm": "Tsunami",
+        "-type": "dart",
+        "-met": "n",
+        "-currents": "n",
+        "-waterquality": "n",
+        "-dart": "y"
+      },
+      {
+        "-id": "46415",
+        "-lat": "52.98",
+        "-lon": "-139.95",
+        "-name": "SOUTHWEST JUNEAU - 370 NM SW of Juneau, AK",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
         "-type": "dart",
@@ -7928,8 +7931,8 @@
       },
       {
         "-id": "51001",
-        "-lat": "14.2657",
-        "-lon": "-177.2020",
+        "-lat": "14.6134",
+        "-lon": "173.0360",
         "-elev": "0",
         "-name": "NORTHWESTERN HAWAII ONE - 170 NM West Northwest of Kauai Island",
         "-owner": "NDBC",
@@ -8160,8 +8163,8 @@
       },
       {
         "-id": "51101",
-        "-lat": "24.6776",
-        "-lon": "-157.7700",
+        "-lat": "26.8777",
+        "-lon": "-157.0849",
         "-elev": "0",
         "-name": "NORTHWESTERN HAWAII TWO - 190NM NW of Kauai Is, HI  ",
         "-owner": "NDBC",
@@ -8259,13 +8262,13 @@
       {
         "-id": "51207",
         "-lat": "21.477",
-        "-lon": "-157.753",
+        "-lon": "-157.752",
         "-elev": "0",
         "-name": "Kaneohe Bay, HI (198)",
         "-owner": "Pacific Islands Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -8279,7 +8282,7 @@
         "-owner": "Pacific Islands Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -8293,7 +8296,7 @@
         "-owner": "Pacific Islands Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -8462,8 +8465,8 @@
       },
       {
         "-id": "51425",
-        "-lat": "-9.517",
-        "-lon": "-176.32",
+        "-lat": "-9.5993",
+        "-lon": "-175.8490",
         "-name": "NORTHWEST APIA - 370 NM NW of Apia, Samoa",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -8471,7 +8474,7 @@
         "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
-        "-dart": "y"
+        "-dart": "n"
       },
       {
         "-id": "51426",
@@ -8488,8 +8491,8 @@
       },
       {
         "-id": "51wh0",
-        "-lat": "22.667",
-        "-lon": "-157.951",
+        "-lat": "22.75",
+        "-lon": "-157.917",
         "-elev": "0",
         "-name": "WHOTS - Woods Hole Ocean Time-series",
         "-owner": "Woods Hole Oceanographic Institution",
@@ -8617,7 +8620,7 @@
         "-owner": "Pacific Islands Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -8777,8 +8780,8 @@
       },
       {
         "-id": "52406",
-        "-lat": "-14.0561",
-        "-lon": "178.6560",
+        "-lat": "-18.8660",
+        "-lon": "176.5320",
         "-name": "NORTHEAST SOLOMON - 370NM NE of Guadalcanal",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -8790,8 +8793,8 @@
       },
       {
         "-id": "54401",
-        "-lat": "-33.4563",
-        "-lon": "-179.3990",
+        "-lat": "-31.5623",
+        "-lon": "-178.3070",
         "-name": "NORTHEAST NEW ZEALAND - 640NM NE of Auckland, NZ",
         "-owner": "NDBC",
         "-pgm": "Tsunami",
@@ -9032,7 +9035,7 @@
         "-owner": "UK Met Office",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -9087,7 +9090,7 @@
         "-owner": "Met Eireann",
         "-pgm": "International Partners",
         "-type": "buoy",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -9155,7 +9158,7 @@
         "-owner": "Private Industry Oil Platform",
         "-pgm": "International Partners",
         "-type": "oilrig",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -9231,7 +9234,7 @@
         "-owner": "Private Industry Oil Platform",
         "-pgm": "International Partners",
         "-type": "oilrig",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -9456,7 +9459,7 @@
         "-owner": "UK Met Office",
         "-pgm": "International Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -9974,7 +9977,7 @@
         "-owner": "COMPS (University of South Florida)",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -10167,9 +10170,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10347,9 +10350,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10431,9 +10434,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10445,9 +10448,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10514,9 +10517,9 @@
         "-owner": "Dauphin Island Sea Lab",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -10529,7 +10532,7 @@
         "-type": "fixed",
         "-met": "n",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10555,7 +10558,7 @@
         "-owner": "U.S. Army Corps of Engineers",
         "-pgm": "IOOS Partners",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -10624,9 +10627,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -10708,9 +10711,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -11028,7 +11031,7 @@
         "-type": "fixed",
         "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -11110,9 +11113,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -11223,7 +11226,7 @@
         "-type": "fixed",
         "-met": "n",
         "-currents": "n",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -11304,9 +11307,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -11442,9 +11445,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -11816,7 +11819,7 @@
         "-type": "fixed",
         "-met": "n",
         "-currents": "n",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -11941,7 +11944,7 @@
         "-type": "fixed",
         "-met": "n",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12161,9 +12164,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12202,9 +12205,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12257,7 +12260,7 @@
         "-owner": "National Estuarine Research Reserve System",
         "-pgm": "NERRS",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -12559,9 +12562,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12670,9 +12673,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12684,7 +12687,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -12782,7 +12785,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -12850,9 +12853,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -12966,20 +12969,6 @@
         "-dart": "n"
       },
       {
-        "-id": "jtaw1",
-        "-lat": "46.266",
-        "-lon": "-124.038",
-        "-elev": "0",
-        "-name": "Jetty A, USCG Station Disappointment",
-        "-owner": "Center for Coastal Margin Observation and Prediction",
-        "-pgm": "IOOS Partners",
-        "-type": "fixed",
-        "-met": "n",
-        "-currents": "n",
-        "-waterquality": "n",
-        "-dart": "n"
-      },
-      {
         "-id": "jxuf1",
         "-lat": "30.354",
         "-lon": "-81.612",
@@ -12988,7 +12977,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -13028,7 +13017,7 @@
         "-owner": "Federal Aviation Administration",
         "-pgm": "Marine METAR",
         "-type": "oilrig",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -13201,7 +13190,7 @@
         "-owner": "Federal Aviation Administration",
         "-pgm": "Marine METAR",
         "-type": "oilrig",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -13267,7 +13256,7 @@
         "-owner": "Federal Aviation Administration",
         "-pgm": "Marine METAR",
         "-type": "oilrig",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -13697,9 +13686,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -13836,9 +13825,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -13864,9 +13853,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -13944,7 +13933,7 @@
         "-lat": "41.481",
         "-lon": "-82.195",
         "-elev": "192.6",
-        "-name": "Loraine, OH",
+        "-name": "Lorain, OH",
         "-owner": "NWS Eastern Region",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
@@ -13990,9 +13979,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -14004,9 +13993,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -14032,9 +14021,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -14228,7 +14217,7 @@
         "-type": "fixed",
         "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -14351,7 +14340,7 @@
         "-owner": "NWS Central Region",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -14644,7 +14633,7 @@
         "-owner": "Marine Exchange of Alaska",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -14672,7 +14661,7 @@
         "-owner": "LSU CSI",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -14715,20 +14704,6 @@
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
         "-met": "y",
-        "-currents": "n",
-        "-waterquality": "n",
-        "-dart": "n"
-      },
-      {
-        "-id": "mtyc1",
-        "-lat": "36.605",
-        "-lon": "-121.889",
-        "-elev": "2.4",
-        "-name": "9413450 - Monterey, CA",
-        "-owner": "NOS",
-        "-pgm": "NOS/CO-OPS",
-        "-type": "fixed",
-        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -15086,7 +15061,7 @@
         "-owner": "National Estuarine Research Reserve System",
         "-pgm": "NERRS",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -15127,9 +15102,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -15323,7 +15298,7 @@
         "-owner": "U.S. Army Corps of Engineers",
         "-pgm": "IOOS Partners",
         "-type": "other",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -15391,7 +15366,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -15501,7 +15476,7 @@
         "-owner": "National Estuarine Research Reserve System",
         "-pgm": "NERRS",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -15805,9 +15780,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -16952,7 +16927,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -16980,7 +16955,7 @@
         "-owner": "TCOON",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -17155,7 +17130,7 @@
         "-id": "sisw1",
         "-lat": "48.321",
         "-lon": "-122.831",
-        "-elev": "15.24",
+        "-elev": "15.2",
         "-name": "Smith Island, WA",
         "-owner": "NDBC",
         "-pgm": "NDBC Meteorological/Ocean",
@@ -17285,7 +17260,7 @@
         "-owner": "NWS Central Region",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -17395,7 +17370,7 @@
         "-owner": "LSU CSI",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -17435,9 +17410,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -17644,7 +17619,7 @@
         "-owner": "GLERL",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -17657,9 +17632,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -17713,9 +17688,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -17795,9 +17770,9 @@
         "-owner": "Central and Northern California Ocean Observing System",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
-        "-waterquality": "y",
+        "-waterquality": "n",
         "-dart": "n"
       },
       {
@@ -17905,9 +17880,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -17961,9 +17936,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -17989,7 +17964,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -18184,7 +18159,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -18267,7 +18242,7 @@
         "-owner": "Shell Oil",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -18376,9 +18351,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -18431,7 +18406,7 @@
         "-owner": "NOS",
         "-pgm": "NOS/CO-OPS",
         "-type": "fixed",
-        "-met": "y",
+        "-met": "n",
         "-currents": "n",
         "-waterquality": "n",
         "-dart": "n"
@@ -18445,9 +18420,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -18487,9 +18462,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -18515,9 +18490,9 @@
         "-owner": "Everglades National Park",
         "-pgm": "IOOS Partners",
         "-type": "fixed",
-        "-met": "n",
+        "-met": "y",
         "-currents": "n",
-        "-waterquality": "n",
+        "-waterquality": "y",
         "-dart": "n"
       },
       {
@@ -18631,4 +18606,3 @@
       }
     ]
   }
-}

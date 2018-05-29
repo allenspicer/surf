@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
+func bouyDataServiceRequest(stationId: String, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
@@ -64,4 +64,8 @@ func bouyDataServiceRequest(stationId: Int, finished: () -> Void) -> (Snapshot){
     finished()
     return (snapshotArray.first ?? Snapshot.init())
 }
+
+
+
+
 

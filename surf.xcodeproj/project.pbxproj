@@ -10,8 +10,10 @@
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		95AB2BA520BD9229004504BF /* bouys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* bouys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
+		95E674BD20BDC6A100166693 /* staticStationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95E674BC20BDC6A000166693 /* staticStationList.json */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
@@ -37,10 +39,12 @@
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		95AB2BA420BD9229004504BF /* bouys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouys.json; sourceTree = "<group>"; };
 		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfTests.swift; sourceTree = "<group>"; };
 		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95E674BC20BDC6A000166693 /* staticStationList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = staticStationList.json; path = surf/Data/staticStationList.json; sourceTree = SOURCE_ROOT; };
 		95EEECCB204CF40600308E73 /* surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,15 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		95AB2BA320BD9189004504BF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				95AB2BA420BD9229004504BF /* bouys.json */,
+				95E674BC20BDC6A000166693 /* staticStationList.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		95B9A2B020893CBA00F911F3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +157,7 @@
 		95EEECCD204CF40600308E73 /* surf */ = {
 			isa = PBXGroup;
 			children = (
+				95AB2BA320BD9189004504BF /* Data */,
 				9576FF59207FDA41006240AD /* Model */,
 				95B9A2B020893CBA00F911F3 /* Controller */,
 				9576FF5A207FDA52006240AD /* View */,
@@ -242,6 +256,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95E674BD20BDC6A100166693 /* staticStationList.json in Resources */,
+				95AB2BA520BD9229004504BF /* bouys.json in Resources */,
 				95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */,
 				95EEECD9204CF40600308E73 /* Assets.xcassets in Resources */,
 				95EEECD4204CF40600308E73 /* Main.storyboard in Resources */,

@@ -12,6 +12,7 @@ class StationsTableViewController: UITableViewController{
     
     var tableData = [Station]()
     var selectedStationIndex = Int()
+    var selectedSnapshot = Snapshot()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +25,22 @@ class StationsTableViewController: UITableViewController{
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        parseStationList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let stationIdArray = [41110, 41038]
-        let stationNameArray = ["Masenboro Inlet", "Wrightsville Beach Nearshore"]
-        for index in 0...1 {
-            addStationWithId(id: stationIdArray[index], name: stationNameArray[index])
-        }
+
+        
+//        let stationIdArray = [41110, 41038]
+//        let stationNameArray = ["Masenboro Inlet", "Wrightsville Beach Nearshore"]
+//        for index in 0...1 {
+//            addStationWithId(id: stationIdArray[index], name: stationNameArray[index])
+//        }
     }
     
-    func addStationWithId(id :Int, name: String){
-        let station : Station = Station(id: id, lat: "", lon: "", owner: "", name: name)
+    func addStationWithId(id :String){
+        let station : Station = Station(id: id, lat: "", lon: "", owner: "", name: "")
         tableData.append(station)
     }
     
@@ -68,8 +73,27 @@ class StationsTableViewController: UITableViewController{
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         selectedStationIndex = indexPath.row
-        self.performSegue(withIdentifier: "showStationDetail", sender: self)
+        let selectedId = tableData[selectedStationIndex].id
+        
+        //display spinner here
+        
+        DispatchQueue.main.async{
+            let data = bouyDataServiceRequest(stationId: selectedId, finished: {})
+            
+            //remove spinner for response:
+            if data.waveHgt != nil {
+                self.selectedSnapshot = data
+                self.performSegue(withIdentifier: "showStationDetail", sender: self)
+            }else{
+                //if no data respond with alertview
+                let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+                alert.addAction(doneAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     // MARK: - Navigation
@@ -80,8 +104,50 @@ class StationsTableViewController: UITableViewController{
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
             destinationVC.stationName = selectedStation.name
+            destinationVC.currentSnapShot = selectedSnapshot
         }
     }
  
+    // MARK: - Parse Data from JSON
 
+//    Parsing for full data set: bouys.json
+//    func parseStationList(){
+//        if let path = Bundle.main.path(forResource: "staticStationList", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                if let metaData = jsonResult as? Dictionary<String, AnyObject>{
+//                    if let stationDataArray = metaData["station"] as? [[String : String]]{
+//                        for station in stationDataArray{
+//                            if let stationId = station["-id"]{
+//                                addStationWithId(id: stationId)
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            } catch {
+//                // handle error
+//            }
+//        }
+//    }
+    
+    func parseStationList(){
+        if let path = Bundle.main.path(forResource: "staticStationList", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let metaData = jsonResult as? [[String : AnyObject]]{
+                    for station in metaData {
+                        if let stationId = station["station"]{
+                            addStationWithId(id: "\(stationId)")
+                        }
+                    }
+                }
+            } catch {
+                // handle error
+            }
+        }
+    }
+    
 }
