@@ -42,6 +42,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         DispatchQueue.main.async{
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+            snapshotView.isScrollEnabled = true
+            snapshotView.contentSize = CGSize(width: 10, height: 2000)
+                
+//                CGSize(width: view.bounds.width, height: (view.bounds.width * 2))
             self.view.addSubview(snapshotView)
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
@@ -96,7 +100,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     UIView.animate(withDuration: 0.7, animations: { () -> Void in
                         snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(0.7)
                     })
-//                    view.animateHide()
+                    view.animateHide()
                 }
             }
         }
@@ -105,7 +109,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.removeWaveHeightIndicator()
-//                    view.animateShow()
+                    view.animateShow()
                     UIView.animate(withDuration: 0.3, animations: { () -> Void in
                         snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(1.0)
                     })
@@ -123,6 +127,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 break
             }
         }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     
@@ -231,5 +239,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let ciColor = CIColor(cgColor: color)
         return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
     }
+
+    
 }
 
