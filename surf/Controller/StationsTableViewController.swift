@@ -14,6 +14,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
+    var stationName = String()
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
     private var userLatitude = 0.0
@@ -108,7 +109,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
-//            destinationVC.stationName = selectedStation.name
+            destinationVC.stationName = stationName
             destinationVC.currentSnapShot = selectedSnapshot
         }
     }
@@ -124,9 +125,11 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
 //                if let metaData = jsonResult as? Dictionary<String, AnyObject>{
 //                    if let stationDataArray = metaData["station"] as? [[String : String]]{
 //                        for station in stationDataArray{
-//                            if let stationId = station["-id"]{
-//                                addStationWithId(id: stationId)
-//                            }
+//                            guard let stationId = station["station"] else {return}
+//                            guard let lon = station["longitude"] as? Double else {return}
+//                            guard let lat = station["latitude"] as? Double else {return}
+//                            addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon)
+//
 //                        }
 //                    }
 //
@@ -148,6 +151,12 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon)
+                        if let name = station["name"] as? String {
+                            selectedSnapshot.stationName = name
+                            //
+                            stationName = name
+                        }
+                    
                     }
                 }
             } catch {
@@ -207,8 +216,6 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         if (userLatitude != 0 && userLongitude != 0) {
             for index in 0..<tableData.count{
                 let station = tableData[index]
-                let calculatedDistanceToStation = pow(abs(station.lat - userLatitude), 2) + pow(abs(station.lon - userLongitude), 2)
-                tableData[index].distance = calculatedDistanceToStation
                 let absoluteLonDiff = Int(abs(station.lon - userLongitude).rounded())
                 let absoluteLatDiff = Int(abs(station.lat - userLatitude).rounded())
                 let distanceInMiles = (absoluteLatDiff * approxMilesToLat) + (absoluteLonDiff * approxMilesToLon)
@@ -220,13 +227,6 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     
     func sortTableObjectsByDistance(){
         tableData = tableData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
-        print(userLatitude)
-        print(userLongitude)
-        print(tableData[0].lat)
-        print(tableData[0].lon)
-        print(tableData[0].distance)
-        print(tableData[0].distanceInMiles)
-        
         self.tableView.reloadData()
     }
     

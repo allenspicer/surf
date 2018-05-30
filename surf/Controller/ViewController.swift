@@ -19,7 +19,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
     private var wlView = UIView()
-    
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -46,6 +45,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.view.addSubview(snapshotView)
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
+            snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
         }
     }
     
@@ -57,7 +57,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func setUIValuesWithBouyData(){
         if let color = getWaterColorFromTempInF(self.currentSnapShot.waterTemp!){
-            self.shapeLayer.strokeColor = color
+            waterColor = color
+            self.shapeLayer.strokeColor = waterColor
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
@@ -92,6 +93,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
+                    UIView.animate(withDuration: 0.7, animations: { () -> Void in
+                        snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(0.7)
+                    })
 //                    view.animateHide()
                 }
             }
@@ -102,6 +106,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.removeWaveHeightIndicator()
 //                    view.animateShow()
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(1.0)
+                    })
                 }
             }
         }
@@ -218,5 +225,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "returnToTableView", sender: self)
     }
     
+    //invert color components for complementary title color
+    private func colorComplement(color: CGColor) -> UIColor{
+        let ciColor = CIColor(cgColor: color)
+        return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
+    }
 }
 

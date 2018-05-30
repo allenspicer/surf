@@ -141,6 +141,7 @@ class SurfSnapshotView: UIScrollView {
     func removeWaveHeightIndicator(){
         label.removeFromSuperview()
     }
+    
       
 }
 
