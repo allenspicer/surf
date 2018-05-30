@@ -43,9 +43,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         DispatchQueue.main.async{
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             snapshotView.isScrollEnabled = true
-            snapshotView.contentSize = CGSize(width: 10, height: 2000)
-                
-//                CGSize(width: view.bounds.width, height: (view.bounds.width * 2))
+            snapshotView.contentSize = CGSize(width: self.view.bounds.width, height: (self.view.bounds.height * 1.2))
             self.view.addSubview(snapshotView)
             self.stopActivityIndicator()
             self.setUIValuesWithBouyData()
