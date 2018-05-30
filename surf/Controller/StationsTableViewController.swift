@@ -14,7 +14,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
-    var stationName = String()
+//    var stationName = ""
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
     private var userLatitude = 0.0
@@ -25,10 +25,8 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         tableView.delegate = self
         tableView.dataSource = self
-        
         parseStationList()
         setTableOrGetUserLocation()
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,6 +74,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
             //remove spinner for response:
             if data.waveHgt != nil && data.waterTemp != nil {
                 self.selectedSnapshot = data
+                self.selectedSnapshot.stationName = self.tableData[indexPath.row].name
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
                 //if no data respond with alertview
@@ -110,11 +109,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         }
     }
     
-    func addStationWithIdLatLon(id :String, lat : Double, lon : Double){
-        let station : Station = Station(id: id, lat: lat, lon: lon, owner: nil, name: nil, distance: 10000.0, distanceInMiles: 10000)
-        tableData.append(station)
-    }
-    
+
     
     // MARK: - Navigation
     
@@ -123,7 +118,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
-            destinationVC.stationName = stationName
+//            destinationVC.stationName = stationName
             destinationVC.currentSnapShot = selectedSnapshot
         }
     }
@@ -164,13 +159,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
                         guard let stationId = station["station"] else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
-                        addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon)
-                        if let name = station["name"] as? String {
-                            selectedSnapshot.stationName = name
-                            //
-                            stationName = name
-                        }
-                    
+                        addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon, name: station["name"] as? String ?? "" )
                     }
                 }
             } catch {
@@ -178,6 +167,12 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
             }
         }
     }
+    
+    func addStationWithIdLatLon(id :String, lat : Double, lon : Double, name: String){
+        let station : Station = Station(id: id, lat: lat, lon: lon, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+        tableData.append(station)
+    }
+    
 
     // MARK: - User Location
     

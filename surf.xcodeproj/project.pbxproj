@@ -39,6 +39,7 @@
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* bouys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouys.json; sourceTree = "<group>"; };
 		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +140,7 @@
 		95EEECC2204CF40600308E73 = {
 			isa = PBXGroup;
 			children = (
+				9590E67420BF260500FD5540 /* ILM.gpx */,
 				95EEECCD204CF40600308E73 /* surf */,
 				95E1BE9C2088C7AC0096ECA3 /* surfTests */,
 				95EEECCC204CF40600308E73 /* Products */,

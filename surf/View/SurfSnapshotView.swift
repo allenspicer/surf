@@ -111,7 +111,7 @@ class SurfSnapshotView: UIScrollView {
         if let name = currentSnapShot.stationName {
             titleLabel.text = "\(name)"
         }
-        titleLabel.font = UIFont(name:"Damascus", size: 40.0)
+        titleLabel.font = UIFont(name:"Damascus", size: 20.0)
         titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         titleLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
         titleLabel.textAlignment = .center
