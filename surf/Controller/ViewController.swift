@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
@@ -19,6 +19,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
     private var wlView = UIView()
+    var collectionView = SurfSnapshotCollectionView()
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -38,6 +39,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionViewSetup()
         setupGestureRecognizer()
         
         DispatchQueue.main.async{
@@ -232,4 +236,55 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
     }
 }
+
+
+extension ViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionViewSetup(){
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = UIColor.black
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: view.frame.width, height: 700)
+        let collectionViewFrame = CGRect(x: 0, y: (3 * (view.bounds.height / 5)), width: view.bounds.width, height: (view.bounds.height / 10))
+        collectionView.frame = collectionViewFrame
+        collectionView.collectionViewLayout = layout
+        view.addSubview(collectionView)
+    }
+    
+    
+     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 15
+    }
+
+
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return 15
+    }
+
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        cell.backgroundColor = .green
+        let cellFrame = cell.frame
+        let label = UILabel(frame: cellFrame)
+        label.text = "5 ft"
+        label.textColor = .black
+        cell.addSubview(label)
+        return cell
+    }
+
+    
+    
+}
+
+
+
+
+
+
+
+
 

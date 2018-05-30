@@ -14,7 +14,6 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
-//    var stationName = ""
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
     private var userLatitude = 0.0

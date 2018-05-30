@@ -23,6 +23,7 @@ class SurfSnapshotView: UIScrollView {
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
+        addCollectionView()
         return
     }
     
@@ -141,7 +142,11 @@ class SurfSnapshotView: UIScrollView {
     func removeWaveHeightIndicator(){
         label.removeFromSuperview()
     }
-    
+
+    func addCollectionView(){
+        
+
+    }
       
 }
 

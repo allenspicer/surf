@@ -10,6 +10,7 @@
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		9590E67820BF3C3B00FD5540 /* SurfSnapshotCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9590E67720BF3C3B00FD5540 /* SurfSnapshotCollectionView.swift */; };
 		95AB2BA520BD9229004504BF /* bouys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* bouys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
@@ -40,6 +41,7 @@
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
+		9590E67720BF3C3B00FD5540 /* SurfSnapshotCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotCollectionView.swift; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* bouys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouys.json; sourceTree = "<group>"; };
 		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
+				9590E67720BF3C3B00FD5540 /* SurfSnapshotCollectionView.swift */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
 				95EEECD8204CF40600308E73 /* Assets.xcassets */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
@@ -285,6 +288,7 @@
 				95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
+				9590E67820BF3C3B00FD5540 /* SurfSnapshotCollectionView.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
 				956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */,
