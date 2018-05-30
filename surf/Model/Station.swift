@@ -10,10 +10,12 @@ import Foundation
 
 struct Station: Decodable {
     let id: String
-    let lat: String
-    let lon: String
+    let lat: Double
+    let lon: Double
     let owner: String?
-    let name: String
+    let name: String?
+    var distance : Double
+    var distanceInMiles : Int
 //    let snapshots: [Snapshot]
     
 }

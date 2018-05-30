@@ -1,5 +1,18 @@
 [
-  {
+ {
+ "station": 41110,
+ "longitude": 77.717,
+ "latitude": 34.141,
+ "time": "2018-05-29T14:00:00Z",
+ "wd": "NaN",
+ "wspd": "NaN",
+ "gst": "NaN",
+ "wvht": 0.8,
+ "dpd": 8,
+ "apd": 5.4,
+ "wtmp": 18.5
+ },
+ {
     "station": 44056,
     "longitude": -75.714,
     "latitude": 36.2,
