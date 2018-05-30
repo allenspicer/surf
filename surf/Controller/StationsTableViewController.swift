@@ -26,26 +26,11 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         tableView.delegate = self
         tableView.dataSource = self
         
-        isAuthorizedtoGetUserLocation()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        }
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestLocation();
-        }
-        
         parseStationList()
-    }
-    
-    
-    func addStationWithIdLatLon(id :String, lat : Double, lon : Double){
-        let station : Station = Station(id: id, lat: lat, lon: lon, owner: nil, name: nil, distance: 10000.0, distanceInMiles: 10000)
-        tableData.append(station)
-    }
+        setTableOrGetUserLocation()
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -101,6 +86,35 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
             }
         }
     }
+    
+    // MARK: - Inital Load Logic
+    
+    func setTableOrGetUserLocation(){
+        let defaults = UserDefaults.standard
+        userLongitude = defaults.object(forKey: "userLongitude") as? Double ?? 0.0
+        userLatitude = defaults.object(forKey: "userLatitude") as? Double ?? 0.0
+        
+        if userLongitude != 0.0 && userLatitude != 0.0 {
+            findDistancesFromUserLocation()
+        }else{
+            isAuthorizedtoGetUserLocation()
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            }
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.requestLocation();
+            }
+        }
+    }
+    
+    func addStationWithIdLatLon(id :String, lat : Double, lon : Double){
+        let station : Station = Station(id: id, lat: lat, lon: lon, owner: nil, name: nil, distance: 10000.0, distanceInMiles: 10000)
+        tableData.append(station)
+    }
+    
     
     // MARK: - Navigation
     
@@ -202,6 +216,11 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
             userLatitude = currentLocation.coordinate.latitude
             userLongitude = currentLocation.coordinate.longitude
             findDistancesFromUserLocation()
+            
+            let defaults = UserDefaults.standard
+            defaults.set(userLatitude, forKey: "userLatitude")
+            defaults.set(userLongitude, forKey: "userLongitude")
+
         }
     }
     

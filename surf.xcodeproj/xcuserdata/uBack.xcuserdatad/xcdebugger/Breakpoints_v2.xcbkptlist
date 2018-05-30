@@ -57,28 +57,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "549392882.536952"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "setUIValuesWithBouyData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "surf/Controller/StationsTableViewController.swift"
-            timestampString = "549392882.5374449"
+            timestampString = "549395204.520995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "findDistancesFromUserLocation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -89,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "549392882.537572"
+            filePath = "surf/Controller/StationsTableViewController.swift"
+            timestampString = "549395204.5211101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "colorComplement(color:)"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "sortTableObjectsByDistance()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,29 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "549392882.5378619"
+            filePath = "surf/Controller/StationsTableViewController.swift"
+            timestampString = "549395204.521174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "colorComplement(color:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "549392882.538115"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

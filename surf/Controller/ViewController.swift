@@ -153,12 +153,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func handleDisplayLink(_ displayLink: CADisplayLink) {
         let elapsed = CFAbsoluteTimeGetCurrent() - startTime!
-        var waveHeightMaxInt = 0
+        var waveHeightFloat :CGFloat = 0.0
         if let wHeight = currentSnapShot.waveHgt {
-           waveHeightMaxInt = Int(wHeight) * 10
+            let rounded = (wHeight * 10).rounded() / 10
+            waveHeightFloat = CGFloat(rounded * 10)
         }
         
-        if let path = wave(at: elapsed, waveHeightMax: waveHeightMaxInt).cgPath as CGPath?{
+        if let path = wave(at: elapsed, waveHeightMax: waveHeightFloat).cgPath as CGPath?{
             shapeLayer.path = path
         }
     }
@@ -170,7 +171,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /// - Parameter elapsed: How many seconds have elapsed.
     /// - Returns: The `UIBezierPath` for a particular point of time.
     
-    private func wave(at elapsed: Double, waveHeightMax: Int) -> UIBezierPath {
+    private func wave(at elapsed: Double, waveHeightMax: CGFloat) -> UIBezierPath {
         let centerY = view.bounds.height / 2
         var amplitude = CGFloat(0)
         let shorten = fabs(fmod(CGFloat(elapsed), 3) - 1.5) * 40
