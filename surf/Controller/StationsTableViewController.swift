@@ -248,35 +248,17 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     func startActivityIndicator(){
         activityIndicatorView = activityIndicatorView.setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "Getting Your Location")
         self.view.addSubview(activityIndicatorView)
-        self.tableView.isScrollEnabled = false
+        self.tableView.alwaysBounceVertical = false
     }
 
     func stopActivityIndicator(){
         for view in self.view.subviews {
             if view.isKind(of: ActivityIndicatorView.self){
                 view.removeFromSuperview()
-                self.tableView.isScrollEnabled = true
+                self.tableView.alwaysBounceVertical = true
             }
         }
     }
-    
-//    func insertionSort(_ array: [Station]) -> [Station] {
-//        var a = array
-//        for x in 1..<a.count {
-//            var y = x
-//            guard let d1 = a[y].distance, let d2 = a[y-1].distance else {return a}
-//            while y > 0 && d1 < d2 {
-//                a.swapAt(y - 1, y)
-//                y -= 1
-//            }
-//        }
-//        for h in a {
-//            print(h.distance)
-//        }
-//        for j in a {
-//            print(j.distanceInMiles)
-//        }
-//        return a
-//    }
+
     
 }
