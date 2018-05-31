@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   type = "1"
+   type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/ViewController.swift"
-            timestampString = "545249695.132553"
+            filePath = "surf/View/CustomActivityIndicatorExtension.swift"
+            timestampString = "549469398.705683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "findDataWithUserLocation()"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "customActivityIndicator(view:widthView:backgroundColor:textColor:message:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/SnapshotViewController.swift"
-            timestampString = "545865826.815829"
+            filePath = "surf/View/CustomActivityIndicatorExtension.swift"
+            timestampString = "549469398.705755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "setUIValuesWithBouyData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "surf/Controller/SnapshotViewController.swift"
-            timestampString = "545865826.816245"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "setUIValuesWithBouyData()"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "customActivityIndicator(view:widthView:backgroundColor:textColor:message:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "surf/Controller/StationsTableViewController.swift"
-            timestampString = "549469398.705119"
+            timestampString = "549469398.705828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "stopActivityIndicator()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

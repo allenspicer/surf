@@ -14,7 +14,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
-//    var stationName = ""
+    var activityIndicatorView = ActivityIndicatorView()
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
     private var userLatitude = 0.0
@@ -22,7 +22,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        startActivityIndicator()
         tableView.delegate = self
         tableView.dataSource = self
         parseStationList()
@@ -242,6 +242,22 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     func sortTableObjectsByDistance(){
         tableData = tableData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
         self.tableView.reloadData()
+        stopActivityIndicator()
+    }
+    
+    func startActivityIndicator(){
+        activityIndicatorView = activityIndicatorView.setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "Getting Your Location")
+        self.view.addSubview(activityIndicatorView)
+        self.tableView.isScrollEnabled = false
+    }
+
+    func stopActivityIndicator(){
+        for view in self.view.subviews {
+            if view.isKind(of: ActivityIndicatorView.self){
+                view.removeFromSuperview()
+                self.tableView.isScrollEnabled = true
+            }
+        }
     }
     
 //    func insertionSort(_ array: [Station]) -> [Station] {
