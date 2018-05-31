@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2AD4CEFBBA4FCEF6F6E7A0B0 /* Pods_surfTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536DD9956E6B341AAAB37D89 /* Pods_surfTests.framework */; };
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
-		953F75B320C02FD3006E9549 /* CustomActivityIndicatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F75B220C02FD3006E9549 /* CustomActivityIndicatorExtension.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		95AB2BA520BD9229004504BF /* bouys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* bouys.json */; };
@@ -17,7 +16,7 @@
 		95C9DBA120C033750080B70B /* crash.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9E20C033750080B70B /* crash.png */; };
 		95C9DBA220C033750080B70B /* flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9F20C033750080B70B /* flat.png */; };
 		95C9DBA320C033750080B70B /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DBA020C033750080B70B /* wave.png */; };
-		95C9DBA520C0386B0080B70B /* activityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9DBA420C0386B0080B70B /* activityIndicatorView.swift */; };
+		95C9DBA520C0386B0080B70B /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */; };
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
 		95E674BD20BDC6A100166693 /* staticStationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95E674BC20BDC6A000166693 /* staticStationList.json */; };
 		95ECA44A20BF5349004F51EA /* forecast.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95ECA44920BF5349004F51EA /* forecast.xml */; };
@@ -48,7 +47,6 @@
 		536DD9956E6B341AAAB37D89 /* Pods_surfTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		857C861B9D1DB582B9367B91 /* Pods-surf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surf.release.xcconfig"; path = "Pods/Target Support Files/Pods-surf/Pods-surf.release.xcconfig"; sourceTree = "<group>"; };
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
-		953F75B220C02FD3006E9549 /* CustomActivityIndicatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActivityIndicatorExtension.swift; path = /Users/uBack/surf/surf/View/CustomActivityIndicatorExtension.swift; sourceTree = "<absolute>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
@@ -57,7 +55,7 @@
 		95C9DB9E20C033750080B70B /* crash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crash.png; sourceTree = "<group>"; };
 		95C9DB9F20C033750080B70B /* flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flat.png; sourceTree = "<group>"; };
 		95C9DBA020C033750080B70B /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wave.png; sourceTree = "<group>"; };
-		95C9DBA420C0386B0080B70B /* activityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activityIndicatorView.swift; sourceTree = "<group>"; };
+		95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfTests.swift; sourceTree = "<group>"; };
 		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,9 +123,8 @@
 		9576FF5A207FDA52006240AD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				953F75B220C02FD3006E9549 /* CustomActivityIndicatorExtension.swift */,
-				95C9DBA420C0386B0080B70B /* activityIndicatorView.swift */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
+				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
 				95EEECD8204CF40600308E73 /* Assets.xcassets */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
@@ -387,7 +384,6 @@
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
 				95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
-				953F75B320C02FD3006E9549 /* CustomActivityIndicatorExtension.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
@@ -395,7 +391,7 @@
 				95713FF02075912300745FC7 /* Snapshot.swift in Sources */,
 				950A2A4D2056BA1E008DE32F /* Station.swift in Sources */,
 				95FEBEBF20A5DA3C0049CA66 /* Networking.swift in Sources */,
-				95C9DBA520C0386B0080B70B /* activityIndicatorView.swift in Sources */,
+				95C9DBA520C0386B0080B70B /* ActivityIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

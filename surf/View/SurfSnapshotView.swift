@@ -23,6 +23,7 @@ class SurfSnapshotView: UIScrollView {
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
+        addDetailContainerView()
         return
     }
     
@@ -141,6 +142,120 @@ class SurfSnapshotView: UIScrollView {
     func removeWaveHeightIndicator(){
         label.removeFromSuperview()
     }
+    
+    func addDetailContainerView(){
+        let containerStackView = UIStackView(frame: CGRect(x: 10, y: ( 6 * self.bounds.size.height / 10) , width: (self.bounds.size.width - 10), height: ( 2 * self.bounds.size.height / 10)))
+        containerStackView.axis = .horizontal
+        containerStackView.distribution = .fillEqually
+        let leftStack = UIStackView()
+        leftStack.axis = .vertical
+        leftStack.distribution = .fillEqually
+        leftStack.spacing = 20
+        leftStack.addArrangedSubview(addFrequencyStackView())
+        leftStack.addArrangedSubview(addAirTempStackView())
+        leftStack.addArrangedSubview(addWaterTempStackView())
+        let rightStack = UIStackView()
+        rightStack.axis = .vertical
+        rightStack.distribution = .fillEqually
+        rightStack.spacing = 20
+        rightStack.addArrangedSubview(addTideStackView())
+        rightStack.addArrangedSubview(addTideNextStackView())
+        rightStack.addArrangedSubview(addWindStackView())
+ 
+        containerStackView.addArrangedSubview(leftStack)
+        containerStackView.addArrangedSubview(rightStack)
+
+        self.addSubview(containerStackView)
+    }
+    
+    func addFrequencyStackView() -> UIView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        let frequencyLabel = UILabel()
+        frequencyLabel.text = "SECONDS BETWEEN WAVES"
+        frequencyLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(frequencyLabel)
+        let frequencyAmountLabel = UILabel()
+        frequencyAmountLabel.text = "6"
+        stack.addArrangedSubview(frequencyAmountLabel)
+        return stack
+    }
+    
+    func addAirTempStackView() -> UIView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        let c = UILabel()
+        c.text = "AIR"
+        c.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(c)
+        let d = UILabel()
+        d.text = "65.8°"
+        stack.addArrangedSubview(d)
+        return stack
+    }
+    
+    func addWaterTempStackView() -> UIView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        let a = UILabel()
+        a.text = "WATER"
+        a.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(a)
+        let b = UILabel()
+        b.text = "76.3°"
+        stack.addArrangedSubview(b)
+        return stack
+    }
+    
+    
+    
+    func addTideStackView() -> UIView {
+        let stack = UIStackView()
+        stack.distribution = .fillProportionally
+        stack.axis = .vertical
+        let a = UILabel()
+        a.text = "TIDE"
+        a.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(a)
+        let b = UILabel()
+        b.text = "Dropping"
+        stack.addArrangedSubview(b)
+        return stack
+    }
+    
+    func addTideNextStackView() -> UIView {
+        let stack = UIStackView()
+        stack.distribution = .fillProportionally
+        stack.axis = .vertical
+        let c = UILabel()
+        c.text = "NEXT TIDE"
+        c.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(c)
+        let d = UILabel()
+        d.text = "High @ 6:03pm"
+        stack.addArrangedSubview(d)
+        return stack
+    }
+    
+    func addWindStackView() -> UIView {
+        let stack = UIStackView()
+        stack.distribution = .fillProportionally
+        stack.axis = .vertical
+        let c = UILabel()
+        c.text = "WIND"
+        c.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(c)
+        let d = UILabel()
+        d.text = "SSW 5 mph"
+        stack.addArrangedSubview(d)
+        return stack
+    }
+    
+    
+    
     
       
 }
