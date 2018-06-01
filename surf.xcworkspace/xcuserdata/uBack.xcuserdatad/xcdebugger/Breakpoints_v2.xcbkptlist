@@ -57,12 +57,76 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Networking/Parsing.swift"
-            timestampString = "549556898.379927"
+            filePath = "surf/View/SurfSnapshotView.swift"
+            timestampString = "549559157.815416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "SurfSnapshotView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "surf.SurfSnapshotView.currentSnapShot.getter : surf.Snapshot"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/View/SurfSnapshotView.swift"
+                  timestampString = "549558598.0497561"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "2113">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "surf.SurfSnapshotView.currentSnapShot.setter : surf.Snapshot"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/View/SurfSnapshotView.swift"
+                  timestampString = "549558598.052969"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "1769">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "surf/Controller/StationsTableViewController.swift"
+            timestampString = "549559157.81595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "surf/Networking/Parsing.swift"
+            timestampString = "549559157.816031"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "createTideDataArray()"
             landmarkType = "9">
          </BreakpointContent>
@@ -73,14 +137,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Networking/Networking.swift"
-            timestampString = "549556898.380403"
+            filePath = "surf/Networking/Parsing.swift"
+            timestampString = "549559157.816349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "tideDataServiceRequest(completion:)"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "createTideDataArray()"
             landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "surf.createTideDataArray() -&gt; Swift.Array&lt;surf.Tide&gt;"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Networking/Parsing.swift"
+                  timestampString = "549558598.072664"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "77">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;&gt;) -&gt; () in surf.createTideDataArray() -&gt; Swift.Array&lt;surf.Tide&gt;"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Networking/Parsing.swift"
+                  timestampString = "549558598.075386"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "surf/Controller/StationsTableViewController.swift"
+            timestampString = "549559157.816597"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

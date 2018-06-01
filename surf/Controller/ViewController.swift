@@ -14,7 +14,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
-    var currentTides = [Tide]()
     var stationId = String()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -94,7 +93,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
-                    UIView.animate(withDuration: 0.7, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
                         snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(0.7)
                     })
 //                    view.animateHide()
@@ -107,7 +106,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.removeWaveHeightIndicator()
 //                    view.animateShow()
-                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
                         snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(1.0)
                     })
                 }

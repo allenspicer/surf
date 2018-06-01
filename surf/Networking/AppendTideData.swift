@@ -9,7 +9,7 @@
 import Foundation
 
 
-func test (_ snapshotWithoutTide : Snapshot, tideArray : [Tide])-> Snapshot{
+func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])-> Snapshot {
     
     var snapshot = snapshotWithoutTide
     var nextTideIndex = Int()

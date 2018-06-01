@@ -70,15 +70,13 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         DispatchQueue.main.async{
             let data = createSnapshot(stationId: selectedId, finished: {})
-            let tideData = createTideDataArray()
+            self.selectedSnapshotTides = createTideDataArray()
             
             //remove spinner for response:
             if data.waveHgt != nil && data.waterTemp != nil {
                 self.stopActivityIndicator()
-                self.selectedSnapshot = data
+                self.selectedSnapshot = addTideDataToSnapshot(data, tideArray: self.selectedSnapshotTides)
                 self.selectedSnapshot.stationName = self.tableData[indexPath.row].name
-                
-                self.selectedSnapshotTides = tideData
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
                 //if no data respond with alertview
@@ -124,7 +122,6 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
             destinationVC.currentSnapShot = selectedSnapshot
-            destinationVC.currentTides = selectedSnapshotTides
         }
     }
  
@@ -251,7 +248,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     }
     
     func startActivityIndicator(_ message : String){
-        activityIndicatorView = activityIndicatorView.setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
+        activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
         self.view.addSubview(activityIndicatorView)
         self.tableView.alwaysBounceVertical = false
     }
