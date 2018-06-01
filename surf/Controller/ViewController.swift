@@ -30,22 +30,19 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return _layer
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        startActivityIndicator()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupGestureRecognizer()
+        let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+        self.view.addSubview(snapshotView)
+        self.setUIValuesWithBouyData()
+        snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
         
-        DispatchQueue.main.async{
-            let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-            self.view.addSubview(snapshotView)
-            self.stopActivityIndicator()
-            self.setUIValuesWithBouyData()
-            snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
+        DispatchQueue.main.async {
+            var selectedSnapshotTides = [Tide]()
+            selectedSnapshotTides = createTideDataArray()
+            self.currentSnapShot = addTideDataToSnapshot(self.currentSnapShot, tideArray: selectedSnapshotTides)
         }
     }
     
@@ -188,29 +185,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         return path
-    }
-    
-    
-  
-    
-    
-    func startActivityIndicator(){
-        self.aiView.backgroundColor = UIColor.clear.withAlphaComponent(0.4)
-        let ai = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        ai.color = .black
-        ai.frame = view.bounds
-        ai.startAnimating()
-        self.aiView.addSubview(ai)
-    }
-    
-    func stopActivityIndicator(){
-        if let ai = self.aiView.subviews.last as? UIActivityIndicatorView {
-            ai.color = .red
-            ai.hidesWhenStopped = true
-            ai.isHidden = true
-            ai.stopAnimating()
-        }
-        self.aiView.removeFromSuperview()
     }
     
     func addReturnToTableViewButton(){

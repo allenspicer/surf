@@ -14,7 +14,6 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
-    var selectedSnapshotTides = [Tide]()
     var activityIndicatorView = ActivityIndicatorView()
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
@@ -70,12 +69,10 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         DispatchQueue.main.async{
             let data = createSnapshot(stationId: selectedId, finished: {})
-            self.selectedSnapshotTides = createTideDataArray()
-            
             //remove spinner for response:
             if data.waveHgt != nil && data.waterTemp != nil {
                 self.stopActivityIndicator()
-                self.selectedSnapshot = addTideDataToSnapshot(data, tideArray: self.selectedSnapshotTides)
+                self.selectedSnapshot = data
                 self.selectedSnapshot.stationName = self.tableData[indexPath.row].name
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
@@ -87,6 +84,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        
     }
     
     // MARK: - Inital Load Logic
