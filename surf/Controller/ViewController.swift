@@ -40,9 +40,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
         
         DispatchQueue.main.async {
+            print("task started")
             var selectedSnapshotTides = [Tide]()
             selectedSnapshotTides = createTideDataArray()
             self.currentSnapShot = addTideDataToSnapshot(self.currentSnapShot, tideArray: selectedSnapshotTides)
+            print("task completed")
+            print("\(selectedSnapshotTides.count) tide objects found")
+            //            print("\(currentSnapShot.upcomingTidePolar?) declared tide polar found")
+            
         }
     }
     

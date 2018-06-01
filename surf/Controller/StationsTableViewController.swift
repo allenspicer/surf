@@ -11,6 +11,7 @@ import CoreLocation
 
 class StationsTableViewController: UITableViewController, CLLocationManagerDelegate{
     
+    var navBar: UINavigationBar?
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
