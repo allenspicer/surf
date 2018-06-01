@@ -29,10 +29,15 @@ struct Snapshot {
     var waterTemp: Double?
     var DEWP: String?
     var VIS: String?
-    var tide: String?
+    var upcomingTidePolar: String?
+    var upcomingTideTimestamp: Date?
+    var currentTideDirection: String?
     var timeStamp: Date = Date()
     var stationName : String?
     var stationId : Int?
+    
+    
+    
 }
 
 

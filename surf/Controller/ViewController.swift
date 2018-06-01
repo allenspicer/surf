@@ -14,6 +14,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
+    var currentTides = [Tide]()
     var stationId = String()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-func bouyDataServiceRequest(stationId: String, finished: () -> Void) -> (Snapshot){
+func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
-    let list = getBouyData(stationId)
+    let list = bouyDataServiceRequest(stationId)
     
     let lines = list.components(separatedBy: "\n")
     var rawStatArray : [String] = []
@@ -63,6 +63,23 @@ func bouyDataServiceRequest(stationId: String, finished: () -> Void) -> (Snapsho
     
     finished()
     return (snapshotArray.first ?? Snapshot.init())
+}
+
+func createTideDataArray() -> [Tide]{
+    var tideArray = [Tide]()
+    tideDataServiceRequest { (dataArray) -> () in
+        
+        guard let arrayOfTideData = dataArray else { return }
+        for dataObject in arrayOfTideData {
+            guard let valueString = dataObject["v"] as? String else { return }
+            guard let value = Double(valueString) else { return }
+            guard let key = dataObject["type"] as? String else { return }
+            guard let timeStamp = dataObject["t"] as? String else { return }
+            let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
+            tideArray.append(tide)
+        }
+    }
+    return tideArray
 }
 
 

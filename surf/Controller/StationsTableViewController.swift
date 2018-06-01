@@ -14,6 +14,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     var tableData = [Station]()
     var selectedStationIndex = Int()
     var selectedSnapshot = Snapshot()
+    var selectedSnapshotTides = [Tide]()
     var activityIndicatorView = ActivityIndicatorView()
     private var locationManager = CLLocationManager()
     private var userLongitude = 0.0
@@ -21,8 +22,9 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
     private var latitudeLongitudeArray = [(Double,Double)]()
 
     override func viewDidLoad() {
+                        
         super.viewDidLoad()
-        startActivityIndicator()
+        startActivityIndicator("Getting Your Location")
         tableView.delegate = self
         tableView.dataSource = self
         parseStationList()
@@ -51,12 +53,10 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         cell.textLabel?.text = "\(tableData[indexPath.row].id)"
         if tableData[indexPath.row].distanceInMiles == 10000 {
             cell.detailTextLabel?.text = "calculating..."
-
         }else{
             let miles = tableData[indexPath.row].distanceInMiles
                 cell.detailTextLabel?.text = "\(miles) mi."
         }
-
         return cell
     }
 
@@ -66,18 +66,23 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         selectedStationIndex = indexPath.row
         let selectedId = tableData[selectedStationIndex].id
         
-        //display spinner here
+        startActivityIndicator("Loading")
         
         DispatchQueue.main.async{
-            let data = bouyDataServiceRequest(stationId: selectedId, finished: {})
+            let data = createSnapshot(stationId: selectedId, finished: {})
+            let tideData = createTideDataArray()
             
             //remove spinner for response:
             if data.waveHgt != nil && data.waterTemp != nil {
+                self.stopActivityIndicator()
                 self.selectedSnapshot = data
                 self.selectedSnapshot.stationName = self.tableData[indexPath.row].name
+                
+                self.selectedSnapshotTides = tideData
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
                 //if no data respond with alertview
+                self.stopActivityIndicator()
                 let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
                 alert.addAction(doneAction)
@@ -118,8 +123,8 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
-//            destinationVC.stationName = stationName
             destinationVC.currentSnapShot = selectedSnapshot
+            destinationVC.currentTides = selectedSnapshotTides
         }
     }
  
@@ -245,8 +250,8 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         stopActivityIndicator()
     }
     
-    func startActivityIndicator(){
-        activityIndicatorView = activityIndicatorView.setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "Getting Your Location")
+    func startActivityIndicator(_ message : String){
+        activityIndicatorView = activityIndicatorView.setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
         self.view.addSubview(activityIndicatorView)
         self.tableView.alwaysBounceVertical = false
     }

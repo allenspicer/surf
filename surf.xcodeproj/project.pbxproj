@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		2AD4CEFBBA4FCEF6F6E7A0B0 /* Pods_surfTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536DD9956E6B341AAAB37D89 /* Pods_surfTests.framework */; };
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
+		9557CFDB20C188E70016C549 /* AppendTideData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557CFDA20C188E70016C549 /* AppendTideData.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* bouys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* bouys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
 		95C9DBA120C033750080B70B /* crash.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9E20C033750080B70B /* crash.png */; };
@@ -47,8 +49,10 @@
 		536DD9956E6B341AAAB37D89 /* Pods_surfTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		857C861B9D1DB582B9367B91 /* Pods-surf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surf.release.xcconfig"; path = "Pods/Target Support Files/Pods-surf/Pods-surf.release.xcconfig"; sourceTree = "<group>"; };
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		9557CFDA20C188E70016C549 /* AppendTideData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendTideData.swift; sourceTree = "<group>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* bouys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouys.json; sourceTree = "<group>"; };
 		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
@@ -113,9 +117,8 @@
 			children = (
 				950A2A4C2056BA1E008DE32F /* Station.swift */,
 				95713FEF2075912300745FC7 /* Snapshot.swift */,
+				957F004520C0AEB600A7B8BA /* Tide.swift */,
 				95FEBEC420A5DDB20049CA66 /* DataHelpers.swift */,
-				95FEBEBE20A5DA3C0049CA66 /* Networking.swift */,
-				95FEBEC220A5DCDD0049CA66 /* Parsing.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +143,16 @@
 				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		957F004720C0AED600A7B8BA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				95FEBEBE20A5DA3C0049CA66 /* Networking.swift */,
+				95FEBEC220A5DCDD0049CA66 /* Parsing.swift */,
+				9557CFDA20C188E70016C549 /* AppendTideData.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		95AB2BA320BD9189004504BF /* Data */ = {
@@ -206,6 +219,7 @@
 			children = (
 				95C9DB9D20C033690080B70B /* Assets */,
 				95AB2BA320BD9189004504BF /* Data */,
+				957F004720C0AED600A7B8BA /* Networking */,
 				9576FF59207FDA41006240AD /* Model */,
 				95B9A2B020893CBA00F911F3 /* Controller */,
 				9576FF5A207FDA52006240AD /* View */,
@@ -384,10 +398,12 @@
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
 				95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
+				957F004620C0AEB600A7B8BA /* Tide.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
 				956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */,
+				9557CFDB20C188E70016C549 /* AppendTideData.swift in Sources */,
 				95713FF02075912300745FC7 /* Snapshot.swift in Sources */,
 				950A2A4D2056BA1E008DE32F /* Station.swift in Sources */,
 				95FEBEBF20A5DA3C0049CA66 /* Networking.swift in Sources */,
