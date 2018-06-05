@@ -221,9 +221,6 @@ extension ViewController: TideClientDelegate {
                 self.view.addSubview(snapshotView)
                 self.view.backgroundColor = self.colorComplement(color: self.waterColor)
 
-//                guard let snapshotView = view as? SurfSnapshotView else { return }
-//                snapshotView.loadAllSubviews()
-//                snapshotView.setNeedsDisplay()
             }
         }
     }
