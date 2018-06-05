@@ -78,11 +78,12 @@ func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])
             }
         }
         
-        if let tide = tideArray[nextTideIndex] as? Tide{
-            snapshot.upcomingTidePolar = tide.key
-            snapshot.upcomingTideTimestamp = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
-            snapshot.currentTideDirection = (tide.key == "H" ? "Rising" : "Dropping")
-        }
+    }
+        
+    if let tide = tideArray[nextTideIndex] as? Tide{
+        snapshot.upcomingTidePolar = tide.key
+        snapshot.upcomingTideTimestamp = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
+        snapshot.currentTideDirection = (tide.key == "H" ? "Rising" : "Dropping")
     }
     
     return snapshot

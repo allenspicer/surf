@@ -9,39 +9,39 @@
 import UIKit
 
 
-protocol TideClientDelegate: AnyObject {
-    func didFinishTideTask(sender: TideClient, tides: [Tide])
+protocol WindClientDelegate: AnyObject {
+    func didFinishWindTask(sender: WindClient, winds: [Wind])
 }
 
-final class TideClient: NSObject {
+final class WindClient: NSObject {
     
-    var delegate : TideClientDelegate?
+    var delegate : WindClientDelegate?
     var dataArray = [[String: Any]]()
-    var tideArray = [Tide]()
+    var windArray = [Wind]()
     var currentSnapshot : Snapshot?
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
     }
 
-    func createTideData() {
+    func createWindData() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            self.tideDataServiceRequest()
+            self.windDataServiceRequest()
         }
     }
     
-    func didGetTideData() {
-        delegate?.didFinishTideTask(sender: self, tides: tideArray)
+    func didGetWindData() {
+        delegate?.didFinishWindTask(sender: self, winds: windArray)
     }
 
     
-    private func tideDataServiceRequest(){
+    private func windDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
         let hoursNeeded = 24
         let stationId = "8658163"
         
-        let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=lst_ldt&application=web_services&format=json"
+        let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=wind&datum=msl&units=english&interval=h&time_zone=gmt&application=web_services&format=json"
         
         guard let url = URL(string: filePathString) else { return }
         
@@ -52,16 +52,16 @@ final class TideClient: NSObject {
                 print("tidesandcurrents.noaa.gov URL Request Succeeded")
             
                 if let json = try JSONSerialization.jsonObject(with: theData, options: []) as? [String : Any]{
-                    print("Tide Client JSON Available")
+                    print("Wind Client JSON Available")
                     
-                    guard let arrayOfDataObjects = json["predictions"] else { return }
+                    guard let arrayOfDataObjects = json["data"] else { return }
                     guard let dataArray = arrayOfDataObjects as? [[String: Any]] else { return }
-                    print("Tide Client Array of Tide Values Available with \(dataArray.count) Objects")
+                    print("Wind Client Array of Tide Values Available with \(dataArray.count) Objects")
                     self.dataArray = dataArray
-                    self.createArrayOfTideDataObjects()
+                    self.createArrayOfWindDataObjects()
                 }
             }catch let jsonError {
-                print("Tide Client Data Request Failed With Error:\(jsonError)")
+                print("Wind Client Data Request Failed With Error:\(jsonError)")
             }
         })
         task.resume()
@@ -69,19 +69,22 @@ final class TideClient: NSObject {
     }
     
     
-    private func createArrayOfTideDataObjects(){
+    private func createArrayOfWindDataObjects(){
             for dataObject in dataArray {
-                guard let valueString = dataObject["v"] as? String else { return }
-                guard let value = Double(valueString) else { return }
-                guard let key = dataObject["type"] as? String else { return }
                 guard let timeStamp = dataObject["t"] as? String else { return }
-                let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
-                tideArray.append(tide)
+                guard let speedString = dataObject["s"] as? String else { return }
+                guard let speed = Double(speedString) else { return }
+                guard let directionString = dataObject["d"] as? String else { return }
+                guard let direction = Double(directionString) else { return }
+                guard let cardinalDirection = dataObject["dr"] as? String else { return }
+                
+                let tide = Wind.init(timeStamp: timeStamp, speed: speed, direction: direction, cardinalDirection: cardinalDirection)
+                windArray.append(tide)
             }
-            print("Tide Array Created with \(tideArray.count) Tide Objects")
-            if self.tideArray.count > 0 {
+            print("Wind Array Created with \(windArray.count) Wind Objects")
+            if self.windArray.count > 0 {
                 DispatchQueue.main.async {
-                self.didGetTideData()
+                self.didGetWindData()
                 }
             }
     }

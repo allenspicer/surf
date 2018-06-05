@@ -20,6 +20,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var aiView = UIView()
     private var wlView = UIView()
     var tideClient : TideClient?
+    var windClient : WindClient?
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -40,9 +41,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.setUIValuesWithBouyData()
         self.view.backgroundColor = self.colorComplement(color: self.waterColor)
         
-        tideClient = TideClient(currentSnapshot: self.currentSnapShot)
-        tideClient?.delegate = self
-        tideClient?.createTideData()
+        setTideClient()
+        setWindClient()
+
         
     }
     
@@ -62,6 +63,19 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.startDisplayLink()
         addReturnToTableViewButton()
     }
+    
+    func setTideClient(){
+        tideClient = TideClient(currentSnapshot: self.currentSnapShot)
+        tideClient?.delegate = self
+        tideClient?.createTideData()
+    }
+    
+    func setWindClient(){
+        windClient = WindClient(currentSnapshot: self.currentSnapShot)
+        windClient?.delegate = self
+        windClient?.createWindData()
+    }
+
     
     
     //
@@ -208,9 +222,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-extension ViewController: TideClientDelegate {
+extension ViewController: TideClientDelegate, WindClientDelegate{
 
-    func didFinishTask(sender: TideClient, tides: [Tide]) {
+    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
         
         print("View Controller Has Tide Array with \(tides.count) tides")
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
@@ -223,6 +237,11 @@ extension ViewController: TideClientDelegate {
             }
         }
     }
+    
+    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
+        print(winds)
+    }
+    
 }
 
 
