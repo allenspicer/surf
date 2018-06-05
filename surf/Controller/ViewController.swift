@@ -19,6 +19,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
     private var wlView = UIView()
+    var tideClient : TideClient?
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -39,16 +40,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.setUIValuesWithBouyData()
         snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
         
-        DispatchQueue.main.async {
-            print("task started")
-            var selectedSnapshotTides = [Tide]()
-            selectedSnapshotTides = createTideDataArray()
-            self.currentSnapShot = addTideDataToSnapshot(self.currentSnapShot, tideArray: selectedSnapshotTides)
-            print("task completed")
-            print("\(selectedSnapshotTides.count) tide objects found")
-            //            print("\(currentSnapShot.upcomingTidePolar?) declared tide polar found")
-            
-        }
+        tideClient = TideClient(currentSnapshot: self.currentSnapShot)
+        tideClient?.delegate = self
+        tideClient?.createTideData()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -211,4 +206,20 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
     }
 }
+
+
+extension ViewController: TideClientDelegate {
+
+    func didFinishTask(sender: TideClient, tides: [Tide]) {
+        
+        print("View Controller Has Tide Array with \(tides.count) tides")
+        
+        currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
+        print("View Controller Has Appended Snapshot with \(currentSnapShot.upcomingTidePolar), \(currentSnapShot.currentTideDirection), \(currentSnapShot.upcomingTideTimestamp)")
+
+        
+        }
+    
+}
+
 

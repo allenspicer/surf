@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 func bouyDataServiceRequest (_ stationId: String) -> String{
     
     var dataString = String()
@@ -43,36 +42,4 @@ func formattedCurrentDateString () -> String {
 }
 
 
-func tideDataServiceRequest(completion: @escaping ([[String: Any]]?) -> ()){
-    
-    var dataArray = [[String: Any]]()
-
-    let currentDateString = formattedCurrentDateString()
-    let hoursNeeded = 24
-    let stationId = "8658163"
-    
-    let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=gmt&application=web_services&format=json"
-
-    
-    guard let url = URL(string: filePathString) else { return }
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
-        if error != nil {
-            print(error!.localizedDescription)
-        }
-        guard let data = data else { return }
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: [])
-            if let dictionary = json as? [String: Any] {
-
-                if let arrayOfDataObjects = dictionary["predictions"] as? [[String: Any]] {
-                    dataArray = arrayOfDataObjects
-                }
-            }
-        completion(dataArray)
-
-        } catch let jsonError {
-            print(jsonError)
-        }
-    }.resume()
-}
 

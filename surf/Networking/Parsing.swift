@@ -65,24 +65,6 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
     return (snapshotArray.first ?? Snapshot.init())
 }
 
-func createTideDataArray() -> [Tide]{
-    var tideArray = [Tide]()
-    tideDataServiceRequest { (dataArray) -> () in
-        
-        guard let arrayOfTideData = dataArray else { return }
-        for dataObject in arrayOfTideData {
-            guard let valueString = dataObject["v"] as? String else { return }
-            guard let value = Double(valueString) else { return }
-            guard let key = dataObject["type"] as? String else { return }
-            guard let timeStamp = dataObject["t"] as? String else { return }
-            let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
-            tideArray.append(tide)
-        }
-    }
-    return tideArray
-}
-
-
 
 
 
