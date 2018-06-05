@@ -43,15 +43,11 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
         }
         //wave direction
         if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
-            currentSnapShot.meanWaveDirection = windDirectionFromDegrees(degrees: currentWaveDirectionDegrees)
+            currentSnapShot.meanWaveDirection = directionFromDegrees(degrees: currentWaveDirectionDegrees)
         }
-        //wind direction
-        if let currentWindDirectionDegrees = Float(bouy[5]) as Float?{
-            currentSnapShot.windDir = windDirectionFromDegrees(degrees: currentWindDirectionDegrees)
-        }
-        //wind speed
-        if let currentWindSpeed = Int(bouy[6]) as Int?{
-            currentSnapShot.windSpd = String(currentWindSpeed)
+        //wave frequency/period
+        if let waveAveragePeriod = Double(bouy[10]) as Double?{
+            currentSnapShot.waveAveragePeriod = waveAveragePeriod
         }
         //water temp
         if let currentWaterTemp = Double(bouy[14]) as Double?{
@@ -63,6 +59,33 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
     
     finished()
     return (snapshotArray.first ?? Snapshot.init())
+}
+
+
+func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])-> Snapshot {
+    
+    var snapshot = snapshotWithoutTide
+    var nextTideIndex = Int()
+    let currentTimestamp = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    
+    for index in 0..<tideArray.count {
+        if let tideTimeStamp = dateFormatter.date(from: tideArray[index].timeStamp){
+            if tideTimeStamp > currentTimestamp {
+                nextTideIndex = index
+                break
+            }
+        }
+        
+        if let tide = tideArray[nextTideIndex] as? Tide{
+            snapshot.upcomingTidePolar = tide.key
+            snapshot.upcomingTideTimestamp = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
+            snapshot.currentTideDirection = (tide.key == "H" ? "Rising" : "Dropping")
+        }
+    }
+    
+    return snapshot
 }
 
 

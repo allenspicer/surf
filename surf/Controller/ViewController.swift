@@ -56,6 +56,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if let color = getWaterColorFromTempInF(self.currentSnapShot.waterTemp!){
             waterColor = color
             self.shapeLayer.strokeColor = waterColor
+            self.currentSnapShot.waterColor = color
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
@@ -207,19 +208,25 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-
 extension ViewController: TideClientDelegate {
 
     func didFinishTask(sender: TideClient, tides: [Tide]) {
         
         print("View Controller Has Tide Array with \(tides.count) tides")
-        
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
-        print("View Controller Has Appended Snapshot with \(currentSnapShot.upcomingTidePolar), \(currentSnapShot.currentTideDirection), \(currentSnapShot.upcomingTideTimestamp)")
+        for view in self.view.subviews {
+            if view is SurfSnapshotView {
+                view.removeFromSuperview()
+                let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+                self.view.addSubview(snapshotView)
+                self.view.backgroundColor = self.colorComplement(color: self.waterColor)
 
-        
+//                guard let snapshotView = view as? SurfSnapshotView else { return }
+//                snapshotView.loadAllSubviews()
+//                snapshotView.setNeedsDisplay()
+            }
         }
-    
+    }
 }
 
 

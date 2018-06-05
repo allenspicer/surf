@@ -20,17 +20,43 @@ class SurfSnapshotView: UIScrollView {
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
         super.init(frame: UIScreen.main.bounds)
-        addWaveHeightLabels()
-        addSpotDetails()
-        addSpotTitleLabel()
-        addDetailContainerView()
+        loadAllSubviews()
         return
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func loadAllSubviews(){
+        addWaveHeightLabels()
+        addSpotDetails()
+        addSpotTitleLabel()
+        addDetailContainerView()
+    }
 
+    func addWaveHeightIndicator(){
+        
+        let centerY = self.bounds.height / 2
+        var waveHeightMaxFloat: CGFloat = 0
+        if let waveHeight = self.currentSnapShot.waveHgt{
+            waveHeightMaxFloat = CGFloat(waveHeight * 10)
+        }
+        let waveTop = centerY - waveHeightMaxFloat - 14
+        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
+        if let waveHeight = self.currentSnapShot.waveHgt{
+            waveHeightLabel.text = "__ \(waveHeight)ft"
+        }
+        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
+        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        waveHeightLabel.textAlignment = .left
+        self.addSubview(waveHeightLabel)
+        label = waveHeightLabel
+    }
+    
+    func removeWaveHeightIndicator(){
+        label.removeFromSuperview()
+    }
     
      private func addWaveHeightLabels(){
     
@@ -119,31 +145,7 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(titleLabel)
     }
     
-
-    func addWaveHeightIndicator(){
-        
-        let centerY = self.bounds.height / 2
-        var waveHeightMaxFloat: CGFloat = 0
-        if let waveHeight = self.currentSnapShot.waveHgt{
-            waveHeightMaxFloat = CGFloat(waveHeight * 10)
-        }
-        let waveTop = centerY - waveHeightMaxFloat - 14
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        if let waveHeight = self.currentSnapShot.waveHgt{
-            waveHeightLabel.text = "__ \(waveHeight)ft"
-        }
-        waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveHeightLabel.textAlignment = .left
-        self.addSubview(waveHeightLabel)
-        label = waveHeightLabel
-    }
-    
-    func removeWaveHeightIndicator(){
-        label.removeFromSuperview()
-    }
-    
-    func addDetailContainerView(){
+    private func addDetailContainerView(){
         let containerStackView = UIStackView(frame: CGRect(x: 10, y: ( 6 * self.bounds.size.height / 10) , width: (self.bounds.size.width - 10), height: ( 2 * self.bounds.size.height / 10)))
         containerStackView.axis = .horizontal
         containerStackView.distribution = .fillEqually
@@ -168,7 +170,7 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(containerStackView)
     }
     
-    func addFrequencyStackView() -> UIView {
+    private func addFrequencyStackView() -> UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillProportionally
@@ -177,12 +179,12 @@ class SurfSnapshotView: UIScrollView {
         frequencyLabel.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(frequencyLabel)
         let frequencyAmountLabel = UILabel()
-        frequencyAmountLabel.text = "6"
+        frequencyAmountLabel.text = "\(currentSnapShot.waveAveragePeriod ?? 0.0)"
         stack.addArrangedSubview(frequencyAmountLabel)
         return stack
     }
     
-    func addAirTempStackView() -> UIView {
+    private func addAirTempStackView() -> UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillProportionally
@@ -196,7 +198,7 @@ class SurfSnapshotView: UIScrollView {
         return stack
     }
     
-    func addWaterTempStackView() -> UIView {
+    private func addWaterTempStackView() -> UIView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillProportionally
@@ -205,14 +207,14 @@ class SurfSnapshotView: UIScrollView {
         a.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(a)
         let b = UILabel()
-        b.text = "76.3°"
+        b.text = "\(currentSnapShot.waterTemp ?? 0.0)°"
         stack.addArrangedSubview(b)
         return stack
     }
     
     
     
-    func addTideStackView() -> UIView {
+    private func addTideStackView() -> UIView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
@@ -221,12 +223,15 @@ class SurfSnapshotView: UIScrollView {
         a.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(a)
         let b = UILabel()
-        b.text = "Dropping"
+        b.text = "Loading..."
+        if let tideFlow = currentSnapShot.currentTideDirection {
+            b.text = "\(tideFlow)"
+        }
         stack.addArrangedSubview(b)
         return stack
     }
     
-    func addTideNextStackView() -> UIView {
+    private func addTideNextStackView() -> UIView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
@@ -235,12 +240,18 @@ class SurfSnapshotView: UIScrollView {
         c.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(c)
         let d = UILabel()
-        d.text = "High @ 6:03pm"
+        d.text = "Loading..."
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        if let letter = currentSnapShot.upcomingTidePolar, let dateTime = currentSnapShot.upcomingTideTimestamp {
+            let time = dateFormatter.string(from: dateTime)
+            d.text = "\(letter) @ \(time)"
+        }
         stack.addArrangedSubview(d)
         return stack
     }
     
-    func addWindStackView() -> UIView {
+    private func addWindStackView() -> UIView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
@@ -254,10 +265,6 @@ class SurfSnapshotView: UIScrollView {
         return stack
     }
     
-    
-    
-    
-      
 }
 
 

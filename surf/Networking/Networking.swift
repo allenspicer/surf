@@ -19,27 +19,5 @@ func bouyDataServiceRequest (_ stationId: String) -> String{
     return dataString
 }
 
-func formattedCurrentDateString () -> String {
-    let currentDate = Date()
-    let calendar = Calendar.current
-    let year = calendar.component(.year, from: currentDate), month = calendar.component(.month, from: currentDate), day = calendar.component(.day, from: currentDate)
-    
-    var monthString = String()
-    if month < 10 {
-        monthString = "0\(month)"
-    }else{
-        monthString = "\(month)"
-    }
-    
-    var dayString = String()
-    if day < 10 {
-        dayString = "0\(day)"
-    }else{
-        dayString = "\(day)"
-    }
-    
-    return "\(year)\(monthString)\(dayString)"
-}
-
 
 

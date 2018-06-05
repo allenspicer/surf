@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-func windDirectionFromDegrees(degrees : Float) -> String {
+func directionFromDegrees(degrees : Float) -> String {
     
     let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
     let i: Int = Int((degrees + 11.25)/22.5)

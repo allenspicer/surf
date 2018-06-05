@@ -10,7 +10,6 @@
 		2AD4CEFBBA4FCEF6F6E7A0B0 /* Pods_surfTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536DD9956E6B341AAAB37D89 /* Pods_surfTests.framework */; };
 		950A2A4D2056BA1E008DE32F /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950A2A4C2056BA1E008DE32F /* Station.swift */; };
 		95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95125EEE20C5DD0600FDE462 /* TideClient.swift */; };
-		9557CFDB20C188E70016C549 /* AppendTideData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557CFDA20C188E70016C549 /* AppendTideData.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
@@ -51,7 +50,6 @@
 		857C861B9D1DB582B9367B91 /* Pods-surf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surf.release.xcconfig"; path = "Pods/Target Support Files/Pods-surf/Pods-surf.release.xcconfig"; sourceTree = "<group>"; };
 		950A2A4C2056BA1E008DE32F /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		95125EEE20C5DD0600FDE462 /* TideClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TideClient.swift; path = surf/Model/TideClient.swift; sourceTree = SOURCE_ROOT; };
-		9557CFDA20C188E70016C549 /* AppendTideData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendTideData.swift; sourceTree = "<group>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 				95FEBEBE20A5DA3C0049CA66 /* Networking.swift */,
 				95FEBEC220A5DCDD0049CA66 /* Parsing.swift */,
 				95125EEE20C5DD0600FDE462 /* TideClient.swift */,
-				9557CFDA20C188E70016C549 /* AppendTideData.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -407,7 +404,6 @@
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
 				956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */,
-				9557CFDB20C188E70016C549 /* AppendTideData.swift in Sources */,
 				95713FF02075912300745FC7 /* Snapshot.swift in Sources */,
 				950A2A4D2056BA1E008DE32F /* Station.swift in Sources */,
 				95FEBEBF20A5DA3C0049CA66 /* Networking.swift in Sources */,

@@ -13,7 +13,7 @@ protocol TideClientDelegate: AnyObject {
     func didFinishTask(sender: TideClient, tides: [Tide])
 }
 
-class TideClient: NSObject {
+final class TideClient: NSObject {
     
     var delegate : TideClientDelegate?
     var dataArray = [[String: Any]]()
@@ -35,7 +35,7 @@ class TideClient: NSObject {
     }
 
     
-    func tideDataServiceRequest(){
+    private func tideDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
         let hoursNeeded = 24
@@ -69,7 +69,7 @@ class TideClient: NSObject {
     }
     
     
-    func createArrayOfTideDataObjects(){
+    private func createArrayOfTideDataObjects(){
             for dataObject in dataArray {
                 guard let valueString = dataObject["v"] as? String else { return }
                 guard let value = Double(valueString) else { return }
@@ -85,6 +85,33 @@ class TideClient: NSObject {
                 }
             }
     }
+    
+    ////
+    //// Helpers
+    ////
+    
+    private func formattedCurrentDateString () -> String {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: currentDate), month = calendar.component(.month, from: currentDate), day = calendar.component(.day, from: currentDate)
+        
+        var monthString = String()
+        if month < 10 {
+            monthString = "0\(month)"
+        }else{
+            monthString = "\(month)"
+        }
+        
+        var dayString = String()
+        if day < 10 {
+            dayString = "0\(day)"
+        }else{
+            dayString = "\(day)"
+        }
+        
+        return "\(year)\(monthString)\(dayString)"
+    }
+
 
 }
 
