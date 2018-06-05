@@ -212,8 +212,6 @@ class SurfSnapshotView: UIScrollView {
         return stack
     }
     
-    
-    
     private func addTideStackView() -> UIView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally

@@ -38,7 +38,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
         self.view.addSubview(snapshotView)
         self.setUIValuesWithBouyData()
-        snapshotView.backgroundColor = self.colorComplement(color: self.waterColor)
+        self.view.backgroundColor = self.colorComplement(color: self.waterColor)
         
         tideClient = TideClient(currentSnapshot: self.currentSnapShot)
         tideClient?.delegate = self
@@ -92,7 +92,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
                     UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                        snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(0.7)
+                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
                     })
 //                    view.animateHide()
                 }
@@ -105,7 +105,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     snapshotView.removeWaveHeightIndicator()
 //                    view.animateShow()
                     UIView.animate(withDuration: 0.2, animations: { () -> Void in
-                        snapshotView.backgroundColor = snapshotView.backgroundColor?.withAlphaComponent(1.0)
+                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
                     })
                 }
             }
@@ -220,7 +220,6 @@ extension ViewController: TideClientDelegate {
                 let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
                 self.view.addSubview(snapshotView)
                 self.view.backgroundColor = self.colorComplement(color: self.waterColor)
-
             }
         }
     }
