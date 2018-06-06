@@ -217,15 +217,24 @@ extension ViewController: TideClientDelegate, WindClientDelegate{
         print("View Controller Has Tide Array with \(tides.count) tides")
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
         snapshotComponents["tide"] = true
-        if !snapshotComponents.values.contains(false){
-            setUIFromCurrentSnapshot(false)
-        }
+        checkDataComponentsThenRefresh()
     }
     
     func didFinishWindTask(sender: WindClient, winds: [Wind]) {
         print("View Controller Has Wind Array with \(winds.count) winds")
         currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
         snapshotComponents["wind"] = true
+        checkDataComponentsThenRefresh()
+    }
+    
+    func didFinishAirTempTask(sender: WindClient, winds: [Wind]) {
+        print("View Controller Has Wind Array with \(winds.count) winds")
+        currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
+        snapshotComponents["wind"] = true
+        checkDataComponentsThenRefresh()
+    }
+    
+    func checkDataComponentsThenRefresh(){
         if !snapshotComponents.values.contains(false){
             setUIFromCurrentSnapshot(false)
         }
