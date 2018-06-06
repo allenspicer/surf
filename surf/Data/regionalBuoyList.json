@@ -1,0 +1,56 @@
+[
+ {
+ "station": 41110,
+ "longitude": -77.717,
+ "latitude": 34.141,
+ "time": "2018-05-29T14:00:00Z",
+ "wd": "NaN",
+ "wspd": "NaN",
+ "gst": "NaN",
+ "wvht": 0.8,
+ "dpd": 8,
+ "apd": 5.4,
+ "wtmp": 18.5,
+ "name": "Masonboro Inlet, NC"
+ },
+ {
+    "station": 44056,
+    "longitude": -75.714,
+    "latitude": 36.2,
+    "time": "2018-05-29T14:00:00Z",
+    "wd": "NaN",
+    "wspd": "NaN",
+    "gst": "NaN",
+    "wvht": 0.8,
+    "dpd": 8,
+    "apd": 5.4,
+    "wtmp": 18.5,
+    "name": "Duck, NC"
+  },
+  {
+    "station": 44088,
+    "longitude": -74.839,
+    "latitude": 36.611,
+    "time": "2018-05-29T14:00:00Z",
+    "wd": "NaN",
+    "wspd": "NaN",
+    "gst": "NaN",
+    "wvht": 1.3,
+    "dpd": 8,
+    "apd": 5.5,
+    "wtmp": 21.7,
+    "name": "Virginia Beach Offshore, VA"
+  },
+  {
+    "station": 44095,
+    "longitude": -75.330,
+    "latitude": 35.750,
+    "name": "Oregon Inlet, NC (192)"
+  },
+ {
+     "station": 41159,
+     "longitude": -76.946 ,
+     "latitude": 34.213,
+     "name": "Onslow Bay, NC"
+ }
+]

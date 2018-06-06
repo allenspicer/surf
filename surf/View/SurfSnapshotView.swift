@@ -210,7 +210,7 @@ class SurfSnapshotView: UIScrollView {
         a.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(a)
         let b = UILabel()
-        b.text = "\(currentSnapShot.waterTemp ?? 0.0)°"
+        b.text = "\(currentSnapShot.waterTemp ?? 0.0)° F"
         stack.addArrangedSubview(b)
         return stack
     }

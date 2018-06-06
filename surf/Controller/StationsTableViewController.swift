@@ -50,7 +50,10 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = "\(tableData[indexPath.row].id)"
+        
+        if let title = tableData[indexPath.row].name as? String {
+            cell.textLabel?.text = title
+        }
         if tableData[indexPath.row].distanceInMiles == 10000 {
             cell.detailTextLabel?.text = "calculating..."
         }else{
@@ -135,13 +138,13 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
 //            do {
 //                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
 //                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//                if let metaData = jsonResult as? Dictionary<String, AnyObject>{
+//                if let metaData = jsonResult as? [[String : Any]]{
 //                    if let stationDataArray = metaData["station"] as? [[String : String]]{
 //                        for station in stationDataArray{
 //                            guard let stationId = station["station"] else {return}
 //                            guard let lon = station["longitude"] as? Double else {return}
 //                            guard let lat = station["latitude"] as? Double else {return}
-//                            addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon)
+//                            addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon, name: "")
 //
 //                        }
 //                    }
@@ -153,8 +156,9 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
 //        }
 //    }
     
+    // parsing for subset: staticStationList.json
     func parseStationList(){
-        if let path = Bundle.main.path(forResource: "staticStationList", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)

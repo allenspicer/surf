@@ -98,9 +98,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
-                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
-                    })
+//                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+//                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
+//                    })
 //                    view.animateHide()
                 }
             }
@@ -111,9 +111,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.removeWaveHeightIndicator()
 //                    view.animateShow()
-                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
-                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
-                    })
+//                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
+//                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
+//                    })
                 }
             }
         }
