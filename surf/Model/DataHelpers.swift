@@ -46,6 +46,12 @@ func getWaterColorFromTempInF(_ temp: Double) -> CGColor?{
     return color
 }
 
+//invert color components for complementary title color
+func colorComplement(color: CGColor) -> UIColor{
+    let ciColor = CIColor(cgColor: color)
+    return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
+}
+
 extension UIColor {
     
     func lighter(by percentage:CGFloat=30.0) -> UIColor? {

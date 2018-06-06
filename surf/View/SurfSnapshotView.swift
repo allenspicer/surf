@@ -29,6 +29,7 @@ class SurfSnapshotView: UIScrollView {
     }
     
     func loadAllSubviews(){
+        self.backgroundColor = currentSnapShot.backgroundColor
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
@@ -100,10 +101,9 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        if  let speed = currentSnapShot.windSpd as String?{
-            if let direction = currentSnapShot.windDir as String?{
-                label.text = speed + " " + windUnit + " " + direction + " WIND"
-            }
+        label.text = "Loading..."
+        if let speed = currentSnapShot.windSpd, let direction = currentSnapShot.windDir{
+            label.text = "\(speed) \(windUnit) \(direction) WIND"
         }
         label.font = UIFont(name:"Damascus", size: 10.0)
         label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -258,7 +258,10 @@ class SurfSnapshotView: UIScrollView {
         c.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(c)
         let d = UILabel()
-        d.text = "SSW 5 mph"
+        d.text = "Loading..."
+        if let direction = currentSnapShot.windCardinalDirection, let speed = currentSnapShot.windSpd {
+            d.text = "\(direction) \(speed) MPH"
+        }
         stack.addArrangedSubview(d)
         return stack
     }

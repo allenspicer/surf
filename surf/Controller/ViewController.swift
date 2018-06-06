@@ -21,6 +21,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var wlView = UIView()
     var tideClient : TideClient?
     var windClient : WindClient?
+    var activityIndicatorView = ActivityIndicatorView()
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -34,34 +35,24 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupGestureRecognizer()
-        let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-        self.view.addSubview(snapshotView)
-        self.setUIValuesWithBouyData()
-        self.view.backgroundColor = self.colorComplement(color: self.waterColor)
-        
+        setUIFromCurrentSnapshot(true)
+        self.setupAnimatedWaveWithBouyData()
         setTideClient()
         setWindClient()
-
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         stopDisplayLink()
     }
     
-
-    
-    func setUIValuesWithBouyData(){
-        if let color = getWaterColorFromTempInF(self.currentSnapShot.waterTemp!){
+    func setupAnimatedWaveWithBouyData(){
+        if let color = currentSnapShot.waterColor{
             waterColor = color
             self.shapeLayer.strokeColor = waterColor
-            self.currentSnapShot.waterColor = color
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
-        addReturnToTableViewButton()
     }
     
     func setTideClient(){
@@ -208,17 +199,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         rButton.setTitleColor(.black, for: .normal)
         rButton.titleLabel?.textColor = .black
         rButton.addTarget(self, action: #selector(returnToTableView), for: .touchUpInside)
-        self.view.addSubview(rButton)
+        for view in self.view.subviews {
+            if view is SurfSnapshotView {
+                view.addSubview(rButton)
+            }
+        }
     }
     
     @objc func returnToTableView(){
         self.performSegue(withIdentifier: "returnToTableView", sender: self)
-    }
-    
-    //invert color components for complementary title color
-    private func colorComplement(color: CGColor) -> UIColor{
-        let ciColor = CIColor(cgColor: color)
-        return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
     }
 }
 
@@ -228,18 +217,30 @@ extension ViewController: TideClientDelegate, WindClientDelegate{
         
         print("View Controller Has Tide Array with \(tides.count) tides")
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
-        for view in self.view.subviews {
-            if view is SurfSnapshotView {
-                view.removeFromSuperview()
-                let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-                self.view.addSubview(snapshotView)
-                self.view.backgroundColor = self.colorComplement(color: self.waterColor)
-            }
-        }
+//        setUIFromCurrentSnapshot(false)
     }
     
     func didFinishWindTask(sender: WindClient, winds: [Wind]) {
         print(winds)
+        setUIFromCurrentSnapshot(false)
+    }
+    
+    func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
+        
+        if isFirstLoad {
+            let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+            self.view.addSubview(snapshotView)
+            addReturnToTableViewButton()
+        }else{
+            for view in self.view.subviews {
+                if view is SurfSnapshotView {
+                    view.removeFromSuperview()
+                    let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+                    self.view.addSubview(snapshotView)
+                    addReturnToTableViewButton()
+                }
+            }
+        }
     }
     
 }

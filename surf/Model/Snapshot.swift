@@ -16,9 +16,6 @@ struct Snapshot {
     var day: String = ""
     var hour: String = ""
     var minute: String = ""
-    var windDir: String?
-    var windSpd: String?
-    var gusts: String?
     var waveHgt: Double?
     var dominantWavePeriod: String?
     var waveAveragePeriod: Double?
@@ -27,6 +24,8 @@ struct Snapshot {
     var PTDY: String?
     var airTemp: String?
     var waterTemp: Double?
+    var waterColor: CGColor?
+    var backgroundColor: UIColor?
     var DEWP: String?
     var VIS: String?
     var upcomingTidePolar: String?
@@ -35,9 +34,9 @@ struct Snapshot {
     var timeStamp: Date = Date()
     var stationName : String?
     var stationId : Int?
-    var waterColor : CGColor?
-    
-    
+    var windDir: Double?
+    var windSpd: Double?
+    var windCardinalDirection: String?
 }
 
 

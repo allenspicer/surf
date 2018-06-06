@@ -53,6 +53,12 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
         if let currentWaterTemp = Double(bouy[14]) as Double?{
             let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
             currentSnapShot.waterTemp = currentWaterTempInFahrenheit
+            //set color of wave
+            if let waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit){
+                currentSnapShot.waterColor = waterColor
+                //set color of background
+                currentSnapShot.backgroundColor = colorComplement(color: waterColor)
+            }
         }
         snapshotArray.append(currentSnapShot)
     }
@@ -77,13 +83,38 @@ func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])
                 break
             }
         }
-        
     }
         
     if let tide = tideArray[nextTideIndex] as? Tide{
         snapshot.upcomingTidePolar = tide.key
         snapshot.upcomingTideTimestamp = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
         snapshot.currentTideDirection = (tide.key == "H" ? "Rising" : "Dropping")
+    }
+    
+    return snapshot
+}
+
+func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])-> Snapshot {
+    
+    var snapshot = snapshotWithoutWind
+    var nextWindIndex = Int()
+    let currentTimestamp = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    
+    for index in 0..<windArray.count {
+        if let windTimeStamp = dateFormatter.date(from: windArray[index].timeStamp){
+            if windTimeStamp > currentTimestamp {
+                nextWindIndex = index
+                break
+            }
+        }
+    }
+    
+    if let wind = windArray[nextWindIndex] as? Wind{
+        snapshot.windCardinalDirection = wind.cardinalDirection
+        snapshot.windSpd = wind.speed
+        snapshot.windDir = wind.direction
     }
     
     return snapshot
