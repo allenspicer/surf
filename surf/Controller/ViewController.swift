@@ -37,7 +37,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
-        self.setupAnimatedWaveWithBouyData()
+        setupAnimatedWaveWithBouyData()
         setTideClient()
         setWindClient()
     }
