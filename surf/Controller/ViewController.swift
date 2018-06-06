@@ -22,6 +22,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var tideClient : TideClient?
     var windClient : WindClient?
     var activityIndicatorView = ActivityIndicatorView()
+    var snapshotComponents = [String:Bool]()
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -66,7 +67,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         windClient?.delegate = self
         windClient?.createWindData()
     }
-
     
     
     //
@@ -214,15 +214,21 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 extension ViewController: TideClientDelegate, WindClientDelegate{
 
     func didFinishTideTask(sender: TideClient, tides: [Tide]) {
-        
         print("View Controller Has Tide Array with \(tides.count) tides")
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
-//        setUIFromCurrentSnapshot(false)
+        snapshotComponents["tide"] = true
+        if !snapshotComponents.values.contains(false){
+            setUIFromCurrentSnapshot(false)
+        }
     }
     
     func didFinishWindTask(sender: WindClient, winds: [Wind]) {
-        print(winds)
-        setUIFromCurrentSnapshot(false)
+        print("View Controller Has Wind Array with \(winds.count) winds")
+        currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
+        snapshotComponents["wind"] = true
+        if !snapshotComponents.values.contains(false){
+            setUIFromCurrentSnapshot(false)
+        }
     }
     
     func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
@@ -237,6 +243,7 @@ extension ViewController: TideClientDelegate, WindClientDelegate{
                     view.removeFromSuperview()
                     let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
                     self.view.addSubview(snapshotView)
+                    self.view.layer.addSublayer(self.shapeLayer)
                     addReturnToTableViewButton()
                 }
             }
