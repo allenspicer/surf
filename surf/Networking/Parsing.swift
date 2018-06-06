@@ -76,6 +76,8 @@ func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
     
+    //
+    //turn this into function for all these to use
     for index in 0..<tideArray.count {
         if let tideTimeStamp = dateFormatter.date(from: tideArray[index].timeStamp){
             if tideTimeStamp > currentTimestamp {
@@ -84,6 +86,8 @@ func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])
             }
         }
     }
+    //
+    //
         
     if let tide = tideArray[nextTideIndex] as? Tide{
         snapshot.upcomingTidePolar = tide.key
@@ -120,6 +124,29 @@ func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])
     return snapshot
 }
 
+func addAirTempDataToSnapshot(_ snapshotWithoutAirTemp : Snapshot, AirTempArray : [AirTemp])-> Snapshot {
+    
+    var snapshot = snapshotWithoutAirTemp
+    var nextAirTempIndex = Int()
+    let currentTimestamp = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+    
+    for index in 0..<AirTempArray.count {
+        if let AirTempTimeStamp = dateFormatter.date(from: AirTempArray[index].timeStamp){
+            if AirTempTimeStamp > currentTimestamp {
+                nextAirTempIndex = index
+                break
+            }
+        }
+    }
+    
+    if let airTemp = AirTempArray[nextAirTempIndex] as? AirTemp{
+        snapshot.airTemp = airTemp.value
+    }
+    
+    return snapshot
+}
 
 
 

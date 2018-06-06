@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 struct Snapshot {
+    var timeStamp: Date = Date()
     var id: String = ""
     var year: String = ""
     var month: String = ""
@@ -22,7 +23,7 @@ struct Snapshot {
     var meanWaveDirection: String?
     var PRES: String?
     var PTDY: String?
-    var airTemp: String?
+    var airTemp: Double?
     var waterTemp: Double?
     var waterColor: CGColor?
     var backgroundColor: UIColor?
@@ -31,7 +32,6 @@ struct Snapshot {
     var upcomingTidePolar: String?
     var upcomingTideTimestamp: Date?
     var currentTideDirection: String?
-    var timeStamp: Date = Date()
     var stationName : String?
     var stationId : Int?
     var windDir: Double?

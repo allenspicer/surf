@@ -21,6 +21,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var wlView = UIView()
     var tideClient : TideClient?
     var windClient : WindClient?
+    var airTempClient : AirTempClient?
     var activityIndicatorView = ActivityIndicatorView()
     var snapshotComponents = [String:Bool]()
 
@@ -39,8 +40,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
         setupAnimatedWaveWithBouyData()
-        setTideClient()
-        setWindClient()
+        setAdditonalDataClients()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -56,16 +56,18 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.startDisplayLink()
     }
     
-    func setTideClient(){
+    func setAdditonalDataClients(){
         tideClient = TideClient(currentSnapshot: self.currentSnapShot)
         tideClient?.delegate = self
         tideClient?.createTideData()
-    }
-    
-    func setWindClient(){
+
         windClient = WindClient(currentSnapshot: self.currentSnapShot)
         windClient?.delegate = self
         windClient?.createWindData()
+        
+        airTempClient = AirTempClient(currentSnapshot: self.currentSnapShot)
+        airTempClient?.delegate = self
+        airTempClient?.createAirTempData()
     }
     
     
@@ -211,7 +213,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-extension ViewController: TideClientDelegate, WindClientDelegate{
+extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate{
 
     func didFinishTideTask(sender: TideClient, tides: [Tide]) {
         print("View Controller Has Tide Array with \(tides.count) tides")
@@ -227,10 +229,10 @@ extension ViewController: TideClientDelegate, WindClientDelegate{
         checkDataComponentsThenRefresh()
     }
     
-    func didFinishAirTempTask(sender: WindClient, winds: [Wind]) {
-        print("View Controller Has Wind Array with \(winds.count) winds")
-        currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
-        snapshotComponents["wind"] = true
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
+        print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
+        currentSnapShot = addAirTempDataToSnapshot(currentSnapShot, AirTempArray: airTemps)
+        snapshotComponents["air"] = true
         checkDataComponentsThenRefresh()
     }
     

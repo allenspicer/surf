@@ -122,7 +122,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
             destinationVC.stationId = selectedStation.id
             destinationVC.currentSnapShot = selectedSnapshot
             if destinationVC.currentSnapShot != nil {
-                destinationVC.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false]
+                destinationVC.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false]
             }
         }
     }
