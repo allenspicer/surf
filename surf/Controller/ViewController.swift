@@ -179,11 +179,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private func wave(at elapsed: Double, waveHeightMax: CGFloat) -> UIBezierPath {
         let centerY = view.bounds.height / 2
         var amplitude = CGFloat(0)
-        let shorten = fabs(fmod(CGFloat(elapsed), 3) - 1.5) * 40
+        var frequency = elapsed * 2
+        if let period = currentSnapShot.waveAveragePeriod {
+            frequency = elapsed * 2 / period
+        }
         amplitude = CGFloat(waveHeightMax)
         
         func f(_ x: Int) -> CGFloat {
-            return sin(((CGFloat(x) / view.bounds.width) + CGFloat(elapsed)) * .pi) * amplitude + centerY
+            return sin(((CGFloat(x) / view.bounds.width) + CGFloat(frequency)) * .pi) * amplitude + centerY
         }
         
         let path = UIBezierPath()
