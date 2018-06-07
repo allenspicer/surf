@@ -207,6 +207,34 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "returnToHomeView", sender: self)
     }
     
+    
+    
+func addFavoriteButton(){
+    let rButton = UIButton(frame: CGRect(x: 40, y: 30, width: 40, height: 40))
+        rButton.setTitle("EE", for: .normal)
+        rButton.setTitleColor(.black, for: .normal)
+        rButton.titleLabel?.textColor = .black
+        rButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
+        for view in self.view.subviews {
+           if view is SurfSnapshotView {
+               view.addSubview(rButton)
+               }
+           }
+        }
+
+     @objc func addFavorite(){
+        
+        
+        //if not favorite
+        //add station to favorites
+        //update button image to filled heart
+        
+        //else opposite
+        
+        
+        }
+
+    
 }
 
 extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate{
@@ -243,6 +271,7 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
         if isFirstLoad {
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             self.view.addSubview(snapshotView)
+            addFavoriteButton()
         }else{
             for view in self.view.subviews {
                 if view is SurfSnapshotView {
@@ -250,6 +279,7 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
                     let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
                     self.view.addSubview(snapshotView)
                     self.view.layer.addSublayer(self.shapeLayer)
+                    addFavoriteButton()
                 }
             }
         }

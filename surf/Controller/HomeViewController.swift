@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
+    private var favoritesArray = [Int]()
 
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png")]
     override func viewDidLoad() {
@@ -25,6 +26,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         parseStationList()
         setTableOrGetUserLocation()
+        let defaults = UserDefaults.standard
+        defaults.set([41110, 44056], forKey: "favorites")
+        
+        if let favorites = defaults.array(forKey:"favorites") as? [Int] {
+            print(favorites)
+        }
+        
     }
     
     
