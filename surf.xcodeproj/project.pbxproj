@@ -19,6 +19,7 @@
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
+		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* buoys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* buoys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
@@ -66,6 +67,7 @@
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
+		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* buoys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buoys.json; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		95B9A2B020893CBA00F911F3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9572891E20C99874007BE075 /* TopDownSegue.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */,
@@ -418,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
+				9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */,
 				95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				957F004620C0AEB600A7B8BA /* Tide.swift in Sources */,

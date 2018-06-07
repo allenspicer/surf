@@ -73,7 +73,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="A9z-NA-s0C" kind="show" identifier="returnToHomeView" id="L62-XP-ypt"/>
+                        <segue destination="A9z-NA-s0C" kind="custom" identifier="returnToHomeView" customClass="TopDownSegue" customModule="surf" customModuleProvider="target" id="L62-XP-ypt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -153,7 +153,7 @@
                     </view>
                     <connections>
                         <outlet property="proximalCollectionView" destination="btx-0C-wgR" id="v25-So-auv"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="showStationDetail" id="Pot-B4-VNx"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="showStationDetail" id="Pot-B4-VNx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jap-Ur-G8C" userLabel="First Responder" sceneMemberID="firstResponder"/>

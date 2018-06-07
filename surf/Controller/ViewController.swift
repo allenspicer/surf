@@ -93,6 +93,11 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    
     @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
         if (gesture.state == .began){
             for view in self.view.subviews as [UIView] {
@@ -122,8 +127,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.up:
-                print("Swiped up")
+            case UISwipeGestureRecognizerDirection.down:
+                returnToTableView()
             default:
                 break
             }
@@ -198,22 +203,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return path
     }
     
-    func addReturnToTableViewButton(){
-        let rButton = UIButton(frame: CGRect(x: self.view.frame.width - 40, y: self.view.frame.height - 50, width: 40, height: 40))
-        rButton.setTitle("EE", for: .normal)
-        rButton.setTitleColor(.black, for: .normal)
-        rButton.titleLabel?.textColor = .black
-        rButton.addTarget(self, action: #selector(returnToTableView), for: .touchUpInside)
-        for view in self.view.subviews {
-            if view is SurfSnapshotView {
-                view.addSubview(rButton)
-            }
-        }
-    }
-    
-    @objc func returnToTableView(){
+    func returnToTableView(){
         self.performSegue(withIdentifier: "returnToHomeView", sender: self)
     }
+    
 }
 
 extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate{
@@ -250,7 +243,6 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
         if isFirstLoad {
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             self.view.addSubview(snapshotView)
-            addReturnToTableViewButton()
         }else{
             for view in self.view.subviews {
                 if view is SurfSnapshotView {
@@ -258,7 +250,6 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
                     let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
                     self.view.addSubview(snapshotView)
                     self.view.layer.addSublayer(self.shapeLayer)
-                    addReturnToTableViewButton()
                 }
             }
         }
