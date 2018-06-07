@@ -13,7 +13,8 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
-    let list = bouyDataServiceRequest(stationId)
+    let networkRequest = NetworkRequest(stationId: stationId)
+    let list = networkRequest.bouyDataServiceRequest()
     
     let lines = list.components(separatedBy: "\n")
     var rawStatArray : [String] = []

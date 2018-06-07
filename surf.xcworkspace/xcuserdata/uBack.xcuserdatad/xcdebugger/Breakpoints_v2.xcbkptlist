@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "550091171.12827"
+            filePath = "surf/View/ActivityIndicatorView.swift"
+            timestampString = "550097559.605592"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "didTouchDown(gesture:)"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "setupActivityIndicator(view:widthView:backgroundColor:textColor:message:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "surf/Controller/ViewController.swift"
-            timestampString = "550091171.128942"
+            filePath = "surf/Controller/HomeViewController.swift"
+            timestampString = "550097559.60619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "respondToSwipeGesture(gesture:)"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

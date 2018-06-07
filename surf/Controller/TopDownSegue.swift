@@ -9,7 +9,7 @@
 import UIKit
 
 class TopDownSegue: UIStoryboardSegue {
-    let duration: TimeInterval = 1
+    let duration: TimeInterval = 0.5
     let delay: TimeInterval = 0
     let animationOptions: UIViewAnimationOptions = .curveEaseInOut
     

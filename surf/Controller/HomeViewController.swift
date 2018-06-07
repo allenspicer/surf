@@ -22,8 +22,8 @@ class HomeViewController: UIViewController {
 
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png")]
     override func viewDidLoad() {
-        startActivityIndicator("Loading")
         super.viewDidLoad()
+        startActivityIndicator("Loading")
         parseStationList()
         setTableOrGetUserLocation()
         let defaults = UserDefaults.standard
@@ -223,7 +223,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return proximalData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
