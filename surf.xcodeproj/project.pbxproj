@@ -16,10 +16,10 @@
 		95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95125EF620C82E3800FDE462 /* AirTempClient.swift */; };
 		95125EFB20C8483600FDE462 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95125EFA20C8483600FDE462 /* regionalBuoyList.json */; };
 		951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C29CE20C854D7009D90B1 /* HomeViewController.swift */; };
-		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
+		9572892120C99DDF007BE075 /* coast.png in Resources */ = {isa = PBXBuildFile; fileRef = 9572892020C99DDF007BE075 /* coast.png */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* buoys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* buoys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
@@ -64,10 +64,10 @@
 		95125EF620C82E3800FDE462 /* AirTempClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirTempClient.swift; sourceTree = "<group>"; };
 		95125EFA20C8483600FDE462 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = regionalBuoyList.json; sourceTree = "<group>"; };
 		951C29CE20C854D7009D90B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
+		9572892020C99DDF007BE075 /* coast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coast.png; sourceTree = "<group>"; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* buoys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buoys.json; sourceTree = "<group>"; };
@@ -193,7 +193,6 @@
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
-				956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -201,6 +200,7 @@
 		95C9DB9D20C033690080B70B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				9572892020C99DDF007BE075 /* coast.png */,
 				95C9DB9E20C033750080B70B /* crash.png */,
 				95C9DB9F20C033750080B70B /* flat.png */,
 				95C9DBA020C033750080B70B /* wave.png */,
@@ -356,6 +356,7 @@
 				95E674BD20BDC6A100166693 /* staticStationList.json in Resources */,
 				95AB2BA520BD9229004504BF /* buoys.json in Resources */,
 				95C9DBA320C033750080B70B /* wave.png in Resources */,
+				9572892120C99DDF007BE075 /* coast.png in Resources */,
 				95C9DBA220C033750080B70B /* flat.png in Resources */,
 				95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */,
 				95125EFB20C8483600FDE462 /* regionalBuoyList.json in Resources */,
@@ -433,7 +434,6 @@
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
 				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,
 				95125EF120C707F800FDE462 /* WindClient.swift in Sources */,
-				956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */,
 				95125EF520C82B9800FDE462 /* AirTemp.swift in Sources */,
 				95713FF02075912300745FC7 /* Snapshot.swift in Sources */,
 				95125EF320C708BB00FDE462 /* Wind.swift in Sources */,

@@ -48,8 +48,21 @@ func getWaterColorFromTempInF(_ temp: Double) -> CGColor?{
 
 //invert color components for complementary title color
 func colorComplement(color: CGColor) -> UIColor{
-    let ciColor = CIColor(cgColor: color)
-    return UIColor(red: 1.0 - ciColor.red, green: 1.0 - ciColor.green, blue: 1.0 - ciColor.blue, alpha: 1.0)
+    
+    let colorArray = [#colorLiteral(red: 0.4, green: 0.3450980392, blue: 0.8549019608, alpha: 1), #colorLiteral(red: 0.2941176471, green: 0.6078431373, blue: 0.8274509804, alpha: 1), #colorLiteral(red: 0.2705882353, green: 0.8705882353, blue: 0.4745098039, alpha: 1), #colorLiteral(red: 1, green: 0.7019607843, blue: 0.3137254902, alpha: 1)]
+    var returnIndex = 0
+
+    for index in 0..<colorArray.count{
+        if color == colorArray[index].cgColor {
+            let halfCount = colorArray.count / 2
+            if index + halfCount >= colorArray.count {
+                returnIndex = index + halfCount - 4
+            }else{
+                returnIndex = index + halfCount
+            }
+        }
+    }
+    return colorArray[returnIndex]
 }
 
 extension UIColor {

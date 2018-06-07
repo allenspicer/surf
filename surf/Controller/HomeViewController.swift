@@ -189,10 +189,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        startActivityIndicator("Loading")
+
         proximalSelectedIndex = indexPath.row
         let selectedId = proximalData[proximalSelectedIndex].id
-        
-        startActivityIndicator("Loading")
         
         DispatchQueue.main.async{
             let data = createSnapshot(stationId: selectedId, finished: {})

@@ -102,7 +102,7 @@ class SurfSnapshotView: UIScrollView {
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         label.text = "Loading..."
-        if let speed = currentSnapShot.windSpd, let direction = currentSnapShot.windDir{
+        if let speed = currentSnapShot.windSpd, let direction = currentSnapShot.windCardinalDirection{
             label.text = "\(speed) \(windUnit) \(direction) WIND"
         }
         label.font = UIFont(name:"Damascus", size: 10.0)
