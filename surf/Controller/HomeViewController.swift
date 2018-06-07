@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
 }
 
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -97,12 +97,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-//        cell.backgroundColor = .black
         cell.imageView.image = imageArray[indexPath.row]
-//        cell.imageView.contentMode = .scaleAspectFit
         cell.titleLabel.textColor = .black
         cell.titleLabel.text = self.proximalData[indexPath.row].name
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 140)
     }
     
 
