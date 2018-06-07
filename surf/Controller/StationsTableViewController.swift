@@ -258,7 +258,7 @@ class StationsTableViewController: UITableViewController, CLLocationManagerDeleg
         self.view.addSubview(activityIndicatorView)
         self.tableView.alwaysBounceVertical = false
     }
-
+    
     func stopActivityIndicator(){
         for view in self.view.subviews {
             if view.isKind(of: ActivityIndicatorView.self){
