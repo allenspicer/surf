@@ -11,9 +11,11 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var proximalCollectionView: UICollectionView!
+    private var favoritesData = [Station]()
     private var proximalData = [Station]()
-    private var proximalSelectedIndex = Int()
+    private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var userLongitude = 0.0
     private var userLatitude = 0.0
@@ -25,21 +27,23 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         startActivityIndicator("Loading")
         parseStationList()
-        setTableOrGetUserLocation()
+        setDataOrGetUserLocation()
+        addFavoriteStationsToCollectionData()
         let defaults = UserDefaults.standard
         defaults.set([41110, 44056], forKey: "favorites")
-        
-        if let favorites = defaults.array(forKey:"favorites") as? [Int] {
+        defaults.set(["WB", "OBX"], forKey: "nicknames")
+
+        if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames"){
             print(favorites)
+            print(names)
         }
-        
     }
     
+//
+// MARK: - Inital Load Logic
+//
     
-    
-    // MARK: - Inital Load Logic
-    
-    private func setTableOrGetUserLocation(){
+    private func setDataOrGetUserLocation(){
         let defaults = UserDefaults.standard
         userLongitude = defaults.object(forKey: "userLongitude") as? Double ?? 0.0
         userLatitude = defaults.object(forKey: "userLatitude") as? Double ?? 0.0
@@ -60,9 +64,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    //
-    //MARK: - Location Services
-    //
+//
+//MARK: - Location Services
+//
     
     private func findDistancesFromUserLocation(){
         
@@ -131,9 +135,9 @@ class HomeViewController: UIViewController {
         stopActivityIndicator()
     }
     
-    //
-    //MARK: - Buoy List for regional data station ids
-    //
+//
+//MARK: - Buoy List for regional data station ids
+//
     
     private func parseStationList(){
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
@@ -145,7 +149,29 @@ class HomeViewController: UIViewController {
                         guard let stationId = station["station"] else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
-                        addStationWithIdLatLon(id: "\(stationId)", lat: lat, lon: lon, name: station["name"] as? String ?? "" )
+                        let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
+                        proximalData.append(station)
+                        stopActivityIndicator()
+                    }
+                }
+            } catch {
+                // handle error
+            }
+        }
+    }
+    
+    private func addFavoriteStationsToCollectionData(){
+        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let metaData = jsonResult as? [[String : AnyObject]]{
+                    for station in metaData {
+                        guard let stationId = station["station"] else {return}
+                        guard let lon = station["longitude"] as? Double else {return}
+                        guard let lat = station["latitude"] as? Double else {return}
+                        let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
+                        favoritesData.append(station)
                         stopActivityIndicator()
                     }
                 }
@@ -156,12 +182,11 @@ class HomeViewController: UIViewController {
     }
     
     private func addStationWithIdLatLon(id :String, lat : Double, lon : Double, name: String){
-        let station : Station = Station(id: id, lat: lat, lon: lon, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
-        proximalData.append(station)
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedStation = proximalData[proximalSelectedIndex]
+        let selectedStation = proximalData[cellSelectedIndex]
         
         if let destinationVC = segue.destination as? ViewController {
             destinationVC.stationId = selectedStation.id
@@ -177,12 +202,12 @@ class HomeViewController: UIViewController {
     //MARK: - Activty Indicator Controllers
     //
     
-    func startActivityIndicator(_ message : String){
+    private func startActivityIndicator(_ message : String){
         let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
         self.view.addSubview(activityIndicatorView)
     }
     
-    func stopActivityIndicator(){
+    private func stopActivityIndicator(){
         for view in self.view.subviews {
             if view.isKind(of: ActivityIndicatorView.self){
                 view.removeFromSuperview()
@@ -192,15 +217,79 @@ class HomeViewController: UIViewController {
     
 }
 
+//
+//MARK: - Extension to handle Collection View
+//
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        cellSelectedIndex = indexPath.row
+        var selectedId = String()
+        var selectedName = String()
         startActivityIndicator("Loading")
+        
+        switch collectionView {
+        case is ProximalCollectionView:
+                selectedId = proximalData[cellSelectedIndex].id
+                if let name = proximalData[cellSelectedIndex].name {
+                    selectedName = name
+                }
+        case is FavoriteCollectionView:
+                selectedId = favoritesData[cellSelectedIndex].id
+                if let name = favoritesData[cellSelectedIndex].name {
+                    selectedName = name
+            }        default:
+            break
+        }
+        selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName)
+    }
 
-        proximalSelectedIndex = indexPath.row
-        let selectedId = proximalData[proximalSelectedIndex].id
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView {
+        case is ProximalCollectionView:
+          return proximalData.count
+        case is FavoriteCollectionView:
+            print(favoritesData.count)
+            return favoritesData.count
+        default:
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView {
+        case is ProximalCollectionView:
+            let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
+            cell.imageView.image = imageArray[indexPath.row]
+            cell.titleLabel.textColor = .black
+            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            return cell
+        case is FavoriteCollectionView:
+            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
+            cell.backgroundColor = .white
+//            cell.imageView.image = imageArray[indexPath.row]
+//            cell.titleLabel.textColor = .black
+//            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView {
+        case is ProximalCollectionView:
+            return CGSize(width: 100, height: 140)
+        case is FavoriteCollectionView:
+            return CGSize(width: 150, height: 200)
+        default:
+            return CGSize()
+        }
+    }
+    
+    private func selectedCellAction (_ index : Int, selectedId : String, stationName : String){
         
         DispatchQueue.main.async{
             let data = createSnapshot(stationId: selectedId, finished: {})
@@ -208,7 +297,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             if data.waveHgt != nil && data.waterTemp != nil {
                 self.stopActivityIndicator()
                 self.selectedSnapshot = data
-                self.selectedSnapshot.stationName = self.proximalData[indexPath.row].name
+                self.selectedSnapshot.stationName = stationName
                 self.performSegue(withIdentifier: "showStationDetail", sender: self)
             }else{
                 //if no data respond with alertview
@@ -219,23 +308,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 self.present(alert, animated: true, completion: nil)
             }
         }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return proximalData.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-        cell.imageView.image = imageArray[indexPath.row]
-        cell.titleLabel.textColor = .black
-        cell.titleLabel.text = self.proximalData[indexPath.row].name
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 140)
     }
     
 
