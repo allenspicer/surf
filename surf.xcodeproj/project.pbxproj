@@ -15,8 +15,10 @@
 		95125EF520C82B9800FDE462 /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95125EF420C82B9800FDE462 /* AirTemp.swift */; };
 		95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95125EF620C82E3800FDE462 /* AirTempClient.swift */; };
 		95125EFB20C8483600FDE462 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95125EFA20C8483600FDE462 /* regionalBuoyList.json */; };
+		951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C29CE20C854D7009D90B1 /* HomeViewController.swift */; };
 		956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
+		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* buoys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* buoys.json */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
@@ -60,8 +62,10 @@
 		95125EF420C82B9800FDE462 /* AirTemp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirTemp.swift; sourceTree = "<group>"; };
 		95125EF620C82E3800FDE462 /* AirTempClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirTempClient.swift; sourceTree = "<group>"; };
 		95125EFA20C8483600FDE462 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = regionalBuoyList.json; sourceTree = "<group>"; };
+		951C29CE20C854D7009D90B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StationsTableViewController.swift; path = surf/Controller/StationsTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* buoys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buoys.json; sourceTree = "<group>"; };
@@ -138,11 +142,12 @@
 		9576FF5A207FDA52006240AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95EEECD2204CF40600308E73 /* Main.storyboard */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
+				9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
 				95EEECD8204CF40600308E73 /* Assets.xcassets */,
-				95EEECD2204CF40600308E73 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
+				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				956B25E720AA66F6002F3A3B /* StationsTableViewController.swift */,
 			);
 			path = Controller;
@@ -416,10 +422,12 @@
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				957F004620C0AEB600A7B8BA /* Tide.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
+				951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
 				95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */,
+				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,
 				95125EF120C707F800FDE462 /* WindClient.swift in Sources */,
 				956B25E820AA66F6002F3A3B /* StationsTableViewController.swift in Sources */,
 				95125EF520C82B9800FDE462 /* AirTemp.swift in Sources */,
