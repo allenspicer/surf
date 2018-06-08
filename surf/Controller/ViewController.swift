@@ -24,6 +24,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var airTempClient : AirTempClient?
     var activityIndicatorView = ActivityIndicatorView()
     var snapshotComponents = [String:Bool]()
+    var favoriteButton = UIButton()
+    var fButtonIsTapped = false
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -207,22 +209,28 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "returnToHomeView", sender: self)
     }
     
+    func setButton(_ button :UIButton){
+        
+        button.setTitle(fButtonIsTapped ? "EE" : "OO" , for: .normal)
+        fButtonIsTapped = !fButtonIsTapped
+    }
     
-    
-func addFavoriteButton(){
-    let rButton = UIButton(frame: CGRect(x: 40, y: 30, width: 40, height: 40))
-        rButton.setTitle("EE", for: .normal)
-        rButton.setTitleColor(.black, for: .normal)
-        rButton.titleLabel?.textColor = .black
-        rButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
+    func addFavoriteButton(){
+        favoriteButton = UIButton(frame: CGRect(x: 40, y: 30, width: 40, height: 40))
+        setButton(favoriteButton)
+        favoriteButton.setTitleColor(.black, for: .normal)
+        favoriteButton.titleLabel?.textColor = .black
+        favoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
         for view in self.view.subviews {
            if view is SurfSnapshotView {
-               view.addSubview(rButton)
+               view.addSubview(favoriteButton)
                }
            }
         }
 
-     @objc func addFavorite(){
+    @objc func addFavorite(){
+        
+        setButton(favoriteButton)
         
         
         //if not favorite
