@@ -36,8 +36,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yoH-yG-KVB" customClass="FavoriteCollectionView" customModule="surf" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yoH-yG-KVB" customClass="FavoriteCollectionView" customModule="surf" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="375" height="250"/>
+                                <color key="backgroundColor" red="0.40392156862745099" green="0.36078431372549019" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="G5A-NK-cMe"/>
                                 </constraints>
@@ -55,21 +56,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OC-Yq-GEI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="hb7-31-9WW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="DamascusSemiBold" family="Damascus" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48d-yH-uJV">
                                                     <rect key="frame" x="0.0" y="50" width="150" height="150"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OC-Yq-GEI">
-                                                    <rect key="frame" x="54" y="12" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="3OC-Yq-GEI" firstAttribute="width" secondItem="SNs-EI-1h5" secondAttribute="width" id="2l8-9G-PMM"/>
+                                            <constraint firstAttribute="trailing" secondItem="3OC-Yq-GEI" secondAttribute="trailing" id="H9L-bJ-bd3"/>
+                                            <constraint firstItem="3OC-Yq-GEI" firstAttribute="leading" secondItem="SNs-EI-1h5" secondAttribute="leading" id="L8h-BR-ECU"/>
+                                        </constraints>
                                         <size key="customSize" width="150" height="200"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="48d-yH-uJV" id="O7X-O5-k3C"/>
+                                            <outlet property="titleLabel" destination="3OC-Yq-GEI" id="BAf-UQ-nAb"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

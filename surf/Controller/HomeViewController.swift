@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
         parseStationList()
         setDataOrGetUserLocation()
         addFavoriteStationsToCollectionData()
+        setDelegatesAndDataSources()
         let defaults = UserDefaults.standard
         defaults.set([41110, 44056], forKey: "favorites")
         defaults.set(["WB", "OBX"], forKey: "nicknames")
@@ -37,6 +38,7 @@ class HomeViewController: UIViewController {
             print(favorites)
             print(names)
         }
+
     }
     
 //
@@ -151,8 +153,8 @@ class HomeViewController: UIViewController {
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
                         proximalData.append(station)
-                        stopActivityIndicator()
                     }
+                    stopActivityIndicator()
                 }
             } catch {
                 // handle error
@@ -172,8 +174,10 @@ class HomeViewController: UIViewController {
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
                         favoritesData.append(station)
-                        stopActivityIndicator()
                     }
+                    print("There are \(favoritesData.count) Favorites Objects")
+
+                    stopActivityIndicator()
                 }
             } catch {
                 // handle error
@@ -223,6 +227,14 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
+    func setDelegatesAndDataSources(){
+        favoritesCollectionView.delegate = self
+        proximalCollectionView.delegate = self
+        
+        favoritesCollectionView.dataSource = self
+        proximalCollectionView.dataSource = self
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         cellSelectedIndex = indexPath.row
@@ -268,10 +280,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-            cell.backgroundColor = .white
-//            cell.imageView.image = imageArray[indexPath.row]
-//            cell.titleLabel.textColor = .black
-//            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            cell.imageView.image = imageArray[indexPath.row]
+            cell.imageView.layer.cornerRadius = 75
+            cell.imageView.layer.masksToBounds = true
+            cell.titleLabel.textColor = .black
+            cell.titleLabel.text = self.proximalData[indexPath.row].name
             return cell
         default:
             return UICollectionViewCell()
