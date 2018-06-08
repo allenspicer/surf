@@ -21,25 +21,45 @@ class HomeViewController: UIViewController {
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
     private var favoritesArray = [Int]()
+    private var favoriteStationIdsFromMemory = [String : Int]()
+
 
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png")]
     override func viewDidLoad() {
         super.viewDidLoad()
         startActivityIndicator("Loading")
+        
         parseStationList()
         setDataOrGetUserLocation()
-        addFavoriteStationsToCollectionData()
-        setDelegatesAndDataSources()
-        let defaults = UserDefaults.standard
-        defaults.set([41110, 44056], forKey: "favorites")
-        defaults.set(["WB", "OBX"], forKey: "nicknames")
-
-        if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames"){
-            print(favorites)
-            print(names)
+        
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async
+            {
+                self.setUserFavorites(){ (favoritesDictionary) in
+                        self.addFavoriteStationsToCollectionData()
+                }
         }
 
+        setDelegatesAndDataSources()
+
+
     }
+    
+    func setUserFavorites (completion:@escaping ([String : Int])->Void){
+                let defaults = UserDefaults.standard
+                defaults.set([41110, 44056], forKey: "favorites")
+                defaults.set(["WB", "OBX"], forKey: "nicknames")
+                
+                if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
+                    for index in 0..<favorites.count {
+                        let favorite = favorites[index]
+                        let name = names[index]
+                        favoriteStationIdsFromMemory[name] = favorite
+                    }
+                }
+        completion(favoriteStationIdsFromMemory)
+    }
+
+    
     
 //
 // MARK: - Inital Load Logic
@@ -169,15 +189,17 @@ class HomeViewController: UIViewController {
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
-                        guard let stationId = station["station"] else {return}
+                        guard let stationId = station["station"] as? Int else {return}
+                        if !self.favoriteStationIdsFromMemory.values.contains(stationId) {continue}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
                         favoritesData.append(station)
                     }
-                    print("There are \(favoritesData.count) Favorites Objects")
-
-                    stopActivityIndicator()
+                    DispatchQueue.main.async{
+                        self.favoritesCollectionView.reloadData()
+                        self.stopActivityIndicator()
+                    }
                 }
             } catch {
                 // handle error
@@ -263,7 +285,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
           return proximalData.count
         case is FavoriteCollectionView:
-            print(favoritesData.count)
             return favoritesData.count
         default:
             return 0
