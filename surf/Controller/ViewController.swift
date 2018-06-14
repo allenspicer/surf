@@ -230,8 +230,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setButton(_ button :UIButton){
-        button.setTitle(favoriteFlag ? "Fav" : "Not Fav" , for: .normal)
-        favoriteFlag = !favoriteFlag
+        button.setTitle(favoriteFlag ? "F" : "N" , for: .normal)
     }
     
     func addFavoriteButton(){
@@ -250,11 +249,17 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
 
     @objc func favoriteButtonAction(){
+        favoriteFlag = !favoriteFlag
         setButton(favoriteButton)
         
         if let index = indexOfCurrentStationInFavoritesArray as? Int {
             
             if index >= 0 {
+                let alert = UIAlertController.init(title: "This break has been removed from your favorites", message: nil, preferredStyle: .alert)
+                let doneAction = UIAlertAction(title: "Okay", style: .default)
+                alert.addAction(doneAction)
+                self.present(alert, animated: true, completion: nil)
+                
                 //subtract from array
                 favoritesArray.remove(at: index)
                 let defaults = UserDefaults.standard

@@ -30,19 +30,21 @@ class HomeViewController: UIViewController {
         startActivityIndicator("Loading")
         parseStationList()
         setDataOrGetUserLocation()
-        
+        setDelegatesAndDataSources()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async
             {
                 self.setUserFavorites(){ (favoritesDictionary) in
-                        self.addFavoriteStationsToCollectionData()
+                    self.addFavoriteStationsToCollectionData()
                 }
         }
-        setDelegatesAndDataSources()
     }
+
     
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
                 let defaults = UserDefaults.standard
                 if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
+                    print(favorites)
+                    print(names)
                     for index in 0..<favorites.count {
                         let favorite = favorites[index]
                         let name = names[index]
@@ -181,12 +183,14 @@ class HomeViewController: UIViewController {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 if let metaData = jsonResult as? [[String : AnyObject]]{
+                    print("attempting to add stations to collection: \(self.favoriteStationIdsFromMemory.values)")
                     for station in metaData {
                         guard let stationId = station["station"] as? Int else {return}
                         if !self.favoriteStationIdsFromMemory.values.contains(stationId) {continue}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
+                        print("appending to collection station \(station)")
                         favoritesData.append(station)
                     }
                     DispatchQueue.main.async{
@@ -196,6 +200,7 @@ class HomeViewController: UIViewController {
                 }
             } catch {
                 // handle error
+                print("Problem accessing regional buoy list docuemnt: \(error)")
             }
         }
     }
@@ -280,6 +285,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
           return proximalData.count
         case is FavoriteCollectionView:
+            print("items in collection \(favoritesData.count)")
             return favoritesData.count
         default:
             return 0
@@ -300,7 +306,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.layer.cornerRadius = 75
             cell.imageView.layer.masksToBounds = true
             cell.titleLabel.textColor = .black
-            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            cell.titleLabel.text = self.favoritesData[indexPath.row].name
             return cell
         default:
             return UICollectionViewCell()
@@ -339,5 +345,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        switch collectionView {
+        case is ProximalCollectionView:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        case is FavoriteCollectionView:
+            let cellWidth : CGFloat = 150
+            let numberOfCells = CGFloat(favoritesData.count)
+            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
+            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+        default:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+    }
+
+        
 
 }
