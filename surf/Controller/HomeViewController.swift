@@ -305,6 +305,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.layer.masksToBounds = true
             cell.titleLabel.textColor = .black
             cell.titleLabel.text = "Unnamed"
+            print(nicknamesArray)
+            print(favoritesData)
+            
             if let name = nicknamesArray[indexPath.row] as? String{
                 cell.titleLabel.text = name
             }
