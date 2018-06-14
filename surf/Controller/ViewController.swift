@@ -264,11 +264,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 favoritesArray.remove(at: index)
                 let defaults = UserDefaults.standard
                 defaults.set(favoritesArray, forKey: "favorites")
-                print("New Favorites Set: \(favoritesArray)")
                 nicknamesArray.remove(at: index)
                 defaults.set(nicknamesArray, forKey: "nicknames")
-                print("New Nicknames Set: \(nicknamesArray)")
-                print(defaults.object(forKey: "favorites"))
             }
         }else{
             addFavorite()

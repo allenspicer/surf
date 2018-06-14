@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
     private var favoritesArray = [Int]()
+    private var nicknamesArray = [String]()
     private var favoriteStationIdsFromMemory = [String : Int]()
 
 
@@ -42,13 +43,9 @@ class HomeViewController: UIViewController {
     
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
                 let defaults = UserDefaults.standard
-        print("favorites from defaults: \(defaults.array(forKey:"favorites"))")
-        print("nicknames from defaults: \(defaults.array(forKey:"nicknames"))")
-
-        
                 if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
-                    print(favorites)
-                    print(names)
+                    favoritesArray = favorites
+                    nicknamesArray = names
                     for index in 0..<favorites.count {
                         let favorite = favorites[index]
                         let name = names[index]
@@ -187,14 +184,12 @@ class HomeViewController: UIViewController {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 if let metaData = jsonResult as? [[String : AnyObject]]{
-                    print("attempting to add stations to collection: \(self.favoriteStationIdsFromMemory.values)")
                     for station in metaData {
                         guard let stationId = station["station"] as? Int else {return}
                         if !self.favoriteStationIdsFromMemory.values.contains(stationId) {continue}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
-                        print("appending to collection station \(station)")
                         favoritesData.append(station)
                     }
                     DispatchQueue.main.async{
@@ -289,7 +284,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
           return proximalData.count
         case is FavoriteCollectionView:
-            print("items in collection \(favoritesData.count)")
             return favoritesData.count
         default:
             return 0
@@ -310,7 +304,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.layer.cornerRadius = 75
             cell.imageView.layer.masksToBounds = true
             cell.titleLabel.textColor = .black
-            cell.titleLabel.text = self.favoritesData[indexPath.row].name
+            cell.titleLabel.text = "Unnamed"
+            if let name = nicknamesArray[indexPath.row] as? String{
+                cell.titleLabel.text = name
+            }
             return cell
         default:
             return UICollectionViewCell()
