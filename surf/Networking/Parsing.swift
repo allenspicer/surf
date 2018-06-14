@@ -61,6 +61,12 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
                 currentSnapShot.backgroundColor = colorComplement(color: waterColor)
             }
         }
+        
+        //station id
+        if let station = Int(stationId){
+            currentSnapShot.stationId = station
+        }
+        
         snapshotArray.append(currentSnapShot)
     }
     

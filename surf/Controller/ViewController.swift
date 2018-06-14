@@ -14,7 +14,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
-    var stationId = String()
+    var stationId = Int()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
@@ -25,7 +25,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var activityIndicatorView = ActivityIndicatorView()
     var snapshotComponents = [String:Bool]()
     var favoriteButton = UIButton()
-    var fButtonIsTapped = false
+    var favoriteFlag = false
+    var indexOfCurrentStationInFavoritesArray: Int?
+    var favoritesArray = [Int]()
+    var nicknamesArray = [String]()
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -39,6 +42,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkStorageForFavorite()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
         setupAnimatedWaveWithBouyData()
@@ -47,6 +51,22 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         stopDisplayLink()
+    }
+    
+    
+    func checkStorageForFavorite(){
+        indexOfCurrentStationInFavoritesArray = nil
+        let defaults = UserDefaults.standard
+        if let favorites = defaults.array(forKey: "favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
+            favoritesArray = favorites
+            nicknamesArray = names
+            for favorite in favorites {
+                if currentSnapShot.stationId == favorite{
+                    favoriteFlag = true
+                    indexOfCurrentStationInFavoritesArray = favorites.index(of: favorite)
+                }
+            }
+        }
     }
     
     func setupAnimatedWaveWithBouyData(){
@@ -210,9 +230,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setButton(_ button :UIButton){
-        
-        button.setTitle(fButtonIsTapped ? "EE" : "OO" , for: .normal)
-        fButtonIsTapped = !fButtonIsTapped
+        button.setTitle(favoriteFlag ? "Fav" : "Not Fav" , for: .normal)
+        favoriteFlag = !favoriteFlag
     }
     
     func addFavoriteButton(){
@@ -220,29 +239,62 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         setButton(favoriteButton)
         favoriteButton.setTitleColor(.black, for: .normal)
         favoriteButton.titleLabel?.textColor = .black
-        favoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         for view in self.view.subviews {
            if view is SurfSnapshotView {
                view.addSubview(favoriteButton)
                }
            }
         }
+    
+    
 
-    @objc func addFavorite(){
-        
+    @objc func favoriteButtonAction(){
         setButton(favoriteButton)
         
-        
-        //if not favorite
-        //add station to favorites
-        //update button image to filled heart
-        
-        //else opposite
-        
-        
+        if let index = indexOfCurrentStationInFavoritesArray as? Int {
+            
+            if index >= 0 {
+                //subtract from array
+                favoritesArray.remove(at: index)
+                let defaults = UserDefaults.standard
+                defaults.set(favoritesArray, forKey: "favorites")
+                print("New Favorites Set: \(favoritesArray)")
+                nicknamesArray.remove(at: index)
+                defaults.set(favoritesArray, forKey: "nicknames")
+                print("New Nicknames Set: \(nicknamesArray)")
+            }
+        }else{
+            addFavorite()
         }
-
+    }
+        
+        
+    func addFavorite(){
+        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this break?", preferredStyle: .alert)
+        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
+        let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
+            guard let textFields = alert.textFields,
+                textFields.count > 0 else {
+                    // Could not find textfield
+                    return
+            }
+            if let text = textFields[0].text {
+                self.saveStationAndNameToFavoritesDefaults(nickname: text)
+            }
+        }
+        alert.addAction(okayAction)
+        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addAction(doneAction)
+        self.present(alert, animated: true, completion: nil)
+        }
     
+    func saveStationAndNameToFavoritesDefaults(nickname : String){
+        favoritesArray.append(stationId)
+        UserDefaults.standard.set(favoritesArray, forKey: "favorites")
+        nicknamesArray.append(nickname)
+        UserDefaults.standard.set(nicknamesArray, forKey: "nicknames")
+        }
 }
 
 extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate{

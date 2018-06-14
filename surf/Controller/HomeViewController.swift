@@ -28,7 +28,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startActivityIndicator("Loading")
-        
         parseStationList()
         setDataOrGetUserLocation()
         
@@ -38,17 +37,11 @@ class HomeViewController: UIViewController {
                         self.addFavoriteStationsToCollectionData()
                 }
         }
-
         setDelegatesAndDataSources()
-
-
     }
     
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
                 let defaults = UserDefaults.standard
-                defaults.set([41110, 44056], forKey: "favorites")
-                defaults.set(["WB", "OBX"], forKey: "nicknames")
-                
                 if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
                     for index in 0..<favorites.count {
                         let favorite = favorites[index]
@@ -215,7 +208,9 @@ class HomeViewController: UIViewController {
         let selectedStation = proximalData[cellSelectedIndex]
         
         if let destinationVC = segue.destination as? ViewController {
-            destinationVC.stationId = selectedStation.id
+            if let id = Int(selectedStation.id){
+                destinationVC.stationId = id
+            }
             destinationVC.currentSnapShot = selectedSnapshot
             if destinationVC.currentSnapShot != nil {
                 destinationVC.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false]
