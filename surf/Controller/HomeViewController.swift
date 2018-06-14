@@ -42,6 +42,10 @@ class HomeViewController: UIViewController {
     
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
                 let defaults = UserDefaults.standard
+        print("favorites from defaults: \(defaults.array(forKey:"favorites"))")
+        print("nicknames from defaults: \(defaults.array(forKey:"nicknames"))")
+
+        
                 if let favorites = defaults.array(forKey:"favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
                     print(favorites)
                     print(names)
