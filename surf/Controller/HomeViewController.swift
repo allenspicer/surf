@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private var favoritesArray = [Int]()
     private var nicknamesArray = [String]()
     private var favoriteStationIdsFromMemory = [String : Int]()
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
 
 
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
@@ -38,6 +39,7 @@ class HomeViewController: UIViewController {
                     self.addFavoriteStationsToCollectionData()
                 }
         }
+        selectionFeedbackGenerator.prepare()
     }
 
     
@@ -191,6 +193,7 @@ class HomeViewController: UIViewController {
                         guard let lat = station["latitude"] as? Double else {return}
                         let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
                         favoritesData.append(station)
+                        return
                     }
                     DispatchQueue.main.async{
                         self.favoritesCollectionView.reloadData()
@@ -257,7 +260,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
@@ -305,8 +309,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.layer.masksToBounds = true
             cell.titleLabel.textColor = .black
             cell.titleLabel.text = "Unnamed"
-            print(nicknamesArray)
-            print(favoritesData)
+            print("nicknames are: \(nicknamesArray)")
+            print("favorites are: \(favoritesData)")
+            
             
             if let name = nicknamesArray[indexPath.row] as? String{
                 cell.titleLabel.text = name

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AudioToolbox.AudioServices
+
 
 final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -29,6 +31,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var indexOfCurrentStationInFavoritesArray: Int?
     var favoritesArray = [Int]()
     var nicknamesArray = [String]()
+    let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
+        return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
+    }()
+
 
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -150,6 +156,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.down:
+                let pop2 = SystemSoundID(1520)
+                AudioServicesPlaySystemSoundWithCompletion(pop2, {
+                })
                 returnToTableView()
             default:
                 break
@@ -249,13 +258,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
 
     @objc func favoriteButtonAction(){
+        
         favoriteFlag = !favoriteFlag
         setButton(favoriteButton)
         
         if let index = indexOfCurrentStationInFavoritesArray as? Int {
             
             if index >= 0 {
-                let alert = UIAlertController.init(title: "This break has been removed from your favorites", message: nil, preferredStyle: .alert)
+                feedbackGenerator.notification.notificationOccurred(.warning)
+                let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
                 self.present(alert, animated: true, completion: nil)
@@ -268,13 +279,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 defaults.set(nicknamesArray, forKey: "nicknames")
             }
         }else{
+            feedbackGenerator.notification.notificationOccurred(.success)
             addFavorite()
         }
     }
         
         
     func addFavorite(){
-        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this break?", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this station?", preferredStyle: .alert)
         alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
             guard let textFields = alert.textFields,
