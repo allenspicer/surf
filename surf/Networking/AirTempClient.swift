@@ -25,7 +25,7 @@ final class AirTempClient: NSObject {
     }
 
     func createAirTempData() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+        DispatchQueue.global(qos:.utility).async {
             self.airTempDataServiceRequest()
         }
     }

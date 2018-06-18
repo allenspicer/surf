@@ -25,7 +25,7 @@ final class WindClient: NSObject {
     }
 
     func createWindData() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+        DispatchQueue.global(qos:.utility).async {
             self.windDataServiceRequest()
         }
     }
