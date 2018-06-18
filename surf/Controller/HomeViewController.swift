@@ -262,10 +262,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
+        startActivityIndicator("Loading")
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
-        startActivityIndicator("Loading")
         
         switch collectionView {
         case is ProximalCollectionView:
@@ -335,21 +335,25 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String){
         
-        DispatchQueue.main.async{
+        DispatchQueue.global(qos:.utility).async {
             let data = createSnapshot(stationId: selectedId, finished: {})
             //remove spinner for response:
             if data.waveHgt != nil && data.waterTemp != nil {
                 self.stopActivityIndicator()
                 self.selectedSnapshot = data
                 self.selectedSnapshot.stationName = stationName
-                self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                }
             }else{
                 //if no data respond with alertview
                 self.stopActivityIndicator()
                 let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
                 alert.addAction(doneAction)
-                self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
