@@ -33,11 +33,10 @@ class HomeViewController: UIViewController {
         parseStationList()
         setDataOrGetUserLocation()
         setDelegatesAndDataSources()
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async
-            {
+            DispatchQueue.global(qos:.utility).async{
                 self.setUserFavorites(){ (favoritesDictionary) in
                     self.addFavoriteStationsToCollectionData()
-                }
+            }
         }
         selectionFeedbackGenerator.prepare()
     }
@@ -334,25 +333,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String){
-        
         DispatchQueue.global(qos:.utility).async {
             let data = createSnapshot(stationId: selectedId, finished: {})
             //remove spinner for response:
-            if data.waveHgt != nil && data.waterTemp != nil {
-                self.stopActivityIndicator()
-                self.selectedSnapshot = data
-                self.selectedSnapshot.stationName = stationName
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "showStationDetail", sender: self)
-                }
-            }else{
-                //if no data respond with alertview
-                self.stopActivityIndicator()
-                let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-                let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-                alert.addAction(doneAction)
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                if data.waveHgt != nil && data.waterTemp != nil {
+                    self.stopActivityIndicator()
+                    self.selectedSnapshot = data
+                    self.selectedSnapshot.stationName = stationName
+                        self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                }else{
+                    //if no data respond with alertview
+                    self.stopActivityIndicator()
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+                    alert.addAction(doneAction)
+                        self.present(alert, animated: true, completion: nil)
                 }
             }
         }

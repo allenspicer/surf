@@ -25,7 +25,7 @@ final class TideClient: NSObject {
     }
 
     func createTideData() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+        DispatchQueue.global(qos:.utility).async {
             self.tideDataServiceRequest()
         }
     }
