@@ -201,7 +201,7 @@ class HomeViewController: UIViewController {
                 }
             } catch {
                 // handle error
-                print("Problem accessing regional buoy list docuemnt: \(error)")
+                print("Problem accessing regional buoy list document: \(error)")
             }
         }
     }
