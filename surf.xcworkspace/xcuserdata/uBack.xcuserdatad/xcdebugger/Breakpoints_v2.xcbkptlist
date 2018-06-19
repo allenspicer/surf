@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "surf/Controller/ViewController.swift"
-            timestampString = "551068171.037789"
+            timestampString = "551122510.064384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "setButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -97,6 +97,102 @@
             endingLineNumber = "315"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "surf/Controller/SurfQuality.swift"
+            timestampString = "551122510.064676"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "valuesContainZero(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "surf.SurfQuality.(valuesContainZero in _ADB94EDDF181E4B9D90EB699C7BB95FB)((Swift.Double, Swift.Double)) -&gt; Swift.Bool"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Controller/SurfQuality.swift"
+                  timestampString = "551122317.932156"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; Swift.ClosedRange&lt;Swift.Double&gt; in surf.SurfQuality.(valuesContainZero in _ADB94EDDF181E4B9D90EB699C7BB95FB)((Swift.Double, Swift.Double)) -&gt; Swift.Bool"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Controller/SurfQuality.swift"
+                  timestampString = "551122317.935358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "surf/Controller/SurfQuality.swift"
+            timestampString = "551122510.0664001"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "getWindAngleWithBeachFaceDirection(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "surf.SurfQuality.getWindAngleWithBeachFaceDirection(Swift.Double) -&gt; Swift.String"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Controller/SurfQuality.swift"
+                  timestampString = "551122317.942914"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "522">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; Swift.Range&lt;Swift.Double&gt; in surf.SurfQuality.getWindAngleWithBeachFaceDirection(Swift.Double) -&gt; Swift.String"
+                  moduleName = "surf"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/uBack/surf/surf/Controller/SurfQuality.swift"
+                  timestampString = "551122317.94595"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

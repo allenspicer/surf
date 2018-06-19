@@ -24,6 +24,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var tideClient : TideClient?
     var windClient : WindClient?
     var airTempClient : AirTempClient?
+    var surfQuality : SurfQuality?
     var activityIndicatorView = ActivityIndicatorView()
     var snapshotComponents = [String:Bool]()
     var favoriteButton = UIButton()
@@ -314,6 +315,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
+        
 //        print("View Controller Has Tide Array with \(airTemps.count) tides")
 //        currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: airTemps)
 //        snapshotComponents["tide"] = true
@@ -332,6 +334,13 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
         currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
         snapshotComponents["wind"] = true
         checkDataComponentsThenRefresh()
+        
+        let wBBeachFaceDirection = 120.0
+        
+        surfQuality = SurfQuality(currentSnapshot: self.currentSnapShot)
+        surfQuality?.delegate = self
+        let wind = surfQuality?.getWindAngleWithBeachFaceDirection(wBBeachFaceDirection)
+        print(wind)
     }
     
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {

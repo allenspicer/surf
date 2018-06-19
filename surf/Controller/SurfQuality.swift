@@ -27,7 +27,7 @@ final class SurfQuality: NSObject {
         self.currentSnapshot = currentSnapshot
     }
     
-    func validateCompassDirection (_ direction : Double) -> Double {
+    private func validateCompassDirection (_ direction : Double) -> Double {
         var finalDirection = direction
         if direction > 360 {
             finalDirection = direction - 360
@@ -37,8 +37,15 @@ final class SurfQuality: NSObject {
         return finalDirection
     }
     
-    func valuesContainZero (_ values: (Double, Double)) -> Bool {
-        let range = values.0..<values.1
+    private func rangeFromTuple(_ tuple: (Double, Double)) -> Range<Double>{
+        if tuple.1 > tuple.0{
+            return tuple.0..<tuple.1
+        }
+        return tuple.1..<tuple.0
+    }
+    
+    private func valuesContainZero (_ values: (Double, Double)) -> Bool {
+        let range : Range<Double> = rangeFromTuple(values)
         if range.contains(0.0){
             return true
         }
@@ -46,7 +53,6 @@ final class SurfQuality: NSObject {
     }
     
     func getWindAngleWithBeachFaceDirection(_ beachFaceDirection : Double) -> String{
-//        let wBBeachFaceDirection = 143.0
         let onshoreRangeValues = (validateCompassDirection(beachFaceDirection - 45), validateCompassDirection(beachFaceDirection + 45))
         let offshoreRangeValues = (validateCompassDirection(beachFaceDirection - 135), validateCompassDirection(beachFaceDirection + 135))
         
@@ -61,7 +67,7 @@ final class SurfQuality: NSObject {
                 helperIntFlag = 1
                 return onshoreRangeValues.0..<0.0
             }
-            return onshoreRangeValues.0..<onshoreRangeValues.1
+            return rangeFromTuple(onshoreRangeValues)
         }()
         let offshoreRange : Range<Double> = {
             if valuesContainZero(offshoreRangeValues){
@@ -69,7 +75,7 @@ final class SurfQuality: NSObject {
                 helperIntFlag = 2
                 return offshoreRangeValues.0..<0.0
             }
-            return offshoreRangeValues.0..<offshoreRangeValues.1
+            return rangeFromTuple(offshoreRangeValues)
         }()
         if let windDirection = currentSnapshot?.windDir {
 
