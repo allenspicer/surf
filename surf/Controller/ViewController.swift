@@ -312,8 +312,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 }
 
-extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate{
-
+extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+    func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
+//        print("View Controller Has Tide Array with \(airTemps.count) tides")
+//        currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: airTemps)
+//        snapshotComponents["tide"] = true
+//        checkDataComponentsThenRefresh()
+    }
+    
     func didFinishTideTask(sender: TideClient, tides: [Tide]) {
         print("View Controller Has Tide Array with \(tides.count) tides")
         currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)

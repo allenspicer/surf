@@ -44,6 +44,7 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
         }
         //wave direction
         if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
+            currentSnapShot.waveDirection = Double(currentWaveDirectionDegrees)
             currentSnapShot.meanWaveDirection = directionFromDegrees(degrees: currentWaveDirectionDegrees)
         }
         //wave frequency/period

@@ -21,6 +21,7 @@ struct Snapshot {
     var dominantWavePeriod: String?
     var waveAveragePeriod: Double?
     var meanWaveDirection: String?
+    var waveDirection: Double?
     var PRES: String?
     var PTDY: String?
     var airTemp: Double?
