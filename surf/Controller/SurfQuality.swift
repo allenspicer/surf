@@ -45,18 +45,20 @@ final class SurfQuality: NSObject {
         return false
     }
     
-    func processSnapshotForWaveQuality(_ beachFaceDirection : Double){
+    func getWindAngleWithBeachFaceDirection(_ beachFaceDirection : Double) -> String{
 //        let wBBeachFaceDirection = 143.0
-        var windShoreDirection = String()
         let onshoreRangeValues = (validateCompassDirection(beachFaceDirection - 45), validateCompassDirection(beachFaceDirection + 45))
         let offshoreRangeValues = (validateCompassDirection(beachFaceDirection - 135), validateCompassDirection(beachFaceDirection + 135))
+        
         //if range contains zero look for values above and below
         //otherwise look for values inside the range
         
         var helperRange = 0.0..<1
+        var helperIntFlag = 0
         let onshoreRange : Range<Double> = {
             if valuesContainZero(onshoreRangeValues){
                 helperRange = onshoreRangeValues.1..<360.0
+                helperIntFlag = 1
                 return onshoreRangeValues.0..<0.0
             }
             return onshoreRangeValues.0..<onshoreRangeValues.1
@@ -64,26 +66,34 @@ final class SurfQuality: NSObject {
         let offshoreRange : Range<Double> = {
             if valuesContainZero(offshoreRangeValues){
                 helperRange = offshoreRangeValues.1..<360.0
+                helperIntFlag = 2
                 return offshoreRangeValues.0..<0.0
             }
             return offshoreRangeValues.0..<offshoreRangeValues.1
         }()
-        
-        
         if let windDirection = currentSnapshot?.windDir {
+
+            if helperIntFlag == 1 {
+                if onshoreRange.contains(windDirection) || helperRange.contains(windDirection){
+                    return "onshore"
+                }
+            }
+            if helperIntFlag == 2 {
+                if offshoreRange.contains(windDirection) || helperRange.contains(windDirection){
+                    return "offshore"
+                }
+            }
+        
             switch windDirection {
             case onshoreRange:
-                windShoreDirection = "onshore"
+                return "onshore"
             case offshoreRange:
-                windShoreDirection = "offshore"
+                return "offshore"
             default:
-                windShoreDirection = "sideshore"
+                return "sideshore"
             }
         }
-        
-        
-        
-        
+        return "error"
     }
     
     func didFinishSurfQualityAssesment() {
