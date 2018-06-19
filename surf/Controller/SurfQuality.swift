@@ -77,8 +77,8 @@ final class SurfQuality: NSObject {
             }
             return rangeFromTuple(offshoreRangeValues)
         }()
+        
         if let windDirection = currentSnapshot?.windDir {
-
             if helperIntFlag == 1 {
                 if onshoreRange.contains(windDirection) || helperRange.contains(windDirection){
                     return "onshore"
