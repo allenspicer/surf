@@ -39,6 +39,12 @@ class HomeViewController: UIViewController {
             }
         }
         selectionFeedbackGenerator.prepare()
+        
+        
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = self.view.frame.size
+        gradientLayer.colors = [UIColor.blue.withAlphaComponent(0.5).cgColor, UIColor.blue.withAlphaComponent(0.1).cgColor]
+        self.view.layer.addSublayer(gradientLayer)
     }
 
     
