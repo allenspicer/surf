@@ -11,7 +11,7 @@
  "dpd": 8,
  "apd": 5.4,
  "wtmp": 18.5,
- "bfd": 121.0,
+ "bfd": 108.0,
  "name": "Kure Beach, NC"
  },
  {
@@ -26,7 +26,7 @@
  "dpd": 8,
  "apd": 5.4,
  "wtmp": 18.5,
- "bfd": 121.0,
+ "bfd": 105.0,
  "name": "Carolina Beach, NC"
  },
  {
@@ -41,7 +41,7 @@
  "dpd": 8,
  "apd": 5.4,
  "wtmp": 18.5,
- "bfd": 121.0,
+ "bfd": 115.0,
  "name": "Masonboro Island, NC"
  },
  {
@@ -71,7 +71,7 @@
  "dpd": 8,
  "apd": 5.4,
  "wtmp": 18.5,
- "bfd": 121.0,
+ "bfd": 148.0,
  "name": "Surf City, NC"
  },
  {
@@ -86,7 +86,7 @@
     "dpd": 8,
     "apd": 5.4,
     "wtmp": 18.5,
-    "bfd": 121.0,
+    "bfd": 72.0,
     "name": "Duck, NC"
   },
   {
@@ -101,21 +101,21 @@
     "dpd": 8,
     "apd": 5.5,
     "wtmp": 21.7,
-    "bfd": 121.0,
+    "bfd": 75.0,
     "name": "Virginia Beach, VA"
   },
   {
     "station": 44095,
     "longitude": -75.330,
     "latitude": 35.750,
-    "bfd": 121.0,
-    "name": "Oregon Inlet, NC"
+    "bfd": 88.0,
+    "name": "Hatteras, NC"
   },
  {
  "station": 41159,
  "longitude": -76.946 ,
  "latitude": 34.213,
- "bfd": 121.0,
- "name": "Onslow Bay, NC"
+ "bfd": 162.0,
+ "name": "Emerald Isle, NC"
  }
 ]
