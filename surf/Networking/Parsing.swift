@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
+func createSnapshot(stationId: String, beachFaceDirection : Double, finished: () -> Void) -> (Snapshot){
     
     var snapshotArray = [Snapshot]()
     var bouyDictionary : [Int : [String]] = [Int: [String]]()
@@ -67,6 +67,9 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
         if let station = Int(stationId){
             currentSnapShot.stationId = station
         }
+        
+        //beach face direction
+        currentSnapShot.beachFaceDirection = beachFaceDirection
         
         snapshotArray.append(currentSnapShot)
     }

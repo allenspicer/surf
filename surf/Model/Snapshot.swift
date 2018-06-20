@@ -35,6 +35,7 @@ struct Snapshot {
     var currentTideDirection: String?
     var stationName : String?
     var stationId : Int?
+    var beachFaceDirection : Double?
     var windDir: Double?
     var windSpd: Double?
     var windCardinalDirection: String?

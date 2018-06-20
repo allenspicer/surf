@@ -27,14 +27,13 @@ final class SurfQuality: NSObject {
     
     func createSurfQualityAssesment(){
         DispatchQueue.global(qos:.utility).async {
-            if let windDirection = self.currentSnapshot?.windDir {
-                let wBBeachFaceDirection = 121.0
-                let diff = wBBeachFaceDirection - windDirection
+            if let windDirection = self.currentSnapshot?.windDir, let faceDirection = self.currentSnapshot?.beachFaceDirection{
+                let diff = faceDirection - windDirection
                 let absDiff = abs(diff)
                 self.surfQualityColor = self.getColorFromDiff(absDiff)
                 DispatchQueue.main.async {
                     print("The Current Wind Direciton is \(windDirection)")
-                    print("The Beach Face Direciton is \(wBBeachFaceDirection)")
+                    print("The Beach Face Direciton is \(faceDirection)")
                     
                     self.didFinishSurfQualityAssesment()
                 }

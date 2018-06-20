@@ -166,9 +166,11 @@ class HomeViewController: UIViewController {
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
                         guard let stationId = station["station"] else {return}
+                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
-                        let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
+                        guard let name = station["name"] as? String else {return}
+                        let station = Station(id: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
@@ -188,9 +190,12 @@ class HomeViewController: UIViewController {
                     for station in metaData {
                         guard let stationId = station["station"] as? Int else {return}
                         if !self.favoriteStationIdsFromMemory.values.contains(stationId) {continue}
+                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
-                        let station : Station = Station(id: "\(stationId)", lat: lat, lon: lon, owner: nil, name: station["name"] as? String ?? "", distance: 10000.0, distanceInMiles: 10000)
+                        guard let name = station["name"] as? String else {return}
+                        let station = Station(id: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+                        
                         favoritesData.append(station)
                         return
                     }
@@ -265,21 +270,25 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
-        
+        var selectedBFD = Double()
+
         switch collectionView {
         case is ProximalCollectionView:
                 selectedId = proximalData[cellSelectedIndex].id
                 if let name = proximalData[cellSelectedIndex].name {
                     selectedName = name
                 }
+                selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         case is FavoriteCollectionView:
                 selectedId = favoritesData[cellSelectedIndex].id
                 if let name = favoritesData[cellSelectedIndex].name {
                     selectedName = name
-            }        default:
+                }
+                selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+        default:
             break
         }
-        selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName)
+        selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -332,9 +341,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    private func selectedCellAction (_ index : Int, selectedId : String, stationName : String){
+    private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let data = createSnapshot(stationId: selectedId, finished: {})
+//            let data = createSnapshot(stationId: selectedId, finished: {})
+            let data = createSnapshot(stationId: selectedId, beachFaceDirection: selectedBFD, finished: {})
             //remove spinner for response:
             DispatchQueue.main.async {
                 if data.waveHgt != nil && data.waterTemp != nil {
