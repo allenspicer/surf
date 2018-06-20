@@ -298,7 +298,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             cell.imageView.image = imageArray[indexPath.row]
-            cell.titleLabel.textColor = .black
+            cell.titleLabel.textColor = .white
             cell.titleLabel.text = self.proximalData[indexPath.row].name
             return cell
         case is FavoriteCollectionView:
@@ -306,7 +306,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.image = imageArray[indexPath.row]
             cell.imageView.layer.cornerRadius = 75
             cell.imageView.layer.masksToBounds = true
-            cell.titleLabel.textColor = .black
+            cell.titleLabel.textColor = .white
             cell.titleLabel.text = "Unnamed"
             print("nicknames are: \(nicknamesArray)")
             print("favorites are: \(favoritesData)")

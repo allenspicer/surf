@@ -59,7 +59,7 @@ func createSnapshot(stationId: String, finished: () -> Void) -> (Snapshot){
             if let waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit){
                 currentSnapShot.waterColor = waterColor
                 //set color of background
-                currentSnapShot.backgroundColor = colorComplement(color: waterColor)
+//                currentSnapShot.backgroundColor = colorComplement(color: waterColor)
             }
         }
         

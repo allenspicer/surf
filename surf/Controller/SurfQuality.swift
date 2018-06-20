@@ -19,91 +19,43 @@ final class SurfQuality: NSObject {
     var surfQualityColor = UIColor()
     var currentSnapshot : Snapshot?
     var isOnshore : Bool?
-    enum WindShoreDirection: String {
-        case onshore, offshore, sideshore
-    }
+    var windShoreDirection: String?
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
     }
     
-    private func validateCompassDirection (_ direction : Double) -> Double {
-        var finalDirection = direction
-        if direction > 360 {
-            finalDirection = direction - 360
-        }else if direction < 0 {
-            finalDirection = direction + 360
-        }
-        return finalDirection
-    }
-    
-    private func rangeFromTuple(_ tuple: (Double, Double)) -> Range<Double>{
-        if tuple.1 > tuple.0{
-            return tuple.0..<tuple.1
-        }
-        return tuple.1..<tuple.0
-    }
-    
-    private func valuesContainZero (_ values: (Double, Double)) -> Bool {
-        let range : Range<Double> = rangeFromTuple(values)
-        if range.contains(0.0){
-            return true
-        }
-        return false
-    }
-    
-    func getWindAngleWithBeachFaceDirection(_ beachFaceDirection : Double) -> String{
-        let onshoreRangeValues = (validateCompassDirection(beachFaceDirection - 45), validateCompassDirection(beachFaceDirection + 45))
-        let offshoreRangeValues = (validateCompassDirection(beachFaceDirection - 135), validateCompassDirection(beachFaceDirection + 135))
-        
-        //if range contains zero look for values above and below
-        //otherwise look for values inside the range
-        
-        var helperRange = 0.0..<1
-        var helperIntFlag = 0
-        let onshoreRange : Range<Double> = {
-            if valuesContainZero(onshoreRangeValues){
-                helperRange = onshoreRangeValues.1..<360.0
-                helperIntFlag = 1
-                return onshoreRangeValues.0..<0.0
-            }
-            return rangeFromTuple(onshoreRangeValues)
-        }()
-        let offshoreRange : Range<Double> = {
-            if valuesContainZero(offshoreRangeValues){
-                helperRange = offshoreRangeValues.1..<360.0
-                helperIntFlag = 2
-                return offshoreRangeValues.0..<0.0
-            }
-            return rangeFromTuple(offshoreRangeValues)
-        }()
-        
-        if let windDirection = currentSnapshot?.windDir {
-            if helperIntFlag == 1 {
-                if onshoreRange.contains(windDirection) || helperRange.contains(windDirection){
-                    return "onshore"
+    func createSurfQualityAssesment(){
+        DispatchQueue.global(qos:.utility).async {
+            if let windDirection = self.currentSnapshot?.windDir {
+                let wBBeachFaceDirection = 121.0
+                let diff = wBBeachFaceDirection - windDirection
+                let absDiff = abs(diff)
+                self.surfQualityColor = self.getColorFromDiff(absDiff)
+                DispatchQueue.main.async {
+                    print("The Current Wind Direciton is \(windDirection)")
+                    print("The Beach Face Direciton is \(wBBeachFaceDirection)")
+                    
+                    self.didFinishSurfQualityAssesment()
                 }
             }
-            if helperIntFlag == 2 {
-                if offshoreRange.contains(windDirection) || helperRange.contains(windDirection){
-                    return "offshore"
-                }
-            }
-        
-            switch windDirection {
-            case onshoreRange:
-                return "onshore"
-            case offshoreRange:
-                return "offshore"
-            default:
-                return "sideshore"
-            }
         }
-        return "error"
     }
     
     func didFinishSurfQualityAssesment() {
         delegate?.didFinishSurfQualityTask(sender: self, surfQualityColor: surfQualityColor)
+    }
+    
+    func getColorFromDiff (_ diff : Double) -> UIColor{
+        if diff > 0 && diff < 60 {
+            print("The wind is onshore \(diff)")
+            return UIColor.red
+        } else if diff > 90 {
+            print("The wind is offshore \(diff)")
+            return UIColor.green
+        }
+    print("The wind is sideshore \(diff)")
+    return UIColor.yellow
     }
 
 }

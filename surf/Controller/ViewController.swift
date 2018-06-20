@@ -97,9 +97,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         airTempClient = AirTempClient(currentSnapshot: self.currentSnapShot)
         airTempClient?.delegate = self
         airTempClient?.createAirTempData()
-        
-        surfQuality = SurfQuality(currentSnapshot: self.currentSnapShot)
-        surfQuality?.delegate = self
     }
     
     
@@ -318,8 +315,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
-        
-
+        currentSnapShot.backgroundColor = surfQualityColor
+        setUIFromCurrentSnapshot(false)
     }
     
     func didFinishTideTask(sender: TideClient, tides: [Tide]) {
@@ -334,9 +331,9 @@ extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegat
         currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
         snapshotComponents["wind"] = true
         checkDataComponentsThenRefresh()
-        
-        let wBBeachFaceDirection = 261.0
-        let wind = surfQuality?.getWindAngleWithBeachFaceDirection(wBBeachFaceDirection)
+        surfQuality = SurfQuality(currentSnapshot: self.currentSnapShot)
+        self.surfQuality?.createSurfQualityAssesment()
+        surfQuality?.delegate = self
     }
     
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
