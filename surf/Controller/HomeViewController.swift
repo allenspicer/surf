@@ -43,6 +43,8 @@ class HomeViewController: UIViewController {
         
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = self.view.frame.size
+//        let darkOceanBlue = UIColor( red: CGFloat(14/255.0), green: CGFloat(8/255.0), blue: CGFloat(67/255.0), alpha: CGFloat(1.0) )
+//        gradientLayer.colors = [darkOceanBlue.withAlphaComponent(0.1).cgColor, darkOceanBlue.withAlphaComponent(0.5).cgColor]
         gradientLayer.colors = [UIColor.blue.withAlphaComponent(0.5).cgColor, UIColor.blue.withAlphaComponent(0.1).cgColor]
         self.view.layer.addSublayer(gradientLayer)
     }
