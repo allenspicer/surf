@@ -21,21 +21,21 @@ class surfTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_wind_unit_not_nil(){
-        let controller = ViewController()
-//        XCTAssertNotNil(controller.windUnit)
-    }
+//    func test_wind_unit_not_nil(){
+//        let controller = ViewController()
+//        XCTAssertNotNil(controller)
+//    }
     
     func test_initial_view_is_not_nil(){
-        let  controller = ViewController()
+        let  controller = HomeViewController()
         let view = controller.view
         XCTAssertNotNil(view)
     }
     
-    func test_initial_subviews_are_less_than_one(){
+    func test_second_view_is_not_nil(){
         let  controller = ViewController()
         let view = controller.view
-        XCTAssertGreaterThan(1, view!.subviews.count)
+        XCTAssertNotNil(view)
     }
     
     

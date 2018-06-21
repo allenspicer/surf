@@ -58,8 +58,6 @@ func createSnapshot(stationId: String, beachFaceDirection : Double, finished: ()
             //set color of wave
             if let waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit){
                 currentSnapShot.waterColor = waterColor
-                //set color of background
-//                currentSnapShot.backgroundColor = colorComplement(color: waterColor)
             }
         }
         
