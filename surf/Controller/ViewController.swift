@@ -21,12 +21,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
     private var wlView = UIView()
-    var tideClient : TideClient?
-    var windClient : WindClient?
-    var airTempClient : AirTempClient?
-    var surfQuality : SurfQuality?
     var activityIndicatorView = ActivityIndicatorView()
-    var snapshotComponents = [String:Bool]()
     var favoriteButton = UIButton()
     var favoriteFlag = false
     var indexOfCurrentStationInFavoritesArray: Int?
@@ -53,7 +48,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
         setupAnimatedWaveWithBouyData()
-        setAdditonalDataClients()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -83,20 +77,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         self.view.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
-    }
-    
-    func setAdditonalDataClients(){
-        tideClient = TideClient(currentSnapshot: self.currentSnapShot)
-        tideClient?.delegate = self
-        tideClient?.createTideData()
-
-        windClient = WindClient(currentSnapshot: self.currentSnapShot)
-        windClient?.delegate = self
-        windClient?.createWindData()
-        
-        airTempClient = AirTempClient(currentSnapshot: self.currentSnapShot)
-        airTempClient?.delegate = self
-        airTempClient?.createAirTempData()
     }
     
     
@@ -313,41 +293,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 }
 
-extension ViewController: TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
-    func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
-        currentSnapShot.backgroundColor = surfQualityColor
-        setUIFromCurrentSnapshot(false)
-    }
-    
-    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
-        print("View Controller Has Tide Array with \(tides.count) tides")
-        currentSnapShot = addTideDataToSnapshot(currentSnapShot, tideArray: tides)
-        snapshotComponents["tide"] = true
-        checkDataComponentsThenRefresh()
-    }
-    
-    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
-        print("View Controller Has Wind Array with \(winds.count) winds")
-        currentSnapShot = addWindDataToSnapshot(currentSnapShot, windArray: winds)
-        snapshotComponents["wind"] = true
-        checkDataComponentsThenRefresh()
-        surfQuality = SurfQuality(currentSnapshot: self.currentSnapShot)
-        self.surfQuality?.createSurfQualityAssesment()
-        surfQuality?.delegate = self
-    }
-    
-    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
-        print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
-        currentSnapShot = addAirTempDataToSnapshot(currentSnapShot, AirTempArray: airTemps)
-        snapshotComponents["air"] = true
-        checkDataComponentsThenRefresh()
-    }
-    
-    func checkDataComponentsThenRefresh(){
-        if !snapshotComponents.values.contains(false){
-            setUIFromCurrentSnapshot(false)
-        }
-    }
+extension ViewController{
+
     
     func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
         

@@ -18,6 +18,11 @@ class HomeViewController: UIViewController {
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
+    var snapshotComponents = [String:Bool]()
+    var tideClient : TideClient?
+    var windClient : WindClient?
+    var airTempClient : AirTempClient?
+    var surfQuality : SurfQuality?
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
@@ -25,9 +30,9 @@ class HomeViewController: UIViewController {
     private var nicknamesArray = [String]()
     private var favoriteStationIdsFromMemory = [String : Int]()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-
-
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startActivityIndicator("Loading")
@@ -245,9 +250,6 @@ class HomeViewController: UIViewController {
                 destinationVC.id = id
             }
             destinationVC.currentSnapShot = selectedSnapshot
-            if destinationVC.currentSnapShot != nil {
-                destinationVC.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false]
-            }
         }
     }
     
@@ -272,10 +274,10 @@ class HomeViewController: UIViewController {
 }
 
 //
-//MARK: - Extension to handle Collection View
+//MARK: - Extension to handle Collection View and Delegates Assignment
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     
     func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
@@ -368,21 +370,20 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let data = createSnapshot(stationId: selectedId, beachFaceDirection: selectedBFD, finished: {})
+            self.selectedSnapshot = createSnapshot(stationId: selectedId, beachFaceDirection: selectedBFD, finished: {})
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
-            DispatchQueue.main.async {
-                if data.waveHgt != nil && data.waterTemp != nil {
-                    self.stopActivityIndicator()
-                    self.selectedSnapshot = data
+                if self.selectedSnapshot.waveHgt != nil && self.selectedSnapshot.waterTemp != nil {
                     self.selectedSnapshot.stationName = stationName
-                        self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                    self.setAdditonalDataClients()
                 }else{
-                    //if no data respond with alertview
-                    self.stopActivityIndicator()
-                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-                    alert.addAction(doneAction)
-                        self.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        //if no data respond with alertview
+                        self.stopActivityIndicator()
+                        let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+                        alert.addAction(doneAction)
+                            self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -404,6 +405,55 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
 
+    
+    func setAdditonalDataClients(){
+        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
+        tideClient?.delegate = self
+        tideClient?.createTideData()
         
+        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
+        windClient?.delegate = self
+        windClient?.createWindData()
+        
+        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
+        airTempClient?.delegate = self
+        airTempClient?.createAirTempData()
+    }
+    
+    func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
+        selectedSnapshot.backgroundColor = surfQualityColor
+        snapshotComponents["quality"] = true
+        segueWhenAllComponenetsAreLoaded()
+    }
+    
+    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
+        print("View Controller Has Tide Array with \(tides.count) tides")
+        selectedSnapshot = addTideDataToSnapshot(selectedSnapshot, tideArray: tides)
+        snapshotComponents["tide"] = true
+        segueWhenAllComponenetsAreLoaded()
+    }
+    
+    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
+        print("View Controller Has Wind Array with \(winds.count) winds")
+        selectedSnapshot = addWindDataToSnapshot(selectedSnapshot, windArray: winds)
+        snapshotComponents["wind"] = true
+        surfQuality = SurfQuality(currentSnapshot: self.selectedSnapshot)
+        self.surfQuality?.createSurfQualityAssesment()
+        surfQuality?.delegate = self
+    }
+    
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
+        print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
+        selectedSnapshot = addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
+        snapshotComponents["air"] = true
+        segueWhenAllComponenetsAreLoaded()
+    }
+    
+    func segueWhenAllComponenetsAreLoaded(){
+        if !snapshotComponents.values.contains(false){
+            stopActivityIndicator()
+            self.performSegue(withIdentifier: "showStationDetail", sender: self)
+        }
+    }
 
 }
