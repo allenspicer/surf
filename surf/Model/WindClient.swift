@@ -116,6 +116,31 @@ final class WindClient: NSObject {
     }
 
 
+    func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])-> Snapshot {
+        
+        var snapshot = snapshotWithoutWind
+        var nextWindIndex = Int()
+        let currentTimestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        for index in 0..<windArray.count {
+            if let windTimeStamp = dateFormatter.date(from: windArray[index].timeStamp){
+                if windTimeStamp > currentTimestamp {
+                    nextWindIndex = index
+                    break
+                }
+            }
+        }
+        
+        if let wind = windArray[nextWindIndex] as? Wind{
+            snapshot.windDirectionString = wind.windDirectionString
+            snapshot.windSpd = wind.speed
+            snapshot.windDir = wind.direction
+        }
+        
+        return snapshot
+    }
 }
 
 

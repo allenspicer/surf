@@ -111,6 +111,31 @@ final class AirTempClient: NSObject {
         
         return "\(year)\(monthString)\(dayString)"
     }
+    
+    
+    func addAirTempDataToSnapshot(_ snapshotWithoutAirTemp : Snapshot, AirTempArray : [AirTemp])-> Snapshot {
+        
+        var snapshot = snapshotWithoutAirTemp
+        var nextAirTempIndex = Int()
+        let currentTimestamp = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        for index in 0..<AirTempArray.count {
+            if let AirTempTimeStamp = dateFormatter.date(from: AirTempArray[index].timeStamp){
+                if AirTempTimeStamp > currentTimestamp {
+                    nextAirTempIndex = index
+                    break
+                }
+            }
+        }
+        
+        if let airTemp = AirTempArray[nextAirTempIndex] as? AirTemp{
+            snapshot.airTemp = airTemp.value
+        }
+        
+        return snapshot
+    }
 
 
 }

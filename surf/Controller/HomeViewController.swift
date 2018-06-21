@@ -421,8 +421,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func didFinishSurfQualityTask(sender: SurfQuality) {
-        if let snapshot = surfQuality?.getSnapshotWithSurfQuality(){
-            selectedSnapshot = snapshot
+        if let updatedSnapshot = surfQuality?.getSnapshotWithSurfQuality(){
+            selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["quality"] = true
         segueWhenAllComponenetsAreLoaded()
@@ -430,14 +430,18 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func didFinishTideTask(sender: TideClient, tides: [Tide]) {
         print("View Controller Has Tide Array with \(tides.count) tides")
-        selectedSnapshot = addTideDataToSnapshot(selectedSnapshot, tideArray: tides)
+        if let updatedSnapshot = tideClient?.addTideDataToSnapshot(selectedSnapshot, tideArray: tides){
+            selectedSnapshot = updatedSnapshot
+        }
         snapshotComponents["tide"] = true
         segueWhenAllComponenetsAreLoaded()
     }
     
     func didFinishWindTask(sender: WindClient, winds: [Wind]) {
         print("View Controller Has Wind Array with \(winds.count) winds")
-        selectedSnapshot = addWindDataToSnapshot(selectedSnapshot, windArray: winds)
+        if let updatedSnapshot = windClient?.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
+            selectedSnapshot = updatedSnapshot
+        }
         snapshotComponents["wind"] = true
         surfQuality = SurfQuality(currentSnapshot: self.selectedSnapshot)
         self.surfQuality?.createSurfQualityAssesment()
@@ -446,7 +450,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
-        selectedSnapshot = addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
+        if let updatedSnapshot = airTempClient?.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps){
+            selectedSnapshot = updatedSnapshot
+        }
         snapshotComponents["air"] = true
         segueWhenAllComponenetsAreLoaded()
     }
