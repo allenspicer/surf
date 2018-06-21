@@ -44,7 +44,6 @@
 		95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */; };
 		95FEBEBF20A5DA3C0049CA66 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FEBEBE20A5DA3C0049CA66 /* NetworkRequest.swift */; };
 		95FEBEC320A5DCDD0049CA66 /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FEBEC220A5DCDD0049CA66 /* Parsing.swift */; };
-		95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FEBEC420A5DDB20049CA66 /* DataHelpers.swift */; };
 		F8D1E3E4962D53D30F5D2C5D /* Pods_surf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4602B956173B62D5E729A48 /* Pods_surf.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +102,6 @@
 		95EEECDD204CF40600308E73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95FEBEBE20A5DA3C0049CA66 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		95FEBEC220A5DCDD0049CA66 /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
-		95FEBEC420A5DDB20049CA66 /* DataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelpers.swift; sourceTree = "<group>"; };
 		A4FFB29593CF8F63DD92920F /* Pods-surf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surf.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surf/Pods-surf.debug.xcconfig"; sourceTree = "<group>"; };
 		AB02FA1CA697A03C032BF7DD /* Pods-surfTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfTests/Pods-surfTests.release.xcconfig"; sourceTree = "<group>"; };
 		D4602B956173B62D5E729A48 /* Pods_surf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,8 +147,6 @@
 				957F004520C0AEB600A7B8BA /* Tide.swift */,
 				95125EF220C708BB00FDE462 /* Wind.swift */,
 				95125EF420C82B9800FDE462 /* AirTemp.swift */,
-				95FEBEC420A5DDB20049CA66 /* DataHelpers.swift */,
-				95D3D38D20DC1310005529CE /* UIColorExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +223,7 @@
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
+				95D3D38D20DC1310005529CE /* UIColorExtension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -457,7 +454,6 @@
 			files = (
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
 				9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */,
-				95FEBEC520A5DDB20049CA66 /* DataHelpers.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				957F004620C0AEB600A7B8BA /* Tide.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
