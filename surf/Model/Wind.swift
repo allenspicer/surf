@@ -13,5 +13,5 @@ struct Wind {
     var timeStamp: String
     var speed : Double
     var direction : Double
-    var cardinalDirection : String
+    var windDirectionString : String
 }

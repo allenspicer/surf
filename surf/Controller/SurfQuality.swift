@@ -10,14 +10,14 @@ import UIKit
 
 
 protocol SurfQualityDelegate: AnyObject {
-    func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor)
+    func didFinishSurfQualityTask(sender: SurfQuality)
 }
 
 final class SurfQuality: NSObject {
     
     var delegate : SurfQualityDelegate?
     var surfQualityColor = UIColor()
-    var currentSnapshot : Snapshot?
+    var currentSnapshot : Snapshot
     var isOnshore : Bool?
     var windShoreDirection: String?
     
@@ -27,10 +27,10 @@ final class SurfQuality: NSObject {
     
     func createSurfQualityAssesment(){
         DispatchQueue.global(qos:.utility).async {
-            if let windDirection = self.currentSnapshot?.windDir, let faceDirection = self.currentSnapshot?.beachFaceDirection{
+            if let windDirection = self.currentSnapshot.windDir, let faceDirection = self.currentSnapshot.beachFaceDirection{
                 let diff = faceDirection - windDirection
                 let absDiff = abs(diff)
-                self.surfQualityColor = self.getColorFromDiff(absDiff)
+                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
                 DispatchQueue.main.async {
                     print("The Current Wind Direciton is \(windDirection)")
                     print("The Beach Face Direciton is \(faceDirection)")
@@ -42,19 +42,23 @@ final class SurfQuality: NSObject {
     }
     
     func didFinishSurfQualityAssesment() {
-        delegate?.didFinishSurfQualityTask(sender: self, surfQualityColor: surfQualityColor)
+        delegate?.didFinishSurfQualityTask(sender: self)
     }
     
     func getColorFromDiff (_ diff : Double) -> UIColor{
         if diff > 0 && diff < 60 {
-            print("The wind is onshore \(diff)")
+            currentSnapshot.windCardinalDirection = "ONSHORE"
             return UIColor.red
         } else if diff > 90 {
-            print("The wind is offshore \(diff)")
+            currentSnapshot.windCardinalDirection = "OFFSHORE"
             return UIColor.green
         }
-    print("The wind is sideshore \(diff)")
+        currentSnapshot.windCardinalDirection = "SIDESHORE"
     return UIColor.yellow
+    }
+    
+    func getSnapshotWithSurfQuality ()-> Snapshot {
+        return currentSnapshot
     }
 
 }

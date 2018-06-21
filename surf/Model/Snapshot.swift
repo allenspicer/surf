@@ -38,7 +38,9 @@ struct Snapshot {
     var beachFaceDirection : Double?
     var windDir: Double?
     var windSpd: Double?
+    var windDirectionString: String?
     var windCardinalDirection: String?
+
 }
 
 

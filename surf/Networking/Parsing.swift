@@ -109,6 +109,8 @@ func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])
     return snapshot
 }
 
+
+
 func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])-> Snapshot {
     
     var snapshot = snapshotWithoutWind
@@ -127,7 +129,7 @@ func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])
     }
     
     if let wind = windArray[nextWindIndex] as? Wind{
-        snapshot.windCardinalDirection = wind.cardinalDirection
+        snapshot.windDirectionString = wind.windDirectionString
         snapshot.windSpd = wind.speed
         snapshot.windDir = wind.direction
     }

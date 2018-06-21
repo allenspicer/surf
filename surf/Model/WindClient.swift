@@ -78,7 +78,7 @@ final class WindClient: NSObject {
                 guard let direction = Double(directionString) else { return }
                 guard let cardinalDirection = dataObject["dr"] as? String else { return }
                 
-                let tide = Wind.init(timeStamp: timeStamp, speed: speed, direction: direction, cardinalDirection: cardinalDirection)
+                let tide = Wind.init(timeStamp: timeStamp, speed: speed, direction: direction, windDirectionString: cardinalDirection)
                 windArray.append(tide)
             }
             print("Wind Array Created with \(windArray.count) Wind Objects")

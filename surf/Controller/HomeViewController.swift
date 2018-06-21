@@ -420,8 +420,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         airTempClient?.createAirTempData()
     }
     
-    func didFinishSurfQualityTask(sender: SurfQuality, surfQualityColor: UIColor) {
-        selectedSnapshot.backgroundColor = surfQualityColor
+    func didFinishSurfQualityTask(sender: SurfQuality) {
+        if let snapshot = surfQuality?.getSnapshotWithSurfQuality(){
+            selectedSnapshot = snapshot
+        }
         snapshotComponents["quality"] = true
         segueWhenAllComponenetsAreLoaded()
     }
