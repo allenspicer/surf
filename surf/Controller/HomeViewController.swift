@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     private var proximalData = [Station]()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
+    private var selectedStationOrFavorite : Any? = nil
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
@@ -236,12 +237,11 @@ class HomeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
-        //wrong
-        let selectedStation = proximalData[cellSelectedIndex]
-        
         if let destinationVC = segue.destination as? ViewController {
-            if let id = Int(selectedStation.id){
+            
+            if let station = selectedStationOrFavorite as? Station, let id = Int(station.id) as? Int{
+                destinationVC.id = id
+            }else if let favorite = selectedStationOrFavorite as? Favorite, let id = Int(favorite.id) as? Int{
                 destinationVC.id = id
             }
             destinationVC.currentSnapShot = selectedSnapshot
@@ -296,12 +296,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
         switch collectionView {
         case is ProximalCollectionView:
+                selectedStationOrFavorite = proximalData[cellSelectedIndex]
                 selectedId = proximalData[cellSelectedIndex].stationId
                 if let name = proximalData[cellSelectedIndex].name {
                     selectedName = name
                 }
                 selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         case is FavoriteCollectionView:
+                selectedStationOrFavorite = favoritesData[cellSelectedIndex]
                 selectedId = favoritesData[cellSelectedIndex].stationId
                 if let name = favoritesData[cellSelectedIndex].name {
                     selectedName = name

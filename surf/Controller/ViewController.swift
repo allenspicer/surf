@@ -68,7 +68,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             favoritesArray = favorites
             nicknamesArray = names
             for favorite in favorites {
-                if currentSnapShot.id == favorite{
+                if id == favorite{
                     favoriteFlag = true
                     indexOfCurrentStationInFavoritesArray = favorites.index(of: favorite)
                 }
