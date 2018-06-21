@@ -11,7 +11,7 @@ import UIKit
 
 struct Snapshot {
     var timeStamp: Date = Date()
-    var id: String = ""
+    var id: Int?
     var year: String = ""
     var month: String = ""
     var day: String = ""

@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var proximalCollectionView: UICollectionView!
-    private var favoritesData = [Station]()
+    private var favoritesData = [Favorite]()
     private var proximalData = [Station]()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -174,11 +174,12 @@ class HomeViewController: UIViewController {
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
                         guard let stationId = station["station"] else {return}
+                        guard let id = station["id"] else {return}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
@@ -194,18 +195,28 @@ class HomeViewController: UIViewController {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                
+                //meta data is all possible surf bouy stations
+                //currently lookin through the entire list
+                //creating a station object when the station id matches
+                //and appending any who have the same station ide
+                
+            
                 if let metaData = jsonResult as? [[String : AnyObject]]{
+//                    for favoriteId in self.favoriteStationIdsFromMemory.values {
+//                        let station = Station(id: "\(favoriteId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+//                        favoritesData.append(station)
+//                    }
+//
+                    
                     for station in metaData {
+                        guard let id = station["id"] as? Int else {return}
+                        if !self.favoriteStationIdsFromMemory.values.contains(id) {continue}
                         guard let stationId = station["station"] as? Int else {return}
-                        if !self.favoriteStationIdsFromMemory.values.contains(stationId) {continue}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
-                        guard let lon = station["longitude"] as? Double else {return}
-                        guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
-                        
-                        favoritesData.append(station)
-                        return
+                        let favorite = Favorite(id: "\(id)", stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
+                        favoritesData.append(favorite)
                     }
                     DispatchQueue.main.async{
                         self.favoritesCollectionView.reloadData()
@@ -224,11 +235,14 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        //wrong
         let selectedStation = proximalData[cellSelectedIndex]
         
         if let destinationVC = segue.destination as? ViewController {
             if let id = Int(selectedStation.id){
-                destinationVC.stationId = id
+                destinationVC.id = id
             }
             destinationVC.currentSnapShot = selectedSnapshot
             if destinationVC.currentSnapShot != nil {
@@ -282,13 +296,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
         switch collectionView {
         case is ProximalCollectionView:
-                selectedId = proximalData[cellSelectedIndex].id
+                selectedId = proximalData[cellSelectedIndex].stationId
                 if let name = proximalData[cellSelectedIndex].name {
                     selectedName = name
                 }
                 selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         case is FavoriteCollectionView:
-                selectedId = favoritesData[cellSelectedIndex].id
+                selectedId = favoritesData[cellSelectedIndex].stationId
                 if let name = favoritesData[cellSelectedIndex].name {
                     selectedName = name
                 }
@@ -304,6 +318,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
           return proximalData.count
         case is FavoriteCollectionView:
+            print("Currently have \(favoritesData.count) favorites objects")
             return favoritesData.count
         default:
             return 0
@@ -351,7 +366,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-//            let data = createSnapshot(stationId: selectedId, finished: {})
             let data = createSnapshot(stationId: selectedId, beachFaceDirection: selectedBFD, finished: {})
             //remove spinner for response:
             DispatchQueue.main.async {

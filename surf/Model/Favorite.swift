@@ -8,16 +8,16 @@
 
 import Foundation
 
-struct Station: Decodable {
+struct Favorite: Decodable {
     let id: String
     let stationId: String
-    let lat: Double
-    let lon: Double
+//    let lat: Double
+//    let lon: Double
     let beachFaceDirection: Double
-    let owner: String?
+//    let owner: String?
     let name: String?
-    var distance : Double
-    var distanceInMiles : Int
+//    var distance : Double
+//    var distanceInMiles : Int
 //    let snapshots: [Snapshot]
     
 }

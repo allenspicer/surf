@@ -16,7 +16,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
-    var stationId = Int()
+    var id = Int()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
@@ -68,7 +68,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             favoritesArray = favorites
             nicknamesArray = names
             for favorite in favorites {
-                if currentSnapShot.stationId == favorite{
+                if currentSnapShot.id == favorite{
                     favoriteFlag = true
                     indexOfCurrentStationInFavoritesArray = favorites.index(of: favorite)
                 }
@@ -306,7 +306,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
-        favoritesArray.append(stationId)
+        favoritesArray.append(id)
         UserDefaults.standard.set(favoritesArray, forKey: "favorites")
         nicknamesArray.append(nickname)
         UserDefaults.standard.set(nicknamesArray, forKey: "nicknames")
