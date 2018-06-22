@@ -106,16 +106,20 @@ class HomeViewController: UIViewController {
         // Used to convert latitude and longitude into miles
         // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
         // number of miles is up to 69 at the equator and down to zero at the poles
-        let approxMilesToLon = 53
-        let approxMilesToLat = 69
+        let approxMilesToLon = 53.0
+        let approxMilesToLat = 69.0
         
         if (userLatitude != 0 && userLongitude != 0) {
             for index in 0..<proximalData.count{
                 let station = proximalData[index]
-                let absoluteLonDiff = Int(abs(station.lon - userLongitude).rounded())
-                let absoluteLatDiff = Int(abs(station.lat - userLatitude).rounded())
-                let distanceInMiles = (absoluteLatDiff * approxMilesToLat) + (absoluteLonDiff * approxMilesToLon)
-                proximalData[index].distanceInMiles = distanceInMiles
+                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
+                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
+                let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
+                proximalData[index].distanceInMiles = Int(milesFromUser)
+                print("\(proximalData[index].name) station is \(milesFromUser) from user")
+                print("\(userLatitude) \(userLongitude)")
+                print("\(station.lat) \(station.lon)")
+
             }
         }
         sortTableObjectsByDistance()
