@@ -21,11 +21,6 @@ class surfTests: XCTestCase {
         super.tearDown()
     }
     
-//    func test_wind_unit_not_nil(){
-//        let controller = ViewController()
-//        XCTAssertNotNil(controller)
-//    }
-    
     func test_initial_view_is_not_nil(){
         let  controller = HomeViewController()
         let view = controller.view
