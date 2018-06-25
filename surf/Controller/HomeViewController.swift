@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
     private var favoriteStationIdsFromMemory = [String : Int]()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
+    var gameTimer : Timer?
     
     
     override func viewDidLoad() {
@@ -267,6 +268,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
+    //
+    //MARK: - Alertviews
+    //
+    
+    private func dataAlert(){
+        let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addAction(doneAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 //
@@ -377,12 +389,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                     DispatchQueue.main.async {
                         //if no data respond with alertview
                         self.stopActivityIndicator()
-                        let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-                        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-                        alert.addAction(doneAction)
-                            self.present(alert, animated: true, completion: nil)
+                        self.dataAlert()
+                    }
                 }
-            }
         }
     }
     
@@ -415,6 +424,21 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
         airTempClient?.delegate = self
         airTempClient?.createAirTempData()
+        
+        // start a timer to time cap the downloads
+        gameTimer = nil
+        gameTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: Selector(timerComplete()), userInfo: nil, repeats: false)
+    }
+    
+    @objc func timerComplete (){
+        //if timer has no time left
+        // invalidate the timer
+        gameTimer.invalidate()
+        // if some of the components are still not ready alert the user
+        if snapshotComponents.values.contains(false){
+            stopActivityIndicator()
+            dataAlert()
+        }
     }
     
     func didFinishSurfQualityTask(sender: SurfQuality) {
@@ -439,7 +463,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         if let updatedSnapshot = windClient?.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
             selectedSnapshot = updatedSnapshot
         }
-        snapshotComponents["wind"] = true
+//        snapshotComponents["wind"] = true
         surfQuality = SurfQuality(currentSnapshot: self.selectedSnapshot)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
