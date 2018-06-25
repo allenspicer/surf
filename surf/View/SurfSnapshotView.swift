@@ -188,16 +188,16 @@ class SurfSnapshotView: UIScrollView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillProportionally
-        let c = UILabel()
-        c.text = "AIR"
-        c.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(c)
-        let d = UILabel()
-        d.text = "Loading..."
+        let airLabel = UILabel()
+        airLabel.text = "AIR"
+        airLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(airLabel)
+        let airTempLabel = UILabel()
+        airTempLabel.text = "Loading..."
         if let airTemp = currentSnapShot.airTemp {
-            d.text = "\(airTemp)° F"
+            airTempLabel.text = "\(airTemp)° F"
         }
-        stack.addArrangedSubview(d)
+        stack.addArrangedSubview(airTempLabel)
         return stack
     }
     
@@ -205,13 +205,13 @@ class SurfSnapshotView: UIScrollView {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fillProportionally
-        let a = UILabel()
-        a.text = "WATER"
-        a.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(a)
-        let b = UILabel()
-        b.text = "\(currentSnapShot.waterTemp ?? 0.0)° F"
-        stack.addArrangedSubview(b)
+        let waterLabel = UILabel()
+        waterLabel.text = "WATER"
+        waterLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(waterLabel)
+        let waterTempLabel = UILabel()
+        waterTempLabel.text = "\(currentSnapShot.waterTemp ?? 0.0)° F"
+        stack.addArrangedSubview(waterTempLabel)
         return stack
     }
     
@@ -219,16 +219,16 @@ class SurfSnapshotView: UIScrollView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
-        let a = UILabel()
-        a.text = "TIDE"
-        a.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(a)
-        let b = UILabel()
-        b.text = "Loading..."
+        let tideLabel = UILabel()
+        tideLabel.text = "TIDE"
+        tideLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(tideLabel)
+        let tideDirectionLabel = UILabel()
+        tideDirectionLabel.text = "Loading..."
         if let tideFlow = currentSnapShot.currentTideDirection {
-            b.text = "\(tideFlow)"
+            tideDirectionLabel.text = "\(tideFlow)"
         }
-        stack.addArrangedSubview(b)
+        stack.addArrangedSubview(tideDirectionLabel)
         return stack
     }
     
@@ -236,19 +236,19 @@ class SurfSnapshotView: UIScrollView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
-        let c = UILabel()
-        c.text = "NEXT TIDE"
-        c.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(c)
-        let d = UILabel()
-        d.text = "Loading..."
+        let nextTideLabel = UILabel()
+        nextTideLabel.text = "NEXT TIDE"
+        nextTideLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(nextTideLabel)
+        let nextTideContentLabel = UILabel()
+        nextTideContentLabel.text = "Loading..."
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         if let letter = currentSnapShot.upcomingTidePolar, let dateTime = currentSnapShot.upcomingTideTimestamp {
             let time = dateFormatter.string(from: dateTime)
-            d.text = "\(letter) @ \(time)"
+            nextTideContentLabel.text = "\(letter) @ \(time)"
         }
-        stack.addArrangedSubview(d)
+        stack.addArrangedSubview(nextTideContentLabel)
         return stack
     }
     
@@ -256,16 +256,16 @@ class SurfSnapshotView: UIScrollView {
         let stack = UIStackView()
         stack.distribution = .fillProportionally
         stack.axis = .vertical
-        let c = UILabel()
-        c.text = "WIND"
-        c.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(c)
-        let d = UILabel()
-        d.text = "Loading..."
+        let windLabel = UILabel()
+        windLabel.text = "WIND"
+        windLabel.font = UIFont(name:"Damascus", size: 10.0)
+        stack.addArrangedSubview(windLabel)
+        let windContentLabel = UILabel()
+        windContentLabel.text = "Loading..."
         if let direction = currentSnapShot.windDirectionString, let speed = currentSnapShot.windSpd {
-            d.text = "\(direction) \(speed) MPH"
+            windContentLabel.text = "\(direction) \(speed) MPH"
         }
-        stack.addArrangedSubview(d)
+        stack.addArrangedSubview(windContentLabel)
         return stack
     }
     
