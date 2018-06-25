@@ -170,7 +170,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     /// Handle the display link timer.
-    ///
     /// - Parameter displayLink: The display link.
     
     @objc func handleDisplayLink(_ displayLink: CADisplayLink) {
@@ -186,10 +185,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    /// Create the wave at a given elapsed time.
-    ///
-    /// You should customize this as you see fit.
-    ///
+    /// Create the wave at a given elapsed time
+    /// You should customize this as you see fit
     /// - Parameter elapsed: How many seconds have elapsed.
     /// - Returns: The `UIBezierPath` for a particular point of time.
     

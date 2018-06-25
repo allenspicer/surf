@@ -207,18 +207,10 @@ class HomeViewController: UIViewController {
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 
                 //meta data is all possible surf bouy stations
-                //currently lookin through the entire list
-                //creating a station object when the station id matches
-                //and appending any who have the same station ide
-                
+                //currently checking entire list against saved IDs
+                //and appending matches to the collection view data
             
                 if let metaData = jsonResult as? [[String : AnyObject]]{
-//                    for favoriteId in self.favoriteStationIdsFromMemory.values {
-//                        let station = Station(id: "\(favoriteId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
-//                        favoritesData.append(station)
-//                    }
-//
-                    
                     for station in metaData {
                         guard let id = station["id"] as? Int else {return}
                         if !self.favoriteStationIdsFromMemory.values.contains(id) {continue}
