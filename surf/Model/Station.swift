@@ -18,7 +18,6 @@ struct Station: Decodable {
     let name: String?
     var distance : Double
     var distanceInMiles : Int
-//    let snapshots: [Snapshot]
     
 }
 

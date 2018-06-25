@@ -11,14 +11,8 @@ import Foundation
 struct Favorite: Decodable {
     let id: String
     let stationId: String
-//    let lat: Double
-//    let lon: Double
     let beachFaceDirection: Double
-//    let owner: String?
     let name: String?
-//    var distance : Double
-//    var distanceInMiles : Int
-//    let snapshots: [Snapshot]
     
 }
 
