@@ -25,6 +25,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var favoriteButton = UIButton()
     var favoriteFlag = false
     var indexOfCurrentStationInFavoritesArray: Int?
+    var startLocation = CGPoint()
     var favoritesArray = [Int]()
     var nicknamesArray = [String]()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
@@ -90,9 +91,12 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         touchDown.delegate = self
         view.addGestureRecognizer(touchDown)
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeDown.direction = UISwipeGestureRecognizerDirection.down
-        view.addGestureRecognizer(swipeDown)
+//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+//        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+//        view.addGestureRecognizer(swipeDown)
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(wasDragged))
+        view.addGestureRecognizer(panRecognizer)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -112,6 +116,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
+                    
+                    
+                    
 //                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
 //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
 //                    })
@@ -133,18 +140,68 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.down:
-                let pop2 = SystemSoundID(1520)
-                AudioServicesPlaySystemSoundWithCompletion(pop2, {
-                })
-                returnToTableView()
-            default:
-                break
+    
+    
+    @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began{
+            startLocation = gestureRecognizer.location(in: view)
+
+        } else if gestureRecognizer.state == UIGestureRecognizerState.changed {
+            let translation = gestureRecognizer.translation(in: self.view)
+            print(gestureRecognizer.view!.center.y)
+            if(gestureRecognizer.view!.center.y < 555 && gestureRecognizer.view!.center.y > 0) {
+                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            }else {
+                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: 554)
+            }
+            gestureRecognizer.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
+        }else if (gestureRecognizer.state == UIGestureRecognizerState.ended) {
+            let stopLocation = gestureRecognizer.location(in: view)
+            let dx = stopLocation.x - startLocation.x;
+            let dy = stopLocation.y - startLocation.y;
+            let distance = sqrt(dx*dx + dy*dy );
+            NSLog("Distance: %f", distance);
+            
+            if distance > 400 {
+                //                userHasSwiped()
             }
         }
+    }
+    
+    @objc func panedView(sender:UIPanGestureRecognizer){
+        var startLocation = CGPoint()
+        let currentLocation = sender.location(in: view)
+        let diff = currentLocation.y - startLocation.y
+        
+        
+        let top = CGAffineTransform(translationX: 0, y: diff)
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [], animations: {
+            // Add the transformation in this block
+            // self.container is your view that you want to animate
+            self.view.transform = top
+        }, completion: nil)
+        
+        if (sender.state == UIGestureRecognizerState.began) {
+            startLocation = sender.location(in: view)
+        }else if (sender.state == UIGestureRecognizerState.ended) {
+            let stopLocation = sender.location(in: view)
+            let dx = stopLocation.x - startLocation.x;
+            let dy = stopLocation.y - startLocation.y;
+            let distance = sqrt(dx*dx + dy*dy );
+            NSLog("Distance: %f", distance);
+            
+            if distance > 400 {
+//                userHasSwiped()
+            }
+        }
+    }
+    
+    func userHasSwiped(){
+        let pop2 = SystemSoundID(1520)
+        AudioServicesPlaySystemSoundWithCompletion(pop2, {
+        })
+        returnToTableView()
     }
     
     
