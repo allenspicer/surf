@@ -157,8 +157,6 @@
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
-				9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */,
-				95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */,
 				95AF666120D810D700157811 /* CollectionViewCells */,
 				95AF666220D810E600157811 /* CollectionViews */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
@@ -204,6 +202,8 @@
 		95AF666120D810D700157811 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */,
+				95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
