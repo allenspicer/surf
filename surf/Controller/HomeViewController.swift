@@ -333,8 +333,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.imageView.image = imageArray[indexPath.row]
             cell.imageView.layer.cornerRadius = 15
             cell.imageView.layer.masksToBounds = true
-            cell.titleLabel.textColor = .white
-            cell.titleLabel.text = self.proximalData[indexPath.row].name
+//            cell.titleLabel.textColor = .white
+//            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            cell.contentView.layer.borderWidth = 2
+            cell.contentView.layer.borderColor = #colorLiteral(red: 0.5058823529, green: 1, blue: 0.8274509804, alpha: 1)
+            cell.contentView.layer.cornerRadius = 15
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
@@ -359,7 +362,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case is ProximalCollectionView:
-            return CGSize(width: 124, height: 164)
+            return CGSize(width: 124, height: 124)
         case is FavoriteCollectionView:
             return CGSize(width: 150, height: 200)
         default:
