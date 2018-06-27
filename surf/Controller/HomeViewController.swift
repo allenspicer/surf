@@ -49,10 +49,11 @@ class HomeViewController: UIViewController {
         
         let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = self.view.frame.size
+        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
 //        let darkOceanBlue = UIColor( red: CGFloat(14/255.0), green: CGFloat(8/255.0), blue: CGFloat(67/255.0), alpha: CGFloat(1.0) )
 //        gradientLayer.colors = [darkOceanBlue.withAlphaComponent(0.1).cgColor, darkOceanBlue.withAlphaComponent(0.5).cgColor]
-        gradientLayer.colors = [UIColor.blue.withAlphaComponent(0.5).cgColor, UIColor.blue.withAlphaComponent(0.1).cgColor]
-        self.view.layer.addSublayer(gradientLayer)
+        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     
@@ -330,6 +331,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             cell.imageView.image = imageArray[indexPath.row]
+            cell.imageView.layer.cornerRadius = 15
+            cell.imageView.layer.masksToBounds = true
             cell.titleLabel.textColor = .white
             cell.titleLabel.text = self.proximalData[indexPath.row].name
             return cell
@@ -356,7 +359,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView {
         case is ProximalCollectionView:
-            return CGSize(width: 100, height: 140)
+            return CGSize(width: 124, height: 164)
         case is FavoriteCollectionView:
             return CGSize(width: 150, height: 200)
         default:

@@ -37,8 +37,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yoH-yG-KVB" customClass="FavoriteCollectionView" customModule="surf" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="22" width="375" height="250"/>
-                                <color key="backgroundColor" red="0.056700383979999998" green="0.030335612509999998" blue="0.26454266510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="171" width="375" height="250"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="G5A-NK-cMe"/>
                                 </constraints>
@@ -86,7 +86,7 @@
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="btx-0C-wgR" customClass="ProximalCollectionView" customModule="surf" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="427" width="375" height="200"/>
-                                <color key="backgroundColor" red="0.056700383979999998" green="0.030335612509999998" blue="0.26454266510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.050980392156862744" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JSt-yB-Fc7"/>
                                 </constraints>
@@ -116,8 +116,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIa-hn-kQw">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="7gR-qB-Xri"/>
-                                                        <constraint firstAttribute="height" constant="100" id="eXL-6c-zDU"/>
+                                                        <constraint firstAttribute="width" constant="124" id="7gR-qB-Xri"/>
+                                                        <constraint firstAttribute="height" constant="124" id="eXL-6c-zDU"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -140,11 +140,11 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.056700383979402365" green="0.030335612510272461" blue="0.26454266509903435" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.015686274509803921" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yoH-yG-KVB" firstAttribute="leading" secondItem="d0z-Ep-3rz" secondAttribute="leadingMargin" constant="-16" id="Gdx-33-0y9"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="leading" secondItem="ROK-kO-E69" secondAttribute="leading" id="M4P-jI-dUN"/>
-                            <constraint firstItem="ROK-kO-E69" firstAttribute="top" secondItem="yoH-yG-KVB" secondAttribute="bottom" constant="-252" id="SHI-bK-Ga0"/>
+                            <constraint firstItem="ROK-kO-E69" firstAttribute="top" secondItem="yoH-yG-KVB" secondAttribute="bottom" constant="-401" id="SHI-bK-Ga0"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="width" secondItem="ROK-kO-E69" secondAttribute="width" id="nDC-5P-ePt"/>
                             <constraint firstItem="yoH-yG-KVB" firstAttribute="width" secondItem="d0z-Ep-3rz" secondAttribute="width" id="owP-xe-emG"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="bottom" secondItem="ROK-kO-E69" secondAttribute="bottom" constant="-40" id="ul8-kZ-Smp"/>
