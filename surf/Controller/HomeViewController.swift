@@ -303,7 +303,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
 //            itemView.image = UIImage(named: "page.png")
             itemView.contentMode = .center
-            itemView.backgroundColor = .black
             
             label = UILabel(frame: itemView.bounds)
             label.backgroundColor = .clear
