@@ -288,6 +288,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var label: UILabel
+        var distanceLabel: UILabel
         var itemView: UIImageView
         
         //reuse view if available, otherwise create a new view
@@ -303,12 +304,26 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 //            itemView.image = UIImage(named: "page.png")
             itemView.contentMode = .center
             
-            label = UILabel(frame: itemView.bounds)
+            let labelFrame = CGRect(x: 0.0, y: itemView.frame.height - 40, width: itemView.frame.width, height: 20.0)
+            label = UILabel(frame: labelFrame)
             label.backgroundColor = .clear
+            label.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
             label.textAlignment = .center
-            label.font = label.font.withSize(20)
+            label.font = label.font.withSize(15)
             label.tag = 1
             itemView.addSubview(label)
+            label.bottomAnchor.constraint(equalTo: itemView.bottomAnchor).isActive = true
+            
+            let distanceLabelFrame = CGRect(x: 0.0, y: itemView.frame.height - 20, width: itemView.frame.width, height: 20.0)
+            distanceLabel = UILabel(frame: distanceLabelFrame)
+            distanceLabel.backgroundColor = .clear
+            distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
+            distanceLabel.textAlignment = .center
+            distanceLabel.font = label.font.withSize(15)
+            distanceLabel.tag = 1
+            itemView.addSubview(distanceLabel)
+            distanceLabel.bottomAnchor.constraint(equalTo: itemView.bottomAnchor).isActive = true
+            distanceLabel.text = "10mi"
         }
         
         //set item label
@@ -318,8 +333,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         //in the wrong place in the carousel
         if let name = favoritesData[index].name {
             label.text = "\(name)"
-            
         }
+        
+        
         
         return itemView
     }
