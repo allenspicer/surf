@@ -224,9 +224,7 @@ class HomeViewController: UIViewController {
                         favoritesData.append(favorite)
                     }
                     DispatchQueue.main.async{
-                        self.favoritesCollectionView.reloadData()
                         self.carousel.type = .rotary
-                        self.carousel.perspective = -0.01
                         self.carousel.dataSource = self
                         self.carousel.delegate = self
                         self.stopActivityIndicator()
@@ -283,7 +281,6 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate, iCarouselDataSource, iCarouselDelegate{
     
     
-    
     func numberOfItems(in carousel: iCarousel) -> Int {
         return favoritesData.count
     }
@@ -335,15 +332,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
 
     
-    
-    
     func setDelegatesAndDataSources(){
-        favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
-        
-        favoritesCollectionView.dataSource = self
         proximalCollectionView.dataSource = self
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -380,9 +371,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
           return proximalData.count
-        case is FavoriteCollectionView:
-            print("Currently have \(favoritesData.count) favorites objects")
-            return favoritesData.count
         default:
             return 0
         }
@@ -407,21 +395,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.contentView.layer.borderColor = #colorLiteral(red: 0.5058823529, green: 1, blue: 0.8274509804, alpha: 1)
             cell.contentView.layer.cornerRadius = 15
             return cell
-        case is FavoriteCollectionView:
-            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-            cell.imageView.image = imageArray[indexPath.row]
-            cell.imageView.layer.cornerRadius = 75
-            cell.imageView.layer.masksToBounds = true
-            cell.titleLabel.textColor = .white
-            cell.titleLabel.text = "Unnamed"
-            print("nicknames are: \(nicknamesArray)")
-            print("favorites are: \(favoritesData)")
-            
-            
-            if let name = nicknamesArray[indexPath.row] as? String{
-                cell.titleLabel.text = name
-            }
-            return cell
         default:
             return UICollectionViewCell()
         }
@@ -431,8 +404,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             return CGSize(width: 124, height: 124)
-        case is FavoriteCollectionView:
-            return CGSize(width: 150, height: 200)
         default:
             return CGSize()
         }
@@ -466,11 +437,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             return UIEdgeInsetsMake(0, 0, 0, 0)
-        case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 150
-            let numberOfCells = CGFloat(favoritesData.count)
-            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
-            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
         default:
             return UIEdgeInsetsMake(0, 0, 0, 0)
         }
