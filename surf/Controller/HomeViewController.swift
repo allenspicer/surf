@@ -225,7 +225,8 @@ class HomeViewController: UIViewController {
                     }
                     DispatchQueue.main.async{
                         self.carousel.type = .rotary
-                        self.carousel.perspective = 0
+                        self.carousel.perspective = -0.0030
+                        self.carousel.viewpointOffset = CGSize(width: 0, height: -125)
                         self.carousel.dataSource = self
                         self.carousel.delegate = self
                         self.stopActivityIndicator()
@@ -311,6 +312,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             mainView.layer.masksToBounds = true
             mainView.layer.borderWidth = 4
             mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
+            mainView.backgroundColor = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            
+            let gradientLayer:CAGradientLayer = CAGradientLayer()
+            gradientLayer.frame.size = mainViewFrame.size
+            let customGreen = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
+            gradientLayer.colors = [UIColor.clear.cgColor, customGreen]
+            mainView.layer.insertSublayer(gradientLayer, at: 1)
+            
             itemView.addSubview(mainView)
 
 
@@ -351,18 +360,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        
         switch option {
         case .spacing:
-            return value * 1.1
+            return 2.50
         case .visibleItems:
             return 3
-        case .fadeMin:
-            return 0
-        case .fadeMax:
-            return 0
-        case .fadeRange:
-            return 1
         default:
             return value
         }

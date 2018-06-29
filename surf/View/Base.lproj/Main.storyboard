@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -141,7 +142,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ach-yF-DF8" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="171" width="375" height="264"/>
+                                <rect key="frame" x="-187.5" y="46" width="750" height="264"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="264" id="XkA-d9-ue1"/>
@@ -153,11 +154,11 @@
                             <constraint firstItem="yoH-yG-KVB" firstAttribute="leading" secondItem="d0z-Ep-3rz" secondAttribute="leadingMargin" constant="-16" id="Gdx-33-0y9"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="leading" secondItem="ROK-kO-E69" secondAttribute="leading" id="M4P-jI-dUN"/>
                             <constraint firstItem="ROK-kO-E69" firstAttribute="top" secondItem="yoH-yG-KVB" secondAttribute="bottom" constant="-401" id="SHI-bK-Ga0"/>
-                            <constraint firstItem="ach-yF-DF8" firstAttribute="top" secondItem="ROK-kO-E69" secondAttribute="top" constant="151" id="Vgo-dl-t5y"/>
-                            <constraint firstItem="ach-yF-DF8" firstAttribute="width" secondItem="d0z-Ep-3rz" secondAttribute="width" id="bw9-ev-Bpr"/>
+                            <constraint firstItem="ach-yF-DF8" firstAttribute="top" secondItem="ROK-kO-E69" secondAttribute="top" constant="26" id="Vgo-dl-t5y"/>
+                            <constraint firstItem="ach-yF-DF8" firstAttribute="width" secondItem="d0z-Ep-3rz" secondAttribute="width" multiplier="2" id="bw9-ev-Bpr"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="width" secondItem="ROK-kO-E69" secondAttribute="width" id="nDC-5P-ePt"/>
                             <constraint firstItem="yoH-yG-KVB" firstAttribute="width" secondItem="d0z-Ep-3rz" secondAttribute="width" id="owP-xe-emG"/>
-                            <constraint firstItem="ach-yF-DF8" firstAttribute="leading" secondItem="d0z-Ep-3rz" secondAttribute="leadingMargin" constant="-16" id="uI9-SN-Mno"/>
+                            <constraint firstItem="ach-yF-DF8" firstAttribute="centerX" secondItem="d0z-Ep-3rz" secondAttribute="centerX" id="tDI-of-BRW"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="bottom" secondItem="ROK-kO-E69" secondAttribute="bottom" constant="-40" id="ul8-kZ-Smp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ROK-kO-E69"/>
