@@ -290,6 +290,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         var label: UILabel
         var distanceLabel: UILabel
         var itemView: UIImageView
+        var mainView: UIView
         
         //reuse view if available, otherwise create a new view
         if let view = view as? UIImageView {
@@ -300,10 +301,19 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             //don't do anything specific to the index within
             //this `if ... else` statement because the view will be
             //recycled and used with other index values later
-            itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+            itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 207, height: 264))
 //            itemView.image = UIImage(named: "page.png")
             itemView.contentMode = .center
             
+            let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
+            mainView = UIView(frame: mainViewFrame)
+            mainView.layer.cornerRadius = 103
+            mainView.layer.masksToBounds = true
+            mainView.layer.borderWidth = 4
+            mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
+            itemView.addSubview(mainView)
+
+
             let labelFrame = CGRect(x: 0.0, y: itemView.frame.height - 40, width: itemView.frame.width, height: 20.0)
             label = UILabel(frame: labelFrame)
             label.backgroundColor = .clear
