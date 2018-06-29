@@ -225,6 +225,7 @@ class HomeViewController: UIViewController {
                     }
                     DispatchQueue.main.async{
                         self.carousel.type = .rotary
+                        self.carousel.perspective = 0
                         self.carousel.dataSource = self
                         self.carousel.delegate = self
                         self.stopActivityIndicator()
@@ -324,12 +325,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if (option == .spacing) {
+        
+        switch option {
+        case .spacing:
             return value * 1.1
+        case .visibleItems:
+            return 3
+        case .fadeMin:
+            return 0
+        case .fadeMax:
+            return 0
+        case .fadeRange:
+            return 1
+        default:
+            return value
         }
-        return value
     }
-    
 
     
     func setDelegatesAndDataSources(){
