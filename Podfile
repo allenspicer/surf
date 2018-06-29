@@ -6,7 +6,8 @@ target 'surf' do
   use_frameworks!
 
   # Pods for surf
-#    pod 'SWXMLHash', '~> 4.0.0'
+  
+  pod 'iCarousel'
 
   target 'surfTests' do
     inherit! :search_paths

@@ -8,11 +8,13 @@
 
 import UIKit
 import CoreLocation
+import iCarousel
 
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var proximalCollectionView: UICollectionView!
+    @IBOutlet weak var carousel: iCarousel!
     private var favoritesData = [Favorite]()
     private var proximalData = [Station]()
     private var cellSelectedIndex = Int()
@@ -222,7 +224,9 @@ class HomeViewController: UIViewController {
                         favoritesData.append(favorite)
                     }
                     DispatchQueue.main.async{
-                        self.favoritesCollectionView.reloadData()
+                        self.carousel.type = .rotary
+                        self.carousel.dataSource = self
+                        self.carousel.delegate = self
                         self.stopActivityIndicator()
                     }
                 }
@@ -274,13 +278,62 @@ class HomeViewController: UIViewController {
 //MARK: - Extension to handle Collection View and Delegates Assignment
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate, iCarouselDataSource, iCarouselDelegate{
+    
+    
+    func numberOfItems(in carousel: iCarousel) -> Int {
+        return favoritesData.count
+    }
+    
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+        var label: UILabel
+        var itemView: UIImageView
+        
+        //reuse view if available, otherwise create a new view
+        if let view = view as? UIImageView {
+            itemView = view
+            //get a reference to the label in the recycled view
+            label = itemView.viewWithTag(1) as! UILabel
+        } else {
+            //don't do anything specific to the index within
+            //this `if ... else` statement because the view will be
+            //recycled and used with other index values later
+            itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+//            itemView.image = UIImage(named: "page.png")
+            itemView.contentMode = .center
+            
+            label = UILabel(frame: itemView.bounds)
+            label.backgroundColor = .clear
+            label.textAlignment = .center
+            label.font = label.font.withSize(20)
+            label.tag = 1
+            itemView.addSubview(label)
+        }
+        
+        //set item label
+        //remember to always set any properties of your carousel item
+        //views outside of the `if (view == nil) {...}` check otherwise
+        //you'll get weird issues with carousel item content appearing
+        //in the wrong place in the carousel
+        if let name = favoritesData[index].name {
+            label.text = "\(name)"
+            
+        }
+        
+        return itemView
+    }
+    
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        if (option == .spacing) {
+            return value * 1.1
+        }
+        return value
+    }
+    
+
     
     func setDelegatesAndDataSources(){
-        favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
-        
-        favoritesCollectionView.dataSource = self
         proximalCollectionView.dataSource = self
     }
     
@@ -318,9 +371,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
           return proximalData.count
-        case is FavoriteCollectionView:
-            print("Currently have \(favoritesData.count) favorites objects")
-            return favoritesData.count
         default:
             return 0
         }
@@ -345,21 +395,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.contentView.layer.borderColor = #colorLiteral(red: 0.5058823529, green: 1, blue: 0.8274509804, alpha: 1)
             cell.contentView.layer.cornerRadius = 15
             return cell
-        case is FavoriteCollectionView:
-            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-            cell.imageView.image = imageArray[indexPath.row]
-            cell.imageView.layer.cornerRadius = 75
-            cell.imageView.layer.masksToBounds = true
-            cell.titleLabel.textColor = .white
-            cell.titleLabel.text = "Unnamed"
-            print("nicknames are: \(nicknamesArray)")
-            print("favorites are: \(favoritesData)")
-            
-            
-            if let name = nicknamesArray[indexPath.row] as? String{
-                cell.titleLabel.text = name
-            }
-            return cell
         default:
             return UICollectionViewCell()
         }
@@ -369,8 +404,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             return CGSize(width: 124, height: 124)
-        case is FavoriteCollectionView:
-            return CGSize(width: 150, height: 200)
         default:
             return CGSize()
         }
@@ -404,11 +437,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             return UIEdgeInsetsMake(0, 0, 0, 0)
-        case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 150
-            let numberOfCells = CGFloat(favoritesData.count)
-            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
-            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
         default:
             return UIEdgeInsetsMake(0, 0, 0, 0)
         }
