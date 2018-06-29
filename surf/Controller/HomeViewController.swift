@@ -37,9 +37,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        carousel.type = .rotary
-        carousel.perspective = -0.01
-        
         startActivityIndicator("Loading")
         parseStationList()
         setDataOrGetUserLocation()
@@ -228,6 +225,10 @@ class HomeViewController: UIViewController {
                     }
                     DispatchQueue.main.async{
                         self.favoritesCollectionView.reloadData()
+                        self.carousel.type = .rotary
+                        self.carousel.perspective = -0.01
+                        self.carousel.dataSource = self
+                        self.carousel.delegate = self
                         self.stopActivityIndicator()
                     }
                 }
@@ -307,7 +308,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             label = UILabel(frame: itemView.bounds)
             label.backgroundColor = .clear
             label.textAlignment = .center
-            label.font = label.font.withSize(50)
+            label.font = label.font.withSize(20)
             label.tag = 1
             itemView.addSubview(label)
         }
@@ -317,7 +318,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         //views outside of the `if (view == nil) {...}` check otherwise
         //you'll get weird issues with carousel item content appearing
         //in the wrong place in the carousel
-//        label.text = "\(items[index])"
+        if let name = favoritesData[index].name {
+            label.text = "\(name)"
+            
+        }
         
         return itemView
     }
@@ -339,6 +343,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         favoritesCollectionView.dataSource = self
         proximalCollectionView.dataSource = self
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
