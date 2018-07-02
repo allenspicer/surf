@@ -116,7 +116,7 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIa-hn-kQw">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <color key="backgroundColor" red="0.019607843137254902" green="0.43529411764705883" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="124" id="7gR-qB-Xri"/>
                                                         <constraint firstAttribute="height" constant="124" id="eXL-6c-zDU"/>
@@ -124,6 +124,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.019607843137254902" green="0.43529411764705883" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="TbD-uS-uhn" firstAttribute="leading" secondItem="iqB-Bv-MbB" secondAttribute="leadingMargin" constant="-8" id="hLT-lv-CKq"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="TbD-uS-uhn" secondAttribute="bottom" id="heb-kJ-qU3"/>
