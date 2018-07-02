@@ -1,0 +1,6 @@
+framework module CCZoomTransition {
+  umbrella header "CCZoomTransition-umbrella.h"
+
+  export *
+  module * { export * }
+}

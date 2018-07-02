@@ -1,16 +1,20 @@
 PODS:
+  - CCZoomTransition (0.1.1)
   - iCarousel (1.8.3)
 
 DEPENDENCIES:
+  - CCZoomTransition
   - iCarousel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CCZoomTransition
     - iCarousel
 
 SPEC CHECKSUMS:
+  CCZoomTransition: 7f68eab8d0c6daab607c257ec27b0fd773a349dc
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
 
-PODFILE CHECKSUM: c773c45e44b9162c789e2838959b607071efbb4b
+PODFILE CHECKSUM: 90fecebf6d44f9496ac45223f684183aee3c5d36
 
 COCOAPODS: 1.5.3

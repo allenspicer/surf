@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import iCarousel
+import CCZoomTransition
 
 class HomeViewController: UIViewController {
 
@@ -555,7 +556,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func segueWhenAllComponenetsAreLoaded(){
         if !snapshotComponents.values.contains(false){
             stopActivityIndicator()
-            self.performSegue(withIdentifier: "showStationDetail", sender: self)
+            let viewController = ViewController()
+            viewController.cc_setZoomTransition(originalView: self.view)
+            self.present(viewController, animated: true, completion: nil)
+            
+//            self.performSegue(withIdentifier: "showStationDetail", sender: self)
         }
     }
 

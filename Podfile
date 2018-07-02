@@ -8,6 +8,7 @@ target 'surf' do
   # Pods for surf
   
   pod 'iCarousel'
+  pod 'CCZoomTransition'
 
   target 'surfTests' do
     inherit! :search_paths
