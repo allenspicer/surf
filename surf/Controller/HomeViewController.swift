@@ -376,6 +376,32 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         proximalCollectionView.dataSource = self
     }
     
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
+        
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+
+        
+        //if item is selected transition to detail
+        if carousel.currentItemIndex == index {
+            
+            startActivityIndicator("Loading")
+            var selectedId = String()
+            var selectedName = String()
+            var selectedBFD = Double()
+            
+            
+            selectedStationOrFavorite = favoritesData[index]
+            selectedId = favoritesData[index].stationId
+            if let name = favoritesData[index].name {
+                selectedName = name
+            }
+            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            
+            selectedCellAction(index, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
@@ -390,13 +416,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 selectedStationOrFavorite = proximalData[cellSelectedIndex]
                 selectedId = proximalData[cellSelectedIndex].stationId
                 if let name = proximalData[cellSelectedIndex].name {
-                    selectedName = name
-                }
-                selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
-        case is FavoriteCollectionView:
-                selectedStationOrFavorite = favoritesData[cellSelectedIndex]
-                selectedId = favoritesData[cellSelectedIndex].stationId
-                if let name = favoritesData[cellSelectedIndex].name {
                     selectedName = name
                 }
                 selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
