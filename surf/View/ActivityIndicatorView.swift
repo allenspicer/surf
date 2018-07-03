@@ -22,7 +22,7 @@ class ActivityIndicatorView: UIView {
         let selfHeigh = view.frame.height
         let loopImages = UIImageView()
         
-        let imageListArray = [#imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png") ,#imageLiteral(resourceName: "crash.png")] // Put your desired array of images in a specific order the way you want to display animation.
+        let imageListArray = [#imageLiteral(resourceName: "BigWave_Loading"), #imageLiteral(resourceName: "Wave_loading") , #imageLiteral(resourceName: "LittleWave_loading"), #imageLiteral(resourceName: "Bump_loading"), #imageLiteral(resourceName: "Flat_Loading")] // Put your desired array of images in a specific order the way you want to display animation.
         
         loopImages.animationImages = imageListArray
         loopImages.animationDuration = TimeInterval(0.8)
