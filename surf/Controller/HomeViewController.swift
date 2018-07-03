@@ -12,7 +12,6 @@ import iCarousel
 
 class HomeViewController: UIViewController {
 
-    @IBOutlet weak var favoritesCollectionView: UICollectionView!
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var carousel: iCarousel!
     private var favoritesData = [Favorite]()
@@ -288,44 +287,28 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        var label: UILabel
-        var distanceLabel: UILabel
-        var itemView: UIImageView
-        var mainView: UIView
+        var label = FavoritesLabel()
+        var itemView: FavCollectionViewCell
         
         //reuse view if available, otherwise create a new view
-        if let view = view as? UIImageView {
+        if let view = view as? FavCollectionViewCell {
             itemView = view
             //get a reference to the label in the recycled view
-            label = itemView.viewWithTag(1) as! UILabel
+            for subview in itemView.subviews{
+                    if let labelView = subview as? FavoritesLabel {
+                        label = labelView
+                }
+            }
+            
         } else {
+            
+            itemView = FavCollectionViewCell.init(frame: CGRect(x: 0, y: 0, width: 207, height: 264))
+
             //don't do anything specific to the index within
             //this `if ... else` statement because the view will be
             //recycled and used with other index values later
-            itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 207, height: 264))
-//            itemView.image = UIImage(named: "page.png")
-            itemView.contentMode = .center
-            
-            let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
-            mainView = UIView(frame: mainViewFrame)
-            mainView.layer.cornerRadius = 103
-            mainView.layer.masksToBounds = true
-            mainView.layer.borderWidth = 4
-            mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
-            mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
-            
-            let gradientLayer:CAGradientLayer = CAGradientLayer()
-            gradientLayer.frame.size = mainViewFrame.size
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            gradientLayer.colors = [customYellow.cgColor, UIColor.clear.cgColor]
-            mainView.layer.addSublayer(gradientLayer)
-//            mainView.layer.insertSublayer(gradientLayer, at: 1)
-            
-            itemView.addSubview(mainView)
-
-
             let labelFrame = CGRect(x: 0.0, y: itemView.frame.height - 40, width: itemView.frame.width, height: 20.0)
-            label = UILabel(frame: labelFrame)
+            label = FavoritesLabel(frame: labelFrame)
             label.backgroundColor = .clear
             label.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
             label.textAlignment = .center
@@ -333,17 +316,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             label.tag = 1
             itemView.addSubview(label)
             label.bottomAnchor.constraint(equalTo: itemView.bottomAnchor).isActive = true
-            
-            let distanceLabelFrame = CGRect(x: 0.0, y: itemView.frame.height - 20, width: itemView.frame.width, height: 20.0)
-            distanceLabel = UILabel(frame: distanceLabelFrame)
-            distanceLabel.backgroundColor = .clear
-            distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
-            distanceLabel.textAlignment = .center
-            distanceLabel.font = label.font.withSize(15)
-            distanceLabel.tag = 1
-            itemView.addSubview(distanceLabel)
-            distanceLabel.bottomAnchor.constraint(equalTo: itemView.bottomAnchor).isActive = true
-            distanceLabel.text = "10mi"
+
         }
         
         //set item label
