@@ -46,17 +46,8 @@ class HomeViewController: UIViewController {
             }
         }
         selectionFeedbackGenerator.prepare()
-        
-        
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.view.frame.size
-        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-//        let darkOceanBlue = UIColor( red: CGFloat(14/255.0), green: CGFloat(8/255.0), blue: CGFloat(67/255.0), alpha: CGFloat(1.0) )
-//        gradientLayer.colors = [darkOceanBlue.withAlphaComponent(0.1).cgColor, darkOceanBlue.withAlphaComponent(0.5).cgColor]
-        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        applyGradientToBackground()
     }
-
     
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
                 let defaults = UserDefaults.standard
@@ -97,6 +88,14 @@ class HomeViewController: UIViewController {
                 locationManager.requestLocation();
             }
         }
+    }
+    
+    private func applyGradientToBackground(){
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = self.view.frame.size
+        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
+        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
 //

@@ -11,15 +11,15 @@ import UIKit
 class ActivityIndicatorView: UIView {
     
     func setupActivityIndicator(view: UIView, widthView: CGFloat?,backgroundColor: UIColor?, textColor:UIColor?, message: String?) -> ActivityIndicatorView{
-        //Config UIView
-        self.backgroundColor = backgroundColor //Background color of your view which you want to set
-        
+            //Config UIView
+        let customBlue = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
+        self.backgroundColor = customBlue //Background color of your view which you want to set
         var selfWidth = view.frame.width
         if widthView != nil{
-        selfWidth = widthView ?? selfWidth
+            selfWidth = widthView ?? selfWidth
         }
         
-        let selfHeigh = view.frame.height
+        let selfHeight = view.frame.height
         let loopImages = UIImageView()
         
         let imageListArray = [#imageLiteral(resourceName: "BigWave_Loading"), #imageLiteral(resourceName: "Wave_loading") , #imageLiteral(resourceName: "LittleWave_loading"), #imageLiteral(resourceName: "Bump_loading"), #imageLiteral(resourceName: "Flat_Loading")] // Put your desired array of images in a specific order the way you want to display animation.
@@ -29,7 +29,7 @@ class ActivityIndicatorView: UIView {
         loopImages.startAnimating()
         
         let imageFrameX = (selfWidth / 2) - 30
-        let imageFrameY = (selfHeigh / 2) - 60
+        let imageFrameY = (selfHeight / 2) - 60
         var imageWidth = CGFloat(60)
         var imageHeight = CGFloat(60)
         
@@ -44,12 +44,12 @@ class ActivityIndicatorView: UIView {
         label.textColor = .gray
         //        label.font = UIFont(name: "SFUIDisplay-Regular", size: 17.0)! // Your Desired UIFont Style and Size
         label.numberOfLines = 0
-        label.text = message ?? ""
-        label.textColor = textColor ?? UIColor.clear
+//        label.text = message ?? ""
+//        label.textColor = textColor ?? UIColor.clear
         
         //Config frame of label
         let labelFrameX = (selfWidth / 2) - 100
-        let labelFrameY = (selfHeigh / 2) - 10
+        let labelFrameY = (selfHeight / 2) - 10
         let labelWidth = CGFloat(200)
         let labelHeight = CGFloat(70)
         
@@ -65,6 +65,20 @@ class ActivityIndicatorView: UIView {
         self.addSubview(loopImages)
         self.addSubview(label)
         
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.frame
+        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
+        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        
         return self
     }
+    
+//    private func applyGradientToBackground(backgroundView: UIView){
+//        let gradientLayer:CAGradientLayer = CAGradientLayer()
+//        gradientLayer.frame = backgroundView.frame
+//        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
+//        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
+//        backgroundView.layer.insertSublayer(gradientLayer, at: 1)
+//    }
 }
