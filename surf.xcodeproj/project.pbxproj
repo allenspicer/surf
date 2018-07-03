@@ -27,6 +27,8 @@
 		95AF666520D81B3F00157811 /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF666320D81B3F00157811 /* ProximalCollectionView.swift */; };
 		95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */; };
 		95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE201E20EBB82B00FFDF99 /* FavoritesLabel.swift */; };
+		95BE202120EBD0A700FFDF99 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */; };
+		95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */; };
 		95C9DBA120C033750080B70B /* crash.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9E20C033750080B70B /* crash.png */; };
 		95C9DBA220C033750080B70B /* flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9F20C033750080B70B /* flat.png */; };
 		95C9DBA320C033750080B70B /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DBA020C033750080B70B /* wave.png */; };
@@ -81,6 +83,8 @@
 		95AF666320D81B3F00157811 /* ProximalCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProximalCollectionView.swift; sourceTree = "<group>"; };
 		95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		95BE201E20EBB82B00FFDF99 /* FavoritesLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesLabel.swift; sourceTree = "<group>"; };
+		95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
+		95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		95C9DB9E20C033750080B70B /* crash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crash.png; sourceTree = "<group>"; };
 		95C9DB9F20C033750080B70B /* flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flat.png; sourceTree = "<group>"; };
 		95C9DBA020C033750080B70B /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wave.png; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 		9576FF5A207FDA52006240AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
@@ -221,6 +226,7 @@
 		95B9A2B020893CBA00F911F3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
@@ -389,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95E674BD20BDC6A100166693 /* staticStationList.json in Resources */,
+				95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */,
 				95AB2BA520BD9229004504BF /* buoys.json in Resources */,
 				95C9DBA320C033750080B70B /* wave.png in Resources */,
 				9572892120C99DDF007BE075 /* coast.png in Resources */,
@@ -477,6 +484,7 @@
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
 				9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
+				95BE202120EBD0A700FFDF99 /* SplashScreenViewController.swift in Sources */,
 				957F004620C0AEB600A7B8BA /* Tide.swift in Sources */,
 				95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */,
 				9516CE3D20DD5DFD002C7299 /* SnapshotSetter.swift in Sources */,

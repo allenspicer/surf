@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A9z-NA-s0C">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nRI-mr-tOL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,18 +30,28 @@
             </objects>
             <point key="canvasLocation" x="1406" y="24"/>
         </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="aH3-jk-2NL">
+        <!--Splash Screen View Controller-->
+        <scene sceneID="4EU-dS-y5H">
             <objects>
-                <viewControllerPlaceholder id="rDN-mP-1Ie" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hPa-SF-5t8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="nRI-mr-tOL" customClass="SplashScreenViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QQT-YK-sVA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="VXH-3p-Bzy"/>
+                    </view>
+                    <connections>
+                        <segue destination="A9z-NA-s0C" kind="show" identifier="showHome" id="N0S-I0-1j9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="23d-my-q5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252" y="-73"/>
+            <point key="canvasLocation" x="-430" y="24"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="sw6-lg-gYO">
             <objects>
-                <viewController storyboardIdentifier="homeViewController" id="A9z-NA-s0C" customClass="HomeViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="A9z-NA-s0C" customClass="HomeViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d0z-Ep-3rz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,4 +143,7 @@
             <point key="canvasLocation" x="489" y="24"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="N0S-I0-1j9"/>
+    </inferredMetricsTieBreakers>
 </document>

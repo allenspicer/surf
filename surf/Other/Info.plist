@@ -41,7 +41,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses your location to find the bouy data closets to you - as that is what our useres will generally be interested in</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>SplashScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
