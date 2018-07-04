@@ -58,7 +58,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func checkStorageForFavorite(){
         indexOfCurrentStationInFavoritesArray = nil
         let defaults = UserDefaults.standard
-        if let favorites = defaults.array(forKey: "favorites") as? [Int], let names = defaults.array(forKey: "nicknames") as? [String]{
+        if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             favoritesArray = favorites
             nicknamesArray = names
             for favorite in favorites {
@@ -252,9 +252,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 //subtract from array
                 favoritesArray.remove(at: index)
                 let defaults = UserDefaults.standard
-                defaults.set(favoritesArray, forKey: "favorites")
+                defaults.set(favoritesArray, forKey: DefaultConstants.favorites)
                 nicknamesArray.remove(at: index)
-                defaults.set(nicknamesArray, forKey: "nicknames")
+                defaults.set(nicknamesArray, forKey: DefaultConstants.nicknames)
             }
         }else{
             feedbackGenerator.notification.notificationOccurred(.success)
@@ -284,9 +284,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
         favoritesArray.append(id)
-        UserDefaults.standard.set(favoritesArray, forKey: "favorites")
+        UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
         nicknamesArray.append(nickname)
-        UserDefaults.standard.set(nicknamesArray, forKey: "nicknames")
+        UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
         }
 }
 
