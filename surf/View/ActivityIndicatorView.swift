@@ -65,20 +65,12 @@ class ActivityIndicatorView: UIView {
         self.addSubview(loopImages)
         self.addSubview(label)
         
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.frame
-        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
-        self.layer.insertSublayer(gradientLayer, at: 0)
-        
+        let gradientView = GradientView(frame: self.frame)
+        gradientView.firstColor = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
+        gradientView.secondColor = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
+        self.addSubview(gradientView)
+        self.sendSubview(toBack: gradientView)
+
         return self
     }
-    
-//    private func applyGradientToBackground(backgroundView: UIView){
-//        let gradientLayer:CAGradientLayer = CAGradientLayer()
-//        gradientLayer.frame = backgroundView.frame
-//        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-//        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
-//        backgroundView.layer.insertSublayer(gradientLayer, at: 1)
-//    }
 }

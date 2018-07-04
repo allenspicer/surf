@@ -91,11 +91,11 @@ class HomeViewController: UIViewController {
     }
     
     private func applyGradientToBackground(){
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.view.frame.size
-        let customBlack = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-        gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        let gradientView = GradientView(frame: self.view.frame)
+        gradientView.firstColor = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
+        gradientView.secondColor = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
+        self.view.addSubview(gradientView)
+        self.view.sendSubview(toBack: gradientView)
     }
     
 //
