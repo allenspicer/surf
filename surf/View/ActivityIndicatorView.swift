@@ -25,7 +25,7 @@ class ActivityIndicatorView: UIView {
         let imageListArray = [#imageLiteral(resourceName: "Flat_Loading"),#imageLiteral(resourceName: "Bump_loading"),#imageLiteral(resourceName: "LittleWave_loading"),#imageLiteral(resourceName: "Wave_loading"),#imageLiteral(resourceName: "BigWave_Loading")] // Put your desired array of images in a specific order the way you want to display animation.
         
         loopImages.animationImages = imageListArray
-        loopImages.animationDuration = TimeInterval(2.0)
+        loopImages.animationDuration = TimeInterval(0.9)
         loopImages.startAnimating()
         
         let imageFrameX = (selfWidth / 2) - 30
