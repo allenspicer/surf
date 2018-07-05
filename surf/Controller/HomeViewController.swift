@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
+    var arrayOfSnapshots = [Snapshot]()
     var snapshotComponents = [String:Bool]()
     var tideClient : TideClient?
     var windClient : WindClient?

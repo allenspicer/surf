@@ -78,9 +78,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VXH-3p-Bzy"/>
                     </view>
-                    <connections>
-                        <segue destination="Epc-Bl-SlY" kind="show" identifier="showHome" id="N0S-I0-1j9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23d-my-q5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
