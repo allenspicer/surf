@@ -47,6 +47,7 @@
 		95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD5204CF40600308E73 /* surf.xcdatamodeld */; };
 		95EEECD9204CF40600308E73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD8204CF40600308E73 /* Assets.xcassets */; };
 		95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */; };
+		95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */; };
 		95FEBEBF20A5DA3C0049CA66 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FEBEBE20A5DA3C0049CA66 /* NetworkRequest.swift */; };
 		F8D1E3E4962D53D30F5D2C5D /* Pods_surf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4602B956173B62D5E729A48 /* Pods_surf.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		95EEECD8204CF40600308E73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95EEECDB204CF40600308E73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95EEECDD204CF40600308E73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLoadViewController.swift; sourceTree = "<group>"; };
 		95FEBEBE20A5DA3C0049CA66 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		A4FFB29593CF8F63DD92920F /* Pods-surf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surf.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surf/Pods-surf.debug.xcconfig"; sourceTree = "<group>"; };
 		AB02FA1CA697A03C032BF7DD /* Pods-surfTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfTests/Pods-surfTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */,
+				95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
@@ -502,6 +505,7 @@
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
+				95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */,
 				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,
 				950EAB4E20ED10F50020D266 /* DefaultConstants.swift in Sources */,
 				95125EF120C707F800FDE462 /* WindClient.swift in Sources */,
