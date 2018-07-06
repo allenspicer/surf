@@ -13,7 +13,7 @@ class InitialLoadViewController: UIViewController {
     var arrayOfSnapshots = [Snapshot]()
     let selectedId = "41110"
     let selectedBFD = 100.0
-    var favoriteSnapshots : [String : Bool]  = ["101" : false]
+    var favoriteSnapshots : [String : Bool]  = ["41110" : false]
 
     override func viewDidLoad() {
         super.viewDidLoad()
