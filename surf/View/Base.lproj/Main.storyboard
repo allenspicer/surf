@@ -37,19 +37,12 @@
                     <view key="view" contentMode="scaleToFill" id="t3s-do-KE3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jc3-VN-OJ8">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="A9z-NA-s0C" kind="show" id="jb4-es-0WH"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="R7X-AJ-TTu"/>
                     </view>
+                    <connections>
+                        <segue destination="A9z-NA-s0C" kind="show" identifier="segueInitalToHome" id="UJ3-HF-K3J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1u2-G6-zqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -165,6 +158,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jb4-es-0WH"/>
+        <segue reference="UJ3-HF-K3J"/>
     </inferredMetricsTieBreakers>
 </document>
