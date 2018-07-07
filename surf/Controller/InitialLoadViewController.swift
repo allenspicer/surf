@@ -34,13 +34,13 @@ class InitialLoadViewController: UIViewController {
     }
     
     
-    func getSnapshot(){
+    func getSnapshotWith(id : String){
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: self.selectedId, beachFaceDirection: self.selectedBFD)
             let snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
-                self.favoriteSnapshots["\(self.selectedId)"] = true
+                self.favoriteSnapshots[id] = true
                 //segue when all snapshots are available
                 self.segueWhenComplete()
 //            }else{
@@ -55,7 +55,6 @@ class InitialLoadViewController: UIViewController {
 //                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
 //                    alert.addAction(doneAction)
 //                    self.present(alert, animated: true, completion: nil)
-                }
             }
         }
     }
@@ -99,7 +98,7 @@ class InitialLoadViewController: UIViewController {
                     }
                         // load snapshot for each Favorite and add to array
                         for id in favoriteSnapshots.keys {
-                            self.getSnapshot()
+                            self.getSnapshotWith(id: id)
                             //use favorite.stationid for snapshot
                             //append to snapshot array
 
