@@ -65,15 +65,21 @@ class InitialLoadViewController: UIViewController {
     func setUserFavorites (completion:@escaping ([String : Int])->Void){
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-            favoritesArray = favorites
-            nicknamesArray = names
+            
+            // here the local id is available
+            // we need to use the id to get the station id, then append to favoritesnapshots array
+            // then use getsnapshot to get all data
+            
+            
+//            favoritesArray = favorites
+//            nicknamesArray = names
             for index in 0..<favorites.count {
                 let favorite = favorites[index]
                 let name = names[index]
-                favoriteStationIdsFromMemory[name] = favorite
+//                favoriteStationIdsFromMemory[name] = favorite
             }
         }
-        completion(favoriteStationIdsFromMemory)
+        completion([String : Int]())
     }
     
     private func addFavoriteStationsToCollectionData(){
@@ -89,12 +95,12 @@ class InitialLoadViewController: UIViewController {
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
                         guard let id = station["id"] as? Int else {return}
-                        if !self.favoriteStationIdsFromMemory.values.contains(id) {continue}
+//                        if !self.favoriteStationIdsFromMemory.values.contains(id) {continue}
                         guard let stationId = station["station"] as? Int else {return}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
                         let favorite = Favorite(id: "\(id)", stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
-                        favoritesData.append(favorite)
+//                        favoritesData.append(favorite)
                     }
                     DispatchQueue.main.async{
 //                        self.carousel.type = .rotary
