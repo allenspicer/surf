@@ -12,9 +12,7 @@ class InitialLoadViewController: UIViewController {
     
     var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
-    let selectedId = "41110"
-    let selectedBFD = 100.0
-    var favoriteSnapshots : [String : Bool]  = ["101" : false]
+    var favoriteSnapshots = [String : Bool]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +32,14 @@ class InitialLoadViewController: UIViewController {
     }
     
     
-    func getSnapshotWith(id : String){
+    func getSnapshotWith(id : String, stationId: String, beachFaceDirection : Double){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: self.selectedId, beachFaceDirection: self.selectedBFD)
+            let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection)
             let snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 self.favoriteSnapshots[id] = true
-                arrayOfSnapshots.append(snapshot)
+                self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
 //            }else{
@@ -99,8 +97,7 @@ class InitialLoadViewController: UIViewController {
                     }
                         // load snapshot for each Favorite
                         for favorite in favoritesToBeLoaded {
-                                self.getSnapshotWith(id: favorite.stationId)
-
+                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
                     }
                 }
             } catch {
@@ -115,7 +112,7 @@ class InitialLoadViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? HomeViewController {
-            destinationVC.favoritesFromMemory = arrayOfSnapshots
+            destinationVC.favoritesSnapshots = arrayOfSnapshots
         }
     }
  
