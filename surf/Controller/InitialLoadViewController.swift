@@ -89,7 +89,7 @@ class InitialLoadViewController: UIViewController {
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
                         guard let id = station["id"] as? Int else {return}
-                        if self.favoriteSnapshots.keys.contains("\(id)") {continue}
+                        if !self.favoriteSnapshots.keys.contains("\(id)") {continue}
                         guard let stationId = station["station"] as? Int else {return}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
