@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var carousel: iCarousel!
-    private var favoritesData = [Favorite]()
     private var proximalData = [Station]()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -28,9 +27,6 @@ class HomeViewController: UIViewController {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
-    private var favoritesArray = [Int]()
-    private var nicknamesArray = [String]()
-    private var favoriteStationIdsFromMemory = [String : Int]()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
     
@@ -41,34 +37,24 @@ class HomeViewController: UIViewController {
         parseStationList()
         setDataOrGetUserLocation()
         setDelegatesAndDataSources()
-            DispatchQueue.global(qos:.utility).async{
-                self.setUserFavorites(){ (favoritesDictionary) in
-                    self.addFavoriteStationsToCollectionData()
-            }
-        }
+        setupCarouselWithInitialLoadData()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
     }
     
-    func setUserFavorites (completion:@escaping ([String : Int])->Void){
-                let defaults = UserDefaults.standard
-                if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-                    favoritesArray = favorites
-                    nicknamesArray = names
-                    for index in 0..<favorites.count {
-                        let favorite = favorites[index]
-                        let name = names[index]
-                        favoriteStationIdsFromMemory[name] = favorite
-                    }
-                }
-        completion(favoriteStationIdsFromMemory)
-    }
-
-    
-    
 //
 // MARK: - Inital Load Logic
 //
+    
+    
+    func setupCarouselWithInitialLoadData(){
+        self.carousel.type = .rotary
+        self.carousel.perspective = -0.0020
+        self.carousel.viewpointOffset = CGSize(width: 0, height: -125)
+        self.carousel.dataSource = self
+        self.carousel.delegate = self
+        self.stopActivityIndicator()
+    }
     
     private func setDataOrGetUserLocation(){
         let defaults = UserDefaults.standard
@@ -202,46 +188,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func addFavoriteStationsToCollectionData(){
-        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                
-                //meta data is all possible surf bouy stations
-                //currently checking entire list against saved IDs
-                //and appending matches to the collection view data
-            
-                if let metaData = jsonResult as? [[String : AnyObject]]{
-                    for station in metaData {
-                        guard let id = station["id"] as? Int else {return}
-                        if !self.favoriteStationIdsFromMemory.values.contains(id) {continue}
-                        guard let stationId = station["station"] as? Int else {return}
-                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
-                        guard let name = station["name"] as? String else {return}
-                        let favorite = Favorite(id: "\(id)", stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
-                        favoritesData.append(favorite)
-                    }
-                    DispatchQueue.main.async{
-                        self.carousel.type = .rotary
-                        self.carousel.perspective = -0.0020
-                        self.carousel.viewpointOffset = CGSize(width: 0, height: -125)
-                        self.carousel.dataSource = self
-                        self.carousel.delegate = self
-                        self.stopActivityIndicator()
-                    }
-                }
-            } catch {
-                // handle error
-                print("Problem accessing regional buoy list document: \(error)")
-            }
-        }
-    }
-    
-    private func addStationWithIdLatLon(id :String, lat : Double, lon : Double, name: String){
-
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? ViewController {
@@ -283,7 +229,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return favoritesData.count
+        return favoritesSnapshots.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -324,9 +270,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         //views outside of the `if (view == nil) {...}` check otherwise
         //you'll get weird issues with carousel item content appearing
         //in the wrong place in the carousel
-        if let name = favoritesData[index].name {
+        if let name = favoritesSnapshots[index].waveHgt {
             label.text = "\(name)"
         }
+        
+        
         
         return itemView
     }
@@ -369,11 +317,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             var selectedBFD = Double()
             
             
-            selectedStationOrFavorite = favoritesData[index]
-            selectedId = favoritesData[index].stationId
-            if let name = favoritesData[index].name {
-                selectedName = name
-            }
+            selectedStationOrFavorite = favoritesSnapshots[index]
+            selectedId = "\(favoritesSnapshots[index].stationId)"
+//            if let name = favoritesData[index].name {
+//                selectedName = name
+//            }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             
             selectedCellAction(index, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
