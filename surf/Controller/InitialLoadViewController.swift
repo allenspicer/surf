@@ -10,7 +10,7 @@ import UIKit
 
 class InitialLoadViewController: UIViewController {
     
-    var arrayOfSnapshots = [Favorite]()
+    var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
     let selectedId = "41110"
     let selectedBFD = 100.0
@@ -41,6 +41,7 @@ class InitialLoadViewController: UIViewController {
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 self.favoriteSnapshots[id] = true
+                arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
 //            }else{
@@ -94,13 +95,11 @@ class InitialLoadViewController: UIViewController {
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
                         let favorite = Favorite(id: "\(id)", stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
-                        arrayOfSnapshots.append(favorite)
+                        favoritesToBeLoaded.append(favorite)
                     }
-                        // load snapshot for each Favorite and add to array
-                        for id in favoriteSnapshots.keys {
-                            self.getSnapshotWith(id: id)
-                            //use favorite.stationid for snapshot
-                            //append to snapshot array
+                        // load snapshot for each Favorite
+                        for favorite in favoritesToBeLoaded {
+                                self.getSnapshotWith(id: favorite.stationId)
 
                     }
                 }
