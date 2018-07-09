@@ -40,7 +40,7 @@ struct Snapshot {
     var windSpd: Double?
     var windDirectionString: String?
     var windCardinalDirection: String?
-
+    var nickname : String?
 }
 
 
