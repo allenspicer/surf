@@ -274,8 +274,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             label.text = "\(name)"
         }
         
-        
-        
         return itemView
     }
     
@@ -324,7 +322,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 //            }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             
-            selectedCellAction(index, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.selectedSnapshot.stationName = "station name placeholder"
+            self.setAdditonalDataClients()
+            
+//            selectedCellAction(index, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         }
     }
     
@@ -386,9 +388,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
-            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
                 if self.selectedSnapshot.waveHgt != nil && self.selectedSnapshot.waterTemp != nil {
+                    self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
                     self.selectedSnapshot.stationName = stationName
                     self.setAdditonalDataClients()
                 }else{
