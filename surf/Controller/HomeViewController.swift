@@ -318,7 +318,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             
             
             selectedStationOrFavorite = favoritesSnapshots[index]
-            selectedId = "\(favoritesSnapshots[index].stationId)"
+            if let selectedStationId = favoritesSnapshots[index].stationId{
+                selectedId = "\(selectedStationId)"
+            }
+            
+            
 //            if let name = favoritesData[index].name {
 //                selectedName = name
 //            }
