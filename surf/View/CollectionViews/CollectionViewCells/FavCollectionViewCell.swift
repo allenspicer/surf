@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class FavCollectionViewCell: UIView {
+class FavCollectionViewCell: UICollectionViewCell {
     
     var backgroundGradient = CAGradientLayer()
     

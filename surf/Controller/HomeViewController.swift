@@ -36,7 +36,6 @@ class HomeViewController: UIViewController {
         parseStationList()
         setDataOrGetUserLocation()
         setDelegatesAndDataSources()
-        setupCarouselWithInitialLoadData()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
     }
@@ -243,9 +242,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         case is FavoriteCollectionView:
-            selectedStationOrFavorite = favoritesData[cellSelectedIndex]
-            selectedId = favoritesData[cellSelectedIndex].stationId
-            if let name = favoritesData[cellSelectedIndex].name {
+            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+//            selectedId = favoritesSnapshots[cellSelectedIndex].stationId
+            if let name = favoritesSnapshots[cellSelectedIndex].name {
                 selectedName = name
             }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
@@ -260,7 +259,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             return proximalData.count
         case is FavoriteCollectionView:
-            return favoritesData.count
+            return favoritesSnapshots.count
         default:
             return 0
         }
@@ -287,18 +286,18 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-            cell.imageView.image = imageArray[indexPath.row]
-            cell.imageView.layer.cornerRadius = 75
-            cell.imageView.layer.masksToBounds = true
-            cell.titleLabel.textColor = .white
-            cell.titleLabel.text = "Unnamed"
-            print("nicknames are: \(nicknamesArray)")
-            print("favorites are: \(favoritesData)")
-            
-            
-            if let name = nicknamesArray[indexPath.row] as? String{
-                cell.titleLabel.text = name
-            }
+//            cell.imageView.image = imageArray[indexPath.row]
+//            cell.imageView.layer.cornerRadius = 75
+//            cell.imageView.layer.masksToBounds = true
+//            cell.titleLabel.textColor = .white
+//            cell.titleLabel.text = "Unnamed"
+//            print("nicknames are: \(nicknamesArray)")
+//            print("favorites are: \(favoritesData)")
+//
+//
+//            if let name = nicknamesArray[indexPath.row] as? String{
+//                cell.titleLabel.text = name
+//            }
             return cell
         default:
             return UICollectionViewCell()

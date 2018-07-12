@@ -41,6 +41,7 @@
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
 		95E674BD20BDC6A100166693 /* staticStationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95E674BC20BDC6A000166693 /* staticStationList.json */; };
 		95ECA44A20BF5349004F51EA /* forecast.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95ECA44920BF5349004F51EA /* forecast.xml */; };
+		95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
@@ -103,6 +104,7 @@
 		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95E674BC20BDC6A000166693 /* staticStationList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = staticStationList.json; path = surf/Data/staticStationList.json; sourceTree = SOURCE_ROOT; };
 		95ECA44920BF5349004F51EA /* forecast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = forecast.xml; sourceTree = "<group>"; };
+		95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
 		95EEECCB204CF40600308E73 /* surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				95AF666120D810D700157811 /* CollectionViewCells */,
 				95AF666320D81B3F00157811 /* ProximalCollectionView.swift */,
+				95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */,
 			);
 			path = CollectionViews;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */,
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
+				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
 				95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */,
 				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,
