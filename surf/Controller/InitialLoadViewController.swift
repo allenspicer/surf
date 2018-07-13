@@ -22,6 +22,7 @@ class InitialLoadViewController: UIViewController {
             self.setUserFavorites(){ (favoritesDictionary) in
                 self.addFavoriteStationsToCollectionData()
             }
+            self.segueWhenComplete()
         }
     }
     
@@ -78,6 +79,7 @@ class InitialLoadViewController: UIViewController {
     }
     
     private func addFavoriteStationsToCollectionData(){
+        
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
