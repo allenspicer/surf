@@ -20,9 +20,9 @@ class InitialLoadViewController: UIViewController {
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
             self.setUserFavorites(){ (favoritesDictionary) in
-                self.addFavoriteStationsToCollectionData()
+                if self.favoriteSnapshots.count > 0 { self.addFavoriteStationsToCollectionData() }
+                self.segueWhenComplete()
             }
-            self.segueWhenComplete()
         }
     }
     
@@ -68,6 +68,7 @@ class InitialLoadViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
+            
             for index in 0..<favorites.count {
                 let favorite = favorites[index]
                 // currently doing nothing with the nickname chosen by the user and saved in defaults

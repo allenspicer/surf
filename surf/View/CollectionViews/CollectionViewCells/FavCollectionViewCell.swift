@@ -13,6 +13,9 @@ class FavCollectionViewCell: UICollectionViewCell {
     
     var backgroundGradient = CAGradientLayer()
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         loadAllViews()
@@ -32,7 +35,7 @@ class FavCollectionViewCell: UICollectionViewCell {
             mainView.layer.borderWidth = 4
             mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
             mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
-            
+        
             let gradientLayer:CAGradientLayer = CAGradientLayer()
             gradientLayer.frame.size = mainViewFrame.size
             let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
