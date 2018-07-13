@@ -214,6 +214,12 @@ class HomeViewController: UIViewController {
 //
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+    
+    
+    //
+    //MARK: - Handling of Collection Views and Cell Display
+    //
+
 
     func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
@@ -303,6 +309,26 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        switch collectionView {
+        case is ProximalCollectionView:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        case is FavoriteCollectionView:
+            let cellWidth : CGFloat = 150
+            let numberOfCells = CGFloat(favoritesSnapshots.count)
+            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
+            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+        default:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+    }
+    
+    //
+    //MARK: - Cell click action and data retreival delegates
+    //
+
+    
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD)
@@ -324,23 +350,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }
         }
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        switch collectionView {
-        case is ProximalCollectionView:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 150
-            let numberOfCells = CGFloat(favoritesSnapshots.count)
-            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
-            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
-        default:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        }
-    }
-
     
     func setAdditonalDataClients(){
         tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
