@@ -269,20 +269,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-            
-            let gradientLayer:CAGradientLayer = CAGradientLayer()
-            gradientLayer.frame.size = cell.layer.frame.size
-            let customBlack = #colorLiteral(red: 0.06274509804, green: 0.05098039216, blue: 0.1490196078, alpha: 1)
-            gradientLayer.colors = [UIColor.clear.cgColor, customBlack.cgColor]
-            cell.imageView.layer.insertSublayer(gradientLayer, at: 1)
-            //            cell.imageView.image = imageArray[indexPath.row]
-            cell.imageView.layer.cornerRadius = 15
-            cell.imageView.layer.masksToBounds = true
-            //            cell.titleLabel.textColor = .white
-            //            cell.titleLabel.text = self.proximalData[indexPath.row].name
-            cell.contentView.layer.borderWidth = 2
-            cell.contentView.layer.borderColor = #colorLiteral(red: 0.5058823529, green: 1, blue: 0.8274509804, alpha: 1)
-            cell.contentView.layer.cornerRadius = 15
+            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell

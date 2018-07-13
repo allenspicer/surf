@@ -27,7 +27,9 @@ class InitialLoadViewController: UIViewController {
     
     func segueWhenComplete(){
         if !favoriteSnapshots.values.contains(false){
-            self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
+            }
         }
     }
     
