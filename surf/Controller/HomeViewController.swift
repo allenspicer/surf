@@ -280,18 +280,12 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-//            cell.imageView.image = imageArray[indexPath.row]
-//            cell.imageView.layer.cornerRadius = 75
-//            cell.imageView.layer.masksToBounds = true
-//            cell.titleLabel.textColor = .white
-//            cell.titleLabel.text = "Unnamed"
-//            print("nicknames are: \(nicknamesArray)")
-//            print("favorites are: \(favoritesData)")
-//
-//
-//            if let name = nicknamesArray[indexPath.row] as? String{
-//                cell.titleLabel.text = name
-//            }
+            let snapshot = self.favoritesSnapshots[indexPath.row]
+            guard let waveHeight = snapshot.waveHgt else {return cell}
+            guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
+//            guard let nickname = snapshot.nickname else {return cell}
+            let nickname = "Emerald Isle"
+            cell.loadAllViews(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
         default:
             return UICollectionViewCell()
