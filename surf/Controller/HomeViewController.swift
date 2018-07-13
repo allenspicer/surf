@@ -244,9 +244,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is FavoriteCollectionView:
             selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
 //            selectedId = favoritesSnapshots[cellSelectedIndex].stationId
-            if let name = favoritesSnapshots[cellSelectedIndex].name {
-                selectedName = name
-            }
+//            if let name = favoritesSnapshots[cellSelectedIndex].name {
+//                selectedName = name
+//            }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         default:
             break
@@ -345,7 +345,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return UIEdgeInsetsMake(0, 0, 0, 0)
         case is FavoriteCollectionView:
             let cellWidth : CGFloat = 150
-            let numberOfCells = CGFloat(favoritesData.count)
+            let numberOfCells = CGFloat(favoritesSnapshots.count)
             let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
             return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
         default:
