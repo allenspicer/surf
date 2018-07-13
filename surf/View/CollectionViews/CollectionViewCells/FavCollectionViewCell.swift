@@ -13,13 +13,9 @@ class FavCollectionViewCell: UICollectionViewCell {
     
     var backgroundGradient = CAGradientLayer()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         loadAllViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
     func loadAllViews() {
