@@ -13,9 +13,14 @@ class InitialLoadViewController: UIViewController {
     var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
     var favoriteSnapshots = [String : Bool]()
+    var activityIndicatorView = ActivityIndicatorView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
+        self.view.addSubview(activityIndicatorView)
         
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{

@@ -41,7 +41,7 @@
                         <viewLayoutGuide key="safeArea" id="R7X-AJ-TTu"/>
                     </view>
                     <connections>
-                        <segue destination="A9z-NA-s0C" kind="show" identifier="segueInitalToHome" id="UJ3-HF-K3J"/>
+                        <segue destination="A9z-NA-s0C" kind="presentation" identifier="segueInitalToHome" modalTransitionStyle="crossDissolve" id="UJ3-HF-K3J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1u2-G6-zqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
