@@ -303,7 +303,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             return CGSize(width: 124, height: 124)
         case is FavoriteCollectionView:
-            return CGSize(width: 150, height: 200)
+            return CGSize(width: 207, height: 264)
         default:
             return CGSize()
         }
@@ -315,7 +315,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             return UIEdgeInsetsMake(0, 0, 0, 0)
         case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 150
+            let cellWidth : CGFloat = 207
             let numberOfCells = CGFloat(favoritesSnapshots.count)
             let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
             return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
