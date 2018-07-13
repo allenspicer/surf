@@ -24,6 +24,9 @@ class FavCollectionViewCell: UICollectionViewCell {
     func loadAllViews() {
 
             var mainView: UIView
+            var heightLabel: UILabel
+            var frequencyLabel: UILabel
+            var locationLabel: UILabel
             var distanceLabel: UILabel
 
             self.contentMode = .center
@@ -42,16 +45,43 @@ class FavCollectionViewCell: UICollectionViewCell {
             gradientLayer.colors = [customYellow.cgColor, UIColor.clear.cgColor]
             mainView.layer.addSublayer(gradientLayer)
             self.addSubview(mainView)
+        
+        
+            let heightLabelFrame = CGRect(x: 0.0, y: 24.0, width: self.frame.width, height: 80.0)
+            heightLabel = UILabel(frame: heightLabelFrame)
+            heightLabel.backgroundColor = .clear
+            heightLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+            heightLabel.textAlignment = .center
+            heightLabel.font = UIFont(name: "Avenir Next Condensed", size: 58)
+            self.addSubview(heightLabel)
+            heightLabel.text = "2 ft"
+        
+            let frequencyLabelFrame = CGRect(x: 0.0, y: mainViewFrame.height * 0.75, width: self.frame.width, height: 18.0)
+            frequencyLabel = UILabel(frame: frequencyLabelFrame)
+            frequencyLabel.backgroundColor = .clear
+            frequencyLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+            frequencyLabel.textAlignment = .center
+            frequencyLabel.font = UIFont(name: "Gotham", size: 18)
+            self.addSubview(frequencyLabel)
+            frequencyLabel.text = "10sec"
+        
+            let locationLabelFrame = CGRect(x: 0.0, y: self.frame.height - 40, width: self.frame.width, height: 20.0)
+            locationLabel = UILabel(frame: locationLabelFrame)
+            locationLabel.backgroundColor = .clear
+            locationLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
+            locationLabel.textAlignment = .center
+            locationLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
+            self.addSubview(locationLabel)
+            locationLabel.text = "Ocean Isle"
 
             let distanceLabelFrame = CGRect(x: 0.0, y: self.frame.height - 20, width: self.frame.width, height: 20.0)
             distanceLabel = UILabel(frame: distanceLabelFrame)
             distanceLabel.backgroundColor = .clear
             distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
             distanceLabel.textAlignment = .center
-            distanceLabel.font = distanceLabel.font.withSize(15)
+            distanceLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
             distanceLabel.tag = 1
             self.addSubview(distanceLabel)
-            distanceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
             distanceLabel.text = "10mi"
 
         }
