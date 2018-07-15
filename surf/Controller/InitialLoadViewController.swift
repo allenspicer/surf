@@ -14,6 +14,9 @@ class InitialLoadViewController: UIViewController {
     var favoritesToBeLoaded = [Favorite]()
     var favoriteSnapshots = [String : Bool]()
     var activityIndicatorView = ActivityIndicatorView()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var waves: [Wave] = []
+
 
 
     override func viewDidLoad() {
@@ -24,10 +27,23 @@ class InitialLoadViewController: UIViewController {
         
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
+            
+            self.getData()
+            print(self.waves)
+            
             self.setUserFavorites(){ (favoritesDictionary) in
                 if self.favoriteSnapshots.count > 0 { self.addFavoriteStationsToCollectionData() }
                 self.segueWhenComplete()
             }
+        }
+    }
+    
+    func getData() {
+        do {
+            waves = try context.fetch(Wave.fetchRequest())
+        }
+        catch {
+            print("Fetching Failed")
         }
     }
     
@@ -46,6 +62,18 @@ class InitialLoadViewController: UIViewController {
             let snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
+                
+                //add to persistent container
+                let wave = Wave(context: self.context)
+                wave.timestamp = Date()
+                if let waveId = snapshot.id {
+                    wave.id = Int32(waveId)
+                }
+                if let waveHeight = snapshot.waveHgt {
+                    wave.waveHeight = waveHeight
+                }
+
+                
                 self.favoriteSnapshots[id] = true
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available

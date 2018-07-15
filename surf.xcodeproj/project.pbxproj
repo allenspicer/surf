@@ -26,6 +26,7 @@
 		95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */; };
 		95786C1E20F935CE0043A543 /* AdobeHeitiStd-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */; };
 		95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1F20F939440043A543 /* Gotham Book Regular.otf */; };
+		95786C2620FB87120043A543 /* surf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95786C2420FB87120043A543 /* surf.xcdatamodeld */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* buoys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* buoys.json */; };
 		95AF666520D81B3F00157811 /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF666320D81B3F00157811 /* ProximalCollectionView.swift */; };
@@ -48,7 +49,6 @@
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
-		95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD5204CF40600308E73 /* surf.xcdatamodeld */; };
 		95EEECD9204CF40600308E73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD8204CF40600308E73 /* Assets.xcassets */; };
 		95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */; };
 		95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */; };
@@ -88,6 +88,7 @@
 		95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionLayout.swift; sourceTree = "<group>"; };
 		95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AdobeHeitiStd-Regular.otf"; sourceTree = "<group>"; };
 		95786C1F20F939440043A543 /* Gotham Book Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham Book Regular.otf"; sourceTree = "<group>"; };
+		95786C2520FB87120043A543 /* surf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = surf.xcdatamodel; sourceTree = "<group>"; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* buoys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buoys.json; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		95EEECD3204CF40600308E73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		95EEECD6204CF40600308E73 /* surf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = surf.xcdatamodel; sourceTree = "<group>"; };
 		95EEECD8204CF40600308E73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95EEECDB204CF40600308E73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95EEECDD204CF40600308E73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 			children = (
 				95EEECDD204CF40600308E73 /* Info.plist */,
 				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
-				95EEECD5204CF40600308E73 /* surf.xcdatamodeld */,
+				95786C2420FB87120043A543 /* surf.xcdatamodeld */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -494,7 +494,6 @@
 				9516CE3D20DD5DFD002C7299 /* SnapshotSetter.swift in Sources */,
 				95DE6E1A20C9DB7400CF0938 /* FavCollectionViewCell.swift in Sources */,
 				951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */,
-				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95B1981120EBDD9D0090940A /* GradientView.swift in Sources */,
 				95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */,
 				95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */,
@@ -513,6 +512,7 @@
 				95125EF320C708BB00FDE462 /* Wind.swift in Sources */,
 				952CD7D720D8746900B5988F /* SurfQuality.swift in Sources */,
 				950A2A4D2056BA1E008DE32F /* Station.swift in Sources */,
+				95786C2620FB87120043A543 /* surf.xcdatamodeld in Sources */,
 				95FEBEBF20A5DA3C0049CA66 /* NetworkRequest.swift in Sources */,
 				95C9DBA520C0386B0080B70B /* ActivityIndicatorView.swift in Sources */,
 			);
@@ -773,13 +773,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		95EEECD5204CF40600308E73 /* surf.xcdatamodeld */ = {
+		95786C2420FB87120043A543 /* surf.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				95EEECD6204CF40600308E73 /* surf.xcdatamodel */,
+				95786C2520FB87120043A543 /* surf.xcdatamodel */,
 			);
-			currentVersion = 95EEECD6204CF40600308E73 /* surf.xcdatamodel */;
-			path = surf.xcdatamodeld;
+			currentVersion = 95786C2520FB87120043A543 /* surf.xcdatamodel */;
+			name = surf.xcdatamodeld;
+			path = ../Data/surf.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
