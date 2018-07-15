@@ -7,18 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B8D8A4315A105D607218C0A35A4B192 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 297DF3C1D670575E4FC61D5D4E74EE3B /* iCarousel.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		21D73299581075FB7368DA9FDAD8DAA6 /* iCarousel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 42BA4EAC243BBCEDB7A7C59A2CED7000 /* iCarousel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		37EB7E333F8520F8C5D6834CD70FD317 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
-		4BE1EC45B5981E792A17EAB7275271E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
+		1BF8300606FC5F60CF419CBC57F8AB60 /* Pods-surf-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F237187686D74E462ECAB9F8073280 /* Pods-surf-dummy.m */; };
+		3C836F3EDF04005F4BB6DEC62D77D547 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		6499F9594183E5831D7EAC7203EF54F3 /* Pods-surf-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BB054C0CDFCAAECA1DC26AFA02676CE0 /* Pods-surf-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66401ACF561D19C6037447FA9F09104B /* Pods-surfTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D40D92878B05D98E172249041662586A /* Pods-surfTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6AE0315E1D5BEB59A5CAC53B1E4C8C42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
-		6C4986A33EE0D75E3B19E605E185E998 /* iCarousel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCB2009ECECF2F86EED8722A85E1BB9 /* iCarousel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		820ADABF3278A67DC71CBD75DFB2AE6F /* iCarousel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2ECB46CA5D6758190738BDAED3DEE6F /* iCarousel-dummy.m */; };
-		82996D7FB6C3BDE69BA8CF1B7FEA751F /* Pods-surf-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 71F237187686D74E462ECAB9F8073280 /* Pods-surf-dummy.m */; };
+		6AE0315E1D5BEB59A5CAC53B1E4C8C42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		83C08E1556CEB08B47AB9DB1AEACFC0D /* Pods-surfTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D397A2EEC858244BE20C21837277C9 /* Pods-surfTests-dummy.m */; };
-		ABECA3A16E15560F553173ABDECBC912 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */; };
-		B34643DD3B828768FB1E4996143060BD /* Pods-surf-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BB054C0CDFCAAECA1DC26AFA02676CE0 /* Pods-surf-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,15 +20,8 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 933397F4300C9865E6FDF09DF214FE1A;
+			remoteGlobalIDString = C4D2BCDA7797056363B651CAD37B811A;
 			remoteInfo = "Pods-surf";
-		};
-		42208B343D22FC03A00F9CC17CE73E4A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B8D8C363B343A0778AE6633D70E11749;
-			remoteInfo = iCarousel;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -42,40 +29,38 @@
 		04D31A66D323A2ADBB3B2CA36E6AE157 /* Pods-surfTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-surfTests-resources.sh"; sourceTree = "<group>"; };
 		0A571644AB845CB2708B9E91594E7BBF /* Pods-surf-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-surf-resources.sh"; sourceTree = "<group>"; };
 		0FEF169A10BA3619E26EAB9A093EFFA8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19BFA1154177CF2E29865684BBC4D485 /* Pods_surfTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_surfTests.framework; path = "Pods-surfTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2153487C7536F97862D6678C8DC85754 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		297DF3C1D670575E4FC61D5D4E74EE3B /* iCarousel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = iCarousel/iCarousel.m; sourceTree = "<group>"; };
-		31569097A012B9106BBBAC7010ADBFAD /* iCarousel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "iCarousel-prefix.pch"; sourceTree = "<group>"; };
+		37CDF5D940EA16D5F4BEACED15F9ACAA /* Pods_surfTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_surfTests.framework; path = "Pods-surfTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CBD6F5BBAE944CBEA6BE44311C1FD49 /* Pods-surfTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-surfTests.modulemap"; sourceTree = "<group>"; };
-		42BA4EAC243BBCEDB7A7C59A2CED7000 /* iCarousel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "iCarousel-umbrella.h"; sourceTree = "<group>"; };
-		43535B019FC32AC95655665903CCBDDA /* iCarousel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = iCarousel.xcconfig; sourceTree = "<group>"; };
 		43C856EF825B1397F667F986C4811C92 /* Pods-surf-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-surf-acknowledgements.plist"; sourceTree = "<group>"; };
 		498A63EAFEFFC2E356DB3FD307E35685 /* Pods-surf-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-surf-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4EF4590DB2F05F05379E824BD2DBB2E6 /* Pods-surfTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-surfTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		5127680A0F748588DD1B1E21469EE42B /* Pods_surf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_surf.framework; path = "Pods-surf.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5FDA93380A0FF8A30DEDE0A0A14586DF /* Pods-surf-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-surf-frameworks.sh"; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		71F237187686D74E462ECAB9F8073280 /* Pods-surf-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-surf-dummy.m"; sourceTree = "<group>"; };
-		7BCB2009ECECF2F86EED8722A85E1BB9 /* iCarousel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = iCarousel/iCarousel.h; sourceTree = "<group>"; };
 		8182535FDB18FF07FE939733259BC055 /* Pods-surfTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-surfTests-frameworks.sh"; sourceTree = "<group>"; };
 		851D4D8256468B5E38BC9E490449D1C1 /* Pods-surf.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-surf.modulemap"; sourceTree = "<group>"; };
 		89983B251612FF9B2AC2FE96DDA50E14 /* Pods-surfTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-surfTests.release.xcconfig"; sourceTree = "<group>"; };
-		8B543A582914EF027786A8476C2BDBF4 /* iCarousel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = iCarousel.framework; path = iCarousel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C2E695A9681658A8E19AF6AB8DE58EA /* iCarousel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = iCarousel.modulemap; sourceTree = "<group>"; };
 		902E60A490E4E82C1ACE3EB4757EC20A /* Pods-surf.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-surf.debug.xcconfig"; sourceTree = "<group>"; };
 		90C3DF8D120D1A32C693975B0AA68D98 /* Pods-surfTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-surfTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		92D397A2EEC858244BE20C21837277C9 /* Pods-surfTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-surfTests-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AB13968028CF517FF69B98A169F0B4D3 /* Pods_surf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_surf.framework; path = "Pods-surf.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B376AB41211924EBF9413F0859686115 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B611DD7C230C772032592C8F89574D96 /* Pods-surf.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-surf.release.xcconfig"; sourceTree = "<group>"; };
 		BB054C0CDFCAAECA1DC26AFA02676CE0 /* Pods-surf-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-surf-umbrella.h"; sourceTree = "<group>"; };
-		C2ECB46CA5D6758190738BDAED3DEE6F /* iCarousel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "iCarousel-dummy.m"; sourceTree = "<group>"; };
 		C6DA5308F0EBBF2E3EB42112356DAC83 /* Pods-surfTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-surfTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D40D92878B05D98E172249041662586A /* Pods-surfTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-surfTests-umbrella.h"; sourceTree = "<group>"; };
-		FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0C5B7953729866B1F17C1780F6D660A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C836F3EDF04005F4BB6DEC62D77D547 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		522AFEA8DC8447306E5334441EA353AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -84,32 +69,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA4DCB14BF2934767B080A48D7F7F624 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4BE1EC45B5981E792A17EAB7275271E9 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EFC77C679BC0DA842ED5E44C9F5F4309 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37EB7E333F8520F8C5D6834CD70FD317 /* Foundation.framework in Frameworks */,
-				ABECA3A16E15560F553173ABDECBC912 /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+		6F04CBAC4679CCF83C833075AF19FBFA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				978007DCB56F415BE390E0F949D4D4E5 /* iOS */,
+				AB13968028CF517FF69B98A169F0B4D3 /* Pods_surf.framework */,
+				37CDF5D940EA16D5F4BEACED15F9ACAA /* Pods_surfTests.framework */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		76ADBE2D4DEB641B90C7E03C2227544C /* Pods-surfTests */ = {
@@ -134,9 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				AAA581DFCE6A6FF2B2DB97F757A79B01 /* Pods */,
-				EB07B3E145FC32412CEDE7BAFDD73A22 /* Products */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				6F04CBAC4679CCF83C833075AF19FBFA /* Products */,
 				D9E41BC9CB9BE2CFE979765CF48F63AF /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -159,46 +127,20 @@
 			path = "Target Support Files/Pods-surf";
 			sourceTree = "<group>";
 		};
-		93E1F8386C1DCEE8733A525C2D240D3E /* iCarousel */ = {
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BCB2009ECECF2F86EED8722A85E1BB9 /* iCarousel.h */,
-				297DF3C1D670575E4FC61D5D4E74EE3B /* iCarousel.m */,
-				C55C05C2A31436174DA68AAB35DD6BE4 /* Support Files */,
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
 			);
-			name = iCarousel;
-			path = iCarousel;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		978007DCB56F415BE390E0F949D4D4E5 /* iOS */ = {
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */,
-				FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */,
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		AAA581DFCE6A6FF2B2DB97F757A79B01 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				93E1F8386C1DCEE8733A525C2D240D3E /* iCarousel */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C55C05C2A31436174DA68AAB35DD6BE4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				8C2E695A9681658A8E19AF6AB8DE58EA /* iCarousel.modulemap */,
-				43535B019FC32AC95655665903CCBDDA /* iCarousel.xcconfig */,
-				C2ECB46CA5D6758190738BDAED3DEE6F /* iCarousel-dummy.m */,
-				31569097A012B9106BBBAC7010ADBFAD /* iCarousel-prefix.pch */,
-				42BA4EAC243BBCEDB7A7C59A2CED7000 /* iCarousel-umbrella.h */,
-				2153487C7536F97862D6678C8DC85754 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/iCarousel";
 			sourceTree = "<group>";
 		};
 		D9E41BC9CB9BE2CFE979765CF48F63AF /* Targets Support Files */ = {
@@ -208,16 +150,6 @@
 				76ADBE2D4DEB641B90C7E03C2227544C /* Pods-surfTests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		EB07B3E145FC32412CEDE7BAFDD73A22 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8B543A582914EF027786A8476C2BDBF4 /* iCarousel.framework */,
-				5127680A0F748588DD1B1E21469EE42B /* Pods_surf.framework */,
-				19BFA1154177CF2E29865684BBC4D485 /* Pods_surfTests.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,20 +163,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5908A4D541714049D2FD62C36467B8BD /* Headers */ = {
+		42B83C02D3EFAACCC1B8EA461A16633B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B34643DD3B828768FB1E4996143060BD /* Pods-surf-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8337EBAB27E6D68330EBB38E73BE7863 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				21D73299581075FB7368DA9FDAD8DAA6 /* iCarousel-umbrella.h in Headers */,
-				6C4986A33EE0D75E3B19E605E185E998 /* iCarousel.h in Headers */,
+				6499F9594183E5831D7EAC7203EF54F3 /* Pods-surf-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,42 +189,24 @@
 			);
 			name = "Pods-surfTests";
 			productName = "Pods-surfTests";
-			productReference = 19BFA1154177CF2E29865684BBC4D485 /* Pods_surfTests.framework */;
+			productReference = 37CDF5D940EA16D5F4BEACED15F9ACAA /* Pods_surfTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		933397F4300C9865E6FDF09DF214FE1A /* Pods-surf */ = {
+		C4D2BCDA7797056363B651CAD37B811A /* Pods-surf */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DD22DE0442127AD6591B23DFF4F0B48 /* Build configuration list for PBXNativeTarget "Pods-surf" */;
+			buildConfigurationList = DE806BE9C0A33582AE9B5DA6FA15A536 /* Build configuration list for PBXNativeTarget "Pods-surf" */;
 			buildPhases = (
-				66CB1C1F88790266D7A22C70D3A93DF7 /* Sources */,
-				CA4DCB14BF2934767B080A48D7F7F624 /* Frameworks */,
-				5908A4D541714049D2FD62C36467B8BD /* Headers */,
+				5D8C1A108ADF05BD4A3C755EC3C4B516 /* Sources */,
+				0C5B7953729866B1F17C1780F6D660A7 /* Frameworks */,
+				42B83C02D3EFAACCC1B8EA461A16633B /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BAC93D060AB292D8185979F7A2DC9C23 /* PBXTargetDependency */,
 			);
 			name = "Pods-surf";
 			productName = "Pods-surf";
-			productReference = 5127680A0F748588DD1B1E21469EE42B /* Pods_surf.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		B8D8C363B343A0778AE6633D70E11749 /* iCarousel */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FAC0E4E27715C58E6999DD991FAE23F5 /* Build configuration list for PBXNativeTarget "iCarousel" */;
-			buildPhases = (
-				53D5F91CD7B3A622448775A99188C684 /* Sources */,
-				EFC77C679BC0DA842ED5E44C9F5F4309 /* Frameworks */,
-				8337EBAB27E6D68330EBB38E73BE7863 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = iCarousel;
-			productName = iCarousel;
-			productReference = 8B543A582914EF027786A8476C2BDBF4 /* iCarousel.framework */;
+			productReference = AB13968028CF517FF69B98A169F0B4D3 /* Pods_surf.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -321,12 +226,11 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = EB07B3E145FC32412CEDE7BAFDD73A22 /* Products */;
+			productRefGroup = 6F04CBAC4679CCF83C833075AF19FBFA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B8D8C363B343A0778AE6633D70E11749 /* iCarousel */,
-				933397F4300C9865E6FDF09DF214FE1A /* Pods-surf */,
+				C4D2BCDA7797056363B651CAD37B811A /* Pods-surf */,
 				7773F8C80293542BC9B5743E1C51EE54 /* Pods-surfTests */,
 			);
 		};
@@ -341,36 +245,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		53D5F91CD7B3A622448775A99188C684 /* Sources */ = {
+		5D8C1A108ADF05BD4A3C755EC3C4B516 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				820ADABF3278A67DC71CBD75DFB2AE6F /* iCarousel-dummy.m in Sources */,
-				0B8D8A4315A105D607218C0A35A4B192 /* iCarousel.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		66CB1C1F88790266D7A22C70D3A93DF7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				82996D7FB6C3BDE69BA8CF1B7FEA751F /* Pods-surf-dummy.m in Sources */,
+				1BF8300606FC5F60CF419CBC57F8AB60 /* Pods-surf-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BAC93D060AB292D8185979F7A2DC9C23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = iCarousel;
-			target = B8D8C363B343A0778AE6633D70E11749 /* iCarousel */;
-			targetProxy = 42208B343D22FC03A00F9CC17CE73E4A /* PBXContainerItemProxy */;
-		};
 		F1772FCFE4B717B2538864C07F30DC91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-surf";
-			target = 933397F4300C9865E6FDF09DF214FE1A /* Pods-surf */;
+			target = C4D2BCDA7797056363B651CAD37B811A /* Pods-surf */;
 			targetProxy = 2EC98BEFF473677430B88289DADC77CF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -410,10 +299,12 @@
 			};
 			name = Debug;
 		};
-		462E4FD10C2A8D3F1509C0046831F086 /* Debug */ = {
+		3E5C7F200593FC9291A503B551C9C967 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43535B019FC32AC95655665903CCBDDA /* iCarousel.xcconfig */;
+			baseConfigurationReference = B611DD7C230C772032592C8F89574D96 /* Pods-surf.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -423,23 +314,25 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/iCarousel/iCarousel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/iCarousel/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-surf/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/iCarousel/iCarousel.modulemap";
-				PRODUCT_MODULE_NAME = iCarousel;
-				PRODUCT_NAME = iCarousel;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-surf/Pods-surf.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		553022A828EE1991F07D2D73F565AEF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -597,42 +490,7 @@
 			};
 			name = Release;
 		};
-		EC353128E5E3A1B5AAD07FBADCF89A62 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B611DD7C230C772032592C8F89574D96 /* Pods-surf.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-surf/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-surf/Pods-surf.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F420A479177D454256034BAAE366D038 /* Debug */ = {
+		C579FA6762E4FBD225E4A027B9B76611 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 902E60A490E4E82C1ACE3EB4757EC20A /* Pods-surf.debug.xcconfig */;
 			buildSettings = {
@@ -666,38 +524,6 @@
 			};
 			name = Debug;
 		};
-		FF138883FA76DBB2745451A30477954D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43535B019FC32AC95655665903CCBDDA /* iCarousel.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/iCarousel/iCarousel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/iCarousel/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/iCarousel/iCarousel.modulemap";
-				PRODUCT_MODULE_NAME = iCarousel;
-				PRODUCT_NAME = iCarousel;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -706,15 +532,6 @@
 			buildConfigurations = (
 				553022A828EE1991F07D2D73F565AEF8 /* Debug */,
 				58CE816B060A41D32CEC095441D0E3E0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9DD22DE0442127AD6591B23DFF4F0B48 /* Build configuration list for PBXNativeTarget "Pods-surf" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F420A479177D454256034BAAE366D038 /* Debug */,
-				EC353128E5E3A1B5AAD07FBADCF89A62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -728,11 +545,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FAC0E4E27715C58E6999DD991FAE23F5 /* Build configuration list for PBXNativeTarget "iCarousel" */ = {
+		DE806BE9C0A33582AE9B5DA6FA15A536 /* Build configuration list for PBXNativeTarget "Pods-surf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				462E4FD10C2A8D3F1509C0046831F086 /* Debug */,
-				FF138883FA76DBB2745451A30477954D /* Release */,
+				C579FA6762E4FBD225E4A027B9B76611 /* Debug */,
+				3E5C7F200593FC9291A503B551C9C967 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

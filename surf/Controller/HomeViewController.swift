@@ -8,12 +8,11 @@
 
 import UIKit
 import CoreLocation
-import iCarousel
 
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var proximalCollectionView: UICollectionView!
-    @IBOutlet weak var carousel: iCarousel!
+    @IBOutlet weak var favoritesCollectionView: UICollectionView!
     private var proximalData = [Station]()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -37,7 +36,6 @@ class HomeViewController: UIViewController {
         parseStationList()
         setDataOrGetUserLocation()
         setDelegatesAndDataSources()
-        setupCarouselWithInitialLoadData()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
     }
@@ -45,16 +43,6 @@ class HomeViewController: UIViewController {
 //
 // MARK: - Inital Load Logic
 //
-    
-    
-    func setupCarouselWithInitialLoadData(){
-        self.carousel.type = .rotary
-        self.carousel.perspective = -0.0020
-        self.carousel.viewpointOffset = CGSize(width: 0, height: -125)
-        self.carousel.dataSource = self
-        self.carousel.delegate = self
-        self.stopActivityIndicator()
-    }
     
     private func setDataOrGetUserLocation(){
         let defaults = UserDefaults.standard
@@ -225,112 +213,22 @@ class HomeViewController: UIViewController {
 //MARK: - Extension to handle Collection View and Delegates Assignment
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate, iCarouselDataSource, iCarouselDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     
     
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return favoritesSnapshots.count
-    }
-    
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        var label = FavoritesLabel()
-        var itemView: FavCollectionViewCell
-        
-        //reuse view if available, otherwise create a new view
-        if let view = view as? FavCollectionViewCell {
-            itemView = view
-            //get a reference to the label in the recycled view
-            for subview in itemView.subviews{
-                    if let labelView = subview as? FavoritesLabel {
-                        label = labelView
-                }
-            }
-            
-        } else {
-            
-            itemView = FavCollectionViewCell.init(frame: CGRect(x: 0, y: 0, width: 207, height: 264))
+    //
+    //MARK: - Handling of Collection Views and Cell Display
+    //
 
-            //don't do anything specific to the index within
-            //this `if ... else` statement because the view will be
-            //recycled and used with other index values later
-            let labelFrame = CGRect(x: 0.0, y: itemView.frame.height - 40, width: itemView.frame.width, height: 20.0)
-            label = FavoritesLabel(frame: labelFrame)
-            label.backgroundColor = .clear
-            label.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
-            label.textAlignment = .center
-            label.font = label.font.withSize(15)
-            label.tag = 1
-            itemView.addSubview(label)
-            label.bottomAnchor.constraint(equalTo: itemView.bottomAnchor).isActive = true
 
-        }
-        
-        //set item label
-        //remember to always set any properties of your carousel item
-        //views outside of the `if (view == nil) {...}` check otherwise
-        //you'll get weird issues with carousel item content appearing
-        //in the wrong place in the carousel
-        if let name = favoritesSnapshots[index].waveHgt {
-            label.text = "\(name)"
-        }
-        
-        
-        
-        return itemView
-    }
-    
-    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        switch option {
-        case .spacing:
-            return 2.30
-        case .visibleItems:
-            return 3
-        case .fadeMin:
-            return -1.0
-        case .fadeMax:
-            return 1.0
-        case .fadeRange:
-            return 0.5
-        default:
-            return value
-        }
-    }
-
-    
     func setDelegatesAndDataSources(){
+        favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
+        
+        favoritesCollectionView.dataSource = self
         proximalCollectionView.dataSource = self
     }
     
-    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
-        
-        selectionFeedbackGenerator.prepare()
-        selectionFeedbackGenerator.selectionChanged()
-
-        
-        //if item is selected transition to detail
-        if carousel.currentItemIndex == index {
-            
-            startActivityIndicator("Loading")
-            var selectedId = String()
-            var selectedName = String()
-            var selectedBFD = Double()
-            
-            
-            selectedStationOrFavorite = favoritesSnapshots[index]
-            if let selectedStationId = favoritesSnapshots[index].stationId{
-                selectedId = "\(selectedStationId)"
-            }
-            
-            
-//            if let name = favoritesData[index].name {
-//                selectedName = name
-//            }
-            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
-            
-            selectedCellAction(index, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
@@ -340,15 +238,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         var selectedId = String()
         var selectedName = String()
         var selectedBFD = Double()
-
+        
         switch collectionView {
         case is ProximalCollectionView:
-                selectedStationOrFavorite = proximalData[cellSelectedIndex]
-                selectedId = proximalData[cellSelectedIndex].stationId
-                if let name = proximalData[cellSelectedIndex].name {
-                    selectedName = name
-                }
-                selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            selectedStationOrFavorite = proximalData[cellSelectedIndex]
+            selectedId = proximalData[cellSelectedIndex].stationId
+            if let name = proximalData[cellSelectedIndex].name {
+                selectedName = name
+            }
+            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+        case is FavoriteCollectionView:
+            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+//            selectedId = favoritesSnapshots[cellSelectedIndex].stationId
+//            if let name = favoritesSnapshots[cellSelectedIndex].name {
+//                selectedName = name
+//            }
+            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
         default:
             break
         }
@@ -358,7 +263,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case is ProximalCollectionView:
-          return proximalData.count
+            return proximalData.count
+        case is FavoriteCollectionView:
+            return favoritesSnapshots.count
         default:
             return 0
         }
@@ -370,7 +277,15 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             cell.titleLabel.text = self.proximalData[indexPath.row].name
             cell.backgroundGradient.frame = cell.bounds
-
+            return cell
+        case is FavoriteCollectionView:
+            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
+            let snapshot = self.favoritesSnapshots[indexPath.row]
+            guard let waveHeight = snapshot.waveHgt else {return cell}
+            guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
+//            guard let nickname = snapshot.nickname else {return cell}
+            let nickname = "Emerald Isle"
+            cell.loadAllViews(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
         default:
             return UICollectionViewCell()
@@ -381,10 +296,32 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             return CGSize(width: 124, height: 124)
+        case is FavoriteCollectionView:
+            return CGSize(width: 207, height: 264)
         default:
             return CGSize()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        switch collectionView {
+        case is ProximalCollectionView:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        case is FavoriteCollectionView:
+            let cellWidth : CGFloat = 207
+            let numberOfCells = CGFloat(favoritesSnapshots.count)
+            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
+            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
+        default:
+            return UIEdgeInsetsMake(0, 0, 0, 0)
+        }
+    }
+    
+    //
+    //MARK: - Cell click action and data retreival delegates
+    //
+
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
@@ -407,18 +344,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }
         }
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        switch collectionView {
-        case is ProximalCollectionView:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        default:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        }
-    }
-
     
     func setAdditonalDataClients(){
         tideClient = TideClient(currentSnapshot: self.selectedSnapshot)

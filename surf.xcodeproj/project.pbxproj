@@ -23,6 +23,9 @@
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
 		9572892120C99DDF007BE075 /* coast.png in Resources */ = {isa = PBXBuildFile; fileRef = 9572892020C99DDF007BE075 /* coast.png */; };
+		95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */; };
+		95786C1E20F935CE0043A543 /* AdobeHeitiStd-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */; };
+		95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1F20F939440043A543 /* Gotham Book Regular.otf */; };
 		957F004620C0AEB600A7B8BA /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957F004520C0AEB600A7B8BA /* Tide.swift */; };
 		95AB2BA520BD9229004504BF /* buoys.json in Resources */ = {isa = PBXBuildFile; fileRef = 95AB2BA420BD9229004504BF /* buoys.json */; };
 		95AF666520D81B3F00157811 /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF666320D81B3F00157811 /* ProximalCollectionView.swift */; };
@@ -41,6 +44,7 @@
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
 		95E674BD20BDC6A100166693 /* staticStationList.json in Resources */ = {isa = PBXBuildFile; fileRef = 95E674BC20BDC6A000166693 /* staticStationList.json */; };
 		95ECA44A20BF5349004F51EA /* forecast.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95ECA44920BF5349004F51EA /* forecast.xml */; };
+		95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */; };
 		95EEECCF204CF40600308E73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECCE204CF40600308E73 /* AppDelegate.swift */; };
 		95EEECD1204CF40600308E73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EEECD0204CF40600308E73 /* ViewController.swift */; };
 		95EEECD4204CF40600308E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EEECD2204CF40600308E73 /* Main.storyboard */; };
@@ -81,6 +85,9 @@
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
 		9572892020C99DDF007BE075 /* coast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coast.png; sourceTree = "<group>"; };
+		95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionLayout.swift; sourceTree = "<group>"; };
+		95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AdobeHeitiStd-Regular.otf"; sourceTree = "<group>"; };
+		95786C1F20F939440043A543 /* Gotham Book Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham Book Regular.otf"; sourceTree = "<group>"; };
 		957F004520C0AEB600A7B8BA /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		9590E67420BF260500FD5540 /* ILM.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ILM.gpx; sourceTree = "<group>"; };
 		95AB2BA420BD9229004504BF /* buoys.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = buoys.json; sourceTree = "<group>"; };
@@ -103,6 +110,7 @@
 		95E1BE9F2088C7AD0096ECA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95E674BC20BDC6A000166693 /* staticStationList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = staticStationList.json; path = surf/Data/staticStationList.json; sourceTree = SOURCE_ROOT; };
 		95ECA44920BF5349004F51EA /* forecast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = forecast.xml; sourceTree = "<group>"; };
+		95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
 		95EEECCB204CF40600308E73 /* surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95EEECCE204CF40600308E73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95EEECD0204CF40600308E73 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +175,7 @@
 			children = (
 				95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
+				95786C1F20F939440043A543 /* Gotham Book Regular.otf */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
 				95AF666220D810E600157811 /* CollectionViews */,
@@ -217,6 +226,7 @@
 			children = (
 				9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */,
 				95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */,
+				95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */,
 				95BE201E20EBB82B00FFDF99 /* FavoritesLabel.swift */,
 			);
 			path = CollectionViewCells;
@@ -225,8 +235,10 @@
 		95AF666220D810E600157811 /* CollectionViews */ = {
 			isa = PBXGroup;
 			children = (
+				95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */,
 				95AF666120D810D700157811 /* CollectionViewCells */,
 				95AF666320D81B3F00157811 /* ProximalCollectionView.swift */,
+				95EE33A120F7B5A4006DB0F5 /* FavoriteCollectionView.swift */,
 			);
 			path = CollectionViews;
 			sourceTree = "<group>";
@@ -339,7 +351,6 @@
 				95EEECC7204CF40600308E73 /* Sources */,
 				95EEECC8204CF40600308E73 /* Frameworks */,
 				95EEECC9204CF40600308E73 /* Resources */,
-				AB7A9ADFC54326E8DE3D8B0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -403,10 +414,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95786C1E20F935CE0043A543 /* AdobeHeitiStd-Regular.otf in Resources */,
 				95E674BD20BDC6A100166693 /* staticStationList.json in Resources */,
 				95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */,
 				95AB2BA520BD9229004504BF /* buoys.json in Resources */,
 				95C9DBA320C033750080B70B /* wave.png in Resources */,
+				95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */,
 				9572892120C99DDF007BE075 /* coast.png in Resources */,
 				95C9DBA220C033750080B70B /* flat.png in Resources */,
 				95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */,
@@ -457,24 +470,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AB7A9ADFC54326E8DE3D8B0D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-surf/Pods-surf-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-surf/Pods-surf-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -501,9 +496,11 @@
 				951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */,
 				95EEECD7204CF40600308E73 /* surf.xcdatamodeld in Sources */,
 				95B1981120EBDD9D0090940A /* GradientView.swift in Sources */,
+				95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */,
 				95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */,
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
+				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
 				95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */,
 				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,

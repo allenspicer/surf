@@ -13,21 +13,29 @@ class InitialLoadViewController: UIViewController {
     var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
     var favoriteSnapshots = [String : Bool]()
+    var activityIndicatorView = ActivityIndicatorView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
+        self.view.addSubview(activityIndicatorView)
+        
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
             self.setUserFavorites(){ (favoritesDictionary) in
-                self.addFavoriteStationsToCollectionData()
+                if self.favoriteSnapshots.count > 0 { self.addFavoriteStationsToCollectionData() }
+                self.segueWhenComplete()
             }
         }
     }
     
     func segueWhenComplete(){
         if !favoriteSnapshots.values.contains(false){
-            self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
+            }
         }
     }
     
@@ -65,6 +73,7 @@ class InitialLoadViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
+            
             for index in 0..<favorites.count {
                 let favorite = favorites[index]
                 // currently doing nothing with the nickname chosen by the user and saved in defaults
@@ -76,6 +85,7 @@ class InitialLoadViewController: UIViewController {
     }
     
     private func addFavoriteStationsToCollectionData(){
+        
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
