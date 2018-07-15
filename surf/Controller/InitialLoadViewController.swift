@@ -25,12 +25,27 @@ class InitialLoadViewController: UIViewController {
         let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
         self.view.addSubview(activityIndicatorView)
         
+        self.getData()
+        
+        //if a wave is availabe from the last 5 minutes
+        
+        //with the right id
+        //load that as snapshot
+        let fiveMinutes: TimeInterval = 5.0 * 60.0
+        for wave in waves{
+            if let timestamp = wave.timestamp {
+                if abs(timestamp.timeIntervalSinceNow) < fiveMinutes {
+                    print(timestamp)
+                    print(wave.waveHeight)
+                }
+            }
+        }
+    
+        
+
+        
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
-            
-            self.getData()
-            print(self.waves)
-            
             self.setUserFavorites(){ (favoritesDictionary) in
                 if self.favoriteSnapshots.count > 0 { self.addFavoriteStationsToCollectionData() }
                 self.segueWhenComplete()
@@ -63,17 +78,23 @@ class InitialLoadViewController: UIViewController {
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 
-                //add to persistent container
-                let wave = Wave(context: self.context)
-                wave.timestamp = Date()
-                if let waveId = snapshot.id {
-                    wave.id = Int32(waveId)
-                }
-                if let waveHeight = snapshot.waveHgt {
-                    wave.waveHeight = waveHeight
+                DispatchQueue.main.async {
+                    //add to persistent container
+                    let wave = Wave(context: self.context)
+                    wave.timestamp = Date()
+                    if let waveId = snapshot.id {
+                        wave.id = Int32(waveId)
+                    }
+                    if let waveHeight = snapshot.waveHgt {
+                        wave.waveHeight = waveHeight
+                    }
+                    
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
 
-                
+//                print(self.waves)
+
+
                 self.favoriteSnapshots[id] = true
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
