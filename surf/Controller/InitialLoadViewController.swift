@@ -27,23 +27,6 @@ class InitialLoadViewController: UIViewController {
         
         self.getData()
         
-        //if a wave is availabe from the last 5 minutes
-        
-        //with the right id
-        //load that as snapshot
-        let fiveMinutes: TimeInterval = 5.0 * 60.0
-        for wave in waves{
-            if let timestamp = wave.timestamp {
-                if abs(timestamp.timeIntervalSinceNow) < fiveMinutes {
-                    print(timestamp)
-                    print(wave.waveHeight)
-                }
-            }
-        }
-    
-        
-
-        
         // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
             self.setUserFavorites(){ (favoritesDictionary) in
@@ -88,12 +71,8 @@ class InitialLoadViewController: UIViewController {
                     if let waveHeight = snapshot.waveHgt {
                         wave.waveHeight = waveHeight
                     }
-                    
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
-
-//                print(self.waves)
-
 
                 self.favoriteSnapshots[id] = true
                 self.arrayOfSnapshots.append(snapshot)
@@ -134,6 +113,44 @@ class InitialLoadViewController: UIViewController {
     }
     
     private func addFavoriteStationsToCollectionData(){
+        
+        
+        
+        //if a wave is availabe in persistence from the last 5 minutes
+        //with the right id
+        //load that as snapshot
+        let fiveMinutes: TimeInterval = 5.0 * 60.0
+        print("there are \(waves.count) saved waves")
+        print("the wave timestamps are :")
+
+        for wave in waves{
+            print(wave.id)
+            print(wave.timestamp)
+            guard let timestamp = wave.timestamp else {return}
+            if abs(timestamp.timeIntervalSinceNow) < fiveMinutes {
+                if self.favoriteSnapshots["\(wave.id)"] == false {
+                    print("snapshot being taken from persistence")
+                    self.favoriteSnapshots["\(wave.id)"] = true
+                    //make snapshot here
+                    var snapshot = Snapshot.init()
+                    snapshot.timeStamp = timestamp
+                    snapshot.waveHgt = wave.waveHeight
+                    snapshot.id = Int(wave.id)
+                    self.arrayOfSnapshots.append(snapshot)
+                    //segue when all snapshots are available
+                    self.segueWhenComplete()
+                }
+            }else {
+                //remove from persistent container
+                DispatchQueue.main.async {
+                    self.context.delete(wave)
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+
         
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
