@@ -15,6 +15,7 @@ struct Station: Decodable {
     let lon: Double
     let beachFaceDirection: Double
     let name: String
+    let nickname: String?
     var distanceInMiles : Int
 }
 

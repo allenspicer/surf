@@ -159,7 +159,7 @@ class HomeViewController: UIViewController {
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, distanceInMiles: 10000)
+                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
