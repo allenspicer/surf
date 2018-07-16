@@ -12,8 +12,7 @@ struct Favorite: Decodable {
     let id: Int
     let stationId: String
     let beachFaceDirection: Double
-    let name: String?
-    
+    let name: String
 }
 
 

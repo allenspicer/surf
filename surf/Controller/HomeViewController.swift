@@ -90,10 +90,6 @@ class HomeViewController: UIViewController {
                 let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
                 let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
                 proximalData[index].distanceInMiles = Int(milesFromUser)
-                print("\(proximalData[index].name) station is \(milesFromUser) from user")
-                print("\(userLatitude) \(userLongitude)")
-                print("\(station.lat) \(station.lon)")
-
             }
         }
         sortTableObjectsByDistance()
@@ -163,7 +159,7 @@ class HomeViewController: UIViewController {
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
@@ -241,9 +237,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             selectedId = proximalData[cellSelectedIndex].stationId
-            if let name = proximalData[cellSelectedIndex].name {
-                selectedName = name
-            }
+            selectedName = proximalData[cellSelectedIndex].name
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
