@@ -13,10 +13,10 @@ class InitialLoadViewController: UIViewController {
     var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
     var favoriteSnapshots = [String : Bool]()
+    var favoritesNicknames = [String]()
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waves: [Wave] = []
-
 
 
     override func viewDidLoad() {
@@ -106,10 +106,9 @@ class InitialLoadViewController: UIViewController {
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             
+            favoritesNicknames = names
             for index in 0..<favorites.count {
                 let favorite = favorites[index]
-                // currently doing nothing with the nickname chosen by the user and saved in defaults
-//                let name = names[index]
                     favoriteSnapshots["\(favorite)"] = false
             }
         }
@@ -176,9 +175,9 @@ class InitialLoadViewController: UIViewController {
                         let favorite = Favorite(id: id, stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
                         favoritesToBeLoaded.append(favorite)
                     }
-                        // load snapshot for each Favorite
-                        for favorite in favoritesToBeLoaded {
-                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
+                    // load snapshot for each Favorite
+                    for favorite in favoritesToBeLoaded {
+                        self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
                     }
                 }
             } catch {

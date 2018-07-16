@@ -274,6 +274,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             if let text = textFields[0].text {
                 self.saveStationAndNameToFavoritesDefaults(nickname: text)
+                
             }
         }
         alert.addAction(okayAction)
