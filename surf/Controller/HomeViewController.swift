@@ -247,17 +247,22 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 selectedName = name
             }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
+            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
             selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-//            selectedId = favoritesSnapshots[cellSelectedIndex].stationId
-//            if let name = favoritesSnapshots[cellSelectedIndex].name {
-//                selectedName = name
-//            }
+            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
+                selectedId = "\(stationId)"
+            }
+            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
+                selectedName = name
+            }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            self.snapshotComponents = ["tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.setAdditonalDataClients()
         default:
             break
         }
-        selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -283,8 +288,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let snapshot = self.favoritesSnapshots[indexPath.row]
             guard let waveHeight = snapshot.waveHgt else {return cell}
             guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
-//            guard let nickname = snapshot.nickname else {return cell}
-            let nickname = "Emerald Isle"
+            guard let nickname = snapshot.nickname else {return cell}
             cell.loadAllViews(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
         default:

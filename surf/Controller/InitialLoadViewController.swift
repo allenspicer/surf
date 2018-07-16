@@ -13,7 +13,7 @@ class InitialLoadViewController: UIViewController {
     var arrayOfSnapshots = [Snapshot]()
     var favoritesToBeLoaded = [Favorite]()
     var favoriteSnapshots = [String : Bool]()
-    var favoritesNicknames = [String]()
+    var favoritesNicknames = [Int : String]()
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waves: [Wave] = []
@@ -79,6 +79,7 @@ class InitialLoadViewController: UIViewController {
                 }
 
                 self.favoriteSnapshots["\(id)"] = true
+                snapshot.nickname = self.favoritesNicknames[id]
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
@@ -106,10 +107,10 @@ class InitialLoadViewController: UIViewController {
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             
-            favoritesNicknames = names
             for index in 0..<favorites.count {
                 let favorite = favorites[index]
                     favoriteSnapshots["\(favorite)"] = false
+                    favoritesNicknames[favorite] = names[index]
             }
         }
         completion([String : Int]())
@@ -140,6 +141,7 @@ class InitialLoadViewController: UIViewController {
                     snapshot.waveHgt = wave.waveHeight
                     snapshot.waveAveragePeriod = wave.frequency
                     snapshot.id = Int(wave.id)
+                    snapshot.nickname = favoritesNicknames[Int(wave.id)]
                     self.arrayOfSnapshots.append(snapshot)
                     //segue when all snapshots are available
                     self.segueWhenComplete()
