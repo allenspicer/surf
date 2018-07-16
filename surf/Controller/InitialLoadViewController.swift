@@ -11,9 +11,7 @@ import UIKit
 class InitialLoadViewController: UIViewController {
     
     var arrayOfSnapshots = [Snapshot]()
-    var favoritesToBeLoaded = [Favorite]()
-    var favoriteSnapshots = [String : Bool]()
-    var favoritesNicknames = [Int : String]()
+    var favoriteSnapshots = [Favorite : Bool]()
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waves: [Wave] = []
@@ -41,7 +39,7 @@ class InitialLoadViewController: UIViewController {
             waves = try context.fetch(Wave.fetchRequest())
         }
         catch {
-            print("Fetching Failed")
+            print("Failed to retrieve Wave Entity from context.")
         }
     }
     
@@ -77,9 +75,12 @@ class InitialLoadViewController: UIViewController {
                     
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
-
-                self.favoriteSnapshots["\(id)"] = true
-                snapshot.nickname = self.favoritesNicknames[id]
+                
+                for favorite in self.favoriteSnapshots.keys {
+                    if favorite.id == id {
+                        self.favoriteSnapshots[favorite] = true
+                    }
+                }
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
@@ -108,9 +109,8 @@ class InitialLoadViewController: UIViewController {
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             
             for index in 0..<favorites.count {
-                let favorite = favorites[index]
-                    favoriteSnapshots["\(favorite)"] = false
-                    favoritesNicknames[favorite] = names[index]
+                let favorite = Favorite.init(id: favorites[index], stationId: "", beachFaceDirection: 0.0, name: names[index])
+                favoriteSnapshots[favorite] = false
             }
         }
         completion([String : Int]())
@@ -131,55 +131,54 @@ class InitialLoadViewController: UIViewController {
             print(wave.id)
             print(wave.timestamp)
             guard let timestamp = wave.timestamp else {return}
-            if abs(timestamp.timeIntervalSinceNow) < fiveMinutes {
-                if self.favoriteSnapshots["\(wave.id)"] == false {
-                    print("snapshot being taken from persistence")
-                    self.favoriteSnapshots["\(wave.id)"] = true
-                    //make snapshot here
-                    var snapshot = Snapshot.init()
-                    snapshot.timeStamp = timestamp
-                    snapshot.waveHgt = wave.waveHeight
-                    snapshot.waveAveragePeriod = wave.frequency
-                    snapshot.id = Int(wave.id)
-                    snapshot.nickname = favoritesNicknames[Int(wave.id)]
-                    self.arrayOfSnapshots.append(snapshot)
-                    //segue when all snapshots are available
-                    self.segueWhenComplete()
-                }
-            }else {
-                //remove from persistent container
-                DispatchQueue.main.async {
-                    self.context.delete(wave)
+            for favorite in self.favoriteSnapshots.keys {
+                if favorite.id == Int(wave.id){
+                    if abs(timestamp.timeIntervalSinceNow) < fiveMinutes{
+                        self.favoriteSnapshots[favorite] = true
+                        //make snapshot here
+                        var snapshot = Snapshot.init()
+                        snapshot.timeStamp = timestamp
+                        snapshot.waveHgt = wave.waveHeight
+                        snapshot.waveAveragePeriod = wave.frequency
+                        snapshot.id = Int(wave.id)
+                        snapshot.nickname = favorite.name
+                        self.arrayOfSnapshots.append(snapshot)
+                        //segue when all snapshots are available
+                        self.segueWhenComplete()
+                    }else{
+                        //remove from persistent container
+                        DispatchQueue.main.async {
+                            self.context.delete(wave)
+                        }
+                    }
                 }
             }
         }
         DispatchQueue.main.async {
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
-
         
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 
-                //meta data is all possible surf bouy stations
-                //currently checking entire list against saved IDs
-                //and appending matches to the collection view data
-                
-                if let metaData = jsonResult as? [[String : AnyObject]]{
-                    for station in metaData {
-                        guard let id = station["id"] as? Int else {return}
-                        if !self.favoriteSnapshots.keys.contains("\(id)") {continue}
-                        guard let stationId = station["station"] as? Int else {return}
-                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
-                        guard let name = station["name"] as? String else {return}
-                        let favorite = Favorite(id: id, stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
-                        favoritesToBeLoaded.append(favorite)
-                    }
-                    // load snapshot for each Favorite
-                    for favorite in favoritesToBeLoaded {
-                        self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
+                for snapshot in favoriteSnapshots {
+                    let id = snapshot.key.id
+                    if let stationsFromJSON = jsonResult as? [[String : AnyObject]]{
+                        for station in stationsFromJSON {
+                            guard let idFromJSON = station["id"] as? Int else {return}
+                            if idFromJSON == id {
+                                guard let stationId = station["station"] as? Int else {return}
+                                guard let beachFaceDirection = station["bfd"] as? Double else {return}
+                                guard let name = station["name"] as? String else {return}
+                                var favorite = snapshot.key
+                                favorite.stationId = "\(stationId)"
+                                favorite.beachFaceDirection = beachFaceDirection
+                                favorite.name = name
+                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
+                            }
+                        }
                     }
                 }
             } catch {

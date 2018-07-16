@@ -10,11 +10,11 @@ import Foundation
 
 struct Station: Decodable {
     let id: String
-    let stationId: String
+    var stationId: String
     let lat: Double
     let lon: Double
-    let beachFaceDirection: Double
-    let name: String
+    var beachFaceDirection: Double
+    var name: String
     let nickname: String?
     var distanceInMiles : Int
 }

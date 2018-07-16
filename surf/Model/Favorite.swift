@@ -10,9 +10,19 @@ import Foundation
 
 struct Favorite: Decodable {
     let id: Int
-    let stationId: String
-    let beachFaceDirection: Double
-    let name: String
+    var stationId: String
+    var beachFaceDirection: Double
+    var name: String
 }
 
+extension Favorite: Equatable {
+    static func == (lhs: Favorite, rhs: Favorite) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
 
+extension Favorite: Hashable {
+    var hashValue: Int {
+        return id.hashValue ^ stationId.hashValue ^ beachFaceDirection.hashValue
+    }
+}
