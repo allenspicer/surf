@@ -213,7 +213,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func returnToTableView(){
-        self.performSegue(withIdentifier: "returnToHomeView", sender: self)
+        self.performSegue(withIdentifier: "returnToInitialView", sender: self)
     }
     
     func setButton(_ button :UIButton){
@@ -274,6 +274,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             if let text = textFields[0].text {
                 self.saveStationAndNameToFavoritesDefaults(nickname: text)
+                
             }
         }
         alert.addAction(okayAction)

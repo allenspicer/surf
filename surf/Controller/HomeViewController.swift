@@ -26,9 +26,7 @@ class HomeViewController: UIViewController {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-    private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
-    
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,10 +90,6 @@ class HomeViewController: UIViewController {
                 let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
                 let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
                 proximalData[index].distanceInMiles = Int(milesFromUser)
-                print("\(proximalData[index].name) station is \(milesFromUser) from user")
-                print("\(userLatitude) \(userLongitude)")
-                print("\(station.lat) \(station.lon)")
-
             }
         }
         sortTableObjectsByDistance()
@@ -165,7 +159,7 @@ class HomeViewController: UIViewController {
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, owner: nil, name: name, distance: 10000.0, distanceInMiles: 10000)
+                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
@@ -243,21 +237,24 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             selectedId = proximalData[cellSelectedIndex].stationId
-            if let name = proximalData[cellSelectedIndex].name {
+            selectedName = proximalData[cellSelectedIndex].name
+            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+        case is FavoriteCollectionView:
+            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
+            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
+                selectedId = "\(stationId)"
+            }
+            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
                 selectedName = name
             }
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
-        case is FavoriteCollectionView:
-            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-//            selectedId = favoritesSnapshots[cellSelectedIndex].stationId
-//            if let name = favoritesSnapshots[cellSelectedIndex].name {
-//                selectedName = name
-//            }
-            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            self.snapshotComponents = ["tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.setAdditonalDataClients()
         default:
             break
         }
-        selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -283,8 +280,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let snapshot = self.favoritesSnapshots[indexPath.row]
             guard let waveHeight = snapshot.waveHgt else {return cell}
             guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
-//            guard let nickname = snapshot.nickname else {return cell}
-            let nickname = "Emerald Isle"
+            guard let nickname = snapshot.nickname else {return cell}
             cell.loadAllViews(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
         default:
@@ -325,7 +321,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD)
+            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id: 1000)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:

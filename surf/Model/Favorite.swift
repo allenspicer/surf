@@ -9,11 +9,10 @@
 import Foundation
 
 struct Favorite: Decodable {
-    let id: String
+    let id: Int
     let stationId: String
     let beachFaceDirection: Double
-    let name: String?
-    
+    let name: String
 }
 
 
