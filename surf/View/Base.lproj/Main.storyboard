@@ -28,7 +28,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="A9z-NA-s0C" kind="custom" identifier="returnToHomeView" customClass="TopDownSegue" customModule="surf" customModuleProvider="target" id="L62-XP-ypt"/>
+                        <segue destination="Fpd-KE-9Tr" kind="custom" identifier="returnToInitialView" customClass="TopDownSegue" customModule="surf" customModuleProvider="target" id="NtY-mM-S3j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -182,7 +182,4 @@
             <point key="canvasLocation" x="488.80000000000001" y="23.838080959520241"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="L62-XP-ypt"/>
-    </inferredMetricsTieBreakers>
 </document>

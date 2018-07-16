@@ -71,6 +71,10 @@ class InitialLoadViewController: UIViewController {
                     if let waveHeight = snapshot.waveHgt {
                         wave.waveHeight = waveHeight
                     }
+                    if let frequency = snapshot.waveAveragePeriod {
+                        wave.frequency = frequency
+                    }
+                    
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
 
@@ -135,6 +139,7 @@ class InitialLoadViewController: UIViewController {
                     var snapshot = Snapshot.init()
                     snapshot.timeStamp = timestamp
                     snapshot.waveHgt = wave.waveHeight
+                    snapshot.waveAveragePeriod = wave.frequency
                     snapshot.id = Int(wave.id)
                     self.arrayOfSnapshots.append(snapshot)
                     //segue when all snapshots are available
