@@ -22,7 +22,6 @@
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
-		9572892120C99DDF007BE075 /* coast.png in Resources */ = {isa = PBXBuildFile; fileRef = 9572892020C99DDF007BE075 /* coast.png */; };
 		95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */; };
 		95786C1E20F935CE0043A543 /* AdobeHeitiStd-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */; };
 		95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1F20F939440043A543 /* Gotham Book Regular.otf */; };
@@ -35,9 +34,6 @@
 		95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE201E20EBB82B00FFDF99 /* FavoritesLabel.swift */; };
 		95BE202120EBD0A700FFDF99 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */; };
 		95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */; };
-		95C9DBA120C033750080B70B /* crash.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9E20C033750080B70B /* crash.png */; };
-		95C9DBA220C033750080B70B /* flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DB9F20C033750080B70B /* flat.png */; };
-		95C9DBA320C033750080B70B /* wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C9DBA020C033750080B70B /* wave.png */; };
 		95C9DBA520C0386B0080B70B /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */; };
 		95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3D38B20DAEFBD005529CE /* Favorite.swift */; };
 		95D3D38E20DC1310005529CE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3D38D20DC1310005529CE /* UIColorExtension.swift */; };
@@ -84,7 +80,6 @@
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
-		9572892020C99DDF007BE075 /* coast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coast.png; sourceTree = "<group>"; };
 		95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionLayout.swift; sourceTree = "<group>"; };
 		95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AdobeHeitiStd-Regular.otf"; sourceTree = "<group>"; };
 		95786C1F20F939440043A543 /* Gotham Book Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham Book Regular.otf"; sourceTree = "<group>"; };
@@ -98,11 +93,8 @@
 		95BE201E20EBB82B00FFDF99 /* FavoritesLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesLabel.swift; sourceTree = "<group>"; };
 		95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
-		95C9DB9E20C033750080B70B /* crash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crash.png; sourceTree = "<group>"; };
-		95C9DB9F20C033750080B70B /* flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flat.png; sourceTree = "<group>"; };
-		95C9DBA020C033750080B70B /* wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wave.png; sourceTree = "<group>"; };
+		95BF8A5620FD100500745481 /* surf-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "surf-Bridging-Header.h"; sourceTree = "<group>"; };
 		95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		95CC4AB320E5D58400A1996A /* surf-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "surf-Bridging-Header.h"; sourceTree = "<group>"; };
 		95D3D38B20DAEFBD005529CE /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		95D3D38D20DC1310005529CE /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -175,12 +167,10 @@
 			children = (
 				95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */,
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
-				95786C1F20F939440043A543 /* Gotham Book Regular.otf */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
 				95AF666220D810E600157811 /* CollectionViews */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
-				95EEECD8204CF40600308E73 /* Assets.xcassets */,
 				95B1981020EBDD9D0090940A /* GradientView.swift */,
 			);
 			path = View;
@@ -252,7 +242,7 @@
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
 				95D3D38D20DC1310005529CE /* UIColorExtension.swift */,
-				95CC4AB320E5D58400A1996A /* surf-Bridging-Header.h */,
+				95BF8A5620FD100500745481 /* surf-Bridging-Header.h */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,10 +250,8 @@
 		95C9DB9D20C033690080B70B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				9572892020C99DDF007BE075 /* coast.png */,
-				95C9DB9E20C033750080B70B /* crash.png */,
-				95C9DB9F20C033750080B70B /* flat.png */,
-				95C9DBA020C033750080B70B /* wave.png */,
+				95786C1F20F939440043A543 /* Gotham Book Regular.otf */,
+				95EEECD8204CF40600308E73 /* Assets.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -418,15 +406,11 @@
 				95E674BD20BDC6A100166693 /* staticStationList.json in Resources */,
 				95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */,
 				95AB2BA520BD9229004504BF /* buoys.json in Resources */,
-				95C9DBA320C033750080B70B /* wave.png in Resources */,
 				95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */,
-				9572892120C99DDF007BE075 /* coast.png in Resources */,
-				95C9DBA220C033750080B70B /* flat.png in Resources */,
 				95EEECDC204CF40600308E73 /* LaunchScreen.storyboard in Resources */,
 				95125EFB20C8483600FDE462 /* regionalBuoyList.json in Resources */,
 				95EEECD9204CF40600308E73 /* Assets.xcassets in Resources */,
 				95ECA44A20BF5349004F51EA /* forecast.xml in Resources */,
-				95C9DBA120C033750080B70B /* crash.png in Resources */,
 				95EEECD4204CF40600308E73 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

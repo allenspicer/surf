@@ -26,9 +26,7 @@ class HomeViewController: UIViewController {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-    private let imageArray = [#imageLiteral(resourceName: "crash.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"), #imageLiteral(resourceName: "wave.png"), #imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png"),#imageLiteral(resourceName: "flat.png")]
-    
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
