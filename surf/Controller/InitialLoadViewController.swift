@@ -54,10 +54,10 @@ class InitialLoadViewController: UIViewController {
     }
     
     
-    func getSnapshotWith(id : String, stationId: String, beachFaceDirection : Double){
+    func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection)
-            let snapshot = snapshotSetter.createSnapshot(finished: {})
+            let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id)
+            var snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 
@@ -74,7 +74,7 @@ class InitialLoadViewController: UIViewController {
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
 
-                self.favoriteSnapshots[id] = true
+                self.favoriteSnapshots["\(id)"] = true
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
@@ -168,7 +168,7 @@ class InitialLoadViewController: UIViewController {
                         guard let stationId = station["station"] as? Int else {return}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let favorite = Favorite(id: "\(id)", stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
+                        let favorite = Favorite(id: id, stationId: "\(stationId)", beachFaceDirection: beachFaceDirection, name: name)
                         favoritesToBeLoaded.append(favorite)
                     }
                         // load snapshot for each Favorite

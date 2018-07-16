@@ -325,7 +325,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD)
+            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id: 1000)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
