@@ -138,17 +138,17 @@ class InitialLoadViewController: UIViewController {
     
     private func addFavoriteStationsToCollectionData(){
         
-        //if a wave is availabe in persistence
-        //with the right id
-        //load that as snapshot
+        //the user does have at least one favorite station
+        //check if a wave is available from persistence data.
+        //if a wave is availabe in persistence with the correct id
+        //then it is 5 minutes old or newer
+        //take the wave and create a snapshot
 
         for wave in waveDictionary{
-            print(wave.key)
-            print(wave.value.timestamp)
             guard let timestamp = wave.value.timestamp else {return}
             for favorite in self.favoriteSnapshots.keys where favorite.id == wave.key{
                 self.favoriteSnapshots[favorite] = true
-                //make snapshot here
+                //init a snapshot object here and populate with the persistence data
                 var snapshot = Snapshot.init()
                 snapshot.timeStamp = timestamp
                 snapshot.waveHgt = wave.value.waveHeight
@@ -162,12 +162,15 @@ class InitialLoadViewController: UIViewController {
             }
         }
         
+        //for snapshots in favorites that still have a false value
+        //we must download a new snapshot
+        
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 
-                for snapshot in favoriteSnapshots {
+                for snapshot in favoriteSnapshots where snapshot.value == false{
                     let id = snapshot.key.id
                     if let stationsFromJSON = jsonResult as? [[String : AnyObject]]{
                         for station in stationsFromJSON {
