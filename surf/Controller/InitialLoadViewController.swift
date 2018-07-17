@@ -133,6 +133,9 @@ class InitialLoadViewController: UIViewController {
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             
+            print(favorites)
+            print(names)
+            
             for index in 0..<favorites.count {
                 let favorite = Favorite.init(id: favorites[index], stationId: "", beachFaceDirection: 0.0, name: names[index])
                 favoriteSnapshots[favorite] = false

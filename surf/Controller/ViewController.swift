@@ -16,7 +16,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
-    var id = Int()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     private var aiView = UIView()
@@ -24,7 +23,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var activityIndicatorView = ActivityIndicatorView()
     var favoriteButton = UIButton()
     var favoriteFlag = false
-    var indexOfCurrentStationInFavoritesArray: Int?
     var favoritesArray = [Int]()
     var nicknamesArray = [String]()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
@@ -56,15 +54,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func checkStorageForFavorite(){
-        indexOfCurrentStationInFavoritesArray = nil
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             favoritesArray = favorites
             nicknamesArray = names
             for favorite in favorites {
-                if id == favorite{
+                if currentSnapShot.id == favorite{
                     favoriteFlag = true
-                    indexOfCurrentStationInFavoritesArray = favorites.index(of: favorite)
                 }
             }
         }
@@ -240,9 +236,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         favoriteFlag = !favoriteFlag
         setButton(favoriteButton)
         
-        if let index = indexOfCurrentStationInFavoritesArray as? Int {
-            
-            if index >= 0 {
+        guard let id = currentSnapShot.id else { return }
+        
+        if let index = favoritesArray.index(of: id) {
                 feedbackGenerator.notification.notificationOccurred(.warning)
                 let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
@@ -255,7 +251,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 defaults.set(favoritesArray, forKey: DefaultConstants.favorites)
                 nicknamesArray.remove(at: index)
                 defaults.set(nicknamesArray, forKey: DefaultConstants.nicknames)
-            }
         }else{
             feedbackGenerator.notification.notificationOccurred(.success)
             addFavorite()
@@ -284,10 +279,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
-        favoritesArray.append(id)
+        if let id = currentSnapShot.id {
+            favoritesArray.append(id)
+        }
         UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
         nicknamesArray.append(nickname)
         UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
+        print(favoritesArray)
+        print(nicknamesArray)
     }
 }
 

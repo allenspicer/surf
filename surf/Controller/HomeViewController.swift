@@ -173,12 +173,6 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? ViewController {
-            
-            if let station = selectedStationOrFavorite as? Station, let id = Int(station.id) as? Int{
-                destinationVC.id = id
-            }else if let favorite = selectedStationOrFavorite as? Favorite, let id = Int(favorite.id) as? Int{
-                destinationVC.id = id
-            }
             destinationVC.currentSnapShot = selectedSnapshot
         }
     }
@@ -327,7 +321,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id: 1000)
+            guard let id = Int(self.proximalData[index].id) else {return}
+            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id:id)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
