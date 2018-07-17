@@ -89,18 +89,17 @@ class InitialLoadViewController: UIViewController {
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
-//            }else{
+            }else{
+//                if no data respond with alertview
+//                alert user then let them trigger endpoint again
                 
-                //delay then try creating endpoint again
-                //eventually show user error. 
-                
-                
-//                DispatchQueue.main.async {
-//                    //if no data respond with alertview
-//                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-//                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-//                    alert.addAction(doneAction)
-//                    self.present(alert, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Try Again", style: .default) { (action:UIAlertAction!) in
+                        self.getSnapshotWith(id: id, stationId: stationId, beachFaceDirection: beachFaceDirection)
+                    })
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
