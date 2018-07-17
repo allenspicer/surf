@@ -94,7 +94,7 @@ class InitialLoadViewController: UIViewController {
 //                alert user then let them trigger endpoint again
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "One of the weather stations in your favorites list is not providing much data at the moment", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Try Again", style: .default) { (action:UIAlertAction!) in
                         self.getSnapshotWith(id: id, stationId: stationId, beachFaceDirection: beachFaceDirection)
                     })
