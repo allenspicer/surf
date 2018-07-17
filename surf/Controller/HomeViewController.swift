@@ -241,6 +241,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
+            
+            
             selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
             selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
             if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
@@ -249,7 +251,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             if let name = favoritesSnapshots[cellSelectedIndex].nickname {
                 selectedName = name
             }
-            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
+                selectedBFD = direction
+            }
+            
             self.snapshotComponents = ["tide" : false, "wind" : false, "air" : false, "quality" : false]
             self.setAdditonalDataClients()
         default:
@@ -379,7 +384,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["wind"] = true
-        surfQuality = SurfQuality(currentSnapshot: self.selectedSnapshot)
+        surfQuality = SurfQuality(currentSnapshot: selectedSnapshot)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
     }

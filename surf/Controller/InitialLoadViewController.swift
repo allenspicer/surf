@@ -72,6 +72,9 @@ class InitialLoadViewController: UIViewController {
                     if let frequency = snapshot.waveAveragePeriod {
                         wave.frequency = frequency
                     }
+                    if let direction = snapshot.beachFaceDirection {
+                        wave.beachFaceDirection = direction
+                    }
                     
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
@@ -139,6 +142,7 @@ class InitialLoadViewController: UIViewController {
                     snapshot.waveAveragePeriod = wave.frequency
                     snapshot.id = Int(wave.id)
                     snapshot.nickname = favorite.name
+                    snapshot.beachFaceDirection = favorite.beachFaceDirection
                     self.arrayOfSnapshots.append(snapshot)
                     //segue when all snapshots are available
                     self.segueWhenComplete()
