@@ -12,6 +12,11 @@ import Foundation
 class FavCollectionViewCell: UICollectionViewCell {
     
     var backgroundGradient = CAGradientLayer()
+    var mainView = UIView()
+    var heightLabel = UILabel()
+    var frequencyLabel = UILabel()
+    var locationLabel = UILabel()
+    var distanceLabel = UILabel()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -19,17 +24,17 @@ class FavCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func setCellContent(waveHeight: Double, waveFrequency: Double, locationName: String, distanceFromUser: Double){
+        heightLabel.text = "\(waveHeight) ft"
+        frequencyLabel.text = "\(waveFrequency)sec"
+        locationLabel.text = locationName
+        distanceLabel.text = "\(distanceFromUser)mi"
+    }
 
-    func loadAllViews(waveHeight: Double, waveFrequency: Double, locationName: String, distanceFromUser: Double) {
-
-            var mainView: UIView
-            var heightLabel: UILabel
-            var frequencyLabel: UILabel
-            var locationLabel: UILabel
-            var distanceLabel: UILabel
-
+    func loadAllViews() {
+        
             self.contentMode = .center
-            
             let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
             mainView = UIView(frame: mainViewFrame)
             mainView.layer.cornerRadius = 103
@@ -53,7 +58,6 @@ class FavCollectionViewCell: UICollectionViewCell {
             heightLabel.textAlignment = .center
             heightLabel.font = UIFont(name: "Avenir Next Condensed", size: 58)
             self.addSubview(heightLabel)
-            heightLabel.text = "\(waveHeight) ft"
         
             let frequencyLabelFrame = CGRect(x: 0.0, y: mainViewFrame.height * 0.75, width: self.frame.width, height: 18.0)
             frequencyLabel = UILabel(frame: frequencyLabelFrame)
@@ -62,7 +66,6 @@ class FavCollectionViewCell: UICollectionViewCell {
             frequencyLabel.textAlignment = .center
             frequencyLabel.font = UIFont(name: "Gotham", size: 18)
             self.addSubview(frequencyLabel)
-            frequencyLabel.text = "\(waveFrequency)sec"
         
             let locationLabelFrame = CGRect(x: 0.0, y: self.frame.height - 40, width: self.frame.width, height: 20.0)
             locationLabel = UILabel(frame: locationLabelFrame)
@@ -71,7 +74,6 @@ class FavCollectionViewCell: UICollectionViewCell {
             locationLabel.textAlignment = .center
             locationLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
             self.addSubview(locationLabel)
-            locationLabel.text = locationName
 
             let distanceLabelFrame = CGRect(x: 0.0, y: self.frame.height - 20, width: self.frame.width, height: 20.0)
             distanceLabel = UILabel(frame: distanceLabelFrame)
@@ -81,7 +83,6 @@ class FavCollectionViewCell: UICollectionViewCell {
             distanceLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
             distanceLabel.tag = 1
             self.addSubview(distanceLabel)
-            distanceLabel.text = "\(distanceFromUser)mi"
 
         }
 
