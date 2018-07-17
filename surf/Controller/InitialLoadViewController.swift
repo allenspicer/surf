@@ -130,13 +130,16 @@ class InitialLoadViewController: UIViewController {
         // retrieve defaults and set up a local dictionary with the users favorites and a false flag
         // false here is a default value to indicate this favorite has not been downloaded
         
-        let defaults = UserDefaults.standard
-        if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-            
-            for index in 0..<favorites.count {
-                let favorite = Favorite.init(id: favorites[index], stationId: "", beachFaceDirection: 0.0, name: names[index])
-                favoriteSnapshots[favorite] = false
-            }
+        var favoritesArray = [Favorite]()
+        do {
+            favoritesArray = try context.fetch(Favorite.fetchRequest())
+        }
+        catch {
+            print("Failed to retrieve Favorite Entity from context.")
+        }
+
+        for favorite in favoritesArray {
+            favoriteSnapshots[favorite] = false
         }
         completion([String : Int]())
     }
@@ -184,11 +187,11 @@ class InitialLoadViewController: UIViewController {
                                 guard let stationId = station["station"] as? Int else {return}
                                 guard let beachFaceDirection = station["bfd"] as? Double else {return}
                                 guard let name = station["name"] as? String else {return}
-                                var favorite = snapshot.key
+                                let favorite = snapshot.key
                                 favorite.stationId = "\(stationId)"
                                 favorite.beachFaceDirection = beachFaceDirection
                                 favorite.name = name
-                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
+                                self.getSnapshotWith(id: Int(favorite.id), stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
                             }
                         }
                     }

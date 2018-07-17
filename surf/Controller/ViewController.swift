@@ -24,12 +24,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var activityIndicatorView = ActivityIndicatorView()
     var favoriteButton = UIButton()
     var favoriteFlag = false
-    var indexOfCurrentStationInFavoritesArray: Int?
-    var favoritesArray = [Int]()
+    var favoritesArray = [Favorite]()
+    var currentFavorite = Favorite()
     var nicknamesArray = [String]()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
     
     
     
@@ -56,17 +58,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func checkStorageForFavorite(){
-        indexOfCurrentStationInFavoritesArray = nil
-        let defaults = UserDefaults.standard
-        if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-            favoritesArray = favorites
-            nicknamesArray = names
-            for favorite in favorites {
-                if id == favorite{
-                    favoriteFlag = true
-                    indexOfCurrentStationInFavoritesArray = favorites.index(of: favorite)
-                }
-            }
+        do {
+            favoritesArray = try context.fetch(Favorite.fetchRequest())
+        }catch {
+            print("Failed to retrieve Favorite Entity from context.")
+        }
+        //set favorite flag
+        for favorite in favoritesArray where Int(favorite.id) == id {
+            favoriteFlag = true
+            currentFavorite = favorite
         }
     }
     
@@ -240,22 +240,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         favoriteFlag = !favoriteFlag
         setButton(favoriteButton)
         
-        if let index = indexOfCurrentStationInFavoritesArray as? Int {
-            
-            if index >= 0 {
+        if favoritesArray.contains(currentFavorite){
                 feedbackGenerator.notification.notificationOccurred(.warning)
                 let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
                 self.present(alert, animated: true, completion: nil)
-                
-                //subtract from array
-                favoritesArray.remove(at: index)
-                let defaults = UserDefaults.standard
-                defaults.set(favoritesArray, forKey: DefaultConstants.favorites)
-                nicknamesArray.remove(at: index)
-                defaults.set(nicknamesArray, forKey: DefaultConstants.nicknames)
-            }
+            
+                self.context.delete(currentFavorite)
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }else{
             feedbackGenerator.notification.notificationOccurred(.success)
             addFavorite()
@@ -284,10 +277,12 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
-        favoritesArray.append(id)
-        UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
-        nicknamesArray.append(nickname)
-        UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
+        let newFavorite = Favorite(context: self.context)
+//        newFavorite.id = currentFavorite.id
+//        newFavorite.stationId = currentFavorite.stationId
+//        newFavorite.beachFaceDirection = currentFavorite.beachFaceDirection
+//        newFavorite.name = currentFavorite.name
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
 }
 

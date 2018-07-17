@@ -35,7 +35,6 @@
 		95BE202120EBD0A700FFDF99 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BE202020EBD0A700FFDF99 /* SplashScreenViewController.swift */; };
 		95BE202420EBD52A00FFDF99 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */; };
 		95C9DBA520C0386B0080B70B /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */; };
-		95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3D38B20DAEFBD005529CE /* Favorite.swift */; };
 		95D3D38E20DC1310005529CE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3D38D20DC1310005529CE /* UIColorExtension.swift */; };
 		95DE6E1A20C9DB7400CF0938 /* FavCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */; };
 		95E1BE9E2088C7AC0096ECA3 /* surfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1BE9D2088C7AC0096ECA3 /* surfTests.swift */; };
@@ -95,7 +94,6 @@
 		95BE202320EBD52900FFDF99 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
 		95BF8A5620FD100500745481 /* surf-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "surf-Bridging-Header.h"; sourceTree = "<group>"; };
 		95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		95D3D38B20DAEFBD005529CE /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		95D3D38D20DC1310005529CE /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		95DE6E1920C9DB7400CF0938 /* FavCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavCollectionViewCell.swift; sourceTree = "<group>"; };
 		95E1BE9B2088C7AC0096ECA3 /* surfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,11 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				950A2A4C2056BA1E008DE32F /* Station.swift */,
-				95D3D38B20DAEFBD005529CE /* Favorite.swift */,
 				95713FEF2075912300745FC7 /* Snapshot.swift */,
 				957F004520C0AEB600A7B8BA /* Tide.swift */,
 				95125EF220C708BB00FDE462 /* Wind.swift */,
 				95125EF420C82B9800FDE462 /* AirTemp.swift */,
+				95786C2420FB87120043A543 /* surf.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,7 +179,6 @@
 			children = (
 				95EEECDD204CF40600308E73 /* Info.plist */,
 				95EEECCE204CF40600308E73 /* AppDelegate.swift */,
-				95786C2420FB87120043A543 /* surf.xcdatamodeld */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -480,7 +477,6 @@
 				951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */,
 				95B1981120EBDD9D0090940A /* GradientView.swift in Sources */,
 				95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */,
-				95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */,
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
 				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
@@ -763,8 +759,7 @@
 				95786C2520FB87120043A543 /* surf.xcdatamodel */,
 			);
 			currentVersion = 95786C2520FB87120043A543 /* surf.xcdatamodel */;
-			name = surf.xcdatamodeld;
-			path = ../Data/surf.xcdatamodeld;
+			path = surf.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
