@@ -242,7 +242,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
             
-            
             selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
             selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
             if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {

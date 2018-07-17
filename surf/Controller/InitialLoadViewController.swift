@@ -14,7 +14,7 @@ class InitialLoadViewController: UIViewController {
     var favoriteSnapshots = [Favorite : Bool]()
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var waves: [Wave] = []
+    var waveDictionary = [Int : Wave]()
 
 
     override func viewDidLoad() {
@@ -35,11 +35,15 @@ class InitialLoadViewController: UIViewController {
     }
     
     func getData() {
+        var waveArray = [Wave]()
         do {
-            waves = try context.fetch(Wave.fetchRequest())
+            waveArray = try context.fetch(Wave.fetchRequest())
         }
         catch {
             print("Failed to retrieve Wave Entity from context.")
+        }
+        for wave in waveArray {
+            waveDictionary[Int(wave.id)] = wave
         }
     }
     
@@ -119,28 +123,26 @@ class InitialLoadViewController: UIViewController {
     
     private func addFavoriteStationsToCollectionData(){
         
-        
-        
         //if a wave is availabe in persistence from the last 5 minutes
         //with the right id
         //load that as snapshot
         let fiveMinutes: TimeInterval = 5.0 * 60.0
-        print("there are \(waves.count) saved waves")
+        print("there are \(waveDictionary.count) saved waves")
         print("the wave timestamps are :")
 
-        for wave in waves{
-            print(wave.id)
-            print(wave.timestamp)
-            guard let timestamp = wave.timestamp else {return}
-            for favorite in self.favoriteSnapshots.keys where favorite.id == Int(wave.id){
+        for wave in waveDictionary{
+            print(wave.key)
+            print(wave.value.timestamp)
+            guard let timestamp = wave.value.timestamp else {return}
+            for favorite in self.favoriteSnapshots.keys where favorite.id == wave.key{
                 if abs(timestamp.timeIntervalSinceNow) < fiveMinutes{
                     self.favoriteSnapshots[favorite] = true
                     //make snapshot here
                     var snapshot = Snapshot.init()
                     snapshot.timeStamp = timestamp
-                    snapshot.waveHgt = wave.waveHeight
-                    snapshot.waveAveragePeriod = wave.frequency
-                    snapshot.id = Int(wave.id)
+                    snapshot.waveHgt = wave.value.waveHeight
+                    snapshot.waveAveragePeriod = wave.value.frequency
+                    snapshot.id = wave.key
                     snapshot.nickname = favorite.name
                     snapshot.beachFaceDirection = favorite.beachFaceDirection
                     self.arrayOfSnapshots.append(snapshot)
@@ -149,7 +151,7 @@ class InitialLoadViewController: UIViewController {
                 }else{
                     //remove from persistent container
                     DispatchQueue.main.async {
-                        self.context.delete(wave)
+                        self.context.delete(wave.value)
                     }
                 }
             }
