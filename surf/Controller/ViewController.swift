@@ -11,7 +11,7 @@ import AudioToolbox.AudioServices
 
 
 final class ViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
@@ -30,11 +30,11 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
-
-
+    
+    
     
     /// The `CAShapeLayer` that will contain the animated path
-     private let shapeLayer: CAShapeLayer = {
+    private let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
         _layer.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         _layer.fillColor = UIColor.clear.cgColor
@@ -112,10 +112,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.addWaveHeightIndicator()
-//                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
-//                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
-//                    })
-//                    view.animateHide()
+                    //                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
+                    //                    })
+                    //                    view.animateHide()
                 }
             }
         }
@@ -124,10 +124,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for view in self.view.subviews as [UIView] {
                 if let snapshotView = view as? SurfSnapshotView {
                     snapshotView.removeWaveHeightIndicator()
-//                    view.animateShow()
-//                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
-//                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
-//                    })
+                    //                    view.animateShow()
+                    //                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                    //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
+                    //                    })
                 }
             }
         }
@@ -151,7 +151,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //
     //Animation Components
     //
-
+    
     
     /// Start the display link
     
@@ -227,14 +227,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         favoriteButton.titleLabel?.textColor = .black
         favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         for view in self.view.subviews {
-           if view is SurfSnapshotView {
-               view.addSubview(favoriteButton)
-               }
-           }
+            if view is SurfSnapshotView {
+                view.addSubview(favoriteButton)
+            }
         }
+    }
     
     
-
+    
     @objc func favoriteButtonAction(){
         
         favoriteFlag = !favoriteFlag
@@ -261,8 +261,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             addFavorite()
         }
     }
-        
-        
+    
+    
     func addFavorite(){
         let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this station?", preferredStyle: .alert)
         alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
@@ -281,18 +281,18 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
         alert.addAction(doneAction)
         self.present(alert, animated: true, completion: nil)
-        }
+    }
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
         favoritesArray.append(id)
         UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
         nicknamesArray.append(nickname)
         UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
-        }
+    }
 }
 
 extension ViewController{
-
+    
     
     func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
         

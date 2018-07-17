@@ -11,7 +11,7 @@ import UIKit
 class ActivityIndicatorView: UIView {
     
     func setupActivityIndicator(view: UIView, widthView: CGFloat?,backgroundColor: UIColor?, textColor:UIColor?, message: String?) -> ActivityIndicatorView{
-            //Config UIView
+        //Config UIView
         let customBlue = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
         self.backgroundColor = customBlue //Background color of your view which you want to set
         var selfWidth = view.frame.width
@@ -34,8 +34,8 @@ class ActivityIndicatorView: UIView {
         var imageHeight = CGFloat(60)
         
         if widthView != nil{
-        imageWidth = widthView ?? imageWidth
-        imageHeight = widthView ?? imageHeight
+            imageWidth = widthView ?? imageWidth
+            imageHeight = widthView ?? imageHeight
         }
         
         //ConfigureLabel
@@ -44,8 +44,8 @@ class ActivityIndicatorView: UIView {
         label.textColor = .gray
         //        label.font = UIFont(name: "SFUIDisplay-Regular", size: 17.0)! // Your Desired UIFont Style and Size
         label.numberOfLines = 0
-//        label.text = message ?? ""
-//        label.textColor = textColor ?? UIColor.clear
+        //        label.text = message ?? ""
+        //        label.textColor = textColor ?? UIColor.clear
         
         //Config frame of label
         let labelFrameX = (selfWidth / 2) - 100
@@ -70,7 +70,7 @@ class ActivityIndicatorView: UIView {
         gradientView.secondColor = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
         self.addSubview(gradientView)
         self.sendSubview(toBack: gradientView)
-
+        
         return self
     }
 }

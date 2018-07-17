@@ -13,10 +13,10 @@ import UIKit
 private var windUnit = "MPH"
 
 class SurfSnapshotView: UIScrollView {
-
+    
     var currentSnapShot : Snapshot
     var label = UILabel()
-
+    
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
         super.init(frame: UIScreen.main.bounds)
@@ -35,7 +35,7 @@ class SurfSnapshotView: UIScrollView {
         addSpotTitleLabel()
         addDetailContainerView()
     }
-
+    
     func addWaveHeightIndicator(){
         
         let centerY = self.bounds.height / 2
@@ -59,8 +59,8 @@ class SurfSnapshotView: UIScrollView {
         label.removeFromSuperview()
     }
     
-     private func addWaveHeightLabels(){
-    
+    private func addWaveHeightLabels(){
+        
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
         if let wHeight = currentSnapShot.waveHgt{
@@ -97,7 +97,7 @@ class SurfSnapshotView: UIScrollView {
         feetLabel.textAlignment = .center
         self.addSubview(feetLabel)
     }
-
+    
     
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
@@ -163,10 +163,10 @@ class SurfSnapshotView: UIScrollView {
         rightStack.addArrangedSubview(addTideStackView())
         rightStack.addArrangedSubview(addTideNextStackView())
         rightStack.addArrangedSubview(addWindStackView())
- 
+        
         containerStackView.addArrangedSubview(leftStack)
         containerStackView.addArrangedSubview(rightStack)
-
+        
         self.addSubview(containerStackView)
     }
     

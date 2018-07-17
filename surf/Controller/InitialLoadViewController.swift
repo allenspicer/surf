@@ -15,26 +15,28 @@ class InitialLoadViewController: UIViewController {
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waveDictionary = [Int : Wave]()
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
         self.view.addSubview(activityIndicatorView)
         
-        self.getData()
-        
-        // determine what breaks are in favorites
         DispatchQueue.global(qos:.utility).async{
-            self.setUserFavorites(){ (favoritesDictionary) in
-                if self.favoriteSnapshots.count > 0 { self.addFavoriteStationsToCollectionData() }
-                self.segueWhenComplete()
+            self.getUserFavoritesFromDefaults(){ (favoritesDictionary) in
+                //if the user has favorites get records from persistent or load them
+                if self.favoriteSnapshots.count > 0 {
+                    self.loadWaveRecordsFromPersistence()
+                    self.addFavoriteStationsToCollectionData()
+                } else {
+                    self.segueWhenComplete()
+                }
             }
         }
     }
     
-    func getData() {
+    func loadWaveRecordsFromPersistence() {
         
         var waveArray = [Wave]()
         do {
@@ -47,7 +49,7 @@ class InitialLoadViewController: UIViewController {
             waveDictionary[Int(wave.id)] = wave
         }
         
-        //if a wave in persistence is more than 5 minutes old remove it from local and persistence
+        //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
         let fiveMinutes: TimeInterval = 5.0 * 60.0
         
         for wave in waveDictionary {
@@ -59,7 +61,9 @@ class InitialLoadViewController: UIViewController {
                 waveDictionary.removeValue(forKey: wave.key)
             }
         }
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        DispatchQueue.main.async {
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
         
     }
     
@@ -106,8 +110,8 @@ class InitialLoadViewController: UIViewController {
                 //segue when all snapshots are available
                 self.segueWhenComplete()
             }else{
-//                if no data respond with alertview
-//                alert user then let them trigger endpoint again
+                //                if no data respond with alertview
+                //                alert user then let them trigger endpoint again
                 
                 DispatchQueue.main.async {
                     let alert = UIAlertController.init(title: "Not enough Data", message: "One of the weather stations in your favorites list is not providing much data at the moment", preferredStyle: .alert)
@@ -120,7 +124,7 @@ class InitialLoadViewController: UIViewController {
         }
     }
     
-    func setUserFavorites (completion:@escaping ([String : Int])->Void){
+    func getUserFavoritesFromDefaults (completion:@escaping ([String : Int])->Void){
         
         // retrieve defaults and set up a local dictionary with the users favorites and a false flag
         // false here is a default value to indicate this favorite has not been downloaded
@@ -143,7 +147,7 @@ class InitialLoadViewController: UIViewController {
         //if a wave is availabe in persistence with the correct id
         //then it is 5 minutes old or newer
         //take the wave and create a snapshot
-
+        
         for wave in waveDictionary{
             guard let timestamp = wave.value.timestamp else {return}
             for favorite in self.favoriteSnapshots.keys where favorite.id == wave.key{
@@ -195,7 +199,7 @@ class InitialLoadViewController: UIViewController {
         }
     }
     
-
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -203,6 +207,6 @@ class InitialLoadViewController: UIViewController {
             destinationVC.favoritesSnapshots = arrayOfSnapshots
         }
     }
- 
-
+    
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 class HomeViewController: UIViewController {
-
+    
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     private var proximalData = [Station]()
@@ -38,9 +38,9 @@ class HomeViewController: UIViewController {
         applyGradientToBackground()
     }
     
-//
-// MARK: - Inital Load Logic
-//
+    //
+    // MARK: - Inital Load Logic
+    //
     
     private func setDataOrGetUserLocation(){
         let defaults = UserDefaults.standard
@@ -71,9 +71,9 @@ class HomeViewController: UIViewController {
         self.view.sendSubview(toBack: gradientView)
     }
     
-//
-//MARK: - Location Services
-//
+    //
+    //MARK: - Location Services
+    //
     
     private func findDistancesFromUserLocation(){
         
@@ -142,9 +142,9 @@ class HomeViewController: UIViewController {
         stopActivityIndicator()
     }
     
-//
-//MARK: - Buoy List for regional data station ids
-//
+    //
+    //MARK: - Buoy List for regional data station ids
+    //
     
     private func parseStationList(){
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
@@ -213,8 +213,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //
     //MARK: - Handling of Collection Views and Cell Display
     //
-
-
+    
+    
     func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
@@ -260,7 +260,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             break
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case is ProximalCollectionView:
@@ -285,7 +285,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let snapshot = self.favoritesSnapshots[indexPath.row]
             guard let waveHeight = snapshot.waveHgt else {return cell}
             guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
-//            guard let nickname = snapshot.nickname else {return cell}
+            //            guard let nickname = snapshot.nickname else {return cell}
             let nickname = snapshot.nickname ?? "nickname"
             cell.setCellContent(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
@@ -323,7 +323,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //
     //MARK: - Cell click action and data retreival delegates
     //
-
+    
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
@@ -331,17 +331,17 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
-                if self.selectedSnapshot.waveHgt != nil && self.selectedSnapshot.waterTemp != nil {
-                    self.selectedSnapshot.stationName = stationName
-                    self.setAdditonalDataClients()
-                }else{
-                    DispatchQueue.main.async {
-                        //if no data respond with alertview
-                        self.stopActivityIndicator()
-                        let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-                        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-                        alert.addAction(doneAction)
-                            self.present(alert, animated: true, completion: nil)
+            if self.selectedSnapshot.waveHgt != nil && self.selectedSnapshot.waterTemp != nil {
+                self.selectedSnapshot.stationName = stationName
+                self.setAdditonalDataClients()
+            }else{
+                DispatchQueue.main.async {
+                    //if no data respond with alertview
+                    self.stopActivityIndicator()
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+                    alert.addAction(doneAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -404,5 +404,5 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.performSegue(withIdentifier: "showStationDetail", sender: self)
         }
     }
-
+    
 }
