@@ -55,7 +55,7 @@ class InitialLoadViewController: UIViewController {
     func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double){
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id)
-            var snapshot = snapshotSetter.createSnapshot(finished: {})
+            let snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot worked update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 
@@ -76,10 +76,8 @@ class InitialLoadViewController: UIViewController {
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
                 
-                for favorite in self.favoriteSnapshots.keys {
-                    if favorite.id == id {
-                        self.favoriteSnapshots[favorite] = true
-                    }
+                for favorite in self.favoriteSnapshots.keys where favorite.id == id{
+                    self.favoriteSnapshots[favorite] = true
                 }
                 self.arrayOfSnapshots.append(snapshot)
                 //segue when all snapshots are available
@@ -131,25 +129,23 @@ class InitialLoadViewController: UIViewController {
             print(wave.id)
             print(wave.timestamp)
             guard let timestamp = wave.timestamp else {return}
-            for favorite in self.favoriteSnapshots.keys {
-                if favorite.id == Int(wave.id){
-                    if abs(timestamp.timeIntervalSinceNow) < fiveMinutes{
-                        self.favoriteSnapshots[favorite] = true
-                        //make snapshot here
-                        var snapshot = Snapshot.init()
-                        snapshot.timeStamp = timestamp
-                        snapshot.waveHgt = wave.waveHeight
-                        snapshot.waveAveragePeriod = wave.frequency
-                        snapshot.id = Int(wave.id)
-                        snapshot.nickname = favorite.name
-                        self.arrayOfSnapshots.append(snapshot)
-                        //segue when all snapshots are available
-                        self.segueWhenComplete()
-                    }else{
-                        //remove from persistent container
-                        DispatchQueue.main.async {
-                            self.context.delete(wave)
-                        }
+            for favorite in self.favoriteSnapshots.keys where favorite.id == Int(wave.id){
+                if abs(timestamp.timeIntervalSinceNow) < fiveMinutes{
+                    self.favoriteSnapshots[favorite] = true
+                    //make snapshot here
+                    var snapshot = Snapshot.init()
+                    snapshot.timeStamp = timestamp
+                    snapshot.waveHgt = wave.waveHeight
+                    snapshot.waveAveragePeriod = wave.frequency
+                    snapshot.id = Int(wave.id)
+                    snapshot.nickname = favorite.name
+                    self.arrayOfSnapshots.append(snapshot)
+                    //segue when all snapshots are available
+                    self.segueWhenComplete()
+                }else{
+                    //remove from persistent container
+                    DispatchQueue.main.async {
+                        self.context.delete(wave)
                     }
                 }
             }
