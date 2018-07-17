@@ -25,7 +25,7 @@ class InitialLoadViewController: UIViewController {
         
         DispatchQueue.global(qos:.utility).async{
             self.getUserFavoritesFromDefaults(){ (favoritesDictionary) in
-                //if the user has favorites get records from persistent or load them
+                //if the user has favorites get records from persistent or download them
                 if self.favoriteSnapshots.count > 0 {
                     self.loadWaveRecordsFromPersistence()
                     self.addFavoriteStationsToCollectionData()
@@ -110,9 +110,10 @@ class InitialLoadViewController: UIViewController {
                 //segue when all snapshots are available
                 self.segueWhenComplete()
             }else{
-                //                if no data respond with alertview
-                //                alert user then let them trigger endpoint again
                 
+                //if no data respond with alertview
+                // alert user then let them trigger endpoint again
+            
                 DispatchQueue.main.async {
                     let alert = UIAlertController.init(title: "Not enough Data", message: "One of the weather stations in your favorites list is not providing much data at the moment", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Try Again", style: .default) { (action:UIAlertAction!) in
