@@ -35,6 +35,7 @@ class InitialLoadViewController: UIViewController {
     }
     
     func getData() {
+        
         var waveArray = [Wave]()
         do {
             waveArray = try context.fetch(Wave.fetchRequest())
@@ -45,6 +46,21 @@ class InitialLoadViewController: UIViewController {
         for wave in waveArray {
             waveDictionary[Int(wave.id)] = wave
         }
+        
+        //if a wave in persistence is more than 5 minutes old remove it from local and persistence
+        let fiveMinutes: TimeInterval = 5.0 * 60.0
+        
+        for wave in waveDictionary {
+            guard let timestamp = wave.value.timestamp else {return}
+            if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
+                DispatchQueue.main.async {
+                    self.context.delete(wave.value)
+                }
+                waveDictionary.removeValue(forKey: wave.key)
+            }
+        }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
     }
     
     func segueWhenComplete(){
@@ -122,41 +138,28 @@ class InitialLoadViewController: UIViewController {
     
     private func addFavoriteStationsToCollectionData(){
         
-        //if a wave is availabe in persistence from the last 5 minutes
+        //if a wave is availabe in persistence
         //with the right id
         //load that as snapshot
-        let fiveMinutes: TimeInterval = 5.0 * 60.0
-        print("there are \(waveDictionary.count) saved waves")
-        print("the wave timestamps are :")
 
         for wave in waveDictionary{
             print(wave.key)
             print(wave.value.timestamp)
             guard let timestamp = wave.value.timestamp else {return}
             for favorite in self.favoriteSnapshots.keys where favorite.id == wave.key{
-                if abs(timestamp.timeIntervalSinceNow) < fiveMinutes{
-                    self.favoriteSnapshots[favorite] = true
-                    //make snapshot here
-                    var snapshot = Snapshot.init()
-                    snapshot.timeStamp = timestamp
-                    snapshot.waveHgt = wave.value.waveHeight
-                    snapshot.waveAveragePeriod = wave.value.frequency
-                    snapshot.id = wave.key
-                    snapshot.nickname = favorite.name
-                    snapshot.beachFaceDirection = favorite.beachFaceDirection
-                    self.arrayOfSnapshots.append(snapshot)
-                    //segue when all snapshots are available
-                    self.segueWhenComplete()
-                }else{
-                    //remove from persistent container
-                    DispatchQueue.main.async {
-                        self.context.delete(wave.value)
-                    }
-                }
+                self.favoriteSnapshots[favorite] = true
+                //make snapshot here
+                var snapshot = Snapshot.init()
+                snapshot.timeStamp = timestamp
+                snapshot.waveHgt = wave.value.waveHeight
+                snapshot.waveAveragePeriod = wave.value.frequency
+                snapshot.id = wave.key
+                snapshot.nickname = favorite.name
+                snapshot.beachFaceDirection = favorite.beachFaceDirection
+                self.arrayOfSnapshots.append(snapshot)
+                //try to segue, will only work when all snapshots are populated
+                self.segueWhenComplete()
             }
-        }
-        DispatchQueue.main.async {
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         }
         
         if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {

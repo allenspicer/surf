@@ -285,7 +285,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let snapshot = self.favoritesSnapshots[indexPath.row]
             guard let waveHeight = snapshot.waveHgt else {return cell}
             guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
-            guard let nickname = snapshot.nickname else {return cell}
+//            guard let nickname = snapshot.nickname else {return cell}
+            let nickname = snapshot.nickname ?? "nickname"
             cell.setCellContent(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
             return cell
         default:
