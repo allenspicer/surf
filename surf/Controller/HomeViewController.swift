@@ -254,7 +254,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 selectedBFD = direction
             }
             
-            self.snapshotComponents = ["tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             self.setAdditonalDataClients()
         default:
             break
