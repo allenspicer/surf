@@ -10,8 +10,8 @@ import UIKit
 
 class InitialLoadViewController: UIViewController {
     
-    var arrayOfSnapshots = [Snapshot]()
-    var favoriteSnapshots = [Favorite : Bool]()
+    var favoriteSnapshots = [Snapshot]()
+    var userFavorites = [Favorite : Bool]()
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waveDictionary = [Int : Wave]()
@@ -19,14 +19,22 @@ class InitialLoadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        displayActivityIndicator()
+        retrieveUserFavoritesAndCreateSnapshots()
+    }
+    
+    func displayActivityIndicator(){
         let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
         self.view.addSubview(activityIndicatorView)
-        
+    }
+    
+    func retrieveUserFavoritesAndCreateSnapshots(){
         DispatchQueue.global(qos:.utility).async{
             self.getUserFavoritesFromDefaults(){ (favoritesDictionary) in
+                
+                print(self.userFavorites.keys)
                 //if the user has favorites get records from persistent or download them
-                if self.favoriteSnapshots.count > 0 {
+                if self.userFavorites.count > 0 {
                     self.loadWaveRecordsFromPersistence()
                     self.addFavoriteStationsToCollectionData()
                 } else {
@@ -35,6 +43,7 @@ class InitialLoadViewController: UIViewController {
             }
         }
     }
+    
     
     func loadWaveRecordsFromPersistence() {
         
@@ -68,7 +77,7 @@ class InitialLoadViewController: UIViewController {
     }
     
     func segueWhenComplete(){
-        if !favoriteSnapshots.values.contains(false){
+        if !userFavorites.values.contains(false){
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
             }
@@ -103,10 +112,10 @@ class InitialLoadViewController: UIViewController {
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
                 
-                for favorite in self.favoriteSnapshots.keys where favorite.id == id{
-                    self.favoriteSnapshots[favorite] = true
+                for favorite in self.userFavorites.keys where favorite.id == id{
+                    self.userFavorites[favorite] = true
                 }
-                self.arrayOfSnapshots.append(snapshot)
+                self.favoriteSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
             }else{
@@ -132,13 +141,9 @@ class InitialLoadViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-            
-            print(favorites)
-            print(names)
-            
             for index in 0..<favorites.count {
                 let favorite = Favorite.init(id: favorites[index], stationId: "", beachFaceDirection: 0.0, name: names[index])
-                favoriteSnapshots[favorite] = false
+                userFavorites[favorite] = false
             }
         }
         completion([String : Int]())
@@ -154,8 +159,8 @@ class InitialLoadViewController: UIViewController {
         
         for wave in waveDictionary{
             guard let timestamp = wave.value.timestamp else {return}
-            for favorite in self.favoriteSnapshots.keys where favorite.id == wave.key{
-                self.favoriteSnapshots[favorite] = true
+            for favorite in self.userFavorites.keys where favorite.id == wave.key{
+                self.userFavorites[favorite] = true
                 //init a snapshot object here and populate with the persistence data
                 var snapshot = Snapshot.init()
                 snapshot.timeStamp = timestamp
@@ -164,7 +169,7 @@ class InitialLoadViewController: UIViewController {
                 snapshot.id = wave.key
                 snapshot.nickname = favorite.name
                 snapshot.beachFaceDirection = favorite.beachFaceDirection
-                self.arrayOfSnapshots.append(snapshot)
+                self.favoriteSnapshots.append(snapshot)
                 //try to segue, will only work when all snapshots are populated
                 self.segueWhenComplete()
             }
@@ -178,7 +183,7 @@ class InitialLoadViewController: UIViewController {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                 
-                for snapshot in favoriteSnapshots where snapshot.value == false{
+                for snapshot in userFavorites where snapshot.value == false{
                     let id = snapshot.key.id
                     if let stationsFromJSON = jsonResult as? [[String : AnyObject]]{
                         for station in stationsFromJSON {
@@ -208,7 +213,7 @@ class InitialLoadViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? HomeViewController {
-            destinationVC.favoritesSnapshots = arrayOfSnapshots
+            destinationVC.favoritesSnapshots = favoriteSnapshots
         }
     }
     
