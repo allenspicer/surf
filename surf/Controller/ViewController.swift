@@ -42,7 +42,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkStorageForFavorite()
+        loadFavoritesAndSetFavoriteButton()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
         setupAnimatedWaveWithBouyData()
@@ -53,7 +53,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func checkStorageForFavorite(){
+    func loadFavoritesAndSetFavoriteButton(){
         let defaults = UserDefaults.standard
         if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
             favoritesArray = favorites
@@ -285,8 +285,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
         nicknamesArray.append(nickname)
         UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
-        print(favoritesArray)
-        print(nicknamesArray)
     }
 }
 
