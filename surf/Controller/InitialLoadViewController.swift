@@ -31,8 +31,6 @@ class InitialLoadViewController: UIViewController {
     func retrieveUserFavoritesAndCreateSnapshots(){
         DispatchQueue.global(qos:.utility).async{
             self.getUserFavoritesFromDefaults(){ (favoritesDictionary) in
-                
-                print(self.userFavorites.keys)
                 //if the user has favorites get records from persistent or download them
                 if self.userFavorites.count > 0 {
                     self.loadWaveRecordsFromPersistence()
