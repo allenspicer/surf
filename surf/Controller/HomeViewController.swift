@@ -26,7 +26,8 @@ class HomeViewController: UIViewController {
     private var userLongitude = 0.0
     private var userLatitude = 0.0
     private var locationManager = CLLocationManager()
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()    
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    let transitionComplete = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -237,29 +238,31 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is FavoriteCollectionView:
             collectionView.frame = self.view.frame
             if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
+                
                 let transitionView = createViewForTransition()
                 self.view.addSubview(transitionView)
                 self.view.bringSubview(toFront: transitionView)
-                transitionView.center = collectionView.center
+                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
+                transitionView.center = centerPoint
                 transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
-                    transitionView.removeFromSuperview()
+//                    transitionView.removeFromSuperview()
                 })
             }
             
-//            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
-//            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-//            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
-//                selectedId = "\(stationId)"
-//            }
-//            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
-//                selectedName = name
-//            }
-//            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
-//                selectedBFD = direction
-//            }
-//
-//            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-//            self.setAdditonalDataClients()
+            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
+            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
+                selectedId = "\(stationId)"
+            }
+            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
+                selectedName = name
+            }
+            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
+                selectedBFD = direction
+            }
+
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.setAdditonalDataClients()
         default:
             break
         }
