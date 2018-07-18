@@ -174,7 +174,7 @@
                     <connections>
                         <outlet property="favoritesCollectionView" destination="GFB-mz-RHo" id="x23-jg-k64"/>
                         <outlet property="proximalCollectionView" destination="btx-0C-wgR" id="v25-So-auv"/>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="showStationDetail" id="Pot-B4-VNx"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showStationDetail" modalTransitionStyle="crossDissolve" id="Pot-B4-VNx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jap-Ur-G8C" userLabel="First Responder" sceneMemberID="firstResponder"/>

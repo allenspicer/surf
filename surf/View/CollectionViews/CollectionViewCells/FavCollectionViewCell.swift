@@ -36,7 +36,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         
             self.contentMode = .center
             let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
-            mainView = UIView(frame: mainViewFrame)
+            mainView = CustomView(frame: mainViewFrame)
             mainView.layer.cornerRadius = 103
             mainView.layer.masksToBounds = true
             mainView.layer.borderWidth = 4

@@ -19,6 +19,8 @@
 		9516CE3D20DD5DFD002C7299 /* SnapshotSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9516CE3C20DD5DFD002C7299 /* SnapshotSetter.swift */; };
 		951C29CF20C854D7009D90B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951C29CE20C854D7009D90B1 /* HomeViewController.swift */; };
 		952CD7D720D8746900B5988F /* SurfQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CD7D620D8746900B5988F /* SurfQuality.swift */; };
+		954C8C7120FF861D005A5CA3 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C8C7020FF861D005A5CA3 /* CircleView.swift */; };
+		954C8C7320FFBE23005A5CA3 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C8C7220FFBE23005A5CA3 /* CustomView.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
@@ -77,6 +79,8 @@
 		9516CE3C20DD5DFD002C7299 /* SnapshotSetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotSetter.swift; sourceTree = "<group>"; };
 		951C29CE20C854D7009D90B1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		952CD7D620D8746900B5988F /* SurfQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurfQuality.swift; path = surf/Controller/SurfQuality.swift; sourceTree = SOURCE_ROOT; };
+		954C8C7020FF861D005A5CA3 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleView.swift; path = surf/View/CircleView.swift; sourceTree = SOURCE_ROOT; };
+		954C8C7220FFBE23005A5CA3 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
@@ -169,6 +173,7 @@
 				95EEECD2204CF40600308E73 /* Main.storyboard */,
 				95B9A2AE20893C7500F911F3 /* SurfSnapshotView.swift */,
 				95C9DBA420C0386B0080B70B /* ActivityIndicatorView.swift */,
+				954C8C7220FFBE23005A5CA3 /* CustomView.swift */,
 				95AF666220D810E600157811 /* CollectionViews */,
 				95EEECDA204CF40600308E73 /* LaunchScreen.storyboard */,
 				95B1981020EBDD9D0090940A /* GradientView.swift */,
@@ -240,6 +245,7 @@
 				95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
+				954C8C7020FF861D005A5CA3 /* CircleView.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
 				95D3D38D20DC1310005529CE /* UIColorExtension.swift */,
 				95BF8A5620FD100500745481 /* surf-Bridging-Header.h */,
@@ -470,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95B9A2AF20893C7500F911F3 /* SurfSnapshotView.swift in Sources */,
+				954C8C7320FFBE23005A5CA3 /* CustomView.swift in Sources */,
 				9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */,
 				95EEECD1204CF40600308E73 /* ViewController.swift in Sources */,
 				95BE202120EBD0A700FFDF99 /* SplashScreenViewController.swift in Sources */,
@@ -482,6 +489,7 @@
 				95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */,
 				95D3D38C20DAEFBD005529CE /* Favorite.swift in Sources */,
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
+				954C8C7120FF861D005A5CA3 /* CircleView.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
 				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
