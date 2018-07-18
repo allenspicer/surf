@@ -85,11 +85,11 @@ class InitialLoadViewController: UIViewController {
     }
     
     
-    func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double){
+    func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double, name: String){
         DispatchQueue.global(qos:.utility).async {
-            let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id)
+            let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id, name: name)
             let snapshot = snapshotSetter.createSnapshot(finished: {})
-            //if snapshot worked update snapshot array
+            //if snapshot available update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 
                 DispatchQueue.main.async {
@@ -115,6 +115,7 @@ class InitialLoadViewController: UIViewController {
                 for favorite in self.userFavorites.keys where favorite.id == id{
                     self.userFavorites[favorite] = true
                 }
+                
                 self.favoriteSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
@@ -126,7 +127,7 @@ class InitialLoadViewController: UIViewController {
                 DispatchQueue.main.async {
                     let alert = UIAlertController.init(title: "Not enough Data", message: "One of the weather stations in your favorites list is not providing much data at the moment", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Try Again", style: .default) { (action:UIAlertAction!) in
-                        self.getSnapshotWith(id: id, stationId: stationId, beachFaceDirection: beachFaceDirection)
+                        self.getSnapshotWith(id: id, stationId: stationId, beachFaceDirection: beachFaceDirection, name: name)
                     })
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -196,7 +197,7 @@ class InitialLoadViewController: UIViewController {
                                 favorite.stationId = "\(stationId)"
                                 favorite.beachFaceDirection = beachFaceDirection
                                 favorite.name = name
-                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection)
+                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection, name: name)
                             }
                         }
                     }

@@ -14,12 +14,15 @@ final class SnapshotSetter: NSObject {
     let stationId : String
     let beachFaceDirection : Double
     let id : Int
+    let name : String
+
 
     
-    init(stationId:String, beachFaceDirection : Double, id: Int){
+    init(stationId:String, beachFaceDirection : Double, id: Int, name: String){
         self.stationId = stationId
         self.beachFaceDirection = beachFaceDirection
         self.id = id
+        self.name = name
         }
     
     func createSnapshot(finished: () -> Void) -> (Snapshot){
@@ -80,6 +83,7 @@ final class SnapshotSetter: NSObject {
             }
             
             currentSnapShot.id = id
+            currentSnapShot.nickname = name
             
             //beach face direction
             currentSnapShot.beachFaceDirection = beachFaceDirection
