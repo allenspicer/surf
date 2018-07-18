@@ -221,7 +221,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
-        startActivityIndicator("Loading")
+//        startActivityIndicator("Loading")
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
@@ -235,25 +235,43 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
-            
-            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
-            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
-                selectedId = "\(stationId)"
-            }
-            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
-                selectedName = name
-            }
-            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
-                selectedBFD = direction
+            collectionView.frame = self.view.frame
+            if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
+                let transitionView = createViewForTransition()
+                self.view.addSubview(transitionView)
+                self.view.bringSubview(toFront: transitionView)
+                transitionView.center = collectionView.center
+                transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
+                    transitionView.removeFromSuperview()
+                })
             }
             
-            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-            self.setAdditonalDataClients()
+//            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
+//            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+//            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
+//                selectedId = "\(stationId)"
+//            }
+//            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
+//                selectedName = name
+//            }
+//            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
+//                selectedBFD = direction
+//            }
+//
+//            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+//            self.setAdditonalDataClients()
         default:
             break
         }
     }
+    
+    func createViewForTransition()-> CircleView {
+        let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
+        let mainView = CircleView(frame: mainViewFrame)
+        return mainView
+    }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
