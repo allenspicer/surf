@@ -18,8 +18,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var currentSnapShot = Snapshot()
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    private var aiView = UIView()
-    private var wlView = UIView()
     var activityIndicatorView = ActivityIndicatorView()
     var favoriteButton = UIButton()
     var favoriteFlag = false

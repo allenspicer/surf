@@ -135,7 +135,9 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotTitleLabel(){
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
-        if let name = currentSnapShot.stationName {
+        if let name = currentSnapShot.nickname {
+            titleLabel.text = "\(name)"
+        }else if let name = currentSnapShot.stationName {
             titleLabel.text = "\(name)"
         }
         titleLabel.font = UIFont(name:"Damascus", size: 20.0)
