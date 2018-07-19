@@ -21,6 +21,7 @@
 		952CD7D720D8746900B5988F /* SurfQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952CD7D620D8746900B5988F /* SurfQuality.swift */; };
 		954C8C7120FF861D005A5CA3 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C8C7020FF861D005A5CA3 /* CircleView.swift */; };
 		954C8C7320FFBE23005A5CA3 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C8C7220FFBE23005A5CA3 /* CustomView.swift */; };
+		954C8C7521011421005A5CA3 /* FavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C8C7421011421005A5CA3 /* FavoriteFlowLayout.swift */; };
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
@@ -81,6 +82,7 @@
 		952CD7D620D8746900B5988F /* SurfQuality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurfQuality.swift; path = surf/Controller/SurfQuality.swift; sourceTree = SOURCE_ROOT; };
 		954C8C7020FF861D005A5CA3 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleView.swift; path = surf/View/CircleView.swift; sourceTree = SOURCE_ROOT; };
 		954C8C7220FFBE23005A5CA3 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		954C8C7421011421005A5CA3 /* FavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFlowLayout.swift; sourceTree = "<group>"; };
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
@@ -245,6 +247,7 @@
 				95FB9C5020EE9E5500301491 /* InitialLoadViewController.swift */,
 				95EEECD0204CF40600308E73 /* ViewController.swift */,
 				951C29CE20C854D7009D90B1 /* HomeViewController.swift */,
+				954C8C7421011421005A5CA3 /* FavoriteFlowLayout.swift */,
 				954C8C7020FF861D005A5CA3 /* CircleView.swift */,
 				9572891E20C99874007BE075 /* TopDownSegue.swift */,
 				95D3D38D20DC1310005529CE /* UIColorExtension.swift */,
@@ -491,6 +494,7 @@
 				95BE201F20EBB82B00FFDF99 /* FavoritesLabel.swift in Sources */,
 				954C8C7120FF861D005A5CA3 /* CircleView.swift in Sources */,
 				95125EEF20C5DD0600FDE462 /* TideClient.swift in Sources */,
+				954C8C7521011421005A5CA3 /* FavoriteFlowLayout.swift in Sources */,
 				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
 				95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */,

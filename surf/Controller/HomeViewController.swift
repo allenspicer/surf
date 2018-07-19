@@ -37,6 +37,15 @@ class HomeViewController: UIViewController {
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
+        
+        
+        // Initial Flow Layout Setup
+        let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
+        
+        layout.estimatedItemSize = CGSize(width: 207.0 * layout.standardItemScale,
+                                          height: 264.0 * layout.standardItemScale)
+        
+        layout.minimumLineSpacing = -(layout.itemSize.height * 0.5)
     }
     
     //
@@ -319,21 +328,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return CGSize()
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        switch collectionView {
-        case is ProximalCollectionView:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 207
-            let numberOfCells = CGFloat(favoritesSnapshots.count)
-            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
-            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
-        default:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        }
-    }
+
     
     //
     //MARK: - Cell click action and data retreival delegates
