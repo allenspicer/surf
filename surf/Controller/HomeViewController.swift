@@ -329,7 +329,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
             let cellWidth : CGFloat = 207
             let cellCount = CGFloat(favoritesSnapshots.count)
-            let edgeInsets = (self.view.frame.size.width - (cellCount * cellWidth)) / (cellCount + 1)
+            let edgeInsets = (self.view.frame.size.width - (cellWidth)) / (2)
             if cellCount == 1 || cellCount == 2{
                 return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
             }
