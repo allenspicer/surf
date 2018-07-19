@@ -11,15 +11,14 @@ import UIKit
 class FavoriteFlowLayout: UICollectionViewFlowLayout {
     var standardItemAlpha: CGFloat = 0.9
     var standardItemScale: CGFloat = 0.55
-    
-//    var isSetup = false
+    var isSetup = false
     
     override func prepare() {
         super.prepare()
-//        if isSetup == false {
-//            setupCollectionView()
-//            isSetup = true
-//        }
+        if isSetup == false {
+            setupCollectionView()
+            isSetup = true
+        }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -71,5 +70,17 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         return targetContentOffset
     }
     
+    
+    func setupCollectionView() {
+        self.collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+        
+        let collectionSize = collectionView!.bounds.size
+//        let yInset = (collectionSize.height - self.itemSize.height) / 2
+        let xInset = (collectionSize.width - self.itemSize.width) / 2
+//
+//        self.sectionInset = UIEdgeInsetsMake(yInset, xInset, yInset, xInset)
+        self.sectionInset = UIEdgeInsetsMake(0, xInset, 0, xInset)
+
+    }
     
 }
