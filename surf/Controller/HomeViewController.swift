@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     private var locationManager = CLLocationManager()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
+    var currentCard: Int = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,16 @@ class HomeViewController: UIViewController {
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
+        
+        
+        // Initial Flow Layout Setup
+        let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
+        
+        layout.estimatedItemSize = CGSize(width: 207.0 * layout.standardItemScale,
+                                          height: 264.0 * layout.standardItemScale)
+        
+        layout.minimumLineSpacing = -(layout.itemSize.height * 0.5)
+        
     }
     
     //
@@ -203,7 +215,16 @@ class HomeViewController: UIViewController {
 //
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let layout = favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
+
+        let cardSize = layout.itemSize.width + layout.minimumInteritemSpacing
+        let offset = scrollView.contentOffset.x
+        let cardCount = CGFloat(favoritesSnapshots.count)
+        currentCard = Int(floor(offset/(cardCount * cardSize)))
+    }
     
     //
     //MARK: - Handling of Collection Views and Cell Display
@@ -236,33 +257,35 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
-            collectionView.frame = self.view.frame
-            if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
+            if indexPath.item == currentCard {
+                collectionView.frame = self.view.frame
+                if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
+                    
+                    let transitionView = createViewForTransition()
+                    self.view.addSubview(transitionView)
+                    self.view.bringSubview(toFront: transitionView)
+                    let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
+                    transitionView.center = centerPoint
+                    transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
+                        //                    transitionView.removeFromSuperview()
+                    })
+                }
                 
-                let transitionView = createViewForTransition()
-                self.view.addSubview(transitionView)
-                self.view.bringSubview(toFront: transitionView)
-                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
-                transitionView.center = centerPoint
-                transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
-//                    transitionView.removeFromSuperview()
-                })
+                selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
+                selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
+                if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
+                    selectedId = "\(stationId)"
+                }
+                if let name = favoritesSnapshots[cellSelectedIndex].nickname {
+                    selectedName = name
+                }
+                if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
+                    selectedBFD = direction
+                }
+                
+                self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+                self.setAdditonalDataClients()
             }
-            
-            selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
-            selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-            if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
-                selectedId = "\(stationId)"
-            }
-            if let name = favoritesSnapshots[cellSelectedIndex].nickname {
-                selectedName = name
-            }
-            if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
-                selectedBFD = direction
-            }
-
-            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-            self.setAdditonalDataClients()
         default:
             break
         }
@@ -319,21 +342,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return CGSize()
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        switch collectionView {
-        case is ProximalCollectionView:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        case is FavoriteCollectionView:
-            let cellWidth : CGFloat = 207
-            let numberOfCells = CGFloat(favoritesSnapshots.count)
-            let edgeInsets = (self.view.frame.size.width - (numberOfCells * cellWidth)) / (numberOfCells + 1)
-            return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets)
-        default:
-            return UIEdgeInsetsMake(0, 0, 0, 0)
-        }
-    }
+
     
     //
     //MARK: - Cell click action and data retreival delegates
@@ -421,4 +430,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
+    
 }
+
+
