@@ -219,7 +219,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     override func viewDidLayoutSubviews() {
         let cellCount = favoritesSnapshots.count
-        let cellWidth : CGFloat = 207
         if (cellCount == 1 || cellCount == 2){
             favoritesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         }else if cellCount > 2 {
@@ -253,7 +252,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
-//        startActivityIndicator("Loading")
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
@@ -261,6 +259,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         switch collectionView {
         case is ProximalCollectionView:
+            startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             selectedId = proximalData[cellSelectedIndex].stationId
             selectedName = proximalData[cellSelectedIndex].name
@@ -269,18 +268,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is FavoriteCollectionView:
             if indexPath.item == currentCard {
                 collectionView.frame = self.view.frame
-                if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
-                    
-                    let transitionView = createViewForTransition()
-                    self.view.addSubview(transitionView)
-                    self.view.bringSubview(toFront: transitionView)
-                    let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
-                    transitionView.center = centerPoint
-                    transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
-                        //                    transitionView.removeFromSuperview()
-                    })
-                }
-                
+                let transitionView = createViewForTransition()
+                self.view.addSubview(transitionView)
+                self.view.bringSubview(toFront: transitionView)
+                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
+                transitionView.center = centerPoint
+                transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
+                })
                 selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
                 selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
                 if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
