@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteFlowLayout: UICollectionViewFlowLayout {
-    var standardItemAlpha: CGFloat = 0.9
+    var standardItemAlpha: CGFloat = 0.5
     var standardItemScale: CGFloat = 0.55
     var isSetup = false
     
