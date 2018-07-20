@@ -217,6 +217,16 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
 
     
+    override func viewDidLayoutSubviews() {
+        let cellCount = favoritesSnapshots.count
+        let cellWidth : CGFloat = 207
+        if (cellCount == 1 || cellCount == 2){
+            favoritesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        }else if cellCount > 2 {
+            favoritesCollectionView.scrollToItem(at: IndexPath(item: 1, section: 0), at: .centeredHorizontally, animated: false)
+        }
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let layout = favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
 
