@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C7M-jN-kap">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -21,7 +21,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -39,7 +39,7 @@
             <objects>
                 <viewController id="Fpd-KE-9Tr" customClass="InitialLoadViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t3s-do-KE3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="R7X-AJ-TTu"/>
@@ -57,11 +57,11 @@
             <objects>
                 <viewController storyboardIdentifier="homeViewController" id="A9z-NA-s0C" customClass="HomeViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d0z-Ep-3rz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GFB-mz-RHo" customClass="FavoriteCollectionView" customModule="surf" customModuleProvider="target">
-                                <rect key="frame" x="-0.5" y="20" width="375" height="500"/>
+                                <rect key="frame" x="-0.66666666666665719" y="44" width="375.33333333333326" height="500"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="z4G-78-chm"/>
@@ -102,7 +102,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="btx-0C-wgR" customClass="ProximalCollectionView" customModule="surf" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="427" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="538" width="375" height="200"/>
                                 <color key="backgroundColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.050980392156862744" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JSt-yB-Fc7"/>
@@ -185,46 +185,46 @@
             <objects>
                 <viewController id="C7M-jN-kap" customClass="SplashScreenViewController" customModule="surf" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="npa-aJ-XYP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flat" translatesAutoresizingMaskIntoConstraints="NO" id="Qwy-7c-dub">
-                                <rect key="frame" x="131" y="37" width="112" height="112"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_Flat" translatesAutoresizingMaskIntoConstraints="NO" id="Qwy-7c-dub">
+                                <rect key="frame" x="131" y="61" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="FkT-zm-3RS"/>
                                     <constraint firstAttribute="height" constant="112" id="YWG-N5-Qen"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wave" translatesAutoresizingMaskIntoConstraints="NO" id="lVh-aW-768">
-                                <rect key="frame" x="131" y="530" width="112" height="112"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_wave" translatesAutoresizingMaskIntoConstraints="NO" id="lVh-aW-768">
+                                <rect key="frame" x="131" y="554" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="7WJ-9j-48l"/>
                                     <constraint firstAttribute="width" constant="112" id="KPI-pG-8S4"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigWave" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-Ug-85r">
-                                <rect key="frame" x="131" y="672" width="112" height="112"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bigwave" translatesAutoresizingMaskIntoConstraints="NO" id="QzJ-Ug-85r">
+                                <rect key="frame" x="131" y="696" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="DTH-Wm-B1f"/>
                                     <constraint firstAttribute="width" constant="112" id="TbC-0g-0vD"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bump" translatesAutoresizingMaskIntoConstraints="NO" id="f0O-CM-V1J">
-                                <rect key="frame" x="131" y="179" width="112" height="112"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bump" translatesAutoresizingMaskIntoConstraints="NO" id="f0O-CM-V1J">
+                                <rect key="frame" x="131" y="203" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="QM8-ZS-gBH"/>
                                     <constraint firstAttribute="height" constant="112" id="Uds-xy-xdf"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LittleWave" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-A3-eEY">
-                                <rect key="frame" x="131" y="388" width="112" height="112"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_littlewave" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-A3-eEY">
+                                <rect key="frame" x="131" y="412" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="cF7-Mu-N8F"/>
                                     <constraint firstAttribute="width" constant="112" id="g2R-9f-RDg"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="breaker" translatesAutoresizingMaskIntoConstraints="NO" id="X4T-H1-TEn">
-                                <rect key="frame" x="61.5" y="321" width="252" height="37"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="surfbreak" translatesAutoresizingMaskIntoConstraints="NO" id="X4T-H1-TEn">
+                                <rect key="frame" x="61.666666666666657" y="345" width="251.99999999999997" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="252" id="aEk-Eo-qpf"/>
                                     <constraint firstAttribute="height" constant="37" id="gX7-HE-WaN"/>
@@ -258,14 +258,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BigWave" width="37" height="37"/>
-        <image name="Bump" width="37" height="37"/>
-        <image name="Flat" width="37" height="37"/>
-        <image name="LittleWave" width="37" height="37"/>
-        <image name="Wave" width="37" height="37"/>
-        <image name="breaker" width="84" height="16"/>
+        <image name="Mini_Flat" width="25" height="25"/>
+        <image name="Mini_bigwave" width="25" height="25"/>
+        <image name="Mini_bump" width="25" height="25"/>
+        <image name="Mini_littlewave" width="25" height="25"/>
+        <image name="Mini_wave" width="25" height="25"/>
+        <image name="surfbreak" width="84" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NtY-mM-S3j"/>
+        <segue reference="18Z-cN-egH"/>
     </inferredMetricsTieBreakers>
 </document>

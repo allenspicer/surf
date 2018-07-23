@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "breaker.png",
+      "filename" : "surfbreak.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "breaker@2x.png",
+      "filename" : "surfbreak@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "breaker@3x.png",
+      "filename" : "surfbreak@3x.png",
       "scale" : "3x"
     }
   ],

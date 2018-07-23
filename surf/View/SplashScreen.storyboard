@@ -18,42 +18,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flat" translatesAutoresizingMaskIntoConstraints="NO" id="04M-3s-jln">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_Flat" translatesAutoresizingMaskIntoConstraints="NO" id="04M-3s-jln">
                                 <rect key="frame" x="131" y="61" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="Igh-SW-nCj"/>
                                     <constraint firstAttribute="height" constant="112" id="lrt-s2-UAD"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wave" translatesAutoresizingMaskIntoConstraints="NO" id="NQe-Uy-FKp">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_wave" translatesAutoresizingMaskIntoConstraints="NO" id="NQe-Uy-FKp">
                                 <rect key="frame" x="131" y="554" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="t6P-Ja-k8g"/>
                                     <constraint firstAttribute="height" constant="112" id="umr-ux-cEe"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigWave" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-et-ejg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bigwave" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-et-ejg">
                                 <rect key="frame" x="131" y="696" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="Jtm-UM-lo5"/>
                                     <constraint firstAttribute="width" constant="112" id="bPw-Af-ivK"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bump" translatesAutoresizingMaskIntoConstraints="NO" id="P4R-vt-r2R">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bump" translatesAutoresizingMaskIntoConstraints="NO" id="P4R-vt-r2R">
                                 <rect key="frame" x="131" y="203" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="3gU-eF-vZE"/>
                                     <constraint firstAttribute="width" constant="112" id="959-P9-bxT"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LittleWave" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-3Y-0Ca">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_littlewave" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-3Y-0Ca">
                                 <rect key="frame" x="131" y="412" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="WHa-yr-83N"/>
                                     <constraint firstAttribute="height" constant="112" id="vIt-eT-atX"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="breaker" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-z6-ch4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="surfbreak" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-z6-ch4">
                                 <rect key="frame" x="61.666666666666657" y="345" width="251.99999999999997" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Ezj-Ft-iJy"/>
@@ -93,11 +93,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BigWave" width="37" height="37"/>
-        <image name="Bump" width="37" height="37"/>
-        <image name="Flat" width="37" height="37"/>
-        <image name="LittleWave" width="37" height="37"/>
-        <image name="Wave" width="37" height="37"/>
-        <image name="breaker" width="84" height="15"/>
+        <image name="Mini_Flat" width="25" height="25"/>
+        <image name="Mini_bigwave" width="25" height="25"/>
+        <image name="Mini_bump" width="25" height="25"/>
+        <image name="Mini_littlewave" width="25" height="25"/>
+        <image name="Mini_wave" width="25" height="25"/>
+        <image name="surfbreak" width="84" height="14"/>
     </resources>
 </document>
