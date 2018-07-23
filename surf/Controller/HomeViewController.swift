@@ -11,6 +11,9 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    var standardMinimumLineSpacing : CGFloat = 80.0
+
+    
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     private var proximalData = [Station]()
@@ -29,7 +32,6 @@ class HomeViewController: UIViewController {
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +45,11 @@ class HomeViewController: UIViewController {
         
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
+        layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
+        layout.minimumLineSpacing = -standardMinimumLineSpacing
         
-        layout.estimatedItemSize = CGSize(width: 207.0 * layout.standardItemScale,
-                                          height: 264.0 * layout.standardItemScale)
-        
-        layout.minimumLineSpacing = -(layout.itemSize.height * 0.5)
+        //set current card
+        if (favoritesSnapshots.count > 2) {currentCard = 1}
         
     }
     
@@ -217,13 +219,34 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
 
     
+    override func viewDidLayoutSubviews() {
+        let cellCount = favoritesSnapshots.count
+        if (cellCount == 1 || cellCount == 2){
+            favoritesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        }else if cellCount > 2 {
+            favoritesCollectionView.scrollToItem(at: IndexPath(item: 1, section: 0), at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == favoritesCollectionView {
+            if (!decelerate) {scrollingHasStopped()}
+        }
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let layout = favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
-
-        let cardSize = layout.itemSize.width + layout.minimumInteritemSpacing
-        let offset = scrollView.contentOffset.x
-        let cardCount = CGFloat(favoritesSnapshots.count)
-        currentCard = Int(floor(offset/(cardCount * cardSize)))
+        if scrollView == favoritesCollectionView {
+            scrollingHasStopped()
+        }
+    }
+    
+    func scrollingHasStopped(){
+        var visibleRect = CGRect()
+        visibleRect.origin = favoritesCollectionView.contentOffset
+        visibleRect.size = favoritesCollectionView.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard let indexPath = favoritesCollectionView.indexPathForItem(at: visiblePoint) else { return }
+        currentCard = indexPath.row
     }
     
     //
@@ -243,7 +266,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
-//        startActivityIndicator("Loading")
         cellSelectedIndex = indexPath.row
         var selectedId = String()
         var selectedName = String()
@@ -251,6 +273,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         switch collectionView {
         case is ProximalCollectionView:
+            startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             selectedId = proximalData[cellSelectedIndex].stationId
             selectedName = proximalData[cellSelectedIndex].name
@@ -259,18 +282,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is FavoriteCollectionView:
             if indexPath.item == currentCard {
                 collectionView.frame = self.view.frame
-                if let cell = collectionView.cellForItem(at: indexPath) as? FavCollectionViewCell {
-                    
-                    let transitionView = createViewForTransition()
-                    self.view.addSubview(transitionView)
-                    self.view.bringSubview(toFront: transitionView)
-                    let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
-                    transitionView.center = centerPoint
-                    transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
-                        //                    transitionView.removeFromSuperview()
-                    })
-                }
-                
+                let transitionView = createViewForTransition()
+                self.view.addSubview(transitionView)
+                self.view.bringSubview(toFront: transitionView)
+                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
+                transitionView.center = centerPoint
+                transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
+                })
                 selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
                 selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
                 if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
@@ -285,7 +303,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 
                 self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
                 self.setAdditonalDataClients()
+            }else {
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
             }
+            
         default:
             break
         }
@@ -332,16 +353,16 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView {
-        case is ProximalCollectionView:
-            return CGSize(width: 124, height: 124)
-        case is FavoriteCollectionView:
-            return CGSize(width: 207, height: 264)
-        default:
-            return CGSize()
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        switch collectionView {
+//        case is ProximalCollectionView:
+//            return CGSize(width: 124, height: 124)
+//        case is FavoriteCollectionView:
+//            return CGSize(width: 207, height: 264)
+//        default:
+//            return CGSize()
+//        }
+//    }
 
     
     //

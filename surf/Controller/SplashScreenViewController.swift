@@ -13,16 +13,9 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let gradientView = GradientView(frame: self.view.frame)
-//        gradientView.firstColor = .blue
-//        gradientView.secondColor = .black
-//        self.view.addSubview(gradientView)
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            if let viewController:HomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeViewController") as? HomeViewController {
-//                self.present(viewController, animated: false, completion: nil)
-//            }
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.performSegue(withIdentifier: "segueSplashToInital", sender: self)
+        }
     }
 
     
