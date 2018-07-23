@@ -228,14 +228,25 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == favoritesCollectionView {
+            if (!decelerate) {scrollingHasStopped()}
+        }
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == favoritesCollectionView {
+            scrollingHasStopped()
+        }
+    }
+    
+    func scrollingHasStopped(){
         var visibleRect = CGRect()
         visibleRect.origin = favoritesCollectionView.contentOffset
         visibleRect.size = favoritesCollectionView.bounds.size
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         guard let indexPath = favoritesCollectionView.indexPathForItem(at: visiblePoint) else { return }
         currentCard = indexPath.row
-        print(currentCard)
     }
     
     //
