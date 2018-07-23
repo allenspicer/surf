@@ -44,8 +44,8 @@ class HomeViewController: UIViewController {
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
         
-        layout.estimatedItemSize = CGSize(width: 207.0 * layout.standardItemScale,
-                                          height: 264.0 * layout.standardItemScale)
+        layout.estimatedItemSize = CGSize(width: 207.0,
+                                          height: 264.0)
         
         layout.minimumLineSpacing = -(layout.itemSize.height * 0.5)
         
@@ -336,16 +336,16 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView {
-        case is ProximalCollectionView:
-            return CGSize(width: 124, height: 124)
-        case is FavoriteCollectionView:
-            return CGSize(width: 207, height: 264)
-        default:
-            return CGSize()
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        switch collectionView {
+//        case is ProximalCollectionView:
+//            return CGSize(width: 124, height: 124)
+//        case is FavoriteCollectionView:
+//            return CGSize(width: 207, height: 264)
+//        default:
+//            return CGSize()
+//        }
+//    }
 
     
     //
