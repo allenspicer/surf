@@ -280,7 +280,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
-            if indexPath.item == currentCard {
+            if indexPath.row == currentCard {
                 collectionView.frame = self.view.frame
                 let transitionView = createViewForTransition()
                 self.view.addSubview(transitionView)
@@ -305,6 +305,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 self.setAdditonalDataClients()
             }else {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+                currentCard = indexPath.row
             }
             
         default:
