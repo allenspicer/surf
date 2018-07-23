@@ -210,15 +210,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.performSegue(withIdentifier: "returnToInitialView", sender: self)
     }
     
-    func setButton(_ button :UIButton){
-        button.setTitle(favoriteFlag ? "F" : "N" , for: .normal)
+    func setButton(){
+        favoriteButton.setBackgroundImage(favoriteFlag ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "NonFavorite") , for: .normal)
     }
     
     func addFavoriteButton(){
-        favoriteButton = UIButton(frame: CGRect(x: 40, y: 30, width: 40, height: 40))
-        setButton(favoriteButton)
-        favoriteButton.setTitleColor(.black, for: .normal)
-        favoriteButton.titleLabel?.textColor = .black
+        favoriteButton.frame = CGRect(x: view.frame.width - 40.0, y: 32, width: 24, height: 37)
+        favoriteButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        setButton()
         favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         for view in self.view.subviews {
             if view is SurfSnapshotView {
@@ -232,7 +231,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func favoriteButtonAction(){
         
         favoriteFlag = !favoriteFlag
-        setButton(favoriteButton)
+        setButton()
+        self.reloadInputViews()
         
         guard let id = currentSnapShot.id else { return }
         

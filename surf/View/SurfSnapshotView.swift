@@ -77,7 +77,7 @@ class SurfSnapshotView: UIScrollView {
         if let wHeight = currentSnapShot.waveHgt{
             waveHeight = wHeight
         }
-        
+
         switch waveHeight{
         case ...9:
             waveHeightDigitCount = 2
@@ -88,25 +88,26 @@ class SurfSnapshotView: UIScrollView {
         default:
             waveHeightDigitCount = 2
         }
-        let offset: CGFloat = 45 * waveHeightDigitCount
+//        let offset: CGFloat = 45 * waveHeightDigitCount
         
-        let widthPixels = 150 * waveHeightDigitCount + 100
+        let widthPixels = 150 * waveHeightDigitCount + 200
+        let distanceFromTop = self.frame.size.height/5
         
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
-        waveHeightLabel.text = "\(currentSnapShot.waveHgt ?? 0.0)"
+        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        waveHeightLabel.text = "\(currentSnapShot.waveHgt ?? 0.0)ft"
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        waveHeightLabel.center = CGPoint(x: self.frame.width - offset, y: 90)
+        waveHeightLabel.center = CGPoint(x: self.frame.width/2, y: 200)
         waveHeightLabel.textAlignment = .center
         self.addSubview(waveHeightLabel)
         
-        let feetLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        feetLabel.text = "ft"
-        feetLabel.font = UIFont(name:"Damascus", size: 20.0)
-        feetLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        feetLabel.center = CGPoint(x: (self.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
-        feetLabel.textAlignment = .center
-        self.addSubview(feetLabel)
+//        let feetLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+//        feetLabel.text = "ft"
+//        feetLabel.font = UIFont(name:"Damascus", size: 20.0)
+//        feetLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        feetLabel.center = CGPoint(x: (self.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
+//        feetLabel.textAlignment = .center
+//        self.addSubview(feetLabel)
     }
     
     
@@ -118,7 +119,7 @@ class SurfSnapshotView: UIScrollView {
         }
         label.font = UIFont(name:"Damascus", size: 10.0)
         label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        let yValue = (self.frame.height/5) + 20
+        let yValue = (2 * self.frame.height/5) + 20
         label.center = CGPoint(x: self.frame.width/2, y:yValue)
         label.textAlignment = .center
         self.addSubview(label)
@@ -153,7 +154,7 @@ class SurfSnapshotView: UIScrollView {
         }
         titleLabel.font = UIFont(name:"Damascus", size: 20.0)
         titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        titleLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
+        titleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/5)
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
     }
