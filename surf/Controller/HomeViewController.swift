@@ -48,6 +48,9 @@ class HomeViewController: UIViewController {
         layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
         layout.minimumLineSpacing = -standardMinimumLineSpacing
         
+        //set current card
+        if (favoritesSnapshots.count > 2) {currentCard = 1}
+        
     }
     
     //
