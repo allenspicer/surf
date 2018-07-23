@@ -80,46 +80,45 @@ class FavCollectionViewCell: UICollectionViewCell {
             mainView.layer.cornerRadius = 103
             mainView.layer.masksToBounds = true
             mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
-        
             backgroundGradient.frame.size = mainViewFrame.size
             mainView.layer.addSublayer(backgroundGradient)
-            self.addSubview(mainView)
-        
-            self.addSubview(imageView)
+            contentView.addSubview(mainView)
 
         
-            let heightLabelFrame = CGRect(x: 0.0, y: 24.0, width: self.frame.width, height: 80.0)
+            let heightLabelFrame = CGRect(x: 0.0, y: contentView.frame.height * 0.06, width: contentView.frame.width, height: 80.0)
             heightLabel = UILabel(frame: heightLabelFrame)
             heightLabel.backgroundColor = .clear
             heightLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
             heightLabel.textAlignment = .center
             heightLabel.font = UIFont(name: "Avenir Next Condensed", size: 58)
-            self.addSubview(heightLabel)
+            contentView.addSubview(heightLabel)
         
-            let frequencyLabelFrame = CGRect(x: 0, y: mainViewFrame.height * 0.65, width: self.frame.width - 30.0, height: 18.0)
+            let frequencyLabelFrame = CGRect(x: 0, y: contentView.frame.height * 0.50, width: contentView.frame.width - 30.0, height: 18.0)
             frequencyLabel = UILabel(frame: frequencyLabelFrame)
             frequencyLabel.backgroundColor = .clear
             frequencyLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
             frequencyLabel.textAlignment = .right
             frequencyLabel.font = UIFont(name: "Gotham", size: 18)
-            self.addSubview(frequencyLabel)
+            contentView.addSubview(frequencyLabel)
         
-            let locationLabelFrame = CGRect(x: 0.0, y: self.frame.height - 40, width: self.frame.width, height: 20.0)
+            let locationLabelFrame = CGRect(x: 0.0, y: contentView.frame.height - 40, width: contentView.frame.width, height: 20.0)
             locationLabel = UILabel(frame: locationLabelFrame)
             locationLabel.backgroundColor = .clear
             locationLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
             locationLabel.textAlignment = .center
             locationLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
-            self.addSubview(locationLabel)
+            contentView.addSubview(locationLabel)
 
-            let distanceLabelFrame = CGRect(x: 0.0, y: self.frame.height - 20, width: self.frame.width, height: 20.0)
+            let distanceLabelFrame = CGRect(x: 0.0, y: contentView.frame.height - 20, width: contentView.frame.width, height: 20.0)
             distanceLabel = UILabel(frame: distanceLabelFrame)
             distanceLabel.backgroundColor = .clear
             distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
             distanceLabel.textAlignment = .center
             distanceLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
             distanceLabel.tag = 1
-            self.addSubview(distanceLabel)
+            contentView.addSubview(distanceLabel)
+        
+            contentView.addSubview(imageView)
 
         }
 
