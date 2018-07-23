@@ -30,6 +30,46 @@ class FavCollectionViewCell: UICollectionViewCell {
         frequencyLabel.text = "\(waveFrequency)sec"
         locationLabel.text = locationName
         distanceLabel.text = "\(distanceFromUser)mi"
+        
+        switch waveHeight{
+        case ...0.5:
+            imageView.image = #imageLiteral(resourceName: "Mini_Flat")
+        case 0.5...1.0:
+            imageView.image = #imageLiteral(resourceName: "Bump")
+        case 1.0...3.0:
+            imageView.image = #imageLiteral(resourceName: "Mini_littlewave")
+        case 3.0...6.0:
+            imageView.image = #imageLiteral(resourceName: "wave")
+        case 6.0...:
+            imageView.image = #imageLiteral(resourceName: "Mini_bigwave")
+        default:
+            imageView.image = #imageLiteral(resourceName: "Mini_Flat")
+        }
+        
+        switch waveFrequency{
+        case ...2:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        case 2...4:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        case 4...6:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        case 6...9:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        case 9...:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        default:
+            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
+            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        }
+        
+        
+        
+        
     }
 
     func loadAllViews() {
@@ -39,17 +79,14 @@ class FavCollectionViewCell: UICollectionViewCell {
             mainView = CustomView(frame: mainViewFrame)
             mainView.layer.cornerRadius = 103
             mainView.layer.masksToBounds = true
-            mainView.layer.borderWidth = 4
-            mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
             mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
         
-            let gradientLayer:CAGradientLayer = CAGradientLayer()
-            gradientLayer.frame.size = mainViewFrame.size
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            gradientLayer.colors = [customYellow.cgColor, UIColor.clear.cgColor]
-            mainView.layer.addSublayer(gradientLayer)
+            backgroundGradient.frame.size = mainViewFrame.size
+            mainView.layer.addSublayer(backgroundGradient)
             self.addSubview(mainView)
         
+            self.addSubview(imageView)
+
         
             let heightLabelFrame = CGRect(x: 0.0, y: 24.0, width: self.frame.width, height: 80.0)
             heightLabel = UILabel(frame: heightLabelFrame)

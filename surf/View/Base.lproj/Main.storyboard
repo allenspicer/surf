@@ -80,9 +80,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="210" height="264"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wc2-H6-HdO">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wc2-H6-HdO">
                                                     <rect key="frame" x="0.0" y="0.0" width="207" height="147"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="207" id="0Kd-VI-C4c"/>
+                                                        <constraint firstAttribute="width" constant="207" id="fBg-Fq-n9n"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqD-uJ-SeU">
                                                     <rect key="frame" x="83" y="166" width="45" height="18"/>
@@ -266,6 +269,7 @@
         <image name="surfbreak" width="84" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="18Z-cN-egH"/>
+        <segue reference="Pot-B4-VNx"/>
+        <segue reference="NtY-mM-S3j"/>
     </inferredMetricsTieBreakers>
 </document>
