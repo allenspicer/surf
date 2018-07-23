@@ -11,6 +11,9 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    var standardMinimumLineSpacing : CGFloat = 80.0
+
+    
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     private var proximalData = [Station]()
@@ -43,11 +46,8 @@ class HomeViewController: UIViewController {
         
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
-        
-        layout.estimatedItemSize = CGSize(width: 207.0,
-                                          height: 264.0)
-        
-        layout.minimumLineSpacing = -(layout.itemSize.height * 0.5)
+        layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
+        layout.minimumLineSpacing = -standardMinimumLineSpacing
         
     }
     
