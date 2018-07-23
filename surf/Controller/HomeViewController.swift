@@ -32,7 +32,6 @@ class HomeViewController: UIViewController {
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -227,12 +226,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let layout = favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
-
-        let cardSize = layout.itemSize.width + layout.minimumInteritemSpacing
-        let offset = scrollView.contentOffset.x
-        let cardCount = CGFloat(favoritesSnapshots.count)
-        currentCard = Int(floor(offset/(cardCount * cardSize)))
+        var visibleRect = CGRect()
+        visibleRect.origin = favoritesCollectionView.contentOffset
+        visibleRect.size = favoritesCollectionView.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        guard let indexPath = favoritesCollectionView.indexPathForItem(at: visiblePoint) else { return }
+        currentCard = indexPath.row
+        print(currentCard)
     }
     
     //
@@ -289,7 +289,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 
                 self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
                 self.setAdditonalDataClients()
+            }else {
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
             }
+            
         default:
             break
         }
