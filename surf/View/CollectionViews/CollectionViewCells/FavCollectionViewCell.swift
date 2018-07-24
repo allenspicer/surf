@@ -33,17 +33,17 @@ class FavCollectionViewCell: UICollectionViewCell {
         
         switch waveHeight{
         case ...0.5:
-            imageView.image = #imageLiteral(resourceName: "Mini_Flat")
+            imageView.image = #imageLiteral(resourceName: "Flat")
         case 0.5...1.0:
             imageView.image = #imageLiteral(resourceName: "Bump")
         case 1.0...3.0:
-            imageView.image = #imageLiteral(resourceName: "Mini_littlewave")
+            imageView.image = #imageLiteral(resourceName: "littlewave")
         case 3.0...6.0:
             imageView.image = #imageLiteral(resourceName: "wave")
         case 6.0...:
-            imageView.image = #imageLiteral(resourceName: "Mini_bigwave")
+            imageView.image = #imageLiteral(resourceName: "bigwave")
         default:
-            imageView.image = #imageLiteral(resourceName: "Mini_Flat")
+            imageView.image = #imageLiteral(resourceName: "Flat")
         }
         
         switch waveFrequency{
