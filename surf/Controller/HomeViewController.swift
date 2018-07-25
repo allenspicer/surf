@@ -220,12 +220,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
     
     override func viewDidLayoutSubviews() {
-        let cellCount = favoritesSnapshots.count
-        if (cellCount == 1 || cellCount == 2){
-            favoritesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-        }else if cellCount > 2 {
-            favoritesCollectionView.scrollToItem(at: IndexPath(item: 1, section: 0), at: .centeredHorizontally, animated: false)
-        }
+        favoritesCollectionView.scrollToItem(at: IndexPath(item: currentCard, section: 0), at: .centeredHorizontally, animated: false)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
