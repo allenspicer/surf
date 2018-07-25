@@ -19,7 +19,6 @@ class FavCollectionViewCell: UICollectionViewCell {
     var distanceLabel = UILabel()
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,6 +77,8 @@ class FavCollectionViewCell: UICollectionViewCell {
             let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
             mainView = CustomView(frame: mainViewFrame)
             mainView.layer.cornerRadius = 103
+            mainView.layer.borderWidth = 4
+            mainView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
             mainView.layer.masksToBounds = true
             mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
             backgroundGradient.frame.size = mainViewFrame.size

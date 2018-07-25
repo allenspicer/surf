@@ -10,11 +10,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AdobeHeitiStd-Regular.otf">
-            <string>AdobeHeitiStd-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -87,19 +82,11 @@
                                                         <constraint firstAttribute="width" constant="207" id="fBg-Fq-n9n"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqD-uJ-SeU">
-                                                    <rect key="frame" x="83" y="166" width="45" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="AdobeHeitiStd-Regular" family="Adobe Heiti Std" pointSize="18"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <size key="customSize" width="210" height="264"/>
                                         <connections>
                                             <outlet property="imageView" destination="wc2-H6-HdO" id="WuG-D1-Iqd"/>
-                                            <outlet property="titleLabel" destination="QqD-uJ-SeU" id="Ey2-cS-iqs"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -269,7 +256,6 @@
         <image name="surfbreak" width="84" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pot-B4-VNx"/>
         <segue reference="NtY-mM-S3j"/>
     </inferredMetricsTieBreakers>
 </document>
