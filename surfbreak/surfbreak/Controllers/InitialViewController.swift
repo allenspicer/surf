@@ -14,6 +14,11 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation = (0.0,0.0)
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var buoyClient : BuoyClient?
+//    private var tideClient : TideClient?
+//    private var windClient : WindClient?
+//    private var airTempClient : AirTempClient?
+//    private var surfQuality : SurfQuality?
 
 
     override func viewDidLoad() {
@@ -22,11 +27,16 @@ final class InitialViewController: UIViewController {
 
         //trigger user location process
             self.getUserLocation()
+            self.setDataClients()
         //check persistence for user favorites
         //for each favorite
             // load series of data points (clients)
         }
     }
+    
+    //
+    //MARK: - location services
+    //
 
     private func getUserLocation (){
         var locationArray = [UserLocation]()
@@ -56,6 +66,29 @@ final class InitialViewController: UIViewController {
                 locationManager.requestLocation();
             }
         }
+    }
+    
+    //
+    //MARK: - Init networking handlers
+    //
+    
+    
+    func setDataClients(){
+        buoyClient = BuoyClient(snapshotId: 0)
+        buoyClient?.delegate = self
+        buoyClient?.createBuoyData()
+        
+//        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
+//        tideClient?.delegate = self
+//        tideClient?.createTideData()
+//
+//        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
+//        windClient?.delegate = self
+//        windClient?.createWindData()
+//
+//        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
+//        airTempClient?.delegate = self
+//        airTempClient?.createAirTempData()
     }
 
 }
@@ -107,8 +140,14 @@ extension InitialViewController : CLLocationManagerDelegate{
     }
 }
 
-extension InitialViewController {
-    
+extension InitialViewController : BuoyClientDelegate{
+    func didFinishBuoyTask(sender: BuoyClient, buoys: [Buoy]) {
+        print("Initial View Controller Has Buoy Array with \(buoys.count) buoys")
+        let snapshot = buoyClient?.getBuoyDataAsSnapshot()
+        print(snapshot)
+//        snapshotComponents["tide"] = true
+//        segueWhenAllComponenetsAreLoaded()
+    }
 }
 
 extension InitialViewController {
