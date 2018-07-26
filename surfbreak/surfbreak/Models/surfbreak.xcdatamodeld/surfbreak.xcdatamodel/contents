@@ -16,7 +16,13 @@
         <attribute name="windDirectionString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="windSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="UserLocation" representedClassName="UserLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Snapshot" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="UserLocation" positionX="-45" positionY="108" width="128" height="90"/>
     </elements>
 </model>
