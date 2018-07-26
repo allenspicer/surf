@@ -42,8 +42,8 @@ final class InitialViewController: UIViewController {
         }
 
         if userLocation.0 != 0.0 && userLocation.1 != 0.0 {
-            //user location available
-            //apply location to find distances
+            print("User location available from persistence: \(userLocation)")
+
         }else{
             isAuthorizedtoGetUserLocation()
             
@@ -92,8 +92,8 @@ extension InitialViewController : CLLocationManagerDelegate{
         if  let currentLocation = locationManager.location{
             userLocation.0 = currentLocation.coordinate.latitude
             userLocation.1 = currentLocation.coordinate.longitude
-            print(userLocation)
-            
+            print("User location available from gps: \(userLocation)")
+
             //save user location to persistence
             DispatchQueue.main.async {
                 //add to persistent container
