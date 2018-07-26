@@ -62,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				953F07E9210A575300E70E18 /* surfbreak */,
+				9592EC4F210A5B1A004B0A82 /* Other */,
 				953F0801210A575400E70E18 /* surfbreakTests */,
 				953F07E8210A575300E70E18 /* Products */,
 			);
@@ -79,7 +80,6 @@
 		953F07E9210A575300E70E18 /* surfbreak */ = {
 			isa = PBXGroup;
 			children = (
-				9592EC4F210A5B1A004B0A82 /* Other */,
 				9592EC50210A5B23004B0A82 /* Controllers */,
 				9592EC4E210A5AF0004B0A82 /* Views */,
 				9592EC51210A5B53004B0A82 /* Assets */,
@@ -404,7 +404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
-				INFOPLIST_FILE = "$(SRCROOT)/surfbreak/Other/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -422,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
-				INFOPLIST_FILE = "$(SRCROOT)/surfbreak/Other/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
