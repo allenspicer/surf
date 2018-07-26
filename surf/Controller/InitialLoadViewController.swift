@@ -24,7 +24,11 @@ class InitialLoadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayActivityIndicator()
-        retrieveUserFavoritesAndCreateSnapshots()
+        DispatchQueue.global(qos:.utility).async{
+        self.makeStationList()
+        self.setDataOrGetUserLocation()
+        self.retrieveUserFavoritesAndCreateSnapshots()
+        }
     }
     
     func displayActivityIndicator(){
@@ -33,7 +37,6 @@ class InitialLoadViewController: UIViewController {
     }
     
     func retrieveUserFavoritesAndCreateSnapshots(){
-        DispatchQueue.global(qos:.utility).async{
             self.getUserFavoritesFromDefaults(){ (favoritesDictionary) in
                 //if the user has favorites get records from persistent or download them
                 if self.userFavorites.count > 0 {
@@ -43,7 +46,6 @@ class InitialLoadViewController: UIViewController {
                     self.segueWhenComplete()
                 }
             }
-        }
     }
     
     
@@ -79,7 +81,8 @@ class InitialLoadViewController: UIViewController {
     }
     
     func segueWhenComplete(){
-        if !userFavorites.values.contains(false){
+        if !userFavorites.values.contains(false) && userLocation.0 != 0.0 && userLocation.1 != 0.0{
+            print(userLocation)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
             }
@@ -90,7 +93,7 @@ class InitialLoadViewController: UIViewController {
     func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double, name: String){
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id, name: name)
-            let snapshot = snapshotSetter.createSnapshot(finished: {})
+            var snapshot = snapshotSetter.createSnapshot(finished: {})
             //if snapshot available update snapshot array
             if snapshot.waveHgt != nil && snapshot.waterTemp != nil {
                 
@@ -114,10 +117,19 @@ class InitialLoadViewController: UIViewController {
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 }
                 
+                snapshot = self.appendDistanceToFavoriteSnapshots(snapshot: snapshot)
+                
                 for favorite in self.userFavorites.keys where favorite.id == id{
-                    self.userFavorites[favorite] = true
+                    
+                    if snapshot.distanceToUser != nil {
+                        self.userFavorites[favorite] = true
+                    }else{
+                        //
+                    }
                 }
                 
+                
+
                 self.favoriteSnapshots.append(snapshot)
                 //segue when all snapshots are available
                 self.segueWhenComplete()
@@ -154,12 +166,6 @@ class InitialLoadViewController: UIViewController {
     
     private func addFavoriteStationsToCollectionData(){
         
-        //the user does have at least one favorite station
-        //check if a wave is available from persistence data.
-        //if a wave is availabe in persistence with the correct id
-        //then it is 5 minutes old or newer
-        //take the wave and create a snapshot
-        
         for wave in waveDictionary{
             guard let timestamp = wave.value.timestamp else {return}
             for favorite in self.userFavorites.keys where favorite.id == wave.key{
@@ -172,6 +178,7 @@ class InitialLoadViewController: UIViewController {
                 snapshot.id = wave.key
                 snapshot.nickname = favorite.name
                 snapshot.beachFaceDirection = favorite.beachFaceDirection
+                snapshot = appendDistanceToFavoriteSnapshots(snapshot: snapshot)
                 self.favoriteSnapshots.append(snapshot)
                 //try to segue, will only work when all snapshots are populated
                 self.segueWhenComplete()
@@ -246,7 +253,7 @@ extension InitialLoadViewController : CLLocationManagerDelegate{
                 locationManager.requestLocation();
             }
         }else{
-            setDistanceFromUserForFavorites()
+//            appendDistanceToFavoriteSnapshots()
         }
     }
     
@@ -284,7 +291,7 @@ extension InitialLoadViewController : CLLocationManagerDelegate{
             userLocation.0 = currentLocation.coordinate.latitude
             userLocation.1 = currentLocation.coordinate.longitude
             
-            setDistanceFromUserForFavorites()
+//            appendDistanceToFavoriteSnapshots()
             
             let defaults = UserDefaults.standard
             defaults.set(userLocation.0, forKey: "userLatitude")
@@ -292,21 +299,23 @@ extension InitialLoadViewController : CLLocationManagerDelegate{
         }
     }
     
-    func setDistanceFromUserForFavorites(){
+    func appendDistanceToFavoriteSnapshots(snapshot : Snapshot) -> Snapshot{
         let approxMilesToLon = 53.0
         let approxMilesToLat = 69.0
         if (userLocation.0 != 0 && userLocation.1 != 0) {
-            for station in stationList{
-                for index in 0..<favoriteSnapshots.count where favoriteSnapshots[index].id == station.id{
-                    let latDiffAbs = abs(station.lat - userLocation.0) * approxMilesToLat
-                    let lonDiffAbs = abs(station.lon - userLocation.1) * approxMilesToLon
-                    let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
-                    var snapshotWithoutDistance = favoriteSnapshots[index]
-                    snapshotWithoutDistance.distanceToUser = Int(milesFromUser)
-                    favoriteSnapshots[index] = snapshotWithoutDistance
-                }
+            for station in stationList where snapshot.id == station.id{
+                let latDiffAbs = abs(station.lat - userLocation.0) * approxMilesToLat
+                let lonDiffAbs = abs(station.lon - userLocation.1) * approxMilesToLon
+                let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
+                var mutableSnapshot = snapshot
+                mutableSnapshot.distanceToUser = Int(milesFromUser)
+                return mutableSnapshot
+//                segueWhenComplete()
             }
+        }else{
+            print("append distance called but user location not available")
         }
+        return Snapshot()
     }
     
     private func makeStationList(){

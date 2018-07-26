@@ -83,14 +83,6 @@
             </objects>
             <point key="canvasLocation" x="-431.19999999999999" y="23.645320197044335"/>
         </scene>
-        <!--homeViewController-->
-        <scene sceneID="kdd-7L-gEJ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="homeViewController" id="Epc-Bl-SlY" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tej-lX-0ZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="489" y="24"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Mini_Flat" width="25" height="25"/>

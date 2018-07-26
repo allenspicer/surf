@@ -133,11 +133,10 @@ final class WindClient: NSObject {
             }
         }
         
-        if let wind = windArray[nextWindIndex] as? Wind{
-            snapshot.windDirectionString = wind.windDirectionString
-            snapshot.windSpd = wind.speed
-            snapshot.windDir = wind.direction
-        }
+        let wind = windArray[nextWindIndex]
+        snapshot.windDirectionString = wind.windDirectionString
+        snapshot.windSpd = wind.speed
+        snapshot.windDir = wind.direction
         
         return snapshot
     }
