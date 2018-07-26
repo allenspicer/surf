@@ -41,6 +41,7 @@ struct Snapshot {
     var windDirectionString: String?
     var windCardinalDirection: String?
     var nickname : String?
+    var distanceToUser : Int?
 }
 
 

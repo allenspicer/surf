@@ -107,12 +107,12 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
                 if let metaData = jsonResult as? [[String : AnyObject]]{
                     for station in metaData {
                         guard let stationId = station["station"] else {return}
-                        guard let id = station["id"] else {return}
+                        guard let id = station["id"] as? Int else {return}
                         guard let beachFaceDirection = station["bfd"] as? Double else {return}
                         guard let lon = station["longitude"] as? Double else {return}
                         guard let lat = station["latitude"] as? Double else {return}
                         guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
+                        let station = Station(id: id, stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
                         proximalData.append(station)
                     }
                     stopActivityIndicator()
@@ -325,9 +325,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let snapshot = self.favoritesSnapshots[indexPath.row]
             guard let waveHeight = snapshot.waveHgt else {return cell}
             guard let waveFrequency = snapshot.waveAveragePeriod else {return cell}
-            //            guard let nickname = snapshot.nickname else {return cell}
             let nickname = snapshot.nickname ?? "nickname"
-            cell.setCellContent(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
+            let distance = snapshot.distanceToUser ?? 0
+
+            cell.setCellContent(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: distance)
             return cell
         default:
             return UICollectionViewCell()
@@ -353,7 +354,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            guard let id = Int(self.proximalData[index].id) else {return}
+            let id = self.proximalData[index].id
             let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id:id, name: stationName)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]

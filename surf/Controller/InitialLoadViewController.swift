@@ -18,6 +18,7 @@ class InitialLoadViewController: UIViewController {
     var waveDictionary = [Int : Wave]()
     var locationManager = CLLocationManager()
     var userLocation = (0.0,0.0)
+    var stationList = [Station]()
 
     
     override func viewDidLoad() {
@@ -292,10 +293,44 @@ extension InitialLoadViewController : CLLocationManagerDelegate{
     }
     
     func setDistanceFromUserForFavorites(){
-        
+        let approxMilesToLon = 53.0
+        let approxMilesToLat = 69.0
+        if (userLocation.0 != 0 && userLocation.1 != 0) {
+            for station in stationList{
+                for index in 0..<favoriteSnapshots.count where favoriteSnapshots[index].id == station.id{
+                    let latDiffAbs = abs(station.lat - userLocation.0) * approxMilesToLat
+                    let lonDiffAbs = abs(station.lon - userLocation.1) * approxMilesToLon
+                    let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
+                    var snapshotWithoutDistance = favoriteSnapshots[index]
+                    snapshotWithoutDistance.distanceToUser = Int(milesFromUser)
+                    favoriteSnapshots[index] = snapshotWithoutDistance
+                }
+            }
+        }
     }
     
+    private func makeStationList(){
+        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let metaData = jsonResult as? [[String : AnyObject]]{
+                    for station in metaData {
+                        guard let stationId = station["station"] else {return}
+                        guard let id = station["id"] as? Int else {return}
+                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
+                        guard let lon = station["longitude"] as? Double else {return}
+                        guard let lat = station["latitude"] as? Double else {return}
+                        guard let name = station["name"] as? String else {return}
+                        let station = Station(id: id, stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
+                        stationList.append(station)
+                    }
+                }
+            } catch {
+                // handle error
+            }
+        }
+    }
+
 }
-
-
 

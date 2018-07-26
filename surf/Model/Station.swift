@@ -9,7 +9,7 @@
 import Foundation
 
 struct Station: Decodable {
-    let id: String
+    let id: Int
     var stationId: String
     let lat: Double
     let lon: Double
