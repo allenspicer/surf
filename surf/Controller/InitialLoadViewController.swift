@@ -82,7 +82,6 @@ class InitialLoadViewController: UIViewController {
     
     func segueWhenComplete(){
         if !userFavorites.values.contains(false) && userLocation.0 != 0.0 && userLocation.1 != 0.0{
-            print(userLocation)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueInitalToHome", sender: self)
             }
