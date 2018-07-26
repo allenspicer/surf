@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     var standardMinimumLineSpacing : CGFloat = 80.0
 
@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
+        setupGestureRecognizer()
         
         
         // Initial Flow Layout Setup
@@ -193,6 +194,72 @@ class HomeViewController: UIViewController {
     }
     
     
+    
+    //
+    //MARK: - Gesture Recognizer
+    //
+    
+    //
+    //Gesture Recognizer
+    //
+    
+    func setupGestureRecognizer() {
+        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
+        touchDown.minimumPressDuration = 0
+        touchDown.delegate = self
+        view.addGestureRecognizer(touchDown)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        
+        //if touch is in current cell return true
+        //else return false
+        
+        let contactPoint = touch.location(in: favoritesCollectionView)
+        if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
+            if currentCell.frame.contains(contactPoint){ return true}
+        }
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    
+    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
+        let contactPoint = gesture.location(in: favoritesCollectionView)
+        if (gesture.state == .began){
+            if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
+                if currentCell.frame.contains(contactPoint){
+                    currentCell.contentView.bringSubview(toFront: currentCell.mainView)
+                }
+            }
+        }
+
+        if (gesture.state == .ended){
+            if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
+                    currentCell.contentView.sendSubview(toBack: currentCell.mainView)
+                if currentCell.frame.contains(contactPoint){
+                    self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+                    self.setAdditonalDataClients()
+                    selectedSnapshot = favoritesSnapshots[currentCard]
+                    selectedStationOrFavorite = favoritesSnapshots[currentCard]
+                    let transitionView = createViewForTransition()
+                    self.view.addSubview(transitionView)
+                    self.view.bringSubview(toFront: transitionView)
+                    let centerPoint = CGPoint(x: self.view.center.x, y: currentCell.center.y + 16)
+                    transitionView.center = centerPoint
+                    transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
+                        self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                    })
+                }
+            }
+        }
+    }
+    
+    
+    
     //
     //MARK: - Activty Indicator Controllers
     //
@@ -220,7 +287,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
     
     override func viewDidLayoutSubviews() {
-        favoritesCollectionView.scrollToItem(at: IndexPath(item: currentCard, section: 0), at: .centeredHorizontally, animated: false)
+        favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -275,30 +342,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
-            if indexPath.row == currentCard {
-                collectionView.frame = self.view.frame
-                let transitionView = createViewForTransition()
-                self.view.addSubview(transitionView)
-                self.view.bringSubview(toFront: transitionView)
-                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y - 70)
-                transitionView.center = centerPoint
-                transitionView.growCircleTo(700, duration: 1.0, completionBlock: {
-                })
-                selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
-                selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-                if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
-                    selectedId = "\(stationId)"
-                }
-                if let name = favoritesSnapshots[cellSelectedIndex].nickname {
-                    selectedName = name
-                }
-                if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
-                    selectedBFD = direction
-                }
-                
-                self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-                self.setAdditonalDataClients()
-            }else {
+            if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 currentCard = indexPath.row
             }
@@ -306,6 +350,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         default:
             break
         }
+    }
+    
+    func currentFavoriteCellSelected(){
+        
     }
     
     func createViewForTransition()-> CircleView {
