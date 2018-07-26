@@ -241,6 +241,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
             if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
                     currentCell.contentView.sendSubview(toBack: currentCell.mainView)
                 if currentCell.frame.contains(contactPoint){
+                    self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+                    self.setAdditonalDataClients()
                     selectedSnapshot = favoritesSnapshots[currentCard]
                     selectedStationOrFavorite = favoritesSnapshots[currentCard]
                     let transitionView = createViewForTransition()
@@ -253,15 +255,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
                     })
                 }
             }
-//            for view in self.view.subviews as [UIView] {
-//                if let snapshotView = view as? SurfSnapshotView {
-//                    snapshotView.removeWaveHeightIndicator()
-//                    //                    view.animateShow()
-//                    //                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
-//                    //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
-//                    //                    })
-//                }
-//            }
         }
     }
     
@@ -349,31 +342,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
-            if indexPath.row == currentCard {
-                collectionView.frame = self.view.frame
-//                let transitionView = createViewForTransition()
-//                self.view.addSubview(transitionView)
-//                self.view.bringSubview(toFront: transitionView)
-//                let centerPoint = CGPoint(x: self.view.frame.size.width/2, y: collectionView.center.y)
-//                transitionView.center = centerPoint
-//                transitionView.growCircleTo(700, duration: 1.2, completionBlock: {
-//                    self.performSegue(withIdentifier: "showStationDetail", sender: self)
-//                })
-                selectedSnapshot = favoritesSnapshots[cellSelectedIndex]
-                selectedStationOrFavorite = favoritesSnapshots[cellSelectedIndex]
-                if let stationId = favoritesSnapshots[cellSelectedIndex].stationId {
-                    selectedId = "\(stationId)"
-                }
-                if let name = favoritesSnapshots[cellSelectedIndex].nickname {
-                    selectedName = name
-                }
-                if let direction = favoritesSnapshots[cellSelectedIndex].beachFaceDirection{
-                    selectedBFD = direction
-                }
-                
-                self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-                self.setAdditonalDataClients()
-            }else {
+            if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 currentCard = indexPath.row
             }
