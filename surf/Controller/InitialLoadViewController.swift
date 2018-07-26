@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class InitialLoadViewController: UIViewController {
     
@@ -15,7 +16,9 @@ class InitialLoadViewController: UIViewController {
     var activityIndicatorView = ActivityIndicatorView()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var waveDictionary = [Int : Wave]()
-    
+    var locationManager = CLLocationManager()
+    var userLocation = (0.0,0.0)
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,8 +216,86 @@ class InitialLoadViewController: UIViewController {
         
         if let destinationVC = segue.destination as? HomeViewController {
             destinationVC.favoritesSnapshots = favoriteSnapshots
+            destinationVC.userLocation = userLocation
         }
     }
     
     
 }
+
+
+
+//extension InitialLoadViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+
+extension InitialLoadViewController : CLLocationManagerDelegate{
+    
+    private func setDataOrGetUserLocation(){
+        let defaults = UserDefaults.standard
+        userLocation.0 = defaults.object(forKey: "userLatitude") as? Double ?? 0.0
+        userLocation.1 = defaults.object(forKey: "userLongitude") as? Double ?? 0.0
+        if userLocation.0 == 0.0 || userLocation.1 == 0.0 {
+            isAuthorizedtoGetUserLocation()
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            }
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.requestLocation();
+            }
+        }else{
+            setDistanceFromUserForFavorites()
+        }
+    }
+    
+    
+    //if we have no permission to access user location, then ask user for permission.
+    private func isAuthorizedtoGetUserLocation() {
+        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    
+    //this method will be called each time when a user change his location access preference.
+    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            print("User allowed us to access location")
+            locationManager.requestLocation();
+        }
+    }
+    
+    
+    //this method is called by the framework on         locationManager.requestLocation();
+    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Did location updates is called")
+        print(locations)
+        setLocationDataFromResponse()
+    }
+    
+    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Did location updates is called but failed getting location \(error)")
+    }
+    
+    private func setLocationDataFromResponse(){
+        if  let currentLocation = locationManager.location{
+            userLocation.0 = currentLocation.coordinate.latitude
+            userLocation.1 = currentLocation.coordinate.longitude
+            
+            setDistanceFromUserForFavorites()
+            
+            let defaults = UserDefaults.standard
+            defaults.set(userLocation.0, forKey: "userLatitude")
+            defaults.set(userLocation.1, forKey: "userLongitude")
+        }
+    }
+    
+    func setDistanceFromUserForFavorites(){
+        
+    }
+    
+}
+
+
+

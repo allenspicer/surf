@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
@@ -26,9 +25,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var windClient : WindClient?
     var airTempClient : AirTempClient?
     var surfQuality : SurfQuality?
-    private var userLongitude = 0.0
-    private var userLatitude = 0.0
-    private var locationManager = CLLocationManager()
+    var userLocation = (0.0,0.0)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
@@ -37,7 +34,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         super.viewDidLoad()
         startActivityIndicator("Loading")
         parseStationList()
-        setDataOrGetUserLocation()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
@@ -58,27 +54,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     // MARK: - Inital Load Logic
     //
     
-    private func setDataOrGetUserLocation(){
-        let defaults = UserDefaults.standard
-        userLongitude = defaults.object(forKey: "userLongitude") as? Double ?? 0.0
-        userLatitude = defaults.object(forKey: "userLatitude") as? Double ?? 0.0
-        
-        if userLongitude != 0.0 && userLatitude != 0.0 {
-            findDistancesFromUserLocation()
-        }else{
-            isAuthorizedtoGetUserLocation()
-            
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.delegate = self
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            }
-            
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.requestLocation();
-            }
-        }
-    }
-    
     private func applyGradientToBackground(){
         let gradientView = GradientView(frame: self.view.frame)
         gradientView.firstColor = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
@@ -88,7 +63,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
     //
-    //MARK: - Location Services
+    //MARK: - Apply User Location to Proximal Dataset
     //
     
     private func findDistancesFromUserLocation(){
@@ -98,12 +73,14 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         // number of miles is up to 69 at the equator and down to zero at the poles
         let approxMilesToLon = 53.0
         let approxMilesToLat = 69.0
-        
-        if (userLatitude != 0 && userLongitude != 0) {
+//        if (userLatitude != 0 && userLongitude != 0) {
+        if (userLocation.0 != 0 && userLocation.1 != 0) {
             for index in 0..<proximalData.count{
                 let station = proximalData[index]
-                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
-                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
+//                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
+//                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
+                let latDiffAbs = abs(station.lat - userLocation.0) * approxMilesToLat
+                let lonDiffAbs = abs(station.lon - userLocation.1) * approxMilesToLon
                 let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
                 proximalData[index].distanceInMiles = Int(milesFromUser)
             }
@@ -111,46 +88,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         sortTableObjectsByDistance()
     }
     
-    //if we have no permission to access user location, then ask user for permission.
-    private func isAuthorizedtoGetUserLocation() {
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    
-    //this method will be called each time when a user change his location access preference.
-    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            print("User allowed us to access location")
-            locationManager.requestLocation();
-        }
-    }
-    
-    
-    //this method is called by the framework on         locationManager.requestLocation();
-    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Did location updates is called")
-        print(locations)
-        setLocationDataFromResponse()
-    }
-    
-    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Did location updates is called but failed getting location \(error)")
-    }
-    
-    private func setLocationDataFromResponse(){
-        if  let currentLocation = locationManager.location{
-            userLatitude = currentLocation.coordinate.latitude
-            userLongitude = currentLocation.coordinate.longitude
-            findDistancesFromUserLocation()
-            
-            let defaults = UserDefaults.standard
-            defaults.set(userLatitude, forKey: "userLatitude")
-            defaults.set(userLongitude, forKey: "userLongitude")
-            
-        }
-    }
     
     func sortTableObjectsByDistance(){
         proximalData = proximalData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
@@ -283,7 +220,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 //MARK: - Extension to handle Collection View and Delegates Assignment
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
 
     
     override func viewDidLayoutSubviews() {
