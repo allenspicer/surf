@@ -61,7 +61,6 @@ final class BuoyClient: NSObject {
         }
         
         guard bouyDictionary.count > 2 else {return}
-        //determine how many buoy dictionaries are made. only make one the last one. don't loop through everything like below.
         
         let index = bouyDictionary.count - 1
         let currentSnapShot = Snapshot(context: self.context)
@@ -124,6 +123,8 @@ final class BuoyClient: NSObject {
         //get all possible snapshots
         //use snapshot id
         //get station id to use for URL
+        //get beach face direction and save for populating snapshot
+        //get name and save for populating snapshot
         
         let stationId = "41110"
         urlString = "http://www.ndbc.noaa.gov/data/realtime2/\(stationId).txt"
