@@ -16,6 +16,7 @@
 		953F0803210A575400E70E18 /* surfbreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F0802210A575400E70E18 /* surfbreakTests.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Buoy.swift */; };
+		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		953F0804210A575400E70E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Buoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buoy.swift; sourceTree = "<group>"; };
+		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		9592EC51210A5B53004B0A82 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				9592EC58210A89C2004B0A82 /* regionalBuoyList.json */,
 				953F07F4210A575400E70E18 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953F07F8210A575400E70E18 /* LaunchScreen.storyboard in Resources */,
+				9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */,
 				953F07F5210A575400E70E18 /* Assets.xcassets in Resources */,
 				953F07F0210A575300E70E18 /* Main.storyboard in Resources */,
 			);

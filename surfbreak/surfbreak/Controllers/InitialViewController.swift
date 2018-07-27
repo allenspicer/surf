@@ -27,7 +27,7 @@ final class InitialViewController: UIViewController {
 
         //trigger user location process
             self.getUserLocation()
-            self.setDataClients()
+            self.setDataClientsForStation(snapshotId: 100)
         //check persistence for user favorites
         //for each favorite
             // load series of data points (clients)
@@ -73,8 +73,8 @@ final class InitialViewController: UIViewController {
     //
     
     
-    func setDataClients(){
-        buoyClient = BuoyClient(snapshotId: 0)
+    func setDataClientsForStation(snapshotId : Int){
+        buoyClient = BuoyClient(snapshotId: snapshotId)
         buoyClient?.delegate = self
         buoyClient?.createBuoyData()
         

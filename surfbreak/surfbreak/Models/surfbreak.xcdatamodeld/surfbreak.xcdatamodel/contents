@@ -8,6 +8,8 @@
         <attribute name="nextTideTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="period" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="swellDirection" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="swellDirectionString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tideDirectionString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="waterTemp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -22,7 +24,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Snapshot" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="Snapshot" positionX="-63" positionY="-18" width="128" height="285"/>
         <element name="UserLocation" positionX="-45" positionY="108" width="128" height="90"/>
     </elements>
 </model>
