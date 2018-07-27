@@ -23,7 +23,7 @@ final class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         //set up activity indicator
-        DispatchQueue.global(qos:.utility).async{
+//        DispatchQueue.global(qos:.utility).async{
 
         //trigger user location process
             self.getUserLocation()
@@ -31,7 +31,7 @@ final class InitialViewController: UIViewController {
         //check persistence for user favorites
         //for each favorite
             // load series of data points (clients)
-        }
+//        }
     }
     
     //
