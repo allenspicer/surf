@@ -287,7 +287,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
     
     override func viewDidLayoutSubviews() {
-        favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        if favoritesCollectionView.numberOfItems(inSection: 0) > 0{
+            favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
