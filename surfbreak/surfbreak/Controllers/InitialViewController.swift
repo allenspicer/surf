@@ -17,8 +17,8 @@ final class InitialViewController: UIViewController {
     private var componentsChecklist = [Int : SnapshotComponents]()
 
     private var buoyClient : BuoyClient?
-//    private var tideClient : TideClient?
-//    private var windClient : WindClient?
+    private var tideClient : TideClient?
+    private var windClient : WindClient?
 //    private var airTempClient : AirTempClient?
 //    private var surfQuality : SurfQuality?
 
@@ -85,14 +85,14 @@ final class InitialViewController: UIViewController {
     }
     
     func setDataClientsFor(snapshot : Snapshot){
-        //        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
-        //        tideClient?.delegate = self
-        //        tideClient?.createTideData()
-        //
-        //        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
-        //        windClient?.delegate = self
-        //        windClient?.createWindData()
-        //
+                tideClient = TideClient(currentSnapshot: snapshot)
+                tideClient?.delegate = self
+                tideClient?.createTideData()
+        
+                windClient = WindClient(currentSnapshot: snapshot)
+                windClient?.delegate = self
+                windClient?.createWindData()
+        
         //        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
         //        airTempClient?.delegate = self
         //        airTempClient?.createAirTempData()
@@ -156,11 +156,23 @@ extension InitialViewController : BuoyClientDelegate{
     }
 }
 
-extension InitialViewController {
-    
+extension InitialViewController : TideClientDelegate{
+    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
+        print("The Tide Client has returned an array of tides.")
+        componentsChecklist[100]?.tide = true
+        componentsChecklist[100]?.tideTimeStamp = Date()
+//        tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
+    }
 }
 
-extension InitialViewController {
+extension InitialViewController : WindClientDelegate{
+    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
+        print("The Wind Client has returned an array of tides.")
+        componentsChecklist[100]?.wind = true
+        componentsChecklist[100]?.windTimeStamp = Date()
+        //        windClient?.add
+    }
+    
     
 }
 
