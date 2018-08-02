@@ -14,6 +14,7 @@
 		953F07F5210A575400E70E18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953F07F4210A575400E70E18 /* Assets.xcassets */; };
 		953F07F8210A575400E70E18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953F07F6210A575400E70E18 /* LaunchScreen.storyboard */; };
 		953F0803210A575400E70E18 /* surfbreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F0802210A575400E70E18 /* surfbreakTests.swift */; };
+		9574719E211348030064DD3A /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574719D211348030064DD3A /* Station.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Buoy.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -41,6 +42,7 @@
 		953F07FE210A575400E70E18 /* surfbreakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfbreakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953F0802210A575400E70E18 /* surfbreakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfbreakTests.swift; sourceTree = "<group>"; };
 		953F0804210A575400E70E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9574719D211348030064DD3A /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Buoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buoy.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				9592EC56210A8064004B0A82 /* Buoy.swift */,
+				9574719D211348030064DD3A /* Station.swift */,
 				953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */,
 			);
 			path = Models;
@@ -262,6 +265,7 @@
 				9592EC57210A8064004B0A82 /* Buoy.swift in Sources */,
 				9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */,
 				953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */,
+				9574719E211348030064DD3A /* Station.swift in Sources */,
 				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

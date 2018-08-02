@@ -20,7 +20,7 @@ final class BuoyClient: NSObject {
     var buoyArray = [Buoy]()
     var snapshotId = Int()
     var urlString = String()
-    var snapshot = Snapshot.init()
+//    var snapshot = Snapshot(context: )
     
     init(snapshotId:Int) {
         self.snapshotId = snapshotId
@@ -28,7 +28,8 @@ final class BuoyClient: NSObject {
     
     func createBuoyData() {
         DispatchQueue.global(qos:.utility).async {
-            self.setUrlStringFromSnapshotId()
+//            self.setUrlStringFromSnapshotId()
+            self.getStationDataFromFileWithSnapshotId(snapshotId: self.snapshotId)
         }
     }
     
@@ -42,10 +43,10 @@ final class BuoyClient: NSObject {
         var bouyDictionary : [Int : [String]] = [Int: [String]]()
 
         var dataString = String()
-        let url = URL(string: urlString)
+        guard let url = URL(string: urlString) else {return}
 
         do {
-            dataString = try String(contentsOf: url!)
+            dataString = try String(contentsOf: url)
         }catch{
             print("Bouy Data Retreival Error: \(error)")
         }
@@ -75,10 +76,7 @@ final class BuoyClient: NSObject {
         }
         //wave direction
         if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
-//                currentSnapShot.swellDirection = Int32(0)
-//                currentSnapShot.swellDirectionString = ""
-            
-//                currentSnapShot.swellDirection = Double(currentWaveDirectionDegrees)
+                currentSnapShot.swellDirection = Int32(currentWaveDirectionDegrees)
 //                currentSnapShot.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
         }
         //wave frequency/period
@@ -87,13 +85,8 @@ final class BuoyClient: NSObject {
         }
         //water temp
         if let currentWaterTemp = Double(bouy[14]) as Double?{
-//                let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
-            let currentWaterTempInFahrenheit = 0.0
-            currentSnapShot.waterTemp = currentWaterTempInFahrenheit
-            //set color of wave
-//                if let waterColor = getWaterColorFromTempInF(currentWaterTempInFahrenheit){
-//                    currentSnapShot.waterColor = waterColor
-//                }
+                let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
+                currentSnapShot.waterTemp = currentWaterTempInFahrenheit
         }
         
         //station id
@@ -108,14 +101,10 @@ final class BuoyClient: NSObject {
 //            currentSnapShot.beachFaceDirection = beachFaceDirection
         
         print(currentSnapShot)
-        self.snapshot = currentSnapShot
+//        self.snapshot = currentSnapShot
         DispatchQueue.main.async {
             self.didGetBuoyData()
         }
-    }
-    
-    func getBuoyDataAsSnapshot()-> Snapshot {
-        return self.snapshot
     }
     
     func setUrlStringFromSnapshotId(){
@@ -133,3 +122,38 @@ final class BuoyClient: NSObject {
     
 
 }
+
+extension BuoyClient {
+    func fahrenheitFromCelcius(temp : Double) -> (Double){
+        let tempInF = (9.0 / 5.0 * (temp)) + 32.0
+        return (tempInF)
+    }
+}
+
+extension BuoyClient {
+    func getStationDataFromFileWithSnapshotId(snapshotId : Int){
+        let fileName = "regionalBuoyList"
+        guard let stations = loadJson(fileName) else {return}
+
+    }
+
+    func loadJson(_ fileName: String) -> [Station]? {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Station].self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        }
+        return nil
+    }
+
+}
+
+
+
+
+
