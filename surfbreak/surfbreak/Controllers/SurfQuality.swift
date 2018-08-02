@@ -27,18 +27,18 @@ final class SurfQuality: NSObject {
     
     func createSurfQualityAssesment(){
         DispatchQueue.global(qos:.utility).async {
-            if let windDirection = self.currentSnapshot.windDir, let faceDirection = self.currentSnapshot.beachFaceDirection{
-                //was setting background color here with wind direction
-                //                let diff = faceDirection - windDirection
-                //                let absDiff = abs(diff)
-                //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
-                DispatchQueue.main.async {
-                    print("The Current Wind Direciton is \(windDirection)")
-                    print("The Beach Face Direciton is \(faceDirection)")
-                    
-                    self.didFinishSurfQualityAssesment()
-                }
-            }
+//            if let windDirection = self.currentSnapshot.windDir, let faceDirection = self.currentSnapshot.beachFaceDirection{
+//                //was setting background color here with wind direction
+//                //                let diff = faceDirection - windDirection
+//                //                let absDiff = abs(diff)
+//                //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
+//                DispatchQueue.main.async {
+//                    print("The Current Wind Direciton is \(windDirection)")
+//                    print("The Beach Face Direciton is \(faceDirection)")
+//
+//                    self.didFinishSurfQualityAssesment()
+//                }
+//            }
         }
     }
     
@@ -48,13 +48,13 @@ final class SurfQuality: NSObject {
     
     func getColorFromDiff (_ diff : Double) -> UIColor{
         if diff > 0 && diff < 60 {
-            currentSnapshot.windCardinalDirection = "ONSHORE"
+            currentSnapshot.windDirectionString = "ONSHORE"
             return UIColor.red
         } else if diff > 90 {
-            currentSnapshot.windCardinalDirection = "OFFSHORE"
+            currentSnapshot.windDirectionString = "OFFSHORE"
             return UIColor.green
         }
-        currentSnapshot.windCardinalDirection = "SIDESHORE"
+        currentSnapshot.windDirectionString = "SIDESHORE"
         return UIColor.yellow
     }
     

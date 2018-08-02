@@ -21,7 +21,7 @@ final class BuoyClient: NSObject {
     var snapshotId = Int()
     var urlString = String()
     var currentStation = Station()
-    var allStations = Station()
+    var allStations = [Station]()
     
     init(snapshotId:Int) {
         self.snapshotId = snapshotId

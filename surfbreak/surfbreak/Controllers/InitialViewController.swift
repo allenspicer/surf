@@ -22,7 +22,7 @@ final class InitialViewController: UIViewController {
     private var airTempClient : AirTempClient?
     private var surfQuality : SurfQuality?
     
-    var allStations = [Station]()
+    var allStations : [Station]? = nil
 
 
     override func viewDidLoad() {
@@ -152,7 +152,7 @@ extension InitialViewController : CLLocationManagerDelegate{
 extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
         print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
-        if allStations.count < 1 { allStations = stations }
+        if (allStations == nil) { allStations = stations }
         componentsChecklist[100]?.bouy = true
         componentsChecklist[100]?.bouyTimeStamp = Date()
         setDataClientsFor(snapshot: snapshot)
