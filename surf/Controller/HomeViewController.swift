@@ -199,10 +199,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     //MARK: - Gesture Recognizer
     //
     
-    //
-    //Gesture Recognizer
-    //
-    
     func setupGestureRecognizer() {
         let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
         touchDown.minimumPressDuration = 0
@@ -287,7 +283,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 
     
     override func viewDidLayoutSubviews() {
-        favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        if favoritesSnapshots.count > 0 {
+            favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }
+
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -396,17 +395,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        switch collectionView {
-//        case is ProximalCollectionView:
-//            return CGSize(width: 124, height: 124)
-//        case is FavoriteCollectionView:
-//            return CGSize(width: 207, height: 264)
-//        default:
-//            return CGSize()
-//        }
-//    }
 
     
     //
@@ -494,8 +482,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.performSegue(withIdentifier: "showStationDetail", sender: self)
         }
     }
-    
-    
 }
 
 
