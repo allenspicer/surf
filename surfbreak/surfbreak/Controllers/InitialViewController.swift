@@ -19,8 +19,8 @@ final class InitialViewController: UIViewController {
     private var buoyClient : BuoyClient?
     private var tideClient : TideClient?
     private var windClient : WindClient?
-//    private var airTempClient : AirTempClient?
-//    private var surfQuality : SurfQuality?
+    private var airTempClient : AirTempClient?
+    private var surfQuality : SurfQuality?
 
 
     override func viewDidLoad() {
@@ -93,9 +93,9 @@ final class InitialViewController: UIViewController {
                 windClient?.delegate = self
                 windClient?.createWindData()
         
-        //        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
-        //        airTempClient?.delegate = self
-        //        airTempClient?.createAirTempData()
+                airTempClient = AirTempClient(currentSnapshot: snapshot)
+                airTempClient?.delegate = self
+                airTempClient?.createAirTempData()
     }
 
 }
@@ -171,8 +171,26 @@ extension InitialViewController : WindClientDelegate{
         componentsChecklist[100]?.wind = true
         componentsChecklist[100]?.windTimeStamp = Date()
         //        windClient?.add
+        self.surfQuality?.createSurfQualityAssesment()
+        surfQuality?.delegate = self
     }
-    
+}
+
+extension InitialViewController : AirTempDelegate{
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
+        print("The Air Temp Client has returned an array of tides.")
+        componentsChecklist[100]?.air = true
+        componentsChecklist[100]?.airTimeStamp = Date()
+        //
+    }
+}
+
+extension InitialViewController : SurfQualityDelegate{
+    func didFinishSurfQualityTask(sender: SurfQuality) {
+        componentsChecklist[100]?.quality = true
+        componentsChecklist[100]?.completeTimestamp = Date()
+        //
+    }
     
 }
 

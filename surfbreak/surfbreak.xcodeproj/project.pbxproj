@@ -20,6 +20,9 @@
 		957471A4211362410064DD3A /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A3211362410064DD3A /* Tide.swift */; };
 		957471A6211364BC0064DD3A /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A5211364BC0064DD3A /* Wind.swift */; };
 		957471A8211364E00064DD3A /* WindClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A7211364E00064DD3A /* WindClient.swift */; };
+		957471AA2113659A0064DD3A /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A92113659A0064DD3A /* AirTemp.swift */; };
+		957471AC211365AF0064DD3A /* AirTempClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AB211365AF0064DD3A /* AirTempClient.swift */; };
+		957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AD211366AD0064DD3A /* SurfQuality.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Buoy.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -53,6 +56,9 @@
 		957471A3211362410064DD3A /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
 		957471A5211364BC0064DD3A /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		957471A7211364E00064DD3A /* WindClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindClient.swift; sourceTree = "<group>"; };
+		957471A92113659A0064DD3A /* AirTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTemp.swift; sourceTree = "<group>"; };
+		957471AB211365AF0064DD3A /* AirTempClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTempClient.swift; sourceTree = "<group>"; };
+		957471AD211366AD0064DD3A /* SurfQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurfQuality.swift; path = surfbreak/Controllers/SurfQuality.swift; sourceTree = SOURCE_ROOT; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Buoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buoy.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		9592EC52210A5B5B004B0A82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				957471A92113659A0064DD3A /* AirTemp.swift */,
 				957471A5211364BC0064DD3A /* Wind.swift */,
 				957471A3211362410064DD3A /* Tide.swift */,
 				9574719F21135BE30064DD3A /* SnapshotComponents.swift */,
@@ -167,6 +174,8 @@
 		9592EC55210A7F02004B0A82 /* Network Clients */ = {
 			isa = PBXGroup;
 			children = (
+				957471AB211365AF0064DD3A /* AirTempClient.swift */,
+				957471AD211366AD0064DD3A /* SurfQuality.swift */,
 				957471A7211364E00064DD3A /* WindClient.swift */,
 				957471A1211362200064DD3A /* TideClient.swift */,
 				9592EC53210A7EF9004B0A82 /* BuoyClient.swift */,
@@ -279,6 +288,7 @@
 				957471A2211362200064DD3A /* TideClient.swift in Sources */,
 				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
+				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
 				9592EC57210A8064004B0A82 /* Buoy.swift in Sources */,
 				9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */,
 				953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */,
@@ -286,7 +296,9 @@
 				957471A8211364E00064DD3A /* WindClient.swift in Sources */,
 				957471A4211362410064DD3A /* Tide.swift in Sources */,
 				9574719E211348030064DD3A /* Station.swift in Sources */,
+				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
 				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
+				957471AC211365AF0064DD3A /* AirTempClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
