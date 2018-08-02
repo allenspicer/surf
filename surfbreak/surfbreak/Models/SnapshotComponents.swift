@@ -42,16 +42,4 @@ struct SnapshotComponents {
         self.quality = quality
         self.completeTimestamp = completeTimestamp
     }
-    
-    
-//    init(myString: String? = nil, //👈
-//        myInt: Int? = nil,
-//        myDouble: Double? = nil) {
-//
-//        self.myString = myString
-//        self.myInt = myInt
-//        self.myDouble = myDouble
-//    }
-    
-    
 }

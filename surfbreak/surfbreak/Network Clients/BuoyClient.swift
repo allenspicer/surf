@@ -23,6 +23,7 @@ final class BuoyClient: NSObject {
     var currentStation = Station()
     var allStations = [Station]()
     
+    
     init(snapshotId:Int) {
         self.snapshotId = snapshotId
     }
