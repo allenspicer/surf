@@ -14,6 +14,8 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation = (0.0,0.0)
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var componentsChecklist = [Int : SnapshotComponents]()
+
     private var buoyClient : BuoyClient?
 //    private var tideClient : TideClient?
 //    private var windClient : WindClient?
@@ -27,9 +29,12 @@ final class InitialViewController: UIViewController {
 
         //trigger user location process
             self.getUserLocation()
-            self.setDataClientsForStation(snapshotId: 100)
         //check persistence for user favorites
         //for each favorite
+        //create a component in the checklist
+        componentsChecklist[100] = SnapshotComponents()
+        self.setDataClientsForStation(snapshotId: 100)
+
             // load series of data points (clients)
 //        }
     }
@@ -77,18 +82,20 @@ final class InitialViewController: UIViewController {
         buoyClient = BuoyClient(snapshotId: snapshotId)
         buoyClient?.delegate = self
         buoyClient?.createBuoyData()
-        
-//        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
-//        tideClient?.delegate = self
-//        tideClient?.createTideData()
-//
-//        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
-//        windClient?.delegate = self
-//        windClient?.createWindData()
-//
-//        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
-//        airTempClient?.delegate = self
-//        airTempClient?.createAirTempData()
+    }
+    
+    func setDataClientsFor(snapshot : Snapshot){
+        //        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
+        //        tideClient?.delegate = self
+        //        tideClient?.createTideData()
+        //
+        //        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
+        //        windClient?.delegate = self
+        //        windClient?.createWindData()
+        //
+        //        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
+        //        airTempClient?.delegate = self
+        //        airTempClient?.createAirTempData()
     }
 
 }
@@ -142,9 +149,10 @@ extension InitialViewController : CLLocationManagerDelegate{
 
 extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot) {
-        print("THe Snapshot has been returned. Contents are \(snapshot)")
-//        snapshotComponents["tide"] = true
-//        segueWhenAllComponenetsAreLoaded()
+        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+        componentsChecklist[100]?.bouy = true
+        componentsChecklist[100]?.bouyTimeStamp = Date()
+        setDataClientsFor(snapshot: snapshot)
     }
 }
 
