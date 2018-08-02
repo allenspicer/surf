@@ -23,6 +23,7 @@
 		957471AA2113659A0064DD3A /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A92113659A0064DD3A /* AirTemp.swift */; };
 		957471AC211365AF0064DD3A /* AirTempClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AB211365AF0064DD3A /* AirTempClient.swift */; };
 		957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AD211366AD0064DD3A /* SurfQuality.swift */; };
+		957471B0211392BC0064DD3A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AF211392BC0064DD3A /* GradientView.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Buoy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Buoy.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -59,6 +60,7 @@
 		957471A92113659A0064DD3A /* AirTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTemp.swift; sourceTree = "<group>"; };
 		957471AB211365AF0064DD3A /* AirTempClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTempClient.swift; sourceTree = "<group>"; };
 		957471AD211366AD0064DD3A /* SurfQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurfQuality.swift; path = surfbreak/Controllers/SurfQuality.swift; sourceTree = SOURCE_ROOT; };
+		957471AF211392BC0064DD3A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Buoy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buoy.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				953F07EE210A575300E70E18 /* Main.storyboard */,
+				957471AF211392BC0064DD3A /* GradientView.swift */,
 				953F07F6210A575400E70E18 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -287,6 +290,7 @@
 			files = (
 				957471A2211362200064DD3A /* TideClient.swift in Sources */,
 				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
+				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
 				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
 				9592EC57210A8064004B0A82 /* Buoy.swift in Sources */,
