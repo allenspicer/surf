@@ -14,11 +14,3 @@ struct Buoy {
     var value : Double
     var key : String
 }
-
-
-
-//100 : [(Bouy: true),(Tide:false),(Wind : false),()]
-
-
-
-//[100 : [Bouy, Wave, Tide, Wind, Air, Quality]]

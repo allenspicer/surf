@@ -27,13 +27,15 @@ final class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         //set up activity indicator
+        
         DispatchQueue.global(qos:.utility).async{
 
-        //trigger user location process
+            //trigger user location process
             self.getUserLocation()
-        //check persistence for user favorites
-        //for each favorite
-        //create a component in the checklist
+            
+            //check persistence for user favorites
+            
+            //for each favorite create a component in the checklist and make data requests
             self.componentsChecklist[100] = SnapshotComponents()
             self.setDataClientsForStation(snapshotId: 100)
 

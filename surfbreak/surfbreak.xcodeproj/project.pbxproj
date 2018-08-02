@@ -160,11 +160,11 @@
 		9592EC52210A5B5B004B0A82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9592EC56210A8064004B0A82 /* Buoy.swift */,
 				957471A92113659A0064DD3A /* AirTemp.swift */,
 				957471A5211364BC0064DD3A /* Wind.swift */,
 				957471A3211362410064DD3A /* Tide.swift */,
 				9574719F21135BE30064DD3A /* SnapshotComponents.swift */,
-				9592EC56210A8064004B0A82 /* Buoy.swift */,
 				9574719D211348030064DD3A /* Station.swift */,
 				953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */,
 			);
