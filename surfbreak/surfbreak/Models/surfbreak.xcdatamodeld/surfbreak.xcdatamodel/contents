@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Snapshot" representedClassName="Snapshot" syncable="YES" codeGenerationType="class">
         <attribute name="airTemp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="beachFaceDirection" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nextTidePolar" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,7 +25,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Snapshot" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="Snapshot" positionX="-63" positionY="-18" width="128" height="30"/>
         <element name="UserLocation" positionX="-45" positionY="108" width="128" height="90"/>
     </elements>
 </model>

@@ -20,7 +20,8 @@ final class BuoyClient: NSObject {
     var buoyArray = [Buoy]()
     var snapshotId = Int()
     var urlString = String()
-//    var snapshot = Snapshot(context: )
+    var currentStation = Station()
+    var snapshot : AnyObject?
     
     init(snapshotId:Int) {
         self.snapshotId = snapshotId
@@ -28,7 +29,6 @@ final class BuoyClient: NSObject {
     
     func createBuoyData() {
         DispatchQueue.global(qos:.utility).async {
-//            self.setUrlStringFromSnapshotId()
             self.getStationDataFromFileWithSnapshotId(snapshotId: self.snapshotId)
         }
     }
@@ -36,6 +36,10 @@ final class BuoyClient: NSObject {
     func didGetBuoyData() {
         delegate?.didFinishBuoyTask(sender: self, buoys: buoyArray)
     }
+    
+    //
+    //MARK: - main data request
+    //
     
     
     private func buoyDataServiceRequest(){
@@ -89,6 +93,9 @@ final class BuoyClient: NSObject {
                 currentSnapShot.waterTemp = currentWaterTempInFahrenheit
         }
         
+        currentSnapShot.beachFaceDirection = Int32(currentStation.bfd)
+        
+        
         //station id
 //            if let station = Int(stationId){
 //                currentSnapShot.stationId = station
@@ -101,22 +108,18 @@ final class BuoyClient: NSObject {
 //            currentSnapShot.beachFaceDirection = beachFaceDirection
         
         print(currentSnapShot)
-//        self.snapshot = currentSnapShot
+        self.snapshot = currentSnapShot
         DispatchQueue.main.async {
             self.didGetBuoyData()
         }
     }
     
     func setUrlStringFromSnapshotId(){
+        //after getStationDataFromFileWithSnapshotId
+        //we have currentStation populated
+        //use the station Id to retrieve data
         
-        //get all possible snapshots
-        //use snapshot id
-        //get station id to use for URL
-        //get beach face direction and save for populating snapshot
-        //get name and save for populating snapshot
-        
-        let stationId = "41110"
-        urlString = "http://www.ndbc.noaa.gov/data/realtime2/\(stationId).txt"
+        urlString = "http://www.ndbc.noaa.gov/data/realtime2/\(currentStation.station).txt"
         buoyDataServiceRequest()
     }
     
@@ -124,17 +127,38 @@ final class BuoyClient: NSObject {
 }
 
 extension BuoyClient {
+    
+    //
+    //MARK: - helpers to convert data
+    //
+    
+    
     func fahrenheitFromCelcius(temp : Double) -> (Double){
         let tempInF = (9.0 / 5.0 * (temp)) + 32.0
         return (tempInF)
     }
+    
+    func directionFromDegrees(degrees : Float) -> String {
+        
+        let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+        let categoryInt: Int = Int((degrees + 11.25)/22.5)
+        return directions[categoryInt % 16]
+    }
 }
 
 extension BuoyClient {
+    
+    //
+    //MARK: - station list handling 
+    //
+    
     func getStationDataFromFileWithSnapshotId(snapshotId : Int){
         let fileName = "regionalBuoyList"
         guard let stations = loadJson(fileName) else {return}
-
+        for station in stations where station.id == self.snapshotId {
+            currentStation = station
+            self.setUrlStringFromSnapshotId()
+        }
     }
 
     func loadJson(_ fileName: String) -> [Station]? {
