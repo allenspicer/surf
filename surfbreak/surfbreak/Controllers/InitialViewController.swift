@@ -23,6 +23,7 @@ final class InitialViewController: UIViewController {
     private var surfQuality : SurfQuality?
     
     var allStations : [Station]? = nil
+    var favoriteSnapshots : [Snapshot]? = nil
 
 
     override func viewDidLoad() {
@@ -117,7 +118,7 @@ extension InitialViewController : CLLocationManagerDelegate{
     internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             print("User allowed us to access location")
-            locationManager.requestLocation();
+            locationManager.requestLocation()
         }
     }
     
@@ -152,12 +153,12 @@ extension InitialViewController : CLLocationManagerDelegate{
 }
 
 extension InitialViewController : BuoyClientDelegate{
-    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
-        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+    func didFinishBuoyTask(sender: BuoyClient, buoy: Buoy, stations: [Station]) {
+//        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
         if (allStations == nil) { allStations = stations }
         componentsChecklist[100]?.bouy = true
         componentsChecklist[100]?.bouyTimeStamp = Date()
-        setDataClientsFor(snapshot: snapshot)
+//        setDataClientsFor(snapshot: snapshot)
     }
 }
 

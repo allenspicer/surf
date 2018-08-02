@@ -10,14 +10,13 @@ import UIKit
 
 
 protocol BuoyClientDelegate: AnyObject {
-    func didFinishBuoyTask(sender: BuoyClient, snapshot : Snapshot, stations : [Station])
+    func didFinishBuoyTask(sender: BuoyClient, buoy : Buoy, stations : [Station])
 }
 
 final class BuoyClient: NSObject {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var delegate : BuoyClientDelegate?
-    var buoyArray = [Buoy]()
+    var buoy = Buoy()
     var snapshotId = Int()
     var urlString = String()
     var currentStation = Station()
@@ -34,8 +33,8 @@ final class BuoyClient: NSObject {
         }
     }
     
-    func didGetBuoyData(snapshot : Snapshot) {
-        delegate?.didFinishBuoyTask(sender: self, snapshot: snapshot, stations: allStations)
+    func didGetBuoyData(snapshotId : Int) {
+        delegate?.didFinishBuoyTask(sender: self, buoy: buoy, stations: allStations)
     }
     
     //
@@ -69,39 +68,38 @@ final class BuoyClient: NSObject {
         guard bouyDictionary.count > 2 else {return}
         
         let index = bouyDictionary.count - 1
-        let currentSnapShot = Snapshot(context: self.context)
         guard let bouy = bouyDictionary[index] else {return}
         
         //wave height
-        if let currentWaveHeight = Double(bouy[8]) as Double?{
-            let formatter = NumberFormatter()
-            formatter.maximumFractionDigits = 1
-            let heightInFeet = currentWaveHeight * 3.28
-            currentSnapShot.waveHeight = heightInFeet
-        }
+        guard let currentWaveHeight = Double(bouy[8]) as Double? else {return}
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
+        let heightInFeet = currentWaveHeight * 3.28
+
         //wave direction
-        if let currentWaveDirectionDegrees = Float(bouy[11]) as Float?{
-                currentSnapShot.swellDirection = Int32(currentWaveDirectionDegrees)
-//                currentSnapShot.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
-        }
+        guard let currentWaveDirectionDegrees = Int(bouy[11]) as Int? else {return}
+
         //wave frequency/period
-        if let waveAveragePeriod = Double(bouy[10]) as Double?{
-            currentSnapShot.period = waveAveragePeriod
-        }
+        guard let waveAveragePeriod = Double(bouy[10]) as Double? else {return}
+
         //water temp
-        if let currentWaterTemp = Double(bouy[14]) as Double?{
-                let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
-                currentSnapShot.waterTemp = currentWaterTempInFahrenheit
-        }
+        guard let currentWaterTemp = Double(bouy[14]) as Double? else {return}
+        let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
         
-        currentSnapShot.beachFaceDirection = Int32(currentStation.bfd)
-        currentSnapShot.id = Int32(currentStation.id)
-        currentSnapShot.stationId = Int32(currentStation.station)
+        var currentBuoy = Buoy()
+        currentBuoy.waveHeight = heightInFeet
+        currentBuoy.swellDirection = currentWaveDirectionDegrees
+//        currentBuoy.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
+        currentBuoy.period = waveAveragePeriod
+        currentBuoy.waterTemp = currentWaterTempInFahrenheit
+        currentBuoy.beachFaceDirection = currentStation.bfd
+        currentBuoy.id = currentStation.id
+        currentBuoy.stationId = currentStation.station
         
 //            currentSnapShot.nickname = name
 
         DispatchQueue.main.async {
-            self.didGetBuoyData(snapshot: currentSnapShot)
+            self.didGetBuoyData(snapshotId: currentBuoy.id)
         }
     }
     
