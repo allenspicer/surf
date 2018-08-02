@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol BuoyClientDelegate: AnyObject {
-    func didFinishBuoyTask(sender: BuoyClient, snapshot : Snapshot)
+    func didFinishBuoyTask(sender: BuoyClient, snapshot : Snapshot, stations : [Station])
 }
 
 final class BuoyClient: NSObject {
@@ -21,6 +21,7 @@ final class BuoyClient: NSObject {
     var snapshotId = Int()
     var urlString = String()
     var currentStation = Station()
+    var allStations = Station()
     
     init(snapshotId:Int) {
         self.snapshotId = snapshotId
@@ -33,7 +34,7 @@ final class BuoyClient: NSObject {
     }
     
     func didGetBuoyData(snapshot : Snapshot) {
-        delegate?.didFinishBuoyTask(sender: self, snapshot: snapshot)
+        delegate?.didFinishBuoyTask(sender: self, snapshot: snapshot, stations: allStations)
     }
     
     //
@@ -148,6 +149,7 @@ extension BuoyClient {
             currentStation = station
             self.setUrlStringFromSnapshotId()
         }
+        allStations = stations
     }
 
     func loadJson(_ fileName: String) -> [Station]? {
