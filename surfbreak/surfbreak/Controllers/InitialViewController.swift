@@ -141,10 +141,8 @@ extension InitialViewController : CLLocationManagerDelegate{
 }
 
 extension InitialViewController : BuoyClientDelegate{
-    func didFinishBuoyTask(sender: BuoyClient, buoys: [Buoy]) {
-        print("Initial View Controller Has Buoy Array with \(buoys.count) buoys")
-//        let snapshot = buoyClient?.getBuoyDataAsSnapshot()
-//        print("THe Snapshot has been returned. Contents are \(snapshot)")
+    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot) {
+        print("THe Snapshot has been returned. Contents are \(snapshot)")
 //        snapshotComponents["tide"] = true
 //        segueWhenAllComponenetsAreLoaded()
     }
