@@ -94,18 +94,11 @@ final class BuoyClient: NSObject {
         }
         
         currentSnapShot.beachFaceDirection = Int32(currentStation.bfd)
+        currentSnapShot.id = Int32(currentStation.id)
+        currentSnapShot.stationId = Int32(currentStation.station)
         
-        
-        //station id
-//            if let station = Int(stationId){
-//                currentSnapShot.stationId = station
-//            }
-        
-//            currentSnapShot.id = id
 //            currentSnapShot.nickname = name
-        
-        //beach face direction
-//            currentSnapShot.beachFaceDirection = beachFaceDirection
+
         
         print(currentSnapShot)
         self.snapshot = currentSnapShot
@@ -149,7 +142,7 @@ extension BuoyClient {
 extension BuoyClient {
     
     //
-    //MARK: - station list handling 
+    //MARK: - station list handling
     //
     
     func getStationDataFromFileWithSnapshotId(snapshotId : Int){

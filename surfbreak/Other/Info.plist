@@ -16,11 +16,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -29,16 +24,18 @@
 			<key>CFBundleURLName</key>
 			<string>http://www.ndbc.noaa.gov/data/latest_obs/latest_obs.txt</string>
 			<key>NSAppTransportSecurity</key>
-			<dict>
-				<key>Allow Arbitrary Loads</key>
-				<true/>
-			</dict>
+			<dict/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses your location to find the bouy data closest to you - as that is what our users will generally be interested in</string>
 	<key>UILaunchStoryboardName</key>
