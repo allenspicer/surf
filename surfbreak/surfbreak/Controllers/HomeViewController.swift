@@ -37,7 +37,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        startActivityIndicator("Loading")
         createProximalCellsFromStations()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
@@ -307,7 +306,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
             cell.distanceLabel.text = "\(current.distanceToUser)mi"
-//            cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
