@@ -38,6 +38,7 @@ final class InitialViewController: UIViewController {
             self.loadStationDataFromFile()
             
             //check persistence for user favorites
+            //if none segue
             
             //for each favorite create a component in the checklist and make data requests
             self.componentsChecklist[100] = SnapshotComponents()
@@ -250,6 +251,8 @@ extension InitialViewController {
         guard let destinationVC = segue.destination as? HomeViewController else { return}
         guard let stations = allStations else {return}
         destinationVC.allStations = stations
+        destinationVC.userLatitude = userLocation.0
+        destinationVC.userLongitude = userLocation.1
         
     }
     

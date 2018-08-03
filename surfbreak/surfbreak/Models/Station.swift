@@ -14,6 +14,9 @@ struct Station : Decodable{
     var station = Int()
     var bfd = Int()
     var name = String()
+    var latitude = Double()
+    var longitude = Double()
+
 }
 
 

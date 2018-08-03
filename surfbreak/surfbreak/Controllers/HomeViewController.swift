@@ -30,8 +30,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var surfQuality : SurfQuality?
     var snapshotComponents = [String:Bool]()
 
-    private var userLongitude = 0.0
-    private var userLatitude = 0.0
+    var userLongitude = 0.0
+    var userLatitude = 0.0
 //    private var locationManager = CLLocationManager()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
@@ -77,20 +77,20 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         let approxMilesToLat = 69.0
         
         if (userLatitude != 0 && userLongitude != 0) {
-            for index in 0..<proximalData.count{
-                //                let station = proximalData[index]
-                //                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
-                //                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
-                //                let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
-                //                proximalData[index].distanceInMiles = Int(milesFromUser)
-                
+            for index in 0..<allStations.count{
+                    let station = allStations[index]
+                    let lonDiffAbs = abs(station.longitude - userLongitude) * approxMilesToLon
+                    let latDiffAbs = abs(station.latitude - userLatitude) * approxMilesToLat
+                    let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
+                    let proximalStation = ProximalStation(station: station, distanceToUser: Int(milesFromUser))
+                    proximalData.append(proximalStation)
             }
         }
         sortTableObjectsByDistance()
     }
 
     func sortTableObjectsByDistance(){
-        //        proximalData = proximalData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
+        proximalData = proximalData.sorted(by: {$0.distanceToUser < $1.distanceToUser })
         proximalCollectionView.reloadData()
         stopActivityIndicator()
     }
@@ -306,7 +306,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-            cell.titleLabel.text = self.proximalData[indexPath.row].station.name
+            let current = self.proximalData[indexPath.row]
+            cell.titleLabel.text = current.station.name
+            cell.distanceLabel.text = "\(current.distanceToUser)mi"
             cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
