@@ -39,12 +39,11 @@ class SurfSnapshotView: UIScrollView {
     
     func setBackgroundGradient(){
         
-        self.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = self.frame.size
-        let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-        gradientLayer.colors = [customYellow.cgColor, UIColor.clear.cgColor]
-        self.layer.addSublayer(gradientLayer)
+        let backgroundView = UIImageView(frame: self.frame)
+        backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
+        backgroundView.contentMode = .center
+        self.addSubview(backgroundView)
+        self.sendSubview(toBack: backgroundView)
     }
     
     func addWaveHeightIndicator(){

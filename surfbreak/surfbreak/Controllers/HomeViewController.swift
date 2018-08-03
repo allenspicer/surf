@@ -173,7 +173,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
                     let centerPoint = CGPoint(x: self.view.center.x, y: currentCell.center.y + 16)
                     transitionView.center = centerPoint
                     transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
-                        self.performSegue(withIdentifier: "showStationDetail", sender: self)
+                        self.performSegue(withIdentifier: "segueToDetail", sender: self)
                     })
                 }
             }
