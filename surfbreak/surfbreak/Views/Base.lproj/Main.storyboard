@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,8 +91,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dg-fm-BQj">
-                                                    <rect key="frame" x="0.0" y="30" width="128" height="20"/>
+                                                    <rect key="frame" x="12.666666666666664" y="30" width="102.66666666666669" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-oh-atD">
+                                                    <rect key="frame" x="12.666666666666664" y="82" width="102.66666666666669" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -100,12 +107,16 @@
                                         <constraints>
                                             <constraint firstItem="i2E-8e-cSK" firstAttribute="centerY" secondItem="e13-oN-TVT" secondAttribute="centerY" id="1mJ-uZ-wip"/>
                                             <constraint firstItem="4dg-fm-BQj" firstAttribute="centerX" secondItem="e13-oN-TVT" secondAttribute="centerX" id="4T2-fB-P7l"/>
-                                            <constraint firstItem="4dg-fm-BQj" firstAttribute="width" secondItem="e13-oN-TVT" secondAttribute="width" id="qln-TX-3Dd"/>
+                                            <constraint firstAttribute="bottom" secondItem="tp4-oh-atD" secondAttribute="bottom" constant="25" id="CrW-O5-Okh"/>
+                                            <constraint firstItem="4dg-fm-BQj" firstAttribute="width" secondItem="e13-oN-TVT" secondAttribute="width" multiplier="0.8" id="qln-TX-3Dd"/>
                                             <constraint firstAttribute="top" secondItem="4dg-fm-BQj" secondAttribute="centerY" constant="-40" id="ssA-lO-ZJ4"/>
+                                            <constraint firstItem="tp4-oh-atD" firstAttribute="centerX" secondItem="4dg-fm-BQj" secondAttribute="centerX" id="uQ0-Pz-oPI"/>
+                                            <constraint firstItem="tp4-oh-atD" firstAttribute="width" secondItem="4dg-fm-BQj" secondAttribute="width" id="xzh-LS-98i"/>
                                             <constraint firstItem="i2E-8e-cSK" firstAttribute="centerX" secondItem="e13-oN-TVT" secondAttribute="centerX" id="zfZ-aH-iuh"/>
                                         </constraints>
                                         <size key="customSize" width="128" height="128"/>
                                         <connections>
+                                            <outlet property="distanceLabel" destination="tp4-oh-atD" id="Lt5-m1-nwx"/>
                                             <outlet property="imageView" destination="i2E-8e-cSK" id="naW-eB-H8f"/>
                                             <outlet property="titleLabel" destination="4dg-fm-BQj" id="KZz-In-fQK"/>
                                         </connections>

@@ -16,8 +16,10 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
     var favoritesSnapshots = [Snapshot]()
-    private var proximalData = [Station]()
+    private var proximalData = [ProximalStation]()
+    var allStations = [Station]()
 
+    
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
@@ -37,8 +39,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startActivityIndicator("Loading")
-        parseStationList()
+//        startActivityIndicator("Loading")
+        createProximalCellsFromStations()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
@@ -66,7 +68,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     //MARK: - Location Services
     //
     
-    private func findDistancesFromUserLocation(){
+    private func createProximalCellsFromStations(){
         
         // Used to convert latitude and longitude into miles
         // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
@@ -96,12 +98,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     //
     //MARK: - Buoy List for regional data station ids
     //
-    
-    private func parseStationList(){
-        let fileName = "regionalBuoyList"
-        guard let stations = loadJson(fileName) else {return}
-        proximalData = stations
-    }
     
     func loadJson(_ fileName: String) -> [Station]? {
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
@@ -268,9 +264,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
-            selectedId = "\(proximalData[cellSelectedIndex].station)"
-            selectedName = proximalData[cellSelectedIndex].name
-            selectedBFD = Double(proximalData[cellSelectedIndex].bfd)
+            selectedId = "\(proximalData[cellSelectedIndex].station.station)"
+            selectedName = proximalData[cellSelectedIndex].station.name
+            selectedBFD = Double(proximalData[cellSelectedIndex].station.bfd)
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
             if indexPath.row != currentCard {
@@ -310,7 +306,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-            cell.titleLabel.text = self.proximalData[indexPath.row].name
+            cell.titleLabel.text = self.proximalData[indexPath.row].station.name
             cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
@@ -336,7 +332,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            let id = Int(self.proximalData[index].id)
+            let id = Int(self.proximalData[index].station.id)
             
             
             

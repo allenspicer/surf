@@ -34,11 +34,15 @@ final class InitialViewController: UIViewController {
             //trigger user location process
             self.getUserLocation()
             
+            //get all stations from local file
+            self.loadStationDataFromFile()
+            
             //check persistence for user favorites
             
             //for each favorite create a component in the checklist and make data requests
             self.componentsChecklist[100] = SnapshotComponents()
-            self.setDataClientsForStation(snapshotId: 100)
+            guard let stations = self.allStations else {return}
+            self.setDataClientsForStation(snapshotId: 100, allStations: stations)
 
             // load series of data points (clients)
         }
@@ -79,12 +83,36 @@ final class InitialViewController: UIViewController {
     }
     
     //
+    //MARK: - station list handling
+    //
+    
+    func loadStationDataFromFile(){
+        let fileName = "regionalBuoyList"
+        guard let stations = loadJson(fileName) else {return}
+        allStations = stations
+    }
+    
+    func loadJson(_ fileName: String) -> [Station]? {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Station].self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        }
+        return nil
+    }
+    
+    //
     //MARK: - Init networking handlers
     //
     
     
-    func setDataClientsForStation(snapshotId : Int){
-        buoyClient = BuoyClient(snapshotId: snapshotId)
+    func setDataClientsForStation(snapshotId : Int, allStations : [Station]){
+        buoyClient = BuoyClient(snapshotId: snapshotId, allStations : allStations)
         buoyClient?.delegate = self
         buoyClient?.createBuoyData()
     }
@@ -211,13 +239,19 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
-        if componentsChecklist[100]?.air == true{
+        if componentsChecklist[100]?.air == true && componentsChecklist[100]?.bouy == true{
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToHome", sender: self)
             }
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? HomeViewController else { return}
+        guard let stations = allStations else {return}
+        destinationVC.allStations = stations
+        
+    }
     
     
     

@@ -39,6 +39,7 @@
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
+		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
+		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				957471A3211362410064DD3A /* Tide.swift */,
 				9574719F21135BE30064DD3A /* SnapshotComponents.swift */,
 				9574719D211348030064DD3A /* Station.swift */,
+				95A474882114B604006409C8 /* ProximalStation.swift */,
 				953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */,
 				957471B92113E6650064DD3A /* DefaultConstants.swift */,
 			);
@@ -330,6 +333,7 @@
 				957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */,
 				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
 				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
+				95A474892114B604006409C8 /* ProximalStation.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
 				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
 				9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */,
