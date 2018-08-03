@@ -298,17 +298,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
             cell.distanceLabel.text = "\(current.distanceToUser)mi"
-//            cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
             cell.loadAllViews()
             let snapshot = self.favoritesSnapshots[indexPath.row]
-            let waveHeight = snapshot.waveHeight
-            let waveFrequency = snapshot.period
             //            guard let nickname = snapshot.nickname else {return cell}
-            let nickname = snapshot.nickname
-            cell.setCellContent(waveHeight: waveHeight, waveFrequency: waveFrequency, locationName: nickname, distanceFromUser: 10.0)
+            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, locationName: snapshot.stationName, distanceFromUser: 10.0)
             return cell
         default:
             return UICollectionViewCell()

@@ -166,7 +166,7 @@
                         <viewLayoutGuide key="safeArea" id="URm-cC-8YO"/>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueDetailToInitial" id="3R7-vV-9zZ"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="segueDetailToInitial" animates="NO" id="3R7-vV-9zZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISG-kL-VMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
