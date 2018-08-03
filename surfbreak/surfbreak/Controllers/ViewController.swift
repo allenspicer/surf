@@ -43,7 +43,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         loadFavoritesAndSetFavoriteButton()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
-        setupAnimatedWaveWithBouyData()
+        if currentSnapShot.waveHeight != 0.0 {
+            setupAnimatedWaveWithBouyData()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

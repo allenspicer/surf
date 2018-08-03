@@ -256,6 +256,7 @@
         <image name="surfbreak" width="84" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Pot-B4-VNx"/>
         <segue reference="NtY-mM-S3j"/>
     </inferredMetricsTieBreakers>
 </document>

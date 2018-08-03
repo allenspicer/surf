@@ -4,9 +4,9 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,25 +38,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142" width="375" height="247"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="244" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="cnc-rm-i7T"/>
+                                </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="8gj-VG-GA8" customClass="FavoriteFlowLayout" customModule="surfbreak" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionViewCell" id="BRw-nr-Ksm" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="82.666666666666671" y="0.0" width="210" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="210" height="264"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="imV-TW-2z7">
-                                                    <rect key="frame" x="-95" y="-39" width="240" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="imV-TW-2z7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="210" height="210"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="imV-TW-2z7" secondAttribute="height" multiplier="1:1" id="bw1-G3-TYs"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="imV-TW-2z7" firstAttribute="top" secondItem="BRw-nr-Ksm" secondAttribute="top" id="Ddr-Af-LIs"/>
+                                            <constraint firstItem="imV-TW-2z7" firstAttribute="width" secondItem="BRw-nr-Ksm" secondAttribute="width" id="FPo-nw-A17"/>
+                                            <constraint firstItem="imV-TW-2z7" firstAttribute="centerX" secondItem="BRw-nr-Ksm" secondAttribute="centerX" id="NDU-JS-KrQ"/>
+                                        </constraints>
+                                        <size key="customSize" width="210" height="264"/>
                                         <connections>
                                             <outlet property="imageView" destination="imV-TW-2z7" id="0k0-vn-7kp"/>
                                         </connections>
@@ -127,15 +137,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="af3-7x-K9q" firstAttribute="width" secondItem="5M9-I8-JoF" secondAttribute="width" id="Ref-H9-VTT"/>
+                            <constraint firstItem="5M9-I8-JoF" firstAttribute="top" secondItem="rFp-us-Te7" secondAttribute="top" constant="-200" id="aFl-Zs-9co"/>
                             <constraint firstItem="af3-7x-K9q" firstAttribute="bottom" secondItem="5M9-I8-JoF" secondAttribute="bottom" constant="-76" id="iZ9-NX-fUh"/>
                             <constraint firstItem="af3-7x-K9q" firstAttribute="centerX" secondItem="jsS-dA-HR5" secondAttribute="centerX" id="pnH-2L-3Pe"/>
+                            <constraint firstItem="rFp-us-Te7" firstAttribute="centerX" secondItem="jsS-dA-HR5" secondAttribute="centerX" id="wSI-rt-uBb"/>
+                            <constraint firstItem="rFp-us-Te7" firstAttribute="width" secondItem="5M9-I8-JoF" secondAttribute="width" id="z5Y-4V-vpB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5M9-I8-JoF"/>
                     </view>
                     <connections>
                         <outlet property="favoritesCollectionView" destination="rFp-us-Te7" id="tww-LV-3Td"/>
                         <outlet property="proximalCollectionView" destination="af3-7x-K9q" id="pYC-2t-BTF"/>
-                        <segue destination="8SK-hn-cwu" kind="show" identifier="segueToDetail" id="O4A-cT-dHl"/>
+                        <segue destination="8SK-hn-cwu" kind="showDetail" identifier="segueToDetail" animates="NO" id="O4A-cT-dHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80R-9F-TT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
