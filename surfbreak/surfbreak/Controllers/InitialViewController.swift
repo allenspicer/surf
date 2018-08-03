@@ -90,17 +90,18 @@ final class InitialViewController: UIViewController {
     }
     
     func setDataClientsFor(snapshot : Snapshot){
-                tideClient = TideClient(currentSnapshot: snapshot)
-                tideClient?.delegate = self
-                tideClient?.createTideData()
         
-                windClient = WindClient(currentSnapshot: snapshot)
-                windClient?.delegate = self
-                windClient?.createWindData()
-        
-                airTempClient = AirTempClient(currentSnapshot: snapshot)
-                airTempClient?.delegate = self
-                airTempClient?.createAirTempData()
+        tideClient = TideClient(currentSnapshot: snapshot)
+        tideClient?.delegate = self
+        tideClient?.createTideData()
+
+        windClient = WindClient(currentSnapshot: snapshot)
+        windClient?.delegate = self
+        windClient?.createWindData()
+
+        airTempClient = AirTempClient(currentSnapshot: snapshot)
+        airTempClient?.delegate = self
+        airTempClient?.createAirTempData()
     }
 
 }
@@ -154,11 +155,12 @@ extension InitialViewController : CLLocationManagerDelegate{
 
 extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
-//        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
         if (allStations == nil) { allStations = stations }
         componentsChecklist[100]?.bouy = true
         componentsChecklist[100]?.bouyTimeStamp = Date()
-//        setDataClientsFor(snapshot: snapshot)
+        componentsChecklist[100]?.snapshot = snapshot
+        setDataClientsFor(snapshot: snapshot)
     }
 }
 
@@ -167,7 +169,9 @@ extension InitialViewController : TideClientDelegate{
         print("The Tide Client has returned an array of tides.")
         componentsChecklist[100]?.tide = true
         componentsChecklist[100]?.tideTimeStamp = Date()
-//        tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
+        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
+        componentsChecklist[100]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
+        checkComponentsThenSegue()
     }
 }
 
@@ -176,7 +180,8 @@ extension InitialViewController : WindClientDelegate{
         print("The Wind Client has returned an array of tides.")
         componentsChecklist[100]?.wind = true
         componentsChecklist[100]?.windTimeStamp = Date()
-        //        windClient?.add
+        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
+        componentsChecklist[100]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
     }
@@ -187,7 +192,9 @@ extension InitialViewController : AirTempDelegate{
         print("The Air Temp Client has returned an array of tides.")
         componentsChecklist[100]?.air = true
         componentsChecklist[100]?.airTimeStamp = Date()
-        //
+        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
+        componentsChecklist[100]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
+        checkComponentsThenSegue()
     }
 }
 
@@ -195,8 +202,24 @@ extension InitialViewController : SurfQualityDelegate{
     func didFinishSurfQualityTask(sender: SurfQuality) {
         componentsChecklist[100]?.quality = true
         componentsChecklist[100]?.completeTimestamp = Date()
-        //
+//        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
+//        componentsChecklist[100]?.snapshot = surfQuality?.getSnapshotWithSurfQuality()
+        checkComponentsThenSegue()
     }
+    
+}
+
+extension InitialViewController {
+    func checkComponentsThenSegue(){
+        if componentsChecklist[100]?.air == true{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueToHome", sender: self)
+            }
+        }
+    }
+    
+    
+    
     
 }
 

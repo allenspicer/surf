@@ -20,6 +20,8 @@ struct SnapshotComponents {
     var airTimeStamp: Date?
     var quality : Bool
     var completeTimestamp: Date?
+    var snapshot: Snapshot?
+
     
     init(bouy : Bool = false,
      bouyTimeStamp: Date? = nil,
@@ -30,7 +32,9 @@ struct SnapshotComponents {
      air : Bool = false,
      airTimeStamp: Date? = nil,
      quality : Bool = false,
-     completeTimestamp: Date? = nil) {
+     completeTimestamp: Date? = nil,
+     snapshot: Snapshot? = nil
+     ) {
         self.bouy = bouy
         self.bouyTimeStamp = bouyTimeStamp
         self.tide = tide
@@ -41,5 +45,6 @@ struct SnapshotComponents {
         self.airTimeStamp = airTimeStamp
         self.quality = quality
         self.completeTimestamp = completeTimestamp
+        self.snapshot = snapshot
     }
 }

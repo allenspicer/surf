@@ -28,6 +28,14 @@
 		957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B3211394420064DD3A /* SurfSnapshotView.swift */; };
 		957471B82113E4500064DD3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B72113E4500064DD3A /* ViewController.swift */; };
 		957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B92113E6650064DD3A /* DefaultConstants.swift */; };
+		957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BB2113EB840064DD3A /* HomeViewController.swift */; };
+		957471BE2113ED9D0064DD3A /* FavCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */; };
+		957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */; };
+		957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */; };
+		957471C42113EF660064DD3A /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C32113EF660064DD3A /* CircleView.swift */; };
+		957471C62113EFC60064DD3A /* FavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C52113EFC60064DD3A /* FavoriteFlowLayout.swift */; };
+		957471C82113F1DF0064DD3A /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C72113F1DF0064DD3A /* CustomView.swift */; };
+		957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -69,6 +77,14 @@
 		957471B3211394420064DD3A /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
 		957471B72113E4500064DD3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		957471B92113E6650064DD3A /* DefaultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConstants.swift; sourceTree = "<group>"; };
+		957471BB2113EB840064DD3A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCollectionViewCell.swift; sourceTree = "<group>"; };
+		957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCollectionView.swift; sourceTree = "<group>"; };
+		957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
+		957471C32113EF660064DD3A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		957471C52113EFC60064DD3A /* FavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFlowLayout.swift; sourceTree = "<group>"; };
+		957471C72113F1DF0064DD3A /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -135,6 +151,12 @@
 		9592EC4E210A5AF0004B0A82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				957471C72113F1DF0064DD3A /* CustomView.swift */,
+				957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */,
+				957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */,
+				957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */,
+				957471C32113EF660064DD3A /* CircleView.swift */,
+				957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */,
 				953F07EE210A575300E70E18 /* Main.storyboard */,
 				957471AF211392BC0064DD3A /* GradientView.swift */,
 				957471B1211394080064DD3A /* ActivityIndicator.swift */,
@@ -156,6 +178,8 @@
 		9592EC50210A5B23004B0A82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				957471C52113EFC60064DD3A /* FavoriteFlowLayout.swift */,
+				957471BB2113EB840064DD3A /* HomeViewController.swift */,
 				957471B72113E4500064DD3A /* ViewController.swift */,
 				953F07EC210A575300E70E18 /* InitialViewController.swift */,
 			);
@@ -300,7 +324,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957471C42113EF660064DD3A /* CircleView.swift in Sources */,
+				957471BE2113ED9D0064DD3A /* FavCollectionViewCell.swift in Sources */,
 				957471A2211362200064DD3A /* TideClient.swift in Sources */,
+				957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */,
 				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
 				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
@@ -313,8 +340,13 @@
 				957471A8211364E00064DD3A /* WindClient.swift in Sources */,
 				957471A4211362410064DD3A /* Tide.swift in Sources */,
 				9574719E211348030064DD3A /* Station.swift in Sources */,
+				957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */,
 				957471B82113E4500064DD3A /* ViewController.swift in Sources */,
 				957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */,
+				957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */,
+				957471C82113F1DF0064DD3A /* CustomView.swift in Sources */,
+				957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */,
+				957471C62113EFC60064DD3A /* FavoriteFlowLayout.swift in Sources */,
 				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
 				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
 				957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */,
