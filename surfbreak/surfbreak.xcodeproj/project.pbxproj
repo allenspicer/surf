@@ -26,6 +26,8 @@
 		957471B0211392BC0064DD3A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AF211392BC0064DD3A /* GradientView.swift */; };
 		957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B1211394080064DD3A /* ActivityIndicator.swift */; };
 		957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B3211394420064DD3A /* SurfSnapshotView.swift */; };
+		957471B82113E4500064DD3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B72113E4500064DD3A /* ViewController.swift */; };
+		957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B92113E6650064DD3A /* DefaultConstants.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -65,6 +67,8 @@
 		957471AF211392BC0064DD3A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		957471B1211394080064DD3A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		957471B3211394420064DD3A /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
+		957471B72113E4500064DD3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		957471B92113E6650064DD3A /* DefaultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConstants.swift; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 		9592EC50210A5B23004B0A82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				957471B72113E4500064DD3A /* ViewController.swift */,
 				953F07EC210A575300E70E18 /* InitialViewController.swift */,
 			);
 			path = Controllers;
@@ -176,6 +181,7 @@
 				9574719F21135BE30064DD3A /* SnapshotComponents.swift */,
 				9574719D211348030064DD3A /* Station.swift */,
 				953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */,
+				957471B92113E6650064DD3A /* DefaultConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,10 +308,12 @@
 				9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */,
 				9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */,
 				953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */,
+				957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */,
 				957471A021135BE30064DD3A /* SnapshotComponents.swift in Sources */,
 				957471A8211364E00064DD3A /* WindClient.swift in Sources */,
 				957471A4211362410064DD3A /* Tide.swift in Sources */,
 				9574719E211348030064DD3A /* Station.swift in Sources */,
+				957471B82113E4500064DD3A /* ViewController.swift in Sources */,
 				957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */,
 				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
 				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
