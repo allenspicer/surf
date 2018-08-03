@@ -111,15 +111,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let destinationVC = segue.destination as? ViewController {
-            destinationVC.currentSnapShot = selectedSnapshot
-        }
-    }
-    
-    
-    
     //
     //MARK: - Gesture Recognizer
     //
@@ -165,7 +156,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
 //                    self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
 //                    self.setAdditonalDataClients()
-//                    selectedSnapshot = favoritesSnapshots[currentCard]
+                    selectedSnapshot = favoritesSnapshots[currentCard]
 //                    selectedStationOrFavorite = favoritesSnapshots[currentCard]
                     let transitionView = createViewForTransition()
                     self.view.addSubview(transitionView)
@@ -419,5 +410,14 @@ extension HomeViewController : BuoyClientDelegate{
                     self.present(alert, animated: true, completion: nil)
                 }
             }
+    }
+}
+
+extension HomeViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destinationVC = segue.destination as? ViewController {
+            destinationVC.currentSnapShot = selectedSnapshot
+        }
     }
 }
