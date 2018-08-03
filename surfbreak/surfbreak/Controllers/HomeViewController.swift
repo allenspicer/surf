@@ -13,22 +13,24 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     var standardMinimumLineSpacing : CGFloat = 80.0
     
-    
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
+    var favoritesSnapshots = [Snapshot]()
     private var proximalData = [Station]()
+
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
-    var favoritesSnapshots = [Snapshot]()
-    var snapshotComponents = [String:Bool]()
+    
     var tideClient : TideClient?
     var windClient : WindClient?
     var airTempClient : AirTempClient?
     var surfQuality : SurfQuality?
+    var snapshotComponents = [String:Bool]()
+
     private var userLongitude = 0.0
     private var userLatitude = 0.0
-    private var locationManager = CLLocationManager()
+//    private var locationManager = CLLocationManager()
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
@@ -37,7 +39,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         super.viewDidLoad()
         startActivityIndicator("Loading")
         parseStationList()
-        setDataOrGetUserLocation()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
@@ -51,31 +52,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
         
-    }
-    
-    //
-    // MARK: - Inital Load Logic
-    //
-    
-    private func setDataOrGetUserLocation(){
-        let defaults = UserDefaults.standard
-        userLongitude = defaults.object(forKey: "userLongitude") as? Double ?? 0.0
-        userLatitude = defaults.object(forKey: "userLatitude") as? Double ?? 0.0
-        
-        if userLongitude != 0.0 && userLatitude != 0.0 {
-            findDistancesFromUserLocation()
-        }else{
-            isAuthorizedtoGetUserLocation()
-            
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.delegate = self
-                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            }
-            
-            if CLLocationManager.locationServicesEnabled() {
-                locationManager.requestLocation();
-            }
-        }
     }
     
     private func applyGradientToBackground(){
@@ -110,48 +86,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         }
         sortTableObjectsByDistance()
     }
-    
-    //if we have no permission to access user location, then ask user for permission.
-    private func isAuthorizedtoGetUserLocation() {
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
-    
-    //this method will be called each time when a user change his location access preference.
-    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            print("User allowed us to access location")
-            locationManager.requestLocation();
-        }
-    }
-    
-    
-    //this method is called by the framework on         locationManager.requestLocation();
-    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Did location updates is called")
-        print(locations)
-        setLocationDataFromResponse()
-    }
-    
-    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Did location updates is called but failed getting location \(error)")
-    }
-    
-    private func setLocationDataFromResponse(){
-        if  let currentLocation = locationManager.location{
-            userLatitude = currentLocation.coordinate.latitude
-            userLongitude = currentLocation.coordinate.longitude
-            findDistancesFromUserLocation()
-            
-            let defaults = UserDefaults.standard
-            defaults.set(userLatitude, forKey: "userLatitude")
-            defaults.set(userLongitude, forKey: "userLongitude")
-            
-        }
-    }
-    
+
     func sortTableObjectsByDistance(){
         //        proximalData = proximalData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
         proximalCollectionView.reloadData()
