@@ -23,7 +23,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="TOs-xO-M58" kind="show" identifier="segueToHome" id="QJy-HC-ACJ"/>
+                        <segue destination="TOs-xO-M58" kind="showDetail" identifier="segueToHome" animates="NO" id="QJy-HC-ACJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

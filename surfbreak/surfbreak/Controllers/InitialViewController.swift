@@ -251,7 +251,7 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
-        if componentsChecklist[100]?.air == true && componentsChecklist[100]?.bouy == true{
+        if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true{
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToHome", sender: self)
             }

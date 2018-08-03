@@ -77,8 +77,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         if (userLocation.0 != 0 && userLocation.1 != 0) {
             for index in 0..<allStations.count{
                     let station = allStations[index]
-                    let lonDiffAbs = abs(station.longitude - userLocation.0) * approxMilesToLon
-                    let latDiffAbs = abs(station.latitude - userLocation.1) * approxMilesToLat
+                    let lonDiffAbs = abs(station.longitude - userLocation.1) * approxMilesToLon
+                    let latDiffAbs = abs(station.latitude - userLocation.0) * approxMilesToLat
                     let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
                     let proximalStation = ProximalStation(station: station, distanceToUser: Int(milesFromUser))
                     proximalData.append(proximalStation)
