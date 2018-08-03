@@ -23,13 +23,15 @@ final class BuoyClient: NSObject {
     var allStations = [Station]()
     
     
-    init(snapshotId:Int) {
+    init(snapshotId:Int, allStations: [Station]) {
         self.snapshotId = snapshotId
+        self.allStations = allStations
     }
     
     func createBuoyData() {
         DispatchQueue.global(qos:.utility).async {
-            self.getStationDataFromFileWithSnapshotId(snapshotId: self.snapshotId)
+            self.setUrlStringFromSnapshotId()
+//            self.getStationDataFromFileWithSnapshotId(snapshotId: self.snapshotId)
         }
     }
     
@@ -108,11 +110,12 @@ final class BuoyClient: NSObject {
         //we have currentStation populated
         //use the station Id to retrieve data
         
-        urlString = "http://www.ndbc.noaa.gov/data/realtime2/\(currentStation.station).txt"
-        buoyDataServiceRequest()
+        for station in allStations where station.id == self.snapshotId {
+            currentStation = station
+            urlString = "http://www.ndbc.noaa.gov/data/realtime2/\(currentStation.station).txt"
+            buoyDataServiceRequest()
+        }
     }
-    
-
 }
 
 extension BuoyClient {
@@ -133,38 +136,6 @@ extension BuoyClient {
         let categoryInt: Int = Int((degrees + 11.25)/22.5)
         return directions[categoryInt % 16]
     }
-}
-
-extension BuoyClient {
-    
-    //
-    //MARK: - station list handling
-    //
-    
-    func getStationDataFromFileWithSnapshotId(snapshotId : Int){
-        let fileName = "regionalBuoyList"
-        guard let stations = loadJson(fileName) else {return}
-        for station in stations where station.id == self.snapshotId {
-            currentStation = station
-            self.setUrlStringFromSnapshotId()
-        }
-        allStations = stations
-    }
-
-    func loadJson(_ fileName: String) -> [Station]? {
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode([Station].self, from: data)
-                return jsonData
-            } catch {
-                print("error:\(error)")
-            }
-        }
-        return nil
-    }
-
 }
 
 
