@@ -20,6 +20,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="TOs-xO-M58" kind="show" identifier="segueToHome" id="QJy-HC-ACJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -34,6 +37,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5M9-I8-JoF"/>
                     </view>
+                    <connections>
+                        <segue destination="8SK-hn-cwu" kind="show" identifier="segueToDetail" id="O4A-cT-dHl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80R-9F-TT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,13 +48,16 @@
         <!--View Controller-->
         <scene sceneID="q9U-lr-nt9">
             <objects>
-                <viewController id="8SK-hn-cwu" sceneMemberID="viewController">
+                <viewController id="8SK-hn-cwu" customClass="ViewController" customModule="surfbreak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a7d-Ju-Jbc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="URm-cC-8YO"/>
                     </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueDetailToInitial" id="3R7-vV-9zZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISG-kL-VMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
