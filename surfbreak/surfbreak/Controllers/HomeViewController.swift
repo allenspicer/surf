@@ -331,28 +331,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
+        self.startActivityIndicator("Loading...")
+        
         DispatchQueue.global(qos:.utility).async {
             let id = Int(self.proximalData[index].station.id)
-            
-            
-            
-//            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: Int(selectedBFD), id:id, name: stationName)
-//            self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
-//            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-//            //remove spinner for response:
-//            if self.selectedSnapshot.waveHeight != nil && self.selectedSnapshot.waterTemp != nil {
-//                self.selectedSnapshot.stationName = stationName
-//                self.setAdditonalDataClients()
-//            }else{
-//                DispatchQueue.main.async {
-//                    //if no data respond with alertview
-//                    self.stopActivityIndicator()
-//                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-//                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-//                    alert.addAction(doneAction)
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//            }
+            let buoyClient = BuoyClient(snapshotId: id, allStations: self.allStations)
+            buoyClient.delegate = self
+            buoyClient.createBuoyData()
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
         }
     }
     
@@ -412,5 +398,26 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             stopActivityIndicator()
             self.performSegue(withIdentifier: "showStationDetail", sender: self)
         }
+    }
+}
+
+extension HomeViewController : BuoyClientDelegate{
+    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
+        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+        self.selectedSnapshot = snapshot
+            //remove spinner for response:
+            if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.waterTemp != 0.0) {
+//                self.selectedSnapshot.stationName = stationName
+                self.setAdditonalDataClients()
+            }else{
+                DispatchQueue.main.async {
+                    //if no data respond with alertview
+                    self.stopActivityIndicator()
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
+                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+                    alert.addAction(doneAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
     }
 }
