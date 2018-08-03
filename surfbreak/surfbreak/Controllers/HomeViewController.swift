@@ -153,11 +153,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
             if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
                 currentCell.contentView.sendSubview(toBack: currentCell.mainView)
                 if currentCell.frame.contains(contactPoint){
-    
-//                    self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
-//                    self.setAdditonalDataClients()
-                    selectedSnapshot = favoritesSnapshots[currentCard]
-//                    selectedStationOrFavorite = favoritesSnapshots[currentCard]
+                        selectedSnapshot = favoritesSnapshots[currentCard]
                     let transitionView = createViewForTransition()
                     self.view.addSubview(transitionView)
                     self.view.bringSubview(toFront: transitionView)
