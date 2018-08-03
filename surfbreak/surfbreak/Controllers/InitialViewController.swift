@@ -188,6 +188,7 @@ extension InitialViewController : CLLocationManagerDelegate{
                 location.latitude = self.userLocation.0
                 location.longitude = self.userLocation.1
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                self.checkComponentsThenSegue()
             }
         }
     }
@@ -251,7 +252,7 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
-        if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true{
+        if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true && userLocation != (0.0,0.0){
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToHome", sender: self)
             }
