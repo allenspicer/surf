@@ -51,14 +51,10 @@ class SurfSnapshotView: UIScrollView {
         
         let centerY = self.bounds.height / 2
         var waveHeightMaxFloat: CGFloat = 0
-        if let waveHeight = self.currentSnapShot.waveHeight{
-            waveHeightMaxFloat = CGFloat(waveHeight * 10)
-        }
+        waveHeightMaxFloat = CGFloat(self.currentSnapShot.waveHeight * 10)
         let waveTop = centerY - waveHeightMaxFloat - 14
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        if let waveHeight = self.currentSnapShot.waveHeight{
-            waveHeightLabel.text = "__ \(waveHeight)ft"
-        }
+        waveHeightLabel.text = "__ \(self.currentSnapShot.waveHeight)ft"
         waveHeightLabel.font = UIFont(name:"Damascus", size: 10.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.textAlignment = .left
@@ -74,9 +70,7 @@ class SurfSnapshotView: UIScrollView {
         
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
-        if let wHeight = currentSnapShot.waveHeight{
-            waveHeight = wHeight
-        }
+            waveHeight = currentSnapShot.waveHeight
         
         switch waveHeight{
         case ...9:
@@ -94,7 +88,7 @@ class SurfSnapshotView: UIScrollView {
         let distanceFromTop = self.frame.size.height/5
         
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
-        waveHeightLabel.text = "\(currentSnapShot.waveHeight ?? 0.0)ft"
+        waveHeightLabel.text = "\(currentSnapShot.waveHeight)ft"
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
         waveHeightLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waveHeightLabel.center = CGPoint(x: self.frame.width/2, y: 200)
@@ -114,9 +108,7 @@ class SurfSnapshotView: UIScrollView {
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         label.text = "Loading..."
-        if let speed = currentSnapShot.windSpeed, let direction = currentSnapShot.windCardinalDirection{
-            label.text = "\(direction) WIND \(speed) \(windUnit)"
-        }
+        label.text = "\(currentSnapShot.windCardinalDirection) WIND \(currentSnapShot.windSpeed) \(windUnit)"
         label.font = UIFont(name:"Damascus", size: 10.0)
         label.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         let yValue = (2 * self.frame.height/5) + 20
@@ -135,9 +127,7 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(waveLabel)
         
         let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        if let temp = currentSnapShot.waterTemp {
-            waterTempLabel.text =  String(temp) + "°F WATER"
-        }
+        waterTempLabel.text =  String(currentSnapShot.waterTemp) + "°F WATER"
         waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
         waterTempLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         waterTempLabel.center = CGPoint(x: self.frame.width/2, y: yValue + 40)
@@ -147,11 +137,10 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotTitleLabel(){
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
-        if let name = currentSnapShot.nickname {
-            titleLabel.text = "\(name)"
-        }else if let name = currentSnapShot.stationName {
-            titleLabel.text = "\(name)"
-        }
+        titleLabel.text = "\(currentSnapShot.nickname)"
+//        }else if let name = currentSnapShot.stationName {
+//            titleLabel.text = "\(name)"
+//        }
         titleLabel.font = UIFont(name:"Damascus", size: 20.0)
         titleLabel.textColor =  #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         titleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/5)
@@ -193,7 +182,7 @@ class SurfSnapshotView: UIScrollView {
         frequencyLabel.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(frequencyLabel)
         let frequencyAmountLabel = UILabel()
-        frequencyAmountLabel.text = "\(currentSnapShot.period ?? 0.0)"
+        frequencyAmountLabel.text = "\(currentSnapShot.period)"
         stack.addArrangedSubview(frequencyAmountLabel)
         return stack
     }
@@ -208,9 +197,7 @@ class SurfSnapshotView: UIScrollView {
         stack.addArrangedSubview(airLabel)
         let airTempLabel = UILabel()
         airTempLabel.text = "Loading..."
-        if let airTemp = currentSnapShot.airTemp {
-            airTempLabel.text = "\(airTemp)° F"
-        }
+        airTempLabel.text = "\(currentSnapShot.airTemp)° F"
         stack.addArrangedSubview(airTempLabel)
         return stack
     }
@@ -224,7 +211,7 @@ class SurfSnapshotView: UIScrollView {
         waterLabel.font = UIFont(name:"Damascus", size: 10.0)
         stack.addArrangedSubview(waterLabel)
         let waterTempLabel = UILabel()
-        waterTempLabel.text = "\(currentSnapShot.waterTemp ?? 0.0)° F"
+        waterTempLabel.text = "\(currentSnapShot.waterTemp)° F"
         stack.addArrangedSubview(waterTempLabel)
         return stack
     }
@@ -239,9 +226,7 @@ class SurfSnapshotView: UIScrollView {
         stack.addArrangedSubview(tideLabel)
         let tideDirectionLabel = UILabel()
         tideDirectionLabel.text = "Loading..."
-        if let tideFlow = currentSnapShot.tideDirectionString {
-            tideDirectionLabel.text = "\(tideFlow)"
-        }
+        tideDirectionLabel.text = "\(currentSnapShot.tideDirectionString)"
         stack.addArrangedSubview(tideDirectionLabel)
         return stack
     }
@@ -258,10 +243,8 @@ class SurfSnapshotView: UIScrollView {
         nextTideContentLabel.text = "Loading..."
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        if let letter = currentSnapShot.nextTidePolar, let dateTime = currentSnapShot.nextTideTime {
-            let time = dateFormatter.string(from: dateTime)
-            nextTideContentLabel.text = "\(letter) @ \(time)"
-        }
+        let time = dateFormatter.string(from: currentSnapShot.nextTideTime)
+        nextTideContentLabel.text = "\(currentSnapShot.nextTidePolar) @ \(time)"
         stack.addArrangedSubview(nextTideContentLabel)
         return stack
     }
@@ -276,9 +259,7 @@ class SurfSnapshotView: UIScrollView {
         stack.addArrangedSubview(windLabel)
         let windContentLabel = UILabel()
         windContentLabel.text = "Loading..."
-        if let direction = currentSnapShot.windDirectionString, let speed = currentSnapShot.windSpeed {
-            windContentLabel.text = "\(direction) \(speed) MPH"
-        }
+        windContentLabel.text = "\(currentSnapShot.windDirectionString) \(currentSnapShot.windSpeed) MPH"
         stack.addArrangedSubview(windContentLabel)
         return stack
     }

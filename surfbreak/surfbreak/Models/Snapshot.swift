@@ -45,7 +45,7 @@ struct Snapshot {
          airTemp : Double = 0.0,
          nextTideTime : Date = Date(),
          nextTidePolar : String = "",
-         tideDirectionString : String
+         tideDirectionString : String = ""
         ) {
         self.waveHeight = waveHeight
         self.swellDirection = swellDirection
