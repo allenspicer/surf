@@ -133,11 +133,11 @@ final class TideClient: NSObject {
         //
         //
         
-        if let tide = tideArray[nextTideIndex] as? Tide{
-            snapshot.nextTidePolar = tide.key
-            snapshot.nextTideTime = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
-            snapshot.tideDirectionString = (tide.key == "H" ? "Rising" : "Dropping")
-        }
+//        if let tide = tideArray[nextTideIndex] as? Tide{
+//            snapshot.nextTidePolar = tide.key
+//            snapshot.nextTideTime = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
+//            snapshot.tideDirectionString = (tide.key == "H" ? "Rising" : "Dropping")
+//        }
         
         return snapshot
     }

@@ -12,13 +12,13 @@ import UIKit
 final class SnapshotSetter: NSObject {
 
     let stationId : String
-    let beachFaceDirection : Double
+    let beachFaceDirection : Int
     let id : Int
     let name : String
 
 
     
-    init(stationId:String, beachFaceDirection : Double, id: Int, name: String){
+    init(stationId:String, beachFaceDirection : Int, id: Int, name: String){
         self.stationId = stationId
         self.beachFaceDirection = beachFaceDirection
         self.id = id

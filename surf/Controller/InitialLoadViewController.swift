@@ -83,7 +83,7 @@ class InitialLoadViewController: UIViewController {
     }
     
     
-    func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Double, name: String){
+    func getSnapshotWith(id : Int, stationId: String, beachFaceDirection : Int, name: String){
         DispatchQueue.global(qos:.utility).async {
             let snapshotSetter = SnapshotSetter(stationId: stationId, beachFaceDirection: beachFaceDirection, id: id, name: name)
             let snapshot = snapshotSetter.createSnapshot(finished: {})
@@ -104,7 +104,7 @@ class InitialLoadViewController: UIViewController {
                         wave.frequency = frequency
                     }
                     if let direction = snapshot.beachFaceDirection {
-                        wave.beachFaceDirection = direction
+                        wave.beachFaceDirection = Double(direction)
                     }
                     
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -167,7 +167,7 @@ class InitialLoadViewController: UIViewController {
                 snapshot.waveAveragePeriod = wave.value.frequency
                 snapshot.id = wave.key
                 snapshot.nickname = favorite.name
-                snapshot.beachFaceDirection = favorite.beachFaceDirection
+                snapshot.beachFaceDirection = Int(favorite.beachFaceDirection)
                 self.favoriteSnapshots.append(snapshot)
                 //try to segue, will only work when all snapshots are populated
                 self.segueWhenComplete()
@@ -176,35 +176,30 @@ class InitialLoadViewController: UIViewController {
         
         //for snapshots in favorites that still have a false value
         //we must download a new snapshot
-        
-        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                
-                for snapshot in userFavorites where snapshot.value == false{
-                    let id = snapshot.key.id
-                    if let stationsFromJSON = jsonResult as? [[String : AnyObject]]{
-                        for station in stationsFromJSON {
-                            guard let idFromJSON = station["id"] as? Int else {return}
-                            if idFromJSON == id {
-                                guard let stationId = station["station"] as? Int else {return}
-                                guard let beachFaceDirection = station["bfd"] as? Double else {return}
-                                guard let name = station["name"] as? String else {return}
-                                var favorite = snapshot.key
-                                favorite.stationId = "\(stationId)"
-                                favorite.beachFaceDirection = beachFaceDirection
-                                favorite.name = name
-                                self.getSnapshotWith(id: favorite.id, stationId: favorite.stationId, beachFaceDirection: favorite.beachFaceDirection, name: name)
-                            }
-                        }
-                    }
-                }
-            } catch {
-                // handle error
-                print("Problem accessing regional buoy list document: \(error)")
+
+        let fileName = "regionalBuoyList"
+        guard let stations = loadJson(fileName) else {return}
+        for snapshot in userFavorites where snapshot.value == false{
+            for station in stations where station.station == Int(snapshot.key.stationId){
+                self.getSnapshotWith(id: station.id, stationId: "\(station.station)", beachFaceDirection: station.bfd, name: station.name)
             }
         }
+        
+        
+    }
+    
+    func loadJson(_ fileName: String) -> [Station]? {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Station].self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        }
+        return nil
     }
     
     

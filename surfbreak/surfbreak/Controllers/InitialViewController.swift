@@ -153,7 +153,7 @@ extension InitialViewController : CLLocationManagerDelegate{
 }
 
 extension InitialViewController : BuoyClientDelegate{
-    func didFinishBuoyTask(sender: BuoyClient, buoy: Buoy, stations: [Station]) {
+    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
 //        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
         if (allStations == nil) { allStations = stations }
         componentsChecklist[100]?.bouy = true

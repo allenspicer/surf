@@ -130,9 +130,9 @@ final class AirTempClient: NSObject {
             }
         }
         
-        if let airTemp = AirTempArray[nextAirTempIndex] as? AirTemp{
-            snapshot.airTemp = airTemp.value
-        }
+//        if let airTemp = AirTempArray[nextAirTempIndex] as? AirTemp{
+//            snapshot.airTemp = airTemp.value
+//        }
         
         return snapshot
     }

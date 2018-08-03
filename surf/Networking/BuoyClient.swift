@@ -45,10 +45,10 @@ final class BuoyClient: NSObject {
     private func buoyDataServiceRequest(){
         
         var bouyDictionary : [Int : [String]] = [Int: [String]]()
-
+        
         var dataString = String()
         guard let url = URL(string: urlString) else {return}
-
+        
         do {
             dataString = try String(contentsOf: url)
         }catch{
@@ -75,31 +75,30 @@ final class BuoyClient: NSObject {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
         let heightInFeet = currentWaveHeight * 3.28
-
+        
         //wave direction
-        guard let currentWaveDirectionDegrees = Int(bouy[11]) as Int? else {return}
-
+        guard let currentWaveDirectionDegrees = Double(bouy[11]) as Double? else {return}
+        
         //wave frequency/period
         guard let waveAveragePeriod = Double(bouy[10]) as Double? else {return}
-
+        
         //water temp
         guard let currentWaterTemp = Double(bouy[14]) as Double? else {return}
         let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
         
-        var currentSnapshot = Snapshot()
-       currentSnapshot.waveHeight = heightInFeet
-       currentSnapshot.swellDirection = currentWaveDirectionDegrees
-//       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
-       currentSnapshot.period = waveAveragePeriod
-       currentSnapshot.waterTemp = currentWaterTempInFahrenheit
-       currentSnapshot.beachFaceDirection = currentStation.bfd
-       currentSnapshot.id = currentStation.id
-       currentSnapshot.stationId = currentStation.station
+        snapshot.waveHgt = heightInFeet
+        snapshot.waveDirection = currentWaveDirectionDegrees
+        //        currentBuoy.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
+        snapshot.waveAveragePeriod = waveAveragePeriod
+        snapshot.waterTemp = currentWaterTempInFahrenheit
+//        snapshot.beachFaceDirection = currentStation.bfd
+//        snapshot.id = currentStation.id
+//        snapshot.stationId = currentStation.station
         
-//            currentSnapShot.nickname = name
-
+        //            currentSnapShot.nickname = name
+        
         DispatchQueue.main.async {
-            self.didGetBuoyData(snapshotId:currentSnapshot.id)
+            self.didGetBuoyData(snapshotId: self.snapshot.id!)
         }
     }
     
@@ -112,7 +111,7 @@ final class BuoyClient: NSObject {
         buoyDataServiceRequest()
     }
     
-
+    
 }
 
 extension BuoyClient {
@@ -150,7 +149,7 @@ extension BuoyClient {
         }
         allStations = stations
     }
-
+    
     func loadJson(_ fileName: String) -> [Station]? {
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
             do {
@@ -164,10 +163,8 @@ extension BuoyClient {
         }
         return nil
     }
-
+    
 }
-
-
 
 
 

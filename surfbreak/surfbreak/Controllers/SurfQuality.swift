@@ -48,13 +48,13 @@ final class SurfQuality: NSObject {
     
     func getColorFromDiff (_ diff : Double) -> UIColor{
         if diff > 0 && diff < 60 {
-            currentSnapshot.windDirectionString = "ONSHORE"
+//            currentSnapshot.windDirectionString = "ONSHORE"
             return UIColor.red
         } else if diff > 90 {
-            currentSnapshot.windDirectionString = "OFFSHORE"
+//            currentSnapshot.windDirectionString = "OFFSHORE"
             return UIColor.green
         }
-        currentSnapshot.windDirectionString = "SIDESHORE"
+//        currentSnapshot.windDirectionString = "SIDESHORE"
         return UIColor.yellow
     }
     

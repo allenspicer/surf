@@ -8,15 +8,24 @@
 
 import Foundation
 
-struct Station: Decodable {
-    let id: String
-    var stationId: String
-    let lat: Double
-    let lon: Double
-    var beachFaceDirection: Double
-    var name: String
-    let nickname: String?
-    var distanceInMiles : Int
+//struct Station: Decodable {
+//    let id = Int()
+//    var station = Int()
+//    let lat = Double()
+//    let lon = Double()
+//    var beachFaceDirection = Double()
+//    var name = String()
+//    let nickname = String()
+//    var distanceInMiles = Int()
+//}
+
+
+struct Station : Decodable{
+    var id = Int()
+    var station = Int()
+    var bfd = Int()
+    var name = String()
 }
+
 
 
