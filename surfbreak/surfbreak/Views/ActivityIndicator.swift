@@ -12,8 +12,6 @@ class ActivityIndicatorView: UIView {
     
     func setupActivityIndicator(view: UIView, widthView: CGFloat?,backgroundColor: UIColor?, textColor:UIColor?, message: String?) -> ActivityIndicatorView{
         //Config UIView
-        let customBlue = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
-        self.backgroundColor = customBlue //Background color of your view which you want to set
         var selfWidth = view.frame.width
         if widthView != nil{
             selfWidth = widthView ?? selfWidth
@@ -65,11 +63,11 @@ class ActivityIndicatorView: UIView {
         self.addSubview(loopImages)
         self.addSubview(label)
         
-        let gradientView = GradientView(frame: self.frame)
-        gradientView.firstColor = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
-        gradientView.secondColor = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-        self.addSubview(gradientView)
-        self.sendSubview(toBack: gradientView)
+        let backgroundView = UIImageView(frame: self.frame)
+        backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
+        backgroundView.contentMode = .center
+        self.addSubview(backgroundView)
+        self.sendSubview(toBack: backgroundView)
         
         return self
     }

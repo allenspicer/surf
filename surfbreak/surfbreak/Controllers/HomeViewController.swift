@@ -55,11 +55,11 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
     private func applyGradientToBackground(){
-        let gradientView = GradientView(frame: self.view.frame)
-        gradientView.firstColor = #colorLiteral(red: 0.01568627451, green: 0.6509803922, blue: 0.6509803922, alpha: 1)
-        gradientView.secondColor = #colorLiteral(red: 0.01960784314, green: 0.01960784314, blue: 0.05098039216, alpha: 1)
-        self.view.addSubview(gradientView)
-        self.view.sendSubview(toBack: gradientView)
+        let backgroundView = UIImageView(frame: self.view.frame)
+        backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
+        backgroundView.contentMode = .center
+        self.view.addSubview(backgroundView)
+        self.view.sendSubview(toBack: backgroundView)
     }
     
     //
@@ -307,7 +307,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
             cell.distanceLabel.text = "\(current.distanceToUser)mi"
-            cell.backgroundGradient.frame = cell.bounds
+//            cell.backgroundGradient.frame = cell.bounds
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell

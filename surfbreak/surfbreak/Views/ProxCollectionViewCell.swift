@@ -14,9 +14,6 @@ class ProxCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
-    var backgroundGradient = CAGradientLayer()
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -27,11 +24,13 @@ class ProxCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.borderWidth = 2
         self.contentView.layer.borderColor = #colorLiteral(red: 0.1568627451, green: 0.2549019608, blue: 0.4352941176, alpha: 1)
         self.contentView.layer.cornerRadius = 15
-        backgroundGradient = CAGradientLayer()
-        let customBlack = #colorLiteral(red: 0.06274509804, green: 0.05098039216, blue: 0.1490196078, alpha: 1)
-        backgroundGradient.colors = [UIColor.clear.cgColor, customBlack.cgColor]
         
-        self.layer.insertSublayer(backgroundGradient, at: 0)
+        let backgroundView = UIImageView(frame: self.frame)
+        backgroundView.image = #imageLiteral(resourceName: "nonfave_tile")
+        backgroundView.contentMode = .center
+        self.addSubview(backgroundView)
+        self.sendSubview(toBack: backgroundView)
+
     }
     
     
