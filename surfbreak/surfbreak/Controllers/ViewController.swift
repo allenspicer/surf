@@ -32,7 +32,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /// The `CAShapeLayer` that will contain the animated path
     private let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
-        _layer.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        _layer.strokeColor = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8196078431, alpha: 1)
         _layer.fillColor = UIColor.clear.cgColor
         _layer.lineWidth = 4
         return _layer
