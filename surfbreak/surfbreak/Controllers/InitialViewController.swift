@@ -264,10 +264,9 @@ extension InitialViewController {
         guard let stations = allStations else {return}
         destinationVC.allStations = stations
         destinationVC.userLocation = userLocation
-        
+        guard let snapshots = self.componentsChecklist[100]?.snapshot else {return}
+        destinationVC.favoritesSnapshots = [snapshots]
     }
-    
-    
-    
+
 }
 
