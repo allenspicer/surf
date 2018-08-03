@@ -30,9 +30,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var surfQuality : SurfQuality?
     var snapshotComponents = [String:Bool]()
 
-    var userLongitude = 0.0
-    var userLatitude = 0.0
-//    private var locationManager = CLLocationManager()
+    var userLocation = (0.0,0.0)
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
@@ -76,11 +74,11 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         let approxMilesToLon = 53.0
         let approxMilesToLat = 69.0
         
-        if (userLatitude != 0 && userLongitude != 0) {
+        if (userLocation.0 != 0 && userLocation.1 != 0) {
             for index in 0..<allStations.count{
                     let station = allStations[index]
-                    let lonDiffAbs = abs(station.longitude - userLongitude) * approxMilesToLon
-                    let latDiffAbs = abs(station.latitude - userLatitude) * approxMilesToLat
+                    let lonDiffAbs = abs(station.longitude - userLocation.0) * approxMilesToLon
+                    let latDiffAbs = abs(station.latitude - userLocation.1) * approxMilesToLat
                     let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
                     let proximalStation = ProximalStation(station: station, distanceToUser: Int(milesFromUser))
                     proximalData.append(proximalStation)

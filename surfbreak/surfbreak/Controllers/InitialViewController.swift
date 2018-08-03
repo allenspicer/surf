@@ -28,6 +28,7 @@ final class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         //set up activity indicator
+        displayActivityIndicator()
         
         DispatchQueue.global(qos:.utility).async{
 
@@ -47,6 +48,16 @@ final class InitialViewController: UIViewController {
 
             // load series of data points (clients)
         }
+    }
+    
+    //
+    //MARK: - Activity Indicator
+    //
+    
+    
+    func displayActivityIndicator(){
+        let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
+        self.view.addSubview(activityIndicatorView)
     }
     
     //
@@ -251,8 +262,7 @@ extension InitialViewController {
         guard let destinationVC = segue.destination as? HomeViewController else { return}
         guard let stations = allStations else {return}
         destinationVC.allStations = stations
-        destinationVC.userLatitude = userLocation.0
-        destinationVC.userLongitude = userLocation.1
+        destinationVC.userLocation = userLocation
         
     }
     
