@@ -16,7 +16,7 @@ protocol BuoyClientDelegate: AnyObject {
 final class BuoyClient: NSObject {
     
     var delegate : BuoyClientDelegate?
-    var snapshot = Snapshot()
+    var currentSnapshot = Snapshot()
     var snapshotId = Int()
     var urlString = String()
     var currentStation = Station()
@@ -31,12 +31,7 @@ final class BuoyClient: NSObject {
     func createBuoyData() {
         DispatchQueue.global(qos:.utility).async {
             self.setUrlStringFromSnapshotId()
-//            self.getStationDataFromFileWithSnapshotId(snapshotId: self.snapshotId)
         }
-    }
-    
-    func didGetBuoyData(snapshotId : Int) {
-        delegate?.didFinishBuoyTask(sender: self, snapshot: snapshot, stations: allStations)
     }
     
     //
@@ -55,6 +50,9 @@ final class BuoyClient: NSObject {
             dataString = try String(contentsOf: url)
         }catch{
             print("Bouy Data Retreival Error: \(error)")
+            DispatchQueue.main.async {
+                self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
+            }
         }
         let lines = dataString.components(separatedBy: "\n")
         var rawStatArray : [String] = []
@@ -88,7 +86,6 @@ final class BuoyClient: NSObject {
         guard let currentWaterTemp = Double(bouy[14]) as Double? else {return}
         let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
         
-        var currentSnapshot = Snapshot()
        currentSnapshot.waveHeight = heightInFeet
        currentSnapshot.swellDirection = currentWaveDirectionDegrees
 //       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
@@ -98,10 +95,11 @@ final class BuoyClient: NSObject {
        currentSnapshot.id = currentStation.id
        currentSnapshot.stationId = currentStation.station
         
+        
 //            currentSnapShot.nickname = name
 
         DispatchQueue.main.async {
-            self.didGetBuoyData(snapshotId:currentSnapshot.id)
+            self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
         }
     }
     
