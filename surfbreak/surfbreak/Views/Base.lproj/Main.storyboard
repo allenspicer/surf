@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
+                            <collectionView multipleTouchEnabled="YES" contentMode="center" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="244" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -46,7 +46,7 @@
                                 </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="8gj-VG-GA8" customClass="FavoriteFlowLayout" customModule="surfbreak" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionViewCell" id="BRw-nr-Ksm" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="bottom" reuseIdentifier="FavoriteCollectionViewCell" id="BRw-nr-Ksm" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
                                         <rect key="frame" x="82.666666666666671" y="0.0" width="210" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
