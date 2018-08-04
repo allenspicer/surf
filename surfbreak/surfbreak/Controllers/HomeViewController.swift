@@ -199,6 +199,15 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 currentCard = indexPath.row
+            }else{
+//                let transitionView = createViewForTransition()
+//                self.view.addSubview(transitionView)
+//                self.view.bringSubview(toFront: transitionView)
+//                let centerPoint = CGPoint(x: self.view.center.x, y: currentCell.center.y + 16)
+//                transitionView.center = centerPoint
+//                transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
+//                })
+                self.performSegue(withIdentifier: "segueToDetail", sender: self)
             }
             
         default:

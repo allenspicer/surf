@@ -55,12 +55,8 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         attributes.alpha = alpha
         attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
         attributes.zIndex = Int(alpha * 10)
-        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio) - (2 * standardVerticalOffset)))
+        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio) - (3 * standardVerticalOffset)))
         
-    }
-    
-    override func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
-        return true
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
