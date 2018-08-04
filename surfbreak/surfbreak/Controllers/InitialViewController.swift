@@ -225,7 +225,6 @@ extension InitialViewController : WindClientDelegate{
         componentsChecklist[100]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
-        checkComponentsThenSegue()
     }
 }
 
@@ -253,8 +252,6 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
-        print("Components are:")
-        print(componentsChecklist[100])
         if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true && userLocation != (0.0,0.0){
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToHome", sender: self)

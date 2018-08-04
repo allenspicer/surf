@@ -36,7 +36,7 @@ final class SurfQuality: NSObject {
 //                    print("The Current Wind Direciton is \(windDirection)")
 //                    print("The Beach Face Direciton is \(faceDirection)")
 //
-//                    self.didFinishSurfQualityAssesment()
+                    self.didFinishSurfQualityAssesment()
 //                }
 //            }
         }
