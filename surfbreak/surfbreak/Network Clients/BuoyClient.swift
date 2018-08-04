@@ -94,6 +94,7 @@ final class BuoyClient: NSObject {
        currentSnapshot.beachFaceDirection = currentStation.bfd
        currentSnapshot.id = currentStation.id
        currentSnapshot.stationId = currentStation.station
+        currentSnapshot.stationName = currentStation.name
         
         
 //            currentSnapShot.nickname = name
