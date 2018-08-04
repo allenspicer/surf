@@ -11,7 +11,7 @@ import UIKit
 class FavoriteFlowLayout: UICollectionViewFlowLayout {
     var standardItemAlpha: CGFloat = 0.5
     var standardItemScale: CGFloat = 0.65
-    var standardVerticalOffset: CGFloat = 100.0
+    var standardVerticalOffset: CGFloat = 40.0
     
     var isSetup = false
     
@@ -55,7 +55,7 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         attributes.alpha = alpha
         attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
         attributes.zIndex = Int(alpha * 10)
-        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio)))
+        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio) - (2 * standardVerticalOffset)))
         
     }
     

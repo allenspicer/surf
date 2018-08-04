@@ -218,19 +218,20 @@ extension InitialViewController : TideClientDelegate{
 
 extension InitialViewController : WindClientDelegate{
     func didFinishWindTask(sender: WindClient, winds: [Wind]) {
-        print("The Wind Client has returned an array of tides.")
+        print("The Wind Client has returned an array of winds.")
         componentsChecklist[100]?.wind = true
         componentsChecklist[100]?.windTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
         componentsChecklist[100]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
+        checkComponentsThenSegue()
     }
 }
 
 extension InitialViewController : AirTempDelegate{
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
-        print("The Air Temp Client has returned an array of tides.")
+        print("The Air Temp Client has returned an array of air temps.")
         componentsChecklist[100]?.air = true
         componentsChecklist[100]?.airTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
@@ -252,6 +253,8 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
+        print("Components are:")
+        print(componentsChecklist[100])
         if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true && userLocation != (0.0,0.0){
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToHome", sender: self)

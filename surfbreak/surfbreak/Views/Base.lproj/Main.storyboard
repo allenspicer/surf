@@ -38,23 +38,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView multipleTouchEnabled="YES" contentMode="center" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="375" height="300"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="cnc-rm-i7T"/>
+                                    <constraint firstAttribute="height" constant="400" id="cnc-rm-i7T"/>
                                 </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="8gj-VG-GA8" customClass="FavoriteFlowLayout" customModule="surfbreak" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="bottom" reuseIdentifier="FavoriteCollectionViewCell" id="BRw-nr-Ksm" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
-                                        <rect key="frame" x="82.666666666666671" y="0.0" width="210" height="264"/>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionViewCell" id="BRw-nr-Ksm" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
+                                        <rect key="frame" x="84" y="0.0" width="207" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="210" height="264"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="207" height="264"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="imV-TW-2z7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="210" height="210"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="207" height="207"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="imV-TW-2z7" secondAttribute="height" multiplier="1:1" id="bw1-G3-TYs"/>
                                                     </constraints>
@@ -66,7 +66,7 @@
                                             <constraint firstItem="imV-TW-2z7" firstAttribute="width" secondItem="BRw-nr-Ksm" secondAttribute="width" id="FPo-nw-A17"/>
                                             <constraint firstItem="imV-TW-2z7" firstAttribute="centerX" secondItem="BRw-nr-Ksm" secondAttribute="centerX" id="NDU-JS-KrQ"/>
                                         </constraints>
-                                        <size key="customSize" width="210" height="264"/>
+                                        <size key="customSize" width="207" height="264"/>
                                         <connections>
                                             <outlet property="imageView" destination="imV-TW-2z7" id="0k0-vn-7kp"/>
                                         </connections>
