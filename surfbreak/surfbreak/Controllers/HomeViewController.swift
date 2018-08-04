@@ -41,7 +41,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         applyGradientToBackground()
-        setupGestureRecognizer()
         
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
@@ -110,64 +109,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         }
         return nil
     }
-    
-    
-    //
-    //MARK: - Gesture Recognizer
-    //
-    
-    func setupGestureRecognizer() {
-        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
-        touchDown.minimumPressDuration = 0
-        touchDown.delegate = self
-        view.addGestureRecognizer(touchDown)
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
-        //if touch is in current cell return true
-        //else return false
-        
-        let contactPoint = touch.location(in: favoritesCollectionView)
-        if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
-            if currentCell.frame.contains(contactPoint){ return true}
-        }
-        return false
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
-    
-    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-        let contactPoint = gesture.location(in: favoritesCollectionView)
-        if (gesture.state == .began){
-            if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
-                if currentCell.frame.contains(contactPoint){
-                    currentCell.contentView.bringSubview(toFront: currentCell.mainView)
-                }
-            }
-        }
-        
-        if (gesture.state == .ended){
-            if let currentCell = favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) as? FavCollectionViewCell{
-                currentCell.contentView.sendSubview(toBack: currentCell.mainView)
-                if currentCell.frame.contains(contactPoint){
-                        selectedSnapshot = favoritesSnapshots[currentCard]
-                    let transitionView = createViewForTransition()
-                    self.view.addSubview(transitionView)
-                    self.view.bringSubview(toFront: transitionView)
-                    let centerPoint = CGPoint(x: self.view.center.x, y: currentCell.center.y + 16)
-                    transitionView.center = centerPoint
-                    transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
-                        self.performSegue(withIdentifier: "segueToDetail", sender: self)
-                    })
-                }
-            }
-        }
-    }
-    
     
     
     //
