@@ -45,7 +45,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
-//        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = -standardMinimumLineSpacing
         
         //set current card
