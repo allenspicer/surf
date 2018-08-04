@@ -154,11 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				957471C72113F1DF0064DD3A /* CustomView.swift */,
-				957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */,
-				957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */,
-				957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */,
+				959BD8762115575A0028F5F5 /* Proximal Collection */,
+				959BD875211557470028F5F5 /* Favorite Collection */,
 				957471C32113EF660064DD3A /* CircleView.swift */,
-				957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */,
 				953F07EE210A575300E70E18 /* Main.storyboard */,
 				957471AF211392BC0064DD3A /* GradientView.swift */,
 				957471B1211394080064DD3A /* ActivityIndicator.swift */,
@@ -180,7 +178,6 @@
 		9592EC50210A5B23004B0A82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				957471C52113EFC60064DD3A /* FavoriteFlowLayout.swift */,
 				957471BB2113EB840064DD3A /* HomeViewController.swift */,
 				957471B72113E4500064DD3A /* ViewController.swift */,
 				953F07EC210A575300E70E18 /* InitialViewController.swift */,
@@ -223,6 +220,25 @@
 				9592EC53210A7EF9004B0A82 /* BuoyClient.swift */,
 			);
 			path = "Network Clients";
+			sourceTree = "<group>";
+		};
+		959BD875211557470028F5F5 /* Favorite Collection */ = {
+			isa = PBXGroup;
+			children = (
+				957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */,
+				957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */,
+				957471C52113EFC60064DD3A /* FavoriteFlowLayout.swift */,
+			);
+			path = "Favorite Collection";
+			sourceTree = "<group>";
+		};
+		959BD8762115575A0028F5F5 /* Proximal Collection */ = {
+			isa = PBXGroup;
+			children = (
+				957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */,
+				957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */,
+			);
+			path = "Proximal Collection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
