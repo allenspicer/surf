@@ -41,6 +41,9 @@ final class InitialViewController: UIViewController {
             //check persistence for user favorites
             //if none segue
             
+            //if favorites check persistence for records
+            //if none continue on to data request
+            
             //for each favorite create a component in the checklist and make data requests
             self.componentsChecklist[100] = SnapshotComponents()
             guard let stations = self.allStations else {return}
