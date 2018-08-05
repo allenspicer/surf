@@ -37,8 +37,10 @@ final class InitialViewController: UIViewController {
             
             //get all stations from local file
             self.loadStationDataFromFile()
+            guard let stations = self.allStations else {return}
             
             //check persistence for user favorites
+            
             
             
             //if none segue
@@ -51,7 +53,6 @@ final class InitialViewController: UIViewController {
             
             //for each favorite create a component in the checklist and make data requests
             self.componentsChecklist[100] = SnapshotComponents()
-            guard let stations = self.allStations else {return}
             self.setDataClientsForStation(snapshotId: 100, allStations: stations)
 
             // load series of data points (clients)
@@ -73,6 +74,29 @@ final class InitialViewController: UIViewController {
     //
 
     private func getUserLocation (){
+        var favoritesArray = [Favorite]()
+        do {
+            favoritesArray = try context.fetch(Favorite.fetchRequest())
+        }
+        catch {
+            print("Failed to retrieve Favorite Entity from context.")
+        }
+        for favorite in favoritesArray {
+            var newComponentsStruct = SnapshotComponents()
+            newComponentsStruct.snapshot = Snapshot()
+            if let nickname = favorite.name {
+                newComponentsStruct.snapshot?.nickname = nickname
+            }
+            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
+        }
+        
+    }
+    
+    //
+    //MARK: - Favorites from persistence
+    //
+    
+    private func getUserFavoritesFromPersistence (){
         var locationArray = [UserLocation]()
         do {
             locationArray = try context.fetch(UserLocation.fetchRequest())
@@ -84,10 +108,10 @@ final class InitialViewController: UIViewController {
             userLocation.0 = location.latitude
             userLocation.1 = location.longitude
         }
-
+        
         if userLocation.0 != 0.0 && userLocation.1 != 0.0 {
             print("User location available from persistence: \(userLocation)")
-
+            
         }else{
             isAuthorizedtoGetUserLocation()
             
@@ -275,9 +299,9 @@ extension InitialViewController {
         guard let stations = allStations else {return}
         destinationVC.allStations = stations
         destinationVC.userLocation = userLocation
-        guard let snapshots = self.componentsChecklist[100]?.snapshot else {return}
-        destinationVC.favoritesSnapshots = [snapshots]
+        if let snapshots = favoriteSnapshots {
+            destinationVC.favoritesSnapshots = snapshots
+        }
     }
-
 }
 
