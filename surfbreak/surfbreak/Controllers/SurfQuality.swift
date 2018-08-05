@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol SurfQualityDelegate: AnyObject {
-    func didFinishSurfQualityTask(sender: SurfQuality)
+    func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot)
 }
 
 final class SurfQuality: NSObject {
@@ -43,7 +43,7 @@ final class SurfQuality: NSObject {
     }
     
     func didFinishSurfQualityAssesment() {
-        delegate?.didFinishSurfQualityTask(sender: self)
+        delegate?.didFinishSurfQualityTask(sender: self, snapshot: currentSnapshot)
     }
     
     func getColorFromDiff (_ diff : Double) -> UIColor{

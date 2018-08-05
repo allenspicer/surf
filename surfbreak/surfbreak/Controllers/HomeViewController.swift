@@ -287,7 +287,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         airTempClient?.createAirTempData()
     }
     
-    func didFinishSurfQualityTask(sender: SurfQuality) {
+    func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
         if let updatedSnapshot = surfQuality?.getSnapshotWithSurfQuality(){
             selectedSnapshot = updatedSnapshot
         }
@@ -295,7 +295,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         segueWhenAllComponenetsAreLoaded()
     }
     
-    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
+    func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot: Snapshot) {
         print("View Controller Has Tide Array with \(tides.count) tides")
         if let updatedSnapshot = tideClient?.addTideDataToSnapshot(selectedSnapshot, tideArray: tides){
             selectedSnapshot = updatedSnapshot
@@ -304,7 +304,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         segueWhenAllComponenetsAreLoaded()
     }
     
-    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
+    func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot) {
         print("View Controller Has Wind Array with \(winds.count) winds")
         if let updatedSnapshot = windClient?.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
             selectedSnapshot = updatedSnapshot
@@ -315,7 +315,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         surfQuality?.delegate = self
     }
     
-    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot: Snapshot) {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
         if let updatedSnapshot = airTempClient?.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps){
             selectedSnapshot = updatedSnapshot

@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol AirTempDelegate: AnyObject {
-    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp])
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot : Snapshot)
 }
 
 final class AirTempClient: NSObject {
@@ -18,7 +18,7 @@ final class AirTempClient: NSObject {
     var delegate : AirTempDelegate?
     var dataArray = [[String: Any]]()
     var airTempArray = [AirTemp]()
-    var currentSnapshot : Snapshot?
+    var currentSnapshot : Snapshot
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
@@ -31,7 +31,7 @@ final class AirTempClient: NSObject {
     }
     
     func didGetAirTempData() {
-        delegate?.didFinishAirTempTask(sender: self, airTemps: airTempArray)
+        delegate?.didFinishAirTempTask(sender: self, airTemps: airTempArray, snapshot: currentSnapshot)
     }
     
     

@@ -229,51 +229,51 @@ extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
         print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
         if (allStations == nil) { allStations = stations }
-        componentsChecklist[100]?.bouy = true
-        componentsChecklist[100]?.bouyTimeStamp = Date()
-        componentsChecklist[100]?.snapshot = snapshot
+        componentsChecklist[snapshot.id]?.bouy = true
+        componentsChecklist[snapshot.id]?.bouyTimeStamp = Date()
+        componentsChecklist[snapshot.id]?.snapshot = snapshot
         setDataClientsFor(snapshot: snapshot)
     }
 }
 
 extension InitialViewController : TideClientDelegate{
-    func didFinishTideTask(sender: TideClient, tides: [Tide]) {
+    func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot: Snapshot) {
         print("The Tide Client has returned an array of tides.")
-        componentsChecklist[100]?.tide = true
-        componentsChecklist[100]?.tideTimeStamp = Date()
-        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
-        componentsChecklist[100]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
+        componentsChecklist[snapshot.id]?.tide = true
+        componentsChecklist[snapshot.id]?.tideTimeStamp = Date()
+        guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
+        componentsChecklist[snapshot.id]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
         checkComponentsThenSegue()
     }
 }
 
 extension InitialViewController : WindClientDelegate{
-    func didFinishWindTask(sender: WindClient, winds: [Wind]) {
+    func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot) {
         print("The Wind Client has returned an array of winds.")
-        componentsChecklist[100]?.wind = true
-        componentsChecklist[100]?.windTimeStamp = Date()
+        componentsChecklist[snapshot.id]?.wind = true
+        componentsChecklist[snapshot.id]?.windTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
-        componentsChecklist[100]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
+        componentsChecklist[snapshot.id]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
     }
 }
 
 extension InitialViewController : AirTempDelegate{
-    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp]) {
+    func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot: Snapshot) {
         print("The Air Temp Client has returned an array of air temps.")
-        componentsChecklist[100]?.air = true
-        componentsChecklist[100]?.airTimeStamp = Date()
-        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
-        componentsChecklist[100]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
+        componentsChecklist[snapshot.id]?.air = true
+        componentsChecklist[snapshot.id]?.airTimeStamp = Date()
+        guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
+        componentsChecklist[snapshot.id]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
         checkComponentsThenSegue()
     }
 }
 
 extension InitialViewController : SurfQualityDelegate{
-    func didFinishSurfQualityTask(sender: SurfQuality) {
-        componentsChecklist[100]?.quality = true
-        componentsChecklist[100]?.completeTimestamp = Date()
+    func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
+        componentsChecklist[snapshot.id]?.quality = true
+        componentsChecklist[snapshot.id]?.completeTimestamp = Date()
 //        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
 //        componentsChecklist[100]?.snapshot = surfQuality?.getSnapshotWithSurfQuality()
         checkComponentsThenSegue()

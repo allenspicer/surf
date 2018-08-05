@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol TideClientDelegate: AnyObject {
-    func didFinishTideTask(sender: TideClient, tides: [Tide])
+    func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot : Snapshot)
 }
 
 final class TideClient: NSObject {
@@ -18,7 +18,7 @@ final class TideClient: NSObject {
     var delegate : TideClientDelegate?
     var dataArray = [[String: Any]]()
     var tideArray = [Tide]()
-    var currentSnapshot : Snapshot?
+    var currentSnapshot : Snapshot
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
@@ -31,7 +31,7 @@ final class TideClient: NSObject {
     }
     
     func didGetTideData() {
-        delegate?.didFinishTideTask(sender: self, tides: tideArray)
+        delegate?.didFinishTideTask(sender: self, tides: tideArray, snapshot: currentSnapshot)
     }
     
     

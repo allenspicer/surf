@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol WindClientDelegate: AnyObject {
-    func didFinishWindTask(sender: WindClient, winds: [Wind])
+    func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot)
 }
 
 final class WindClient: NSObject {
@@ -18,7 +18,7 @@ final class WindClient: NSObject {
     var delegate : WindClientDelegate?
     var dataArray = [[String: Any]]()
     var windArray = [Wind]()
-    var currentSnapshot : Snapshot?
+    var currentSnapshot : Snapshot
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
@@ -31,7 +31,7 @@ final class WindClient: NSObject {
     }
     
     func didGetWindData() {
-        delegate?.didFinishWindTask(sender: self, winds: windArray)
+        delegate?.didFinishWindTask(sender: self, winds: windArray, snapshot : currentSnapshot)
     }
     
     
