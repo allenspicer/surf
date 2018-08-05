@@ -39,7 +39,12 @@ final class InitialViewController: UIViewController {
             self.loadStationDataFromFile()
             
             //check persistence for user favorites
+            
+            
             //if none segue
+            if self.componentsChecklist.count == 0 {
+                self.checkComponentsThenSegue()
+            }
             
             //if favorites check persistence for records
             //if none continue on to data request
@@ -255,10 +260,13 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     func checkComponentsThenSegue(){
-        if componentsChecklist[100]?.bouy == true && componentsChecklist[100]?.air == true && componentsChecklist[100]?.wind == true && componentsChecklist[100]?.tide == true && userLocation != (0.0,0.0){
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "segueToHome", sender: self)
+        for key in componentsChecklist.keys {
+            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
+                return
             }
+        }
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
     }
     
