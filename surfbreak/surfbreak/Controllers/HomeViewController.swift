@@ -242,7 +242,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
-            cell.distanceLabel.text = "\(current.distanceToUser)mi"
+            cell.distanceLabel.text = userLocation == (0.0,0.0) ? "Unknown Distance" : "\(current.distanceToUser)mi"
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell

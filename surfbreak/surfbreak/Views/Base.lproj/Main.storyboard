@@ -106,8 +106,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-oh-atD">
-                                                    <rect key="frame" x="12.666666666666664" y="82" width="102.66666666666669" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-oh-atD">
+                                                    <rect key="frame" x="12.666666666666664" y="86" width="102.66666666666669" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                                         <constraints>
                                             <constraint firstItem="i2E-8e-cSK" firstAttribute="centerY" secondItem="e13-oN-TVT" secondAttribute="centerY" id="1mJ-uZ-wip"/>
                                             <constraint firstItem="4dg-fm-BQj" firstAttribute="centerX" secondItem="e13-oN-TVT" secondAttribute="centerX" id="4T2-fB-P7l"/>
-                                            <constraint firstAttribute="bottom" secondItem="tp4-oh-atD" secondAttribute="bottom" constant="25" id="CrW-O5-Okh"/>
+                                            <constraint firstAttribute="bottom" secondItem="tp4-oh-atD" secondAttribute="centerY" constant="32" id="CrW-O5-Okh"/>
                                             <constraint firstItem="4dg-fm-BQj" firstAttribute="width" secondItem="e13-oN-TVT" secondAttribute="width" multiplier="0.8" id="qln-TX-3Dd"/>
                                             <constraint firstAttribute="top" secondItem="4dg-fm-BQj" secondAttribute="centerY" constant="-40" id="ssA-lO-ZJ4"/>
                                             <constraint firstItem="tp4-oh-atD" firstAttribute="centerX" secondItem="4dg-fm-BQj" secondAttribute="centerX" id="uQ0-Pz-oPI"/>

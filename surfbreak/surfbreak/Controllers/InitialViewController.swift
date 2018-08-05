@@ -40,7 +40,7 @@ final class InitialViewController: UIViewController {
             guard let stations = self.allStations else {return}
             
             //check persistence for user favorites
-            
+            self.getUserFavoritesFromPersistence()
             
             
             //if none segue
@@ -74,29 +74,6 @@ final class InitialViewController: UIViewController {
     //
 
     private func getUserLocation (){
-        var favoritesArray = [Favorite]()
-        do {
-            favoritesArray = try context.fetch(Favorite.fetchRequest())
-        }
-        catch {
-            print("Failed to retrieve Favorite Entity from context.")
-        }
-        for favorite in favoritesArray {
-            var newComponentsStruct = SnapshotComponents()
-            newComponentsStruct.snapshot = Snapshot()
-            if let nickname = favorite.name {
-                newComponentsStruct.snapshot?.nickname = nickname
-            }
-            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
-        }
-        
-    }
-    
-    //
-    //MARK: - Favorites from persistence
-    //
-    
-    private func getUserFavoritesFromPersistence (){
         var locationArray = [UserLocation]()
         do {
             locationArray = try context.fetch(UserLocation.fetchRequest())
@@ -123,6 +100,28 @@ final class InitialViewController: UIViewController {
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.requestLocation();
             }
+        }
+    }
+    
+    //
+    //MARK: - Favorites from persistence
+    //
+    
+    private func getUserFavoritesFromPersistence (){
+        var favoritesArray = [Favorite]()
+        do {
+            favoritesArray = try context.fetch(Favorite.fetchRequest())
+        }
+        catch {
+            print("Failed to retrieve Favorite Entity from context.")
+        }
+        for favorite in favoritesArray {
+            var newComponentsStruct = SnapshotComponents()
+            newComponentsStruct.snapshot = Snapshot()
+            if let nickname = favorite.name {
+                newComponentsStruct.snapshot?.nickname = nickname
+            }
+            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
         }
     }
     
@@ -283,6 +282,7 @@ extension InitialViewController : SurfQualityDelegate{
 }
 
 extension InitialViewController {
+    
     func checkComponentsThenSegue(){
         for key in componentsChecklist.keys {
             if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
