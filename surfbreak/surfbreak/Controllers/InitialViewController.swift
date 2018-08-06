@@ -158,7 +158,7 @@ final class InitialViewController: UIViewController {
     func checkForDownloadedSnapshots(){
         var favoritesArray = [Snapshot]()
         do {
-            favoritesArray = try Disk.retrieve("favorites", from: .caches, as: [Snapshot].self)
+            favoritesArray = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
         }catch{
             print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
         }
@@ -364,15 +364,15 @@ extension InitialViewController {
     
     func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
         DispatchQueue.global(qos:.utility).async{
-            if Disk.exists("favorites", in: .caches) {
+            if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
                 do {
-                    try Disk.append(snapshots, to: "favorites", in: .caches)
+                    try Disk.append(snapshots, to: DefaultConstants.allSnapshots, in: .caches)
                 }catch{
                     print("Appending to automatic storage with Disk failed. Error is: \(error)")
                 }
             }else{
                 do {
-                    try Disk.save(snapshots, to: .caches, as: "favorites")
+                    try Disk.save(snapshots, to: .caches, as: DefaultConstants.allSnapshots)
                 }catch{
                     print("Saving to automatic storage with Disk failed. Error is: \(error)")
                 }

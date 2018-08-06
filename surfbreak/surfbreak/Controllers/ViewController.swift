@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioToolbox.AudioServices
+import Disk
 
 
 final class ViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -21,8 +22,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var activityIndicatorView = ActivityIndicatorView()
     var favoriteButton = UIButton()
     var favoriteFlag = false
-    var favoritesArray = [Int]()
-    var nicknamesArray = [String]()
+    var favoritesArray = [Favorite]()
+    var currentIndexInFavoritesArray = Int()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
@@ -54,15 +55,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func loadFavoritesAndSetFavoriteButton(){
-        let defaults = UserDefaults.standard
-        if let favorites = defaults.array(forKey: DefaultConstants.favorites) as? [Int], let names = defaults.array(forKey: DefaultConstants.nicknames) as? [String]{
-            favoritesArray = favorites
-            nicknamesArray = names
-            for favorite in favorites {
-                if currentSnapShot.id == favorite{
-                    favoriteFlag = true
-                }
-            }
+        do{
+            favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
+        }catch{
+            print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
+        }
+        for index in 0..<favoritesArray.count where favoritesArray[index].id == currentSnapShot.id {
+            favoriteFlag = true
+            currentIndexInFavoritesArray = index
         }
     }
     
@@ -227,29 +227,26 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func favoriteButtonAction(){
         
-        favoriteFlag = !favoriteFlag
-        setButton()
-        self.reloadInputViews()
-        
-         let id = currentSnapShot.id
-        
-        if let index = favoritesArray.index(of: id) {
+        let id = currentSnapShot.id
+        if favoriteFlag {
             feedbackGenerator.notification.notificationOccurred(.warning)
             let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
             let doneAction = UIAlertAction(title: "Okay", style: .default)
             alert.addAction(doneAction)
             self.present(alert, animated: true, completion: nil)
-            
-            //subtract from array
-            favoritesArray.remove(at: index)
-            let defaults = UserDefaults.standard
-            defaults.set(favoritesArray, forKey: DefaultConstants.favorites)
-            nicknamesArray.remove(at: index)
-            defaults.set(nicknamesArray, forKey: DefaultConstants.nicknames)
+            favoritesArray.remove(at: currentIndexInFavoritesArray)
+            do{
+                try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
+            }catch{
+                print("Removing from favorite automatic storage with Disk failed. Error is: \(error)")
+            }
         }else{
             feedbackGenerator.notification.notificationOccurred(.success)
             addFavorite()
         }
+        favoriteFlag = !favoriteFlag
+        setButton()
+        self.reloadInputViews()
     }
     
     
@@ -257,14 +254,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this station?", preferredStyle: .alert)
         alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
-            guard let textFields = alert.textFields,
-                textFields.count > 0 else {
-                    // Could not find textfield
-                    return
-            }
+            guard let textFields = alert.textFields, textFields.count > 0 else {return}
             if let text = textFields[0].text {
                 self.saveStationAndNameToFavoritesDefaults(nickname: text)
-                
             }
         }
         alert.addAction(okayAction)
@@ -274,11 +266,23 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func saveStationAndNameToFavoritesDefaults(nickname : String){
-        let id = currentSnapShot.id
-        favoritesArray.append(id)
-        UserDefaults.standard.set(favoritesArray, forKey: DefaultConstants.favorites)
-        nicknamesArray.append(nickname)
-        UserDefaults.standard.set(nicknamesArray, forKey: DefaultConstants.nicknames)
+        DispatchQueue.global(qos:.utility).async{
+            let id = self.currentSnapShot.id
+            let newFavoriteInArray = Favorite(id: id, nickname: nickname)
+            if Disk.exists(DefaultConstants.favorites, in: .caches) {
+                do {
+                    try Disk.append(newFavoriteInArray, to: DefaultConstants.favorites, in: .caches)
+                }catch{
+                    print("Appending to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }else{
+                do {
+                    try Disk.save(newFavoriteInArray, to: .caches, as: DefaultConstants.favorites)
+                }catch{
+                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }
+        }
     }
 }
 

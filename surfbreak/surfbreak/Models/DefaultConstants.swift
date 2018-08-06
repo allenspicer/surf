@@ -11,5 +11,5 @@ import Foundation
 
 struct DefaultConstants {
     static let favorites = "favorites"
-    static let nicknames = "nicknames"
+    static let allSnapshots = "allsnapshots"
 }
