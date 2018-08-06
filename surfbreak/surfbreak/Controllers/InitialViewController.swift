@@ -42,20 +42,20 @@ final class InitialViewController: UIViewController {
             //check persistence for user favorites
             self.getUserFavoritesFromPersistence()
             
-            
-            //if none segue
-            if self.componentsChecklist.count == 0 {
+            if self.componentsChecklist.count < 0 {
+                
+                //if favorites check persistence for records
+                self.checkForDownloadedSnapshots()
+                
+                //for each favorite create a component in the checklist and make data requests
+                self.componentsChecklist[100] = SnapshotComponents()
+                self.setDataClientsForStation(snapshotId: 100, allStations: stations)
+                
+                // load series of data points (clients)
+            }else{
+                //if no favorites, transition to home
                 self.checkComponentsThenSegue()
             }
-            
-            //if favorites check persistence for records
-            //if none continue on to data request
-            
-            //for each favorite create a component in the checklist and make data requests
-            self.componentsChecklist[100] = SnapshotComponents()
-            self.setDataClientsForStation(snapshotId: 100, allStations: stations)
-
-            // load series of data points (clients)
         }
     }
     
@@ -147,6 +147,13 @@ final class InitialViewController: UIViewController {
             }
         }
         return nil
+    }
+    
+    //
+    //MARK: - check persistence for snapshot records
+    //
+    func checkForDownloadedSnapshots(){
+        
     }
     
     //
@@ -288,6 +295,11 @@ extension InitialViewController {
             if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
                 return
             }
+            //for the snapshot at this key all components are downloaded and available
+            //save them to persistence
+            if let snapshot = componentsChecklist[key]?.snapshot{
+                saveCompleteSnapshotToPersistence(with: snapshot)
+            }
         }
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)
@@ -302,6 +314,20 @@ extension InitialViewController {
         if let snapshots = favoriteSnapshots {
             destinationVC.favoritesSnapshots = snapshots
         }
+    }
+}
+
+extension InitialViewController {
+    
+    func saveCompleteSnapshotToPersistence(with snapshot: Snapshot){
+        var storageSnapshotArray = [PersistenceSnapshot]()
+        do {
+            storageSnapshotArray = try context.fetch(PersistenceSnapshot.fetchRequest())
+        }
+        catch {
+            print("Failed to retrieve Wave Entity from context.")
+        }
+        
     }
 }
 
