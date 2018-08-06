@@ -40,6 +40,8 @@
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
 		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
 		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
+		C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */; };
+		D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.debug.xcconfig"; sourceTree = "<group>"; };
+		539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.release.xcconfig"; sourceTree = "<group>"; };
 		953F07E7210A575300E70E18 /* surfbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surfbreak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953F07EA210A575300E70E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		953F07EC210A575300E70E18 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +95,9 @@
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
 		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
 		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,12 +113,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88AC19A74A347A3CF328E4FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */,
+				D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */,
+				CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */,
+				539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		953F07DE210A575300E70E18 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +138,8 @@
 				9592EC4F210A5B1A004B0A82 /* Other */,
 				953F0801210A575400E70E18 /* surfbreakTests */,
 				953F07E8210A575300E70E18 /* Products */,
+				88AC19A74A347A3CF328E4FD /* Pods */,
+				FDE449EFB5CBFC4BB583496A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -241,6 +264,15 @@
 			path = "Proximal Collection";
 			sourceTree = "<group>";
 		};
+		FDE449EFB5CBFC4BB583496A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */,
+				D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -248,9 +280,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 953F0807210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreak" */;
 			buildPhases = (
+				0B8FD6EDF49BEE8221F3DC8A /* [CP] Check Pods Manifest.lock */,
 				953F07E3210A575300E70E18 /* Sources */,
 				953F07E4210A575300E70E18 /* Frameworks */,
 				953F07E5210A575300E70E18 /* Resources */,
+				91295BF67468CEF1976A2801 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,6 +299,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 953F080A210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreakTests" */;
 			buildPhases = (
+				6E3DFE4B9ECADA2FF2A51FC2 /* [CP] Check Pods Manifest.lock */,
 				953F07FA210A575400E70E18 /* Sources */,
 				953F07FB210A575400E70E18 /* Frameworks */,
 				953F07FC210A575400E70E18 /* Resources */,
@@ -337,6 +372,63 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B8FD6EDF49BEE8221F3DC8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-surfbreak-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E3DFE4B9ECADA2FF2A51FC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-surfbreakTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91295BF67468CEF1976A2801 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		953F07E3210A575300E70E18 /* Sources */ = {
@@ -520,16 +612,14 @@
 		};
 		953F0808210A575400E70E18 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -539,16 +629,14 @@
 		};
 		953F0809210A575400E70E18 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -558,17 +646,14 @@
 		};
 		953F080B210A575400E70E18 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -579,17 +664,14 @@
 		};
 		953F080C210A575400E70E18 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

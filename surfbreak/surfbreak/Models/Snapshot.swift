@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Snapshot {
+struct Snapshot : Codable{
     
     var waveHeight : Double
     var swellDirection : Int

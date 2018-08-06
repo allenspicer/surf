@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Disk
 
 final class InitialViewController: UIViewController {
     
@@ -42,20 +43,19 @@ final class InitialViewController: UIViewController {
             //check persistence for user favorites
             self.getUserFavoritesFromPersistence()
             
-            if self.componentsChecklist.count < 0 {
+            if self.componentsChecklist.count > 0 {
                 
                 //if favorites check persistence for records
                 self.checkForDownloadedSnapshots()
-                
-                //for each favorite create a component in the checklist and make data requests
-                self.componentsChecklist[100] = SnapshotComponents()
-                self.setDataClientsForStation(snapshotId: 100, allStations: stations)
-                
-                // load series of data points (clients)
-            }else{
-                //if no favorites, transition to home
-                self.checkComponentsThenSegue()
+                    
+                //for each favorite that does not have a snapshot
+                //make data requests
+                for key in self.componentsChecklist.keys {
+                    self.setDataClientsForStation(snapshotId: key, allStations: stations)
+                }
             }
+            //if no favorites, or if transition to home
+            self.checkComponentsThenSegue()
         }
     }
     
@@ -108,21 +108,24 @@ final class InitialViewController: UIViewController {
     //
     
     private func getUserFavoritesFromPersistence (){
-        var favoritesArray = [Favorite]()
-        do {
-            favoritesArray = try context.fetch(Favorite.fetchRequest())
-        }
-        catch {
-            print("Failed to retrieve Favorite Entity from context.")
-        }
-        for favorite in favoritesArray {
-            var newComponentsStruct = SnapshotComponents()
-            newComponentsStruct.snapshot = Snapshot()
-            if let nickname = favorite.name {
-                newComponentsStruct.snapshot?.nickname = nickname
-            }
-            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
-        }
+        
+        self.componentsChecklist[100] = SnapshotComponents()
+
+//        var favoritesArray = [Favorite]()
+//        do {
+//            favoritesArray = try context.fetch(Favorite.fetchRequest())
+//        }
+//        catch {
+//            print("Failed to retrieve Favorite Entity from context.")
+//        }
+//        for favorite in favoritesArray {
+//            var newComponentsStruct = SnapshotComponents()
+//            newComponentsStruct.snapshot = Snapshot()
+//            if let nickname = favorite.name {
+//                newComponentsStruct.snapshot?.nickname = nickname
+//            }
+//            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
+//        }
     }
     
     //
@@ -153,7 +156,22 @@ final class InitialViewController: UIViewController {
     //MARK: - check persistence for snapshot records
     //
     func checkForDownloadedSnapshots(){
+        var favoritesArray = [Snapshot]()
+        do {
+            favoritesArray = try Disk.retrieve("favorites", from: .caches, as: [Snapshot].self)
+        }catch{
+            print("Saving to automatic storage with Disk failed. Error is: \(error)")
+        }
         
+        // remove snapshotcomponents entry where we have data from persistence
+        for favoriteSnapshot in favoritesArray where self.componentsChecklist[Int(favoriteSnapshot.id)] != nil {
+            
+            //remove the entry from componentsChecklist
+            self.componentsChecklist.removeValue(forKey: Int(favoriteSnapshot.id))
+            
+            //then populate persistence snapshot into favoriteSnapshots array
+            favoriteSnapshots?.append(favoriteSnapshot)
+        }
     }
     
     //
@@ -295,12 +313,9 @@ extension InitialViewController {
             if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
                 return
             }
-            //for the snapshot at this key all components are downloaded and available
-            //save them to persistence
-            if let snapshot = componentsChecklist[key]?.snapshot{
-                saveCompleteSnapshotToPersistence(with: snapshot)
-            }
         }
+        
+        //if nothing in componentsChecklist or if all components are downloaded segue
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)
         }
@@ -313,20 +328,48 @@ extension InitialViewController {
         destinationVC.userLocation = userLocation
         if let snapshots = favoriteSnapshots {
             destinationVC.favoritesSnapshots = snapshots
+            saveCompleteSnapshotToPersistence(with: snapshots)
         }
     }
 }
 
 extension InitialViewController {
     
-    func saveCompleteSnapshotToPersistence(with snapshot: Snapshot){
-        var storageSnapshotArray = [PersistenceSnapshot]()
-        do {
-            storageSnapshotArray = try context.fetch(PersistenceSnapshot.fetchRequest())
+    func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
+        
+        DispatchQueue.global(qos:.utility).async{
+            if Disk.exists("favorites", in: .caches) {
+                do {
+                    try Disk.append(snapshots, to: "favorites", in: .caches)
+                }catch{
+                    print("Appending to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }else{
+                do {
+                    try Disk.save(snapshots, to: .caches, as: "favorites")
+                }catch{
+                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }
+
         }
-        catch {
-            print("Failed to retrieve Wave Entity from context.")
-        }
+//
+//            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
+//            let fiveMinutes: TimeInterval = 5.0 * 60.0
+//
+//            for wave in waveDictionary {
+//                guard let timestamp = wave.value.timestamp else {return}
+//                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
+//                    DispatchQueue.main.async {
+//                        self.context.delete(wave.value)
+//                    }
+//                    waveDictionary.removeValue(forKey: wave.key)
+//                }
+//            }
+//            DispatchQueue.main.async {
+//                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//            }
+        
         
     }
 }
