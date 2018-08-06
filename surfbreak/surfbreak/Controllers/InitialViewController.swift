@@ -29,7 +29,7 @@ final class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         //set up activity indicator
-        displayActivityIndicator()
+        startActivityIndicator("Loading...")
         
         DispatchQueue.global(qos:.utility).async{
 
@@ -60,13 +60,20 @@ final class InitialViewController: UIViewController {
     }
     
     //
-    //MARK: - Activity Indicator
+    //MARK: - Activty Indicator Triggers
     //
     
-    
-    func displayActivityIndicator(){
-        let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: "loading...")
+    private func startActivityIndicator(_ message : String){
+        let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
         self.view.addSubview(activityIndicatorView)
+    }
+    
+    private func stopActivityIndicator(){
+        for view in self.view.subviews {
+            if view.isKind(of: ActivityIndicatorView.self){
+                view.removeFromSuperview()
+            }
+        }
     }
     
     //
@@ -108,24 +115,20 @@ final class InitialViewController: UIViewController {
     //
     
     private func getUserFavoritesFromPersistence (){
-        
-        self.componentsChecklist[100] = SnapshotComponents()
-
-//        var favoritesArray = [Favorite]()
-//        do {
-//            favoritesArray = try context.fetch(Favorite.fetchRequest())
-//        }
-//        catch {
-//            print("Failed to retrieve Favorite Entity from context.")
-//        }
-//        for favorite in favoritesArray {
-//            var newComponentsStruct = SnapshotComponents()
-//            newComponentsStruct.snapshot = Snapshot()
-//            if let nickname = favorite.name {
-//                newComponentsStruct.snapshot?.nickname = nickname
-//            }
-//            self.componentsChecklist[Int(favorite.id)] = newComponentsStruct
-//        }
+        var favoritesArray = [Favorite]()
+        if Disk.exists(DefaultConstants.favorites, in: .caches) {
+            do{
+                favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
+            }catch{
+                print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
+            }
+            for favorite in favoritesArray {
+                var newComponentsStruct = SnapshotComponents()
+                newComponentsStruct.snapshot = Snapshot()
+                newComponentsStruct.snapshot?.nickname = favorite.nickname
+                self.componentsChecklist[favorite.id] = newComponentsStruct
+            }
+        }
     }
     
     //
@@ -156,47 +159,45 @@ final class InitialViewController: UIViewController {
     //MARK: - check persistence for snapshot records
     //
     func checkForDownloadedSnapshots(){
-        var favoritesArray = [Snapshot]()
-        do {
-            favoritesArray = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
-        }catch{
-            print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
-        }
-        
-        
-        
-        //TODO: scrub records - only time-relevant Snapshots should be used
-        
-        //
-        //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
-        //            let fiveMinutes: TimeInterval = 5.0 * 60.0
-        //
-        //            for wave in waveDictionary {
-        //                guard let timestamp = wave.value.timestamp else {return}
-        //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
-        //                    DispatchQueue.main.async {
-        //                        self.context.delete(wave.value)
-        //                    }
-        //                    waveDictionary.removeValue(forKey: wave.key)
-        //                }
-        //            }
-        //            DispatchQueue.main.async {
-        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //            }
-        
-        
-        
-        
-        
-        // remove snapshotcomponents entry where we have data from persistence
-        for favoriteSnapshot in favoritesArray where self.componentsChecklist[Int(favoriteSnapshot.id)] != nil {
+        if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
+            var favoritesArray = [Snapshot]()
+            do {
+                favoritesArray = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+            }
+
             
-            //remove the entry from componentsChecklist
-            self.componentsChecklist.removeValue(forKey: Int(favoriteSnapshot.id))
+            //TODO: scrub records - only time-relevant Snapshots should be used
             
-            //then populate persistence snapshot into favoriteSnapshots array
-            if favoriteSnapshots?.append(favoriteSnapshot) == nil {
-                favoriteSnapshots = [favoriteSnapshot]
+            //
+            //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
+            //            let fiveMinutes: TimeInterval = 5.0 * 60.0
+            //
+            //            for wave in waveDictionary {
+            //                guard let timestamp = wave.value.timestamp else {return}
+            //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
+            //                    DispatchQueue.main.async {
+            //                        self.context.delete(wave.value)
+            //                    }
+            //                    waveDictionary.removeValue(forKey: wave.key)
+            //                }
+            //            }
+            //            DispatchQueue.main.async {
+            //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            //            }
+
+            
+            // remove snapshotcomponents entry where we have data from persistence
+            for favoriteSnapshot in favoritesArray where self.componentsChecklist[Int(favoriteSnapshot.id)] != nil {
+                
+                //remove the entry from componentsChecklist
+                self.componentsChecklist.removeValue(forKey: Int(favoriteSnapshot.id))
+                
+                //then populate persistence snapshot into favoriteSnapshots array
+                if favoriteSnapshots?.append(favoriteSnapshot) == nil {
+                    favoriteSnapshots = [favoriteSnapshot]
+                }
             }
         }
     }
@@ -236,6 +237,7 @@ extension InitialViewController : CLLocationManagerDelegate{
             locationManager.requestWhenInUseAuthorization()
         }
     }
+    
     
     
     //this method will be called each time a user changes his location access preference.
@@ -304,7 +306,7 @@ extension InitialViewController : WindClientDelegate{
         print("The Wind Client has returned an array of winds.")
         componentsChecklist[snapshot.id]?.wind = true
         componentsChecklist[snapshot.id]?.windTimeStamp = Date()
-        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
+        guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
         self.surfQuality?.createSurfQualityAssesment()
         surfQuality?.delegate = self
@@ -337,11 +339,23 @@ extension InitialViewController {
     
     func checkComponentsThenSegue(){
         for key in componentsChecklist.keys {
+            print(componentsChecklist[key]?.bouy)
+            print(componentsChecklist[key]?.air)
+            print(componentsChecklist[key]?.wind)
+            print(componentsChecklist[key]?.tide)
+            print(userLocation)
+
             if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
                 return
             }
         }
         
+        if userLocation == (0.0,0.0) {
+            
+            //try to get location again
+            locationManager.requestLocation()
+            return
+        }
         //if nothing in componentsChecklist or if all components are downloaded segue
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)

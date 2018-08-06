@@ -51,7 +51,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
-        
+        stopActivityIndicator()
     }
     
     private func applyGradientToBackground(){
@@ -111,7 +111,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     
     //
-    //MARK: - Activty Indicator Controllers
+    //MARK: - Activty Indicator Triggers
     //
     
     private func startActivityIndicator(_ message : String){

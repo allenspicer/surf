@@ -55,14 +55,17 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func loadFavoritesAndSetFavoriteButton(){
-        do{
-            favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
-        }catch{
-            print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
-        }
-        for index in 0..<favoritesArray.count where favoritesArray[index].id == currentSnapShot.id {
-            favoriteFlag = true
-            currentIndexInFavoritesArray = index
+        
+        if Disk.exists(DefaultConstants.favorites, in: .caches) {
+            do{
+                favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
+            }catch{
+                print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
+            }
+            for index in 0..<favoritesArray.count where favoritesArray[index].id == currentSnapShot.id {
+                favoriteFlag = true
+                currentIndexInFavoritesArray = index
+            }
         }
     }
     
@@ -251,7 +254,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func addFavorite(){
-        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this station?", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this break?", preferredStyle: .alert)
         alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
             guard let textFields = alert.textFields, textFields.count > 0 else {return}
@@ -268,7 +271,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func saveStationAndNameToFavoritesDefaults(nickname : String){
         DispatchQueue.global(qos:.utility).async{
             let id = self.currentSnapShot.id
-            let newFavoriteInArray = Favorite(id: id, nickname: nickname)
+            let newFavoriteInArray = [Favorite(id: id, nickname: nickname)]
             if Disk.exists(DefaultConstants.favorites, in: .caches) {
                 do {
                     try Disk.append(newFavoriteInArray, to: DefaultConstants.favorites, in: .caches)
