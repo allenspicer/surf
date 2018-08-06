@@ -160,7 +160,7 @@ final class InitialViewController: UIViewController {
         do {
             favoritesArray = try Disk.retrieve("favorites", from: .caches, as: [Snapshot].self)
         }catch{
-            print("Saving to automatic storage with Disk failed. Error is: \(error)")
+            print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
         }
         
         
@@ -195,7 +195,9 @@ final class InitialViewController: UIViewController {
             self.componentsChecklist.removeValue(forKey: Int(favoriteSnapshot.id))
             
             //then populate persistence snapshot into favoriteSnapshots array
-            favoriteSnapshots?.append(favoriteSnapshot)
+            if favoriteSnapshots?.append(favoriteSnapshot) == nil {
+                favoriteSnapshots = [favoriteSnapshot]
+            }
         }
     }
     

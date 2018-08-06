@@ -193,7 +193,15 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             selectedId = "\(proximalData[cellSelectedIndex].station.station)"
             selectedName = proximalData[cellSelectedIndex].station.name
             selectedBFD = Double(proximalData[cellSelectedIndex].station.bfd)
-            selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+            if let snapshot = snapshotFromPersistence(proximalData[cellSelectedIndex].station.id){
+                selectedSnapshot = snapshot
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                    self.stopActivityIndicator()
+                }
+            }else{
+                selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+            }
         case is FavoriteCollectionView:
             if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
@@ -274,6 +282,43 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
+    
+    func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
+        var snapshot : Snapshot? = nil
+        var persistenceSnapshots = [Snapshot]()
+        do {
+            persistenceSnapshots = try Disk.retrieve("favorites", from: .caches, as: [Snapshot].self)
+        }catch{
+            print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+        }
+        for persistenceSnapshot in persistenceSnapshots {
+            if persistenceSnapshot.id == snapshotId {
+                snapshot = persistenceSnapshot
+            }
+        }
+        return snapshot
+        
+        //TODO: scrub records - only time-relevant Snapshots should be used
+        
+        //
+        //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
+        //            let fiveMinutes: TimeInterval = 5.0 * 60.0
+        //
+        //            for wave in waveDictionary {
+        //                guard let timestamp = wave.value.timestamp else {return}
+        //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
+        //                    DispatchQueue.main.async {
+        //                        self.context.delete(wave.value)
+        //                    }
+        //                    waveDictionary.removeValue(forKey: wave.key)
+        //                }
+        //            }
+        //            DispatchQueue.main.async {
+        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        //            }
+    }
+    
+    
     func setAdditonalDataClients(){
         tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
         tideClient?.delegate = self
@@ -327,8 +372,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func segueWhenAllComponenetsAreLoaded(){
         if !snapshotComponents.values.contains(false){
-            stopActivityIndicator()
-            self.performSegue(withIdentifier: "segueToDetail", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                self.stopActivityIndicator()
+            }
             saveCompleteSnapshotToPersistence(with: [selectedSnapshot])
         }
     }
