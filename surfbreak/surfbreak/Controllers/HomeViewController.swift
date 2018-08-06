@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var surfQuality : SurfQuality?
     var snapshotComponents = [String:Bool]()
 
-    var userLocation = (0.0,0.0)
+    var userLocation : UserLocation? = nil
     let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     let transitionComplete = Bool()
     var currentCard: Int = 0
@@ -76,10 +76,13 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         for index in 0..<allStations.count{
             let station = allStations[index]
-            let lonDiffAbs = abs(station.longitude - userLocation.1) * approxMilesToLon
-            let latDiffAbs = abs(station.latitude - userLocation.0) * approxMilesToLat
-            let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
-            let proximalStation = ProximalStation(station: station, distanceToUser: Int(milesFromUser))
+            var distance = 0
+            if let lon = userLocation?.longitude, let lat = userLocation?.latitude {
+                let lonDiffAbs = abs(station.longitude - lon) * approxMilesToLon
+                let latDiffAbs = abs(station.latitude - lat) * approxMilesToLat
+                distance = Int((pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot())
+            }
+            let proximalStation = ProximalStation(station: station, distanceToUser: distance)
             proximalData.append(proximalStation)
         }
         sortTableObjectsByDistance()
@@ -251,7 +254,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
-            cell.distanceLabel.text = userLocation == (0.0,0.0) ? "Unknown Distance" : "\(current.distanceToUser)mi"
+            cell.distanceLabel.text = userLocation == nil ? "Unknown Distance" : "\(current.distanceToUser)mi"
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell

@@ -41,6 +41,7 @@
 		959BD87A2118CB3B0028F5F5 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BD8792118CB3B0028F5F5 /* Favorite.swift */; };
 		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
 		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
+		95B223992118EDA70060EDFD /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B223982118EDA70060EDFD /* UserLocation.swift */; };
 		C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */; };
 		D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		959BD8792118CB3B0028F5F5 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
 		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95B223982118EDA70060EDFD /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				959BD8792118CB3B0028F5F5 /* Favorite.swift */,
+				95B223982118EDA70060EDFD /* UserLocation.swift */,
 				9592EC56210A8064004B0A82 /* Snapshot.swift */,
 				957471A92113659A0064DD3A /* AirTemp.swift */,
 				957471A5211364BC0064DD3A /* Wind.swift */,
@@ -447,6 +450,7 @@
 				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
 				95A474892114B604006409C8 /* ProximalStation.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
+				95B223992118EDA70060EDFD /* UserLocation.swift in Sources */,
 				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
 				9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */,
 				9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */,

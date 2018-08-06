@@ -244,8 +244,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 print("Removing from favorite automatic storage with Disk failed. Error is: \(error)")
             }
         }else{
-            feedbackGenerator.notification.notificationOccurred(.success)
             addFavorite()
+            feedbackGenerator.notification.notificationOccurred(.success)
         }
         favoriteFlag = !favoriteFlag
         setButton()

@@ -13,7 +13,7 @@ import Disk
 final class InitialViewController: UIViewController {
     
     private var locationManager = CLLocationManager()
-    private var userLocation = (0.0,0.0)
+    private var userLocation : UserLocation? = nil
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var componentsChecklist = [Int : SnapshotComponents]()
 
@@ -49,8 +49,9 @@ final class InitialViewController: UIViewController {
                 self.checkForDownloadedSnapshots()
                     
                 //for each favorite that does not have a snapshot
-                //make data requests
                 for key in self.componentsChecklist.keys {
+                    
+                    //make data requests
                     self.setDataClientsForStation(snapshotId: key, allStations: stations)
                 }
             }
@@ -81,19 +82,15 @@ final class InitialViewController: UIViewController {
     //
 
     private func getUserLocation (){
-        var locationArray = [UserLocation]()
-        do {
-            locationArray = try context.fetch(UserLocation.fetchRequest())
-        }
-        catch {
-            print("Failed to retrieve UserLocation Entity from context.")
-        }
-        for location in locationArray {
-            userLocation.0 = location.latitude
-            userLocation.1 = location.longitude
+        if Disk.exists(DefaultConstants.userLocation, in: .caches) {
+            do {
+                userLocation = try Disk.retrieve(DefaultConstants.userLocation, from: .caches, as: UserLocation.self)
+            }catch{
+                print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+            }
         }
         
-        if userLocation.0 != 0.0 && userLocation.1 != 0.0 {
+        if userLocation != nil{
             print("User location available from persistence: \(userLocation)")
             
         }else{
@@ -261,20 +258,15 @@ extension InitialViewController : CLLocationManagerDelegate{
     
     private func setLocationDataFromResponse(){
         if  let currentLocation = locationManager.location{
-            userLocation.0 = currentLocation.coordinate.latitude
-            userLocation.1 = currentLocation.coordinate.longitude
+            userLocation = UserLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, timestamp: Date())
             print("User location available from gps: \(userLocation)")
 
-            //save user location to persistence
-            DispatchQueue.main.async {
-                //add to persistent container
-                let location = UserLocation(context: self.context)
-                location.timestamp = Date()
-                location.latitude = self.userLocation.0
-                location.longitude = self.userLocation.1
-                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                self.checkComponentsThenSegue()
+            do {
+                try Disk.save(userLocation, to: .caches, as: DefaultConstants.userLocation)
+            }catch{
+                print("Saving to automatic storage with Disk failed. Error is: \(error)")
             }
+            self.checkComponentsThenSegue()
         }
     }
 }
@@ -345,17 +337,17 @@ extension InitialViewController {
             print(componentsChecklist[key]?.tide)
             print(userLocation)
 
-            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == (0.0,0.0){
+            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == nil{
                 return
             }
         }
         
-        if userLocation == (0.0,0.0) {
-            
+        if userLocation == nil {
             //try to get location again
             locationManager.requestLocation()
             return
         }
+        
         //if nothing in componentsChecklist or if all components are downloaded segue
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)
