@@ -12,4 +12,5 @@ import Foundation
 struct DefaultConstants {
     static let favorites = "favorites"
     static let allSnapshots = "allsnapshots"
+    static let userLocation = "userlocation"
 }
