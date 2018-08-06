@@ -163,6 +163,31 @@ final class InitialViewController: UIViewController {
             print("Saving to automatic storage with Disk failed. Error is: \(error)")
         }
         
+        
+        
+        //TODO: scrub records - only time-relevant Snapshots should be used
+        
+        //
+        //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
+        //            let fiveMinutes: TimeInterval = 5.0 * 60.0
+        //
+        //            for wave in waveDictionary {
+        //                guard let timestamp = wave.value.timestamp else {return}
+        //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
+        //                    DispatchQueue.main.async {
+        //                        self.context.delete(wave.value)
+        //                    }
+        //                    waveDictionary.removeValue(forKey: wave.key)
+        //                }
+        //            }
+        //            DispatchQueue.main.async {
+        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        //            }
+        
+        
+        
+        
+        
         // remove snapshotcomponents entry where we have data from persistence
         for favoriteSnapshot in favoritesArray where self.componentsChecklist[Int(favoriteSnapshot.id)] != nil {
             
@@ -336,7 +361,6 @@ extension InitialViewController {
 extension InitialViewController {
     
     func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
-        
         DispatchQueue.global(qos:.utility).async{
             if Disk.exists("favorites", in: .caches) {
                 do {
@@ -353,24 +377,6 @@ extension InitialViewController {
             }
 
         }
-//
-//            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
-//            let fiveMinutes: TimeInterval = 5.0 * 60.0
-//
-//            for wave in waveDictionary {
-//                guard let timestamp = wave.value.timestamp else {return}
-//                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
-//                    DispatchQueue.main.async {
-//                        self.context.delete(wave.value)
-//                    }
-//                    waveDictionary.removeValue(forKey: wave.key)
-//                }
-//            }
-//            DispatchQueue.main.async {
-//                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-//            }
-        
-        
     }
 }
 

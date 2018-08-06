@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Disk
 
 class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
@@ -327,7 +328,26 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func segueWhenAllComponenetsAreLoaded(){
         if !snapshotComponents.values.contains(false){
             stopActivityIndicator()
-            self.performSegue(withIdentifier: "showStationDetail", sender: self)
+            self.performSegue(withIdentifier: "segueToDetail", sender: self)
+            saveCompleteSnapshotToPersistence(with: [selectedSnapshot])
+        }
+    }
+    func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
+        DispatchQueue.global(qos:.utility).async{
+            if Disk.exists("favorites", in: .caches) {
+                do {
+                    try Disk.append(snapshots, to: "favorites", in: .caches)
+                }catch{
+                    print("Appending to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }else{
+                do {
+                    try Disk.save(snapshots, to: .caches, as: "favorites")
+                }catch{
+                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }
+            
         }
     }
 }
