@@ -24,6 +24,7 @@ final class InitialViewController: UIViewController {
     private var surfQuality : SurfQuality?
     
     var allStations : [Station]? = nil
+    var allPersistenceSnapshots = [Snapshot]()
     var favoriteSnapshots : [Snapshot]? = nil
 
 
@@ -43,16 +44,18 @@ final class InitialViewController: UIViewController {
             //check persistence for user favorites
             self.getUserFavoritesFromPersistence()
             
+            //check persistence for saved snapshots
+            self.getAndScrubAllPersistenceSnapshots()
+            
             if self.componentsChecklist.count > 0 {
-                
-                //if favorites check persistence for records
-                self.checkForDownloadedSnapshots()
                     
                 //for each favorite that does not have a snapshot
                 for key in self.componentsChecklist.keys {
                     
-                    //make data requests
-                    self.setDataClientsForStation(snapshotId: key, allStations: stations)
+                    //if favorites check persistence for records
+                    if !self.checkForDownloadedSnapshot(with: key){
+                        self.setDataClientsForStation(snapshotId: key, allStations: stations)
+                    }
                 }
             }
             //if no favorites, or if transition to home
@@ -155,48 +158,52 @@ final class InitialViewController: UIViewController {
     //
     //MARK: - check persistence for snapshot records
     //
-    func checkForDownloadedSnapshots(){
+    func getAndScrubAllPersistenceSnapshots(){
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
-            var favoritesArray = [Snapshot]()
+            var allSnapshots = [Snapshot]()
             do {
-                favoritesArray = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+                allSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
             }catch{
-                print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
-
             
-            //TODO: scrub records - only time-relevant Snapshots should be used
+            print("Favorite Snapshots before removing")
+            print(allSnapshots.count)
             
-            //
-            //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
-            //            let fiveMinutes: TimeInterval = 5.0 * 60.0
-            //
-            //            for wave in waveDictionary {
-            //                guard let timestamp = wave.value.timestamp else {return}
-            //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
-            //                    DispatchQueue.main.async {
-            //                        self.context.delete(wave.value)
-            //                    }
-            //                    waveDictionary.removeValue(forKey: wave.key)
-            //                }
-            //            }
-            //            DispatchQueue.main.async {
-            //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            //            }
-
+            allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
+            allSnapshots = allSnapshots.uniqueElements
+            allPersistenceSnapshots = allSnapshots
+            
+            print("Favorite Snapshots after removing")
+            print(allSnapshots.count)
+            
+            do {
+                try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
+            }catch{
+                print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    func checkForDownloadedSnapshot(with key:Int)->Bool{
             
             // remove snapshotcomponents entry where we have data from persistence
-            for favoriteSnapshot in favoritesArray where self.componentsChecklist[Int(favoriteSnapshot.id)] != nil {
+            for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
                 
                 //remove the entry from componentsChecklist
-                self.componentsChecklist.removeValue(forKey: Int(favoriteSnapshot.id))
+                self.componentsChecklist.removeValue(forKey: Int(savedSnapshot.id))
                 
                 //then populate persistence snapshot into favoriteSnapshots array
-                if favoriteSnapshots?.append(favoriteSnapshot) == nil {
-                    favoriteSnapshots = [favoriteSnapshot]
+                if favoriteSnapshots?.append(savedSnapshot) == nil {
+                    favoriteSnapshots = [savedSnapshot]
                 }
+                return true
             }
-        }
+        return false
     }
     
     //
@@ -330,7 +337,12 @@ extension InitialViewController : SurfQualityDelegate{
 extension InitialViewController {
     
     func checkComponentsThenSegue(){
+        print("Beginning Transiton")
+        print("There are \(favoriteSnapshots?.count) snapshots to be sent to the Home Controller ")
+        print("There are \(componentsChecklist.count) componentsChecklists ")
+        print("The component checklists are")
         for key in componentsChecklist.keys {
+            print(key)
             print(componentsChecklist[key]?.bouy)
             print(componentsChecklist[key]?.air)
             print(componentsChecklist[key]?.wind)
@@ -364,6 +376,7 @@ extension InitialViewController {
             saveCompleteSnapshotToPersistence(with: snapshots)
         }
     }
+        
 }
 
 extension InitialViewController {

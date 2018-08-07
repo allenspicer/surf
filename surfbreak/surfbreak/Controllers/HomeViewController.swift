@@ -289,17 +289,20 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
         var snapshot : Snapshot? = nil
         var persistenceSnapshots = [Snapshot]()
-        do {
-            persistenceSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
-        }catch{
-            print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
-        }
-        for persistenceSnapshot in persistenceSnapshots {
-            if persistenceSnapshot.id == snapshotId {
-                snapshot = persistenceSnapshot
+        if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
+            do {
+                persistenceSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
             }
+            for persistenceSnapshot in persistenceSnapshots {
+                if persistenceSnapshot.id == snapshotId {
+                    snapshot = persistenceSnapshot
+                }
+            }
+            return snapshot
         }
-        return snapshot
+        return nil
         
         //TODO: scrub records - only time-relevant Snapshots should be used
         

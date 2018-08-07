@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Snapshot : Codable{
+struct Snapshot : Codable, Equatable{
     
     var waveHeight : Double
     var swellDirection : Int
@@ -28,6 +28,7 @@ struct Snapshot : Codable{
     var nextTideTime : Date
     var nextTidePolar : String
     var tideDirectionString : String
+    var timeStamp : Date
 
     init(waveHeight : Double = 0.0,
          swellDirection : Int = 0,
@@ -45,7 +46,8 @@ struct Snapshot : Codable{
          airTemp : Double = 0.0,
          nextTideTime : Date = Date(),
          nextTidePolar : String = "",
-         tideDirectionString : String = ""
+         tideDirectionString : String = "",
+         timeStamp : Date = Date()
         ) {
         self.waveHeight = waveHeight
         self.swellDirection = swellDirection
@@ -64,5 +66,6 @@ struct Snapshot : Codable{
         self.nextTideTime = nextTideTime
         self.nextTidePolar = nextTidePolar
         self.tideDirectionString = tideDirectionString
+        self.timeStamp = Date()
     }
 }
