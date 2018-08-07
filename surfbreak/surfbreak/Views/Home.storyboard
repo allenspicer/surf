@@ -5,7 +5,8 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -68,48 +69,55 @@
                                     <constraint firstAttribute="height" constant="200" id="JSt-yB-Fc7"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KBC-yd-UsA">
-                                    <size key="itemSize" width="100" height="107.5"/>
+                                    <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProximalCollectionViewCell" id="iqB-Bv-MbB" customClass="ProxCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="200"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProximalCollectionViewCell" id="9al-9H-avp" customClass="ProxCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="36" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-uS-uhn">
-                                                    <rect key="frame" x="0.0" y="162" width="100" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n02-Mb-7VZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Nrj-YW-1QP"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Damascus" family="Damascus" pointSize="10"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIa-hn-kQw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="124" id="7gR-qB-Xri"/>
-                                                        <constraint firstAttribute="height" constant="124" id="eXL-6c-zDU"/>
+                                                        <constraint firstAttribute="height" constant="128" id="3hO-Ep-bJI"/>
+                                                        <constraint firstAttribute="width" constant="128" id="ehv-Tw-GN8"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u5-oV-gkQ">
+                                                    <rect key="frame" x="12.5" y="30" width="103" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20b-Ku-2Gs">
+                                                    <rect key="frame" x="12.5" y="86" width="103" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.019607843137254902" green="0.43529411764705883" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="TbD-uS-uhn" firstAttribute="leading" secondItem="iqB-Bv-MbB" secondAttribute="leadingMargin" constant="-8" id="hLT-lv-CKq"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="TbD-uS-uhn" secondAttribute="bottom" id="heb-kJ-qU3"/>
-                                            <constraint firstItem="TbD-uS-uhn" firstAttribute="width" secondItem="iqB-Bv-MbB" secondAttribute="width" id="k1m-Fq-59f"/>
+                                            <constraint firstAttribute="top" secondItem="5u5-oV-gkQ" secondAttribute="centerY" constant="-40" id="0ef-Xj-Zzb"/>
+                                            <constraint firstItem="5u5-oV-gkQ" firstAttribute="centerX" secondItem="9al-9H-avp" secondAttribute="centerX" id="3Zc-TR-Kua"/>
+                                            <constraint firstItem="n02-Mb-7VZ" firstAttribute="centerY" secondItem="9al-9H-avp" secondAttribute="centerY" id="AOh-hc-AGU"/>
+                                            <constraint firstItem="5u5-oV-gkQ" firstAttribute="width" secondItem="9al-9H-avp" secondAttribute="width" multiplier="0.8" id="Cay-Vd-LDI"/>
+                                            <constraint firstItem="20b-Ku-2Gs" firstAttribute="centerX" secondItem="5u5-oV-gkQ" secondAttribute="centerX" id="LYc-JR-VHU"/>
+                                            <constraint firstAttribute="bottom" secondItem="20b-Ku-2Gs" secondAttribute="centerY" constant="32" id="YM3-KK-Yd1"/>
+                                            <constraint firstItem="n02-Mb-7VZ" firstAttribute="centerX" secondItem="9al-9H-avp" secondAttribute="centerX" id="vZt-xI-ZkO"/>
+                                            <constraint firstItem="20b-Ku-2Gs" firstAttribute="width" secondItem="5u5-oV-gkQ" secondAttribute="width" id="wWK-O4-d0C"/>
                                         </constraints>
-                                        <size key="customSize" width="100" height="200"/>
+                                        <size key="customSize" width="128" height="128"/>
                                         <connections>
-                                            <outlet property="imageView" destination="lIa-hn-kQw" id="hx4-ER-Buu"/>
-                                            <outlet property="titleLabel" destination="TbD-uS-uhn" id="Jh6-f5-lq4"/>
+                                            <outlet property="distanceLabel" destination="20b-Ku-2Gs" id="Gio-L4-5jH"/>
+                                            <outlet property="imageView" destination="n02-Mb-7VZ" id="RDZ-Mf-YB9"/>
+                                            <outlet property="titleLabel" destination="5u5-oV-gkQ" id="baH-BQ-kWx"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

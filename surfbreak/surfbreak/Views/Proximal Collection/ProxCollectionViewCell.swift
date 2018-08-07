@@ -20,7 +20,7 @@ class ProxCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 15
         self.layer.masksToBounds = true
         titleLabel.textColor = #colorLiteral(red: 0.6156862745, green: 0.9019607843, blue: 0.9019607843, alpha: 1)
-//        distanceLabel.textColor = #colorLiteral(red: 0.8862745098, green: 0.8862745098, blue: 0.8862745098, alpha: 1)
+        distanceLabel.textColor = #colorLiteral(red: 0.8862745098, green: 0.8862745098, blue: 0.8862745098, alpha: 1)
         self.contentView.layer.borderWidth = 2
         self.contentView.layer.borderColor = #colorLiteral(red: 0.1568627451, green: 0.2549019608, blue: 0.4352941176, alpha: 1)
         self.contentView.layer.cornerRadius = 15
