@@ -29,6 +29,8 @@ struct Snapshot : Codable, Equatable{
     var nextTidePolar : String
     var tideDirectionString : String
     var timeStamp : Date
+    var quality : Int
+
 
     init(waveHeight : Double = 0.0,
          swellDirection : Int = 0,
@@ -47,7 +49,9 @@ struct Snapshot : Codable, Equatable{
          nextTideTime : Date = Date(),
          nextTidePolar : String = "",
          tideDirectionString : String = "",
-         timeStamp : Date = Date()
+         timeStamp : Date = Date(),
+         quality : Int = 0
+
         ) {
         self.waveHeight = waveHeight
         self.swellDirection = swellDirection
@@ -67,5 +71,6 @@ struct Snapshot : Codable, Equatable{
         self.nextTidePolar = nextTidePolar
         self.tideDirectionString = tideDirectionString
         self.timeStamp = Date()
+        self.quality = quality
     }
 }
