@@ -39,9 +39,19 @@ class SurfSnapshotView: UIScrollView {
     
     
     func setBackgroundGradient(){
-        
         let backgroundView = UIImageView(frame: self.frame)
-        backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
+        switch currentSnapShot.period{
+        case ...4:
+            backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
+        case 4...6:
+            backgroundView.image = #imageLiteral(resourceName: "Bkgd_3")
+        case 6...9:
+            backgroundView.image = #imageLiteral(resourceName: "Bkgd_2")
+        case 9...:
+            backgroundView.image = #imageLiteral(resourceName: "Bkgd_1")
+        default:
+            backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
+        }
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
         self.sendSubview(toBack: backgroundView)
@@ -82,11 +92,9 @@ class SurfSnapshotView: UIScrollView {
         default:
             waveHeightDigitCount = 2
         }
-        //        let offset: CGFloat = 45 * waveHeightDigitCount
         
         let widthPixels = 150 * waveHeightDigitCount + 200
         let distanceFromTop = self.frame.size.height/5
-        
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
         waveHeightLabel.text = "\(currentSnapShot.waveHeight)ft"
         waveHeightLabel.font = UIFont(name:"Damascus", size: 80.0)
@@ -169,10 +177,11 @@ class SurfSnapshotView: UIScrollView {
         let frequencyLabel = UILabel()
         frequencyLabel.text = "SECONDS BETWEEN WAVES"
         frequencyLabel.font = UIFont(name:"Damascus", size: 10.0)
+        frequencyLabel.textColor = textColor
         stack.addArrangedSubview(frequencyLabel)
         let frequencyAmountLabel = UILabel()
         frequencyAmountLabel.text = "\(currentSnapShot.period)"
-        frequencyLabel.textColor = textColor
+        frequencyAmountLabel.textColor = textColor
         stack.addArrangedSubview(frequencyAmountLabel)
         return stack
     }
