@@ -262,7 +262,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
             cell.loadAllViews()
             let snapshot = self.favoritesSnapshots[indexPath.row]
-            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, locationName: snapshot.stationName, distanceFromUser: 10.0)
+            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshot.stationName, distanceFromUser: 10.0)
             return cell
         default:
             return UICollectionViewCell()

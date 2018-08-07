@@ -25,7 +25,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setCellContent(waveHeight: Double, waveFrequency: Double, locationName: String, distanceFromUser: Double){
+    func setCellContent(waveHeight: Double, waveFrequency: Double, quality: Int, locationName: String, distanceFromUser: Double){
         heightLabel.text = "\(waveHeight) ft"
         frequencyLabel.text = "\(waveFrequency)s"
         locationLabel.text = locationName
@@ -46,14 +46,14 @@ class FavCollectionViewCell: UICollectionViewCell {
             imageView.image = #imageLiteral(resourceName: "Flat")
         }
         
-        switch waveFrequency{
-        case ...4:
+        switch quality{
+        case 4:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_4")
-        case 4...6:
+        case 3:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_3")
-        case 6...9:
+        case 2:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_2")
-        case 9...:
+        case 1:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_1")
         default:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_4")
@@ -63,6 +63,8 @@ class FavCollectionViewCell: UICollectionViewCell {
     }
     
     func loadAllViews() {
+        
+        if contentView.subviews.contains(mainView){return}
         
         self.contentMode = .center
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 206.0, height: 206.0)
@@ -109,5 +111,10 @@ class FavCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         
     }
+    
+    
+//    override func prepareForReuse() {
+//        contentView.subviews.forEach({ $0.removeFromSuperview() })
+//    }
     
 }

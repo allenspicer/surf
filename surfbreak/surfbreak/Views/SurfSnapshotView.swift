@@ -40,14 +40,14 @@ class SurfSnapshotView: UIScrollView {
     
     func setBackgroundGradient(){
         let backgroundView = UIImageView(frame: self.frame)
-        switch currentSnapShot.period{
-        case ...4:
+        switch currentSnapShot.quality{
+        case 4:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
-        case 4...6:
+        case 3:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_3")
-        case 6...9:
+        case 2:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_2")
-        case 9...:
+        case 1:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_1")
         default:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
