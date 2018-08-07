@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FavoriteFlowLayout: UICollectionViewFlowLayout {
+class OldFavoriteFlowLayout: UICollectionViewFlowLayout {
     var standardItemAlpha: CGFloat = 0.5
     var standardItemScale: CGFloat = 0.65
-    var standardVerticalOffset: CGFloat = 100.0
-
+    var standardVerticalOffset: CGFloat = 40.0
+    
     var isSetup = false
     
     override func prepare() {
@@ -55,10 +55,9 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         attributes.alpha = alpha
         attributes.transform3D = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
         attributes.zIndex = Int(alpha * 10)
-        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio)))
+        attributes.center = CGPoint(x: attributes.center.x, y: (attributes.center.y + (standardVerticalOffset * ratio) - (3 * standardVerticalOffset)))
         
     }
-    
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
@@ -70,7 +69,7 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         let closest = layoutAttributes!.sorted { abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin) }.first ?? UICollectionViewLayoutAttributes()
         
         let targetContentOffset = CGPoint(x: floor(closest.center.x - center), y: proposedContentOffset.y)
-
+        
         return targetContentOffset
     }
     
@@ -79,12 +78,13 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
         self.collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
         
         let collectionSize = collectionView!.bounds.size
-//        let yInset = (collectionSize.height - self.itemSize.height) / 2
+        //        let yInset = (collectionSize.height - self.itemSize.height) / 2
         let xInset = (collectionSize.width - self.itemSize.width) / 2
-//
-//        self.sectionInset = UIEdgeInsetsMake(yInset, xInset, yInset, xInset)
+        //
+        //        self.sectionInset = UIEdgeInsetsMake(yInset, xInset, yInset, xInset)
         self.sectionInset = UIEdgeInsetsMake(0, xInset, 0, xInset)
-
+        
     }
     
 }
+
