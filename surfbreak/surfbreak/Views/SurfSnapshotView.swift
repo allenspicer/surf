@@ -94,14 +94,6 @@ class SurfSnapshotView: UIScrollView {
         waveHeightLabel.center = CGPoint(x: self.frame.width/2, y: 200)
         waveHeightLabel.textAlignment = .center
         self.addSubview(waveHeightLabel)
-        
-        //        let feetLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        //        feetLabel.text = "ft"
-        //        feetLabel.font = UIFont(name:"Damascus", size: 20.0)
-        //        feetLabel.textColor =  textColor
-        //        feetLabel.center = CGPoint(x: (self.frame.width - offset) + 20 + (waveHeightDigitCount * 20), y: 95)
-        //        feetLabel.textAlignment = .center
-        //        self.addSubview(feetLabel)
     }
     
     

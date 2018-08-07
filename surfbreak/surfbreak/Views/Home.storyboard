@@ -40,10 +40,18 @@
                                                         <constraint firstAttribute="width" constant="207" id="fBg-Fq-n9n"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MVb-7h-Z5E">
+                                                    <rect key="frame" x="10" y="10" width="207" height="147"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="207" id="QlO-yu-cTN"/>
+                                                        <constraint firstAttribute="width" constant="207" id="gwH-Hf-a3x"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <size key="customSize" width="210" height="264"/>
                                         <connections>
+                                            <outlet property="backgroundImageView" destination="MVb-7h-Z5E" id="dff-8R-9gY"/>
                                             <outlet property="imageView" destination="wc2-H6-HdO" id="WuG-D1-Iqd"/>
                                         </connections>
                                     </collectionViewCell>

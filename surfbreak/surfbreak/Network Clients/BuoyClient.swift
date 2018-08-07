@@ -74,7 +74,8 @@ final class BuoyClient: NSObject {
         guard let currentWaveHeight = Double(bouy[8]) as Double? else {return}
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
-        let heightInFeet = currentWaveHeight * 3.28
+        var heightInFeet = currentWaveHeight * 3.28
+        heightInFeet = (heightInFeet*10).rounded()/10
 
         //wave direction
         guard let currentWaveDirectionDegrees = Int(bouy[11]) as Int? else {return}

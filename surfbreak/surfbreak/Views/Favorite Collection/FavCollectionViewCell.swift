@@ -11,7 +11,6 @@ import Foundation
 
 class FavCollectionViewCell: UICollectionViewCell {
     
-    var backgroundGradient = CAGradientLayer()
     var mainView = UIView()
     var heightLabel = UILabel()
     var frequencyLabel = UILabel()
@@ -19,6 +18,8 @@ class FavCollectionViewCell: UICollectionViewCell {
     var distanceLabel = UILabel()
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,28 +47,18 @@ class FavCollectionViewCell: UICollectionViewCell {
         }
         
         switch waveFrequency{
-        case ...2:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
-        case 2...4:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+        case ...4:
+            backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_4")
         case 4...6:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+            backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_3")
         case 6...9:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+            backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_2")
         case 9...:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+            backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_1")
         default:
-            let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-            backgroundGradient.colors = [customYellow.cgColor, UIColor.clear.cgColor]
+            backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_4")
         }
-        
-        
-        
+
         
     }
     
@@ -76,11 +67,9 @@ class FavCollectionViewCell: UICollectionViewCell {
         self.contentMode = .center
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 206.0, height: 206.0)
         mainView = CustomView(frame: mainViewFrame)
-        mainView.layer.cornerRadius = 103
-        mainView.layer.masksToBounds = true
-        mainView.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
-        backgroundGradient.frame.size = mainViewFrame.size
-        mainView.layer.addSublayer(backgroundGradient)
+        backgroundImageView.frame = mainViewFrame
+        backgroundImageView.layer.cornerRadius = 103
+        backgroundImageView.layer.masksToBounds = true
         contentView.addSubview(mainView)
         
         
