@@ -112,9 +112,4 @@ class FavCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
-//    override func prepareForReuse() {
-//        contentView.subviews.forEach({ $0.removeFromSuperview() })
-//    }
-    
 }
