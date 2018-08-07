@@ -43,7 +43,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         applyGradientToBackground()
         setupGestureRecognizer()
         
-        
         // Initial Flow Layout Setup
         let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
         layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
@@ -101,11 +100,12 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         if (userLatitude != 0 && userLongitude != 0) {
             for index in 0..<proximalData.count{
-                let station = proximalData[index]
-                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
-                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
-                let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
-                proximalData[index].distanceInMiles = Int(milesFromUser)
+//                let station = proximalData[index]
+//                let lonDiffAbs = abs(station.lon - userLongitude) * approxMilesToLon
+//                let latDiffAbs = abs(station.lat - userLatitude) * approxMilesToLat
+//                let milesFromUser = (pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot()
+//                proximalData[index].distanceInMiles = Int(milesFromUser)
+
             }
         }
         sortTableObjectsByDistance()
@@ -153,7 +153,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     
     func sortTableObjectsByDistance(){
-        proximalData = proximalData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
+//        proximalData = proximalData.sorted(by: {$0.distanceInMiles < $1.distanceInMiles })
         proximalCollectionView.reloadData()
         stopActivityIndicator()
     }
@@ -163,28 +163,25 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     //
     
     private func parseStationList(){
-        if let path = Bundle.main.path(forResource: "regionalBuoyList", ofType: "json") {
+        let fileName = "regionalBuoyList"
+        guard let stations = loadJson(fileName) else {return}
+        proximalData = stations
+    }
+
+    func loadJson(_ fileName: String) -> [Station]? {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
             do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let metaData = jsonResult as? [[String : AnyObject]]{
-                    for station in metaData {
-                        guard let stationId = station["station"] else {return}
-                        guard let id = station["id"] else {return}
-                        guard let beachFaceDirection = station["bfd"] as? Double else {return}
-                        guard let lon = station["longitude"] as? Double else {return}
-                        guard let lat = station["latitude"] as? Double else {return}
-                        guard let name = station["name"] as? String else {return}
-                        let station = Station(id: "\(id)", stationId: "\(stationId)", lat: lat, lon: lon, beachFaceDirection: beachFaceDirection, name: name, nickname: nil, distanceInMiles: 10000)
-                        proximalData.append(station)
-                    }
-                    stopActivityIndicator()
-                }
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Station].self, from: data)
+                return jsonData
             } catch {
-                // handle error
+                print("error:\(error)")
             }
         }
+        return nil
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -197,10 +194,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     //
     //MARK: - Gesture Recognizer
-    //
-    
-    //
-    //Gesture Recognizer
     //
     
     func setupGestureRecognizer() {
@@ -339,9 +332,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
-            selectedId = proximalData[cellSelectedIndex].stationId
+            selectedId = "\(proximalData[cellSelectedIndex].station)"
             selectedName = proximalData[cellSelectedIndex].name
-            selectedBFD = proximalData[cellSelectedIndex].beachFaceDirection
+            selectedBFD = Double(proximalData[cellSelectedIndex].bfd)
             selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
         case is FavoriteCollectionView:
             if indexPath.row != currentCard {
@@ -398,17 +391,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        switch collectionView {
-//        case is ProximalCollectionView:
-//            return CGSize(width: 124, height: 124)
-//        case is FavoriteCollectionView:
-//            return CGSize(width: 207, height: 264)
-//        default:
-//            return CGSize()
-//        }
-//    }
 
     
     //
@@ -418,8 +400,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
         DispatchQueue.global(qos:.utility).async {
-            guard let id = Int(self.proximalData[index].id) else {return}
-            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: selectedBFD, id:id, name: stationName)
+            let id = Int(self.proximalData[index].id)
+            let snapshotSetter = SnapshotSetter(stationId: selectedId, beachFaceDirection: Int(selectedBFD), id:id, name: stationName)
             self.selectedSnapshot = snapshotSetter.createSnapshot(finished: {})
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
             //remove spinner for response:
@@ -496,8 +478,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.performSegue(withIdentifier: "showStationDetail", sender: self)
         }
     }
-    
-    
 }
 
 

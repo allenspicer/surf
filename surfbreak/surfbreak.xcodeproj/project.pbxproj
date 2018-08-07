@@ -1,0 +1,763 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		953502E6211A01F800E8DDA8 /* HomeOld.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953502E5211A01F800E8DDA8 /* HomeOld.storyboard */; };
+		953502E8211A045100E8DDA8 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953502E7211A045100E8DDA8 /* Home.storyboard */; };
+		953502EC211A0D5400E8DDA8 /* FavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953502EB211A0D5400E8DDA8 /* FavoriteFlowLayout.swift */; };
+		953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F07EA210A575300E70E18 /* AppDelegate.swift */; };
+		953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F07EC210A575300E70E18 /* InitialViewController.swift */; };
+		953F07F0210A575300E70E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953F07EE210A575300E70E18 /* Main.storyboard */; };
+		953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */; };
+		953F07F5210A575400E70E18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953F07F4210A575400E70E18 /* Assets.xcassets */; };
+		953F0803210A575400E70E18 /* surfbreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F0802210A575400E70E18 /* surfbreakTests.swift */; };
+		9574719E211348030064DD3A /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574719D211348030064DD3A /* Station.swift */; };
+		957471A021135BE30064DD3A /* SnapshotComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9574719F21135BE30064DD3A /* SnapshotComponents.swift */; };
+		957471A2211362200064DD3A /* TideClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A1211362200064DD3A /* TideClient.swift */; };
+		957471A4211362410064DD3A /* Tide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A3211362410064DD3A /* Tide.swift */; };
+		957471A6211364BC0064DD3A /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A5211364BC0064DD3A /* Wind.swift */; };
+		957471A8211364E00064DD3A /* WindClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A7211364E00064DD3A /* WindClient.swift */; };
+		957471AA2113659A0064DD3A /* AirTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471A92113659A0064DD3A /* AirTemp.swift */; };
+		957471AC211365AF0064DD3A /* AirTempClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AB211365AF0064DD3A /* AirTempClient.swift */; };
+		957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AD211366AD0064DD3A /* SurfQuality.swift */; };
+		957471B0211392BC0064DD3A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471AF211392BC0064DD3A /* GradientView.swift */; };
+		957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B1211394080064DD3A /* ActivityIndicator.swift */; };
+		957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B3211394420064DD3A /* SurfSnapshotView.swift */; };
+		957471B82113E4500064DD3A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B72113E4500064DD3A /* ViewController.swift */; };
+		957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B92113E6650064DD3A /* DefaultConstants.swift */; };
+		957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BB2113EB840064DD3A /* HomeViewController.swift */; };
+		957471BE2113ED9D0064DD3A /* FavCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */; };
+		957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */; };
+		957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */; };
+		957471C42113EF660064DD3A /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C32113EF660064DD3A /* CircleView.swift */; };
+		957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */; };
+		957471C82113F1DF0064DD3A /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C72113F1DF0064DD3A /* CustomView.swift */; };
+		957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */; };
+		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
+		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
+		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
+		959BD87A2118CB3B0028F5F5 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BD8792118CB3B0028F5F5 /* Favorite.swift */; };
+		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
+		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
+		95B223992118EDA70060EDFD /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B223982118EDA70060EDFD /* UserLocation.swift */; };
+		C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */; };
+		D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		953F07FF210A575400E70E18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953F07DF210A575300E70E18 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953F07E6210A575300E70E18;
+			remoteInfo = surfbreak;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.debug.xcconfig"; sourceTree = "<group>"; };
+		539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.release.xcconfig"; sourceTree = "<group>"; };
+		953502E5211A01F800E8DDA8 /* HomeOld.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeOld.storyboard; sourceTree = "<group>"; };
+		953502E7211A045100E8DDA8 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		953502EB211A0D5400E8DDA8 /* FavoriteFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteFlowLayout.swift; sourceTree = "<group>"; };
+		953F07E7210A575300E70E18 /* surfbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surfbreak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		953F07EA210A575300E70E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		953F07EC210A575300E70E18 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		953F07EF210A575300E70E18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		953F07F2210A575300E70E18 /* surfbreak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = surfbreak.xcdatamodel; sourceTree = "<group>"; };
+		953F07F4210A575400E70E18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		953F07F9210A575400E70E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953F07FE210A575400E70E18 /* surfbreakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surfbreakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		953F0802210A575400E70E18 /* surfbreakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = surfbreakTests.swift; sourceTree = "<group>"; };
+		953F0804210A575400E70E18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9574719D211348030064DD3A /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		9574719F21135BE30064DD3A /* SnapshotComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotComponents.swift; sourceTree = "<group>"; };
+		957471A1211362200064DD3A /* TideClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TideClient.swift; sourceTree = "<group>"; };
+		957471A3211362410064DD3A /* Tide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tide.swift; sourceTree = "<group>"; };
+		957471A5211364BC0064DD3A /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
+		957471A7211364E00064DD3A /* WindClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindClient.swift; sourceTree = "<group>"; };
+		957471A92113659A0064DD3A /* AirTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTemp.swift; sourceTree = "<group>"; };
+		957471AB211365AF0064DD3A /* AirTempClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirTempClient.swift; sourceTree = "<group>"; };
+		957471AD211366AD0064DD3A /* SurfQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurfQuality.swift; path = surfbreak/Controllers/SurfQuality.swift; sourceTree = SOURCE_ROOT; };
+		957471AF211392BC0064DD3A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		957471B1211394080064DD3A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		957471B3211394420064DD3A /* SurfSnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfSnapshotView.swift; sourceTree = "<group>"; };
+		957471B72113E4500064DD3A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		957471B92113E6650064DD3A /* DefaultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultConstants.swift; sourceTree = "<group>"; };
+		957471BB2113EB840064DD3A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavCollectionViewCell.swift; sourceTree = "<group>"; };
+		957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCollectionView.swift; sourceTree = "<group>"; };
+		957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
+		957471C32113EF660064DD3A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFavoriteFlowLayout.swift; sourceTree = "<group>"; };
+		957471C72113F1DF0064DD3A /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
+		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
+		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
+		959BD8792118CB3B0028F5F5 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
+		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95B223982118EDA70060EDFD /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		953F07E4210A575300E70E18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953F07FB210A575400E70E18 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		88AC19A74A347A3CF328E4FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */,
+				D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */,
+				CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */,
+				539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		953F07DE210A575300E70E18 = {
+			isa = PBXGroup;
+			children = (
+				953F07E9210A575300E70E18 /* surfbreak */,
+				9592EC4F210A5B1A004B0A82 /* Other */,
+				953F0801210A575400E70E18 /* surfbreakTests */,
+				953F07E8210A575300E70E18 /* Products */,
+				88AC19A74A347A3CF328E4FD /* Pods */,
+				FDE449EFB5CBFC4BB583496A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		953F07E8210A575300E70E18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				953F07E7210A575300E70E18 /* surfbreak.app */,
+				953F07FE210A575400E70E18 /* surfbreakTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		953F07E9210A575300E70E18 /* surfbreak */ = {
+			isa = PBXGroup;
+			children = (
+				9592EC55210A7F02004B0A82 /* Network Clients */,
+				9592EC50210A5B23004B0A82 /* Controllers */,
+				9592EC4E210A5AF0004B0A82 /* Views */,
+				9592EC51210A5B53004B0A82 /* Assets */,
+				9592EC52210A5B5B004B0A82 /* Models */,
+			);
+			path = surfbreak;
+			sourceTree = "<group>";
+		};
+		953F0801210A575400E70E18 /* surfbreakTests */ = {
+			isa = PBXGroup;
+			children = (
+				953F0802210A575400E70E18 /* surfbreakTests.swift */,
+				953F0804210A575400E70E18 /* Info.plist */,
+			);
+			path = surfbreakTests;
+			sourceTree = "<group>";
+		};
+		9592EC4E210A5AF0004B0A82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				953502E5211A01F800E8DDA8 /* HomeOld.storyboard */,
+				953502E7211A045100E8DDA8 /* Home.storyboard */,
+				957471C72113F1DF0064DD3A /* CustomView.swift */,
+				959BD8762115575A0028F5F5 /* Proximal Collection */,
+				959BD875211557470028F5F5 /* Favorite Collection */,
+				957471C32113EF660064DD3A /* CircleView.swift */,
+				953F07EE210A575300E70E18 /* Main.storyboard */,
+				957471AF211392BC0064DD3A /* GradientView.swift */,
+				957471B1211394080064DD3A /* ActivityIndicator.swift */,
+				95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */,
+				957471B3211394420064DD3A /* SurfSnapshotView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9592EC4F210A5B1A004B0A82 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				953F07F9210A575400E70E18 /* Info.plist */,
+				953F07EA210A575300E70E18 /* AppDelegate.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		9592EC50210A5B23004B0A82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				953F07EC210A575300E70E18 /* InitialViewController.swift */,
+				957471BB2113EB840064DD3A /* HomeViewController.swift */,
+				957471B72113E4500064DD3A /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9592EC51210A5B53004B0A82 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9592EC58210A89C2004B0A82 /* regionalBuoyList.json */,
+				953F07F4210A575400E70E18 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		9592EC52210A5B5B004B0A82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				959BD8792118CB3B0028F5F5 /* Favorite.swift */,
+				95B223982118EDA70060EDFD /* UserLocation.swift */,
+				9592EC56210A8064004B0A82 /* Snapshot.swift */,
+				957471A92113659A0064DD3A /* AirTemp.swift */,
+				957471A5211364BC0064DD3A /* Wind.swift */,
+				957471A3211362410064DD3A /* Tide.swift */,
+				9574719F21135BE30064DD3A /* SnapshotComponents.swift */,
+				9574719D211348030064DD3A /* Station.swift */,
+				95A474882114B604006409C8 /* ProximalStation.swift */,
+				953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */,
+				957471B92113E6650064DD3A /* DefaultConstants.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9592EC55210A7F02004B0A82 /* Network Clients */ = {
+			isa = PBXGroup;
+			children = (
+				957471AB211365AF0064DD3A /* AirTempClient.swift */,
+				957471AD211366AD0064DD3A /* SurfQuality.swift */,
+				957471A7211364E00064DD3A /* WindClient.swift */,
+				957471A1211362200064DD3A /* TideClient.swift */,
+				9592EC53210A7EF9004B0A82 /* BuoyClient.swift */,
+			);
+			path = "Network Clients";
+			sourceTree = "<group>";
+		};
+		959BD875211557470028F5F5 /* Favorite Collection */ = {
+			isa = PBXGroup;
+			children = (
+				957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */,
+				957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */,
+				957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */,
+				953502EB211A0D5400E8DDA8 /* FavoriteFlowLayout.swift */,
+			);
+			path = "Favorite Collection";
+			sourceTree = "<group>";
+		};
+		959BD8762115575A0028F5F5 /* Proximal Collection */ = {
+			isa = PBXGroup;
+			children = (
+				957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */,
+				957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */,
+			);
+			path = "Proximal Collection";
+			sourceTree = "<group>";
+		};
+		FDE449EFB5CBFC4BB583496A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */,
+				D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		953F07E6210A575300E70E18 /* surfbreak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953F0807210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreak" */;
+			buildPhases = (
+				0B8FD6EDF49BEE8221F3DC8A /* [CP] Check Pods Manifest.lock */,
+				953F07E3210A575300E70E18 /* Sources */,
+				953F07E4210A575300E70E18 /* Frameworks */,
+				953F07E5210A575300E70E18 /* Resources */,
+				91295BF67468CEF1976A2801 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = surfbreak;
+			productName = surfbreak;
+			productReference = 953F07E7210A575300E70E18 /* surfbreak.app */;
+			productType = "com.apple.product-type.application";
+		};
+		953F07FD210A575400E70E18 /* surfbreakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953F080A210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreakTests" */;
+			buildPhases = (
+				6E3DFE4B9ECADA2FF2A51FC2 /* [CP] Check Pods Manifest.lock */,
+				953F07FA210A575400E70E18 /* Sources */,
+				953F07FB210A575400E70E18 /* Frameworks */,
+				953F07FC210A575400E70E18 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953F0800210A575400E70E18 /* PBXTargetDependency */,
+			);
+			name = surfbreakTests;
+			productName = surfbreakTests;
+			productReference = 953F07FE210A575400E70E18 /* surfbreakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		953F07DF210A575300E70E18 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = surfbreak;
+				TargetAttributes = {
+					953F07E6210A575300E70E18 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					953F07FD210A575400E70E18 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 953F07E6210A575300E70E18;
+					};
+				};
+			};
+			buildConfigurationList = 953F07E2210A575300E70E18 /* Build configuration list for PBXProject "surfbreak" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 953F07DE210A575300E70E18;
+			productRefGroup = 953F07E8210A575300E70E18 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				953F07E6210A575300E70E18 /* surfbreak */,
+				953F07FD210A575400E70E18 /* surfbreakTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		953F07E5210A575300E70E18 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */,
+				953502E6211A01F800E8DDA8 /* HomeOld.storyboard in Resources */,
+				953F07F5210A575400E70E18 /* Assets.xcassets in Resources */,
+				953502E8211A045100E8DDA8 /* Home.storyboard in Resources */,
+				95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */,
+				953F07F0210A575300E70E18 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953F07FC210A575400E70E18 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B8FD6EDF49BEE8221F3DC8A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-surfbreak-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E3DFE4B9ECADA2FF2A51FC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-surfbreakTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91295BF67468CEF1976A2801 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		953F07E3210A575300E70E18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				957471C42113EF660064DD3A /* CircleView.swift in Sources */,
+				957471BE2113ED9D0064DD3A /* FavCollectionViewCell.swift in Sources */,
+				957471A2211362200064DD3A /* TideClient.swift in Sources */,
+				959BD87A2118CB3B0028F5F5 /* Favorite.swift in Sources */,
+				957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */,
+				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
+				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
+				95A474892114B604006409C8 /* ProximalStation.swift in Sources */,
+				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
+				95B223992118EDA70060EDFD /* UserLocation.swift in Sources */,
+				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
+				9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */,
+				9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */,
+				953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */,
+				957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */,
+				957471A021135BE30064DD3A /* SnapshotComponents.swift in Sources */,
+				957471A8211364E00064DD3A /* WindClient.swift in Sources */,
+				957471A4211362410064DD3A /* Tide.swift in Sources */,
+				953502EC211A0D5400E8DDA8 /* FavoriteFlowLayout.swift in Sources */,
+				9574719E211348030064DD3A /* Station.swift in Sources */,
+				957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */,
+				957471B82113E4500064DD3A /* ViewController.swift in Sources */,
+				957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */,
+				957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */,
+				957471C82113F1DF0064DD3A /* CustomView.swift in Sources */,
+				957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */,
+				957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */,
+				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
+				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
+				957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */,
+				957471AC211365AF0064DD3A /* AirTempClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953F07FA210A575400E70E18 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953F0803210A575400E70E18 /* surfbreakTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		953F0800210A575400E70E18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953F07E6210A575300E70E18 /* surfbreak */;
+			targetProxy = 953F07FF210A575400E70E18 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		953F07EE210A575300E70E18 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953F07EF210A575300E70E18 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		953F0805210A575400E70E18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		953F0806210A575400E70E18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		953F0808210A575400E70E18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953F0809210A575400E70E18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		953F080B210A575400E70E18 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = surfbreakTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/surfbreak.app/surfbreak";
+			};
+			name = Debug;
+		};
+		953F080C210A575400E70E18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
+				INFOPLIST_FILE = surfbreakTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/surfbreak.app/surfbreak";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		953F07E2210A575300E70E18 /* Build configuration list for PBXProject "surfbreak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953F0805210A575400E70E18 /* Debug */,
+				953F0806210A575400E70E18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953F0807210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953F0808210A575400E70E18 /* Debug */,
+				953F0809210A575400E70E18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953F080A210A575400E70E18 /* Build configuration list for PBXNativeTarget "surfbreakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953F080B210A575400E70E18 /* Debug */,
+				953F080C210A575400E70E18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		953F07F1210A575300E70E18 /* surfbreak.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				953F07F2210A575300E70E18 /* surfbreak.xcdatamodel */,
+			);
+			currentVersion = 953F07F2210A575300E70E18 /* surfbreak.xcdatamodel */;
+			path = surfbreak.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 953F07DF210A575300E70E18 /* Project object */;
+}

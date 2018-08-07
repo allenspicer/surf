@@ -25,6 +25,7 @@
 		95713FF02075912300745FC7 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95713FEF2075912300745FC7 /* Snapshot.swift */; };
 		9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */; };
 		9572891F20C99874007BE075 /* TopDownSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572891E20C99874007BE075 /* TopDownSegue.swift */; };
+		957471B621139BA40064DD3A /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471B521139BA40064DD3A /* BuoyClient.swift */; };
 		95786C1C20F906790043A543 /* FavoriteCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */; };
 		95786C1E20F935CE0043A543 /* AdobeHeitiStd-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */; };
 		95786C2020F939450043A543 /* Gotham Book Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95786C1F20F939440043A543 /* Gotham Book Regular.otf */; };
@@ -86,6 +87,7 @@
 		95713FEF2075912300745FC7 /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9572891C20C8731D007BE075 /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		9572891E20C99874007BE075 /* TopDownSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopDownSegue.swift; path = surf/Controller/TopDownSegue.swift; sourceTree = SOURCE_ROOT; };
+		957471B521139BA40064DD3A /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		95786C1B20F906790043A543 /* FavoriteCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionLayout.swift; sourceTree = "<group>"; };
 		95786C1D20F935CD0043A543 /* AdobeHeitiStd-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AdobeHeitiStd-Regular.otf"; sourceTree = "<group>"; };
 		95786C1F20F939440043A543 /* Gotham Book Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham Book Regular.otf"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				95FEBEBE20A5DA3C0049CA66 /* NetworkRequest.swift */,
 				9516CE3C20DD5DFD002C7299 /* SnapshotSetter.swift */,
+				957471B521139BA40064DD3A /* BuoyClient.swift */,
 				95125EEE20C5DD0600FDE462 /* TideClient.swift */,
 				95125EF020C707F800FDE462 /* WindClient.swift */,
 				95125EF620C82E3800FDE462 /* AirTempClient.swift */,
@@ -497,6 +500,7 @@
 				954C8C7521011421005A5CA3 /* FavoriteFlowLayout.swift in Sources */,
 				95EE33A220F7B5A5006DB0F5 /* FavoriteCollectionView.swift in Sources */,
 				95125EF720C82E3800FDE462 /* AirTempClient.swift in Sources */,
+				957471B621139BA40064DD3A /* BuoyClient.swift in Sources */,
 				95FB9C5120EE9E5500301491 /* InitialLoadViewController.swift in Sources */,
 				9572891D20C8731D007BE075 /* ProxCollectionViewCell.swift in Sources */,
 				950EAB4E20ED10F50020D266 /* DefaultConstants.swift in Sources */,
