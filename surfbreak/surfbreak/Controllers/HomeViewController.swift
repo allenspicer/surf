@@ -44,10 +44,12 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         applyGradientToBackground()
         
         // Initial Flow Layout Setup
-        let layout = self.favoritesCollectionView.collectionViewLayout as! FavoriteFlowLayout
-        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = -standardMinimumLineSpacing
+        if let layout = self.favoritesCollectionView.collectionViewLayout as? FavoriteFlowLayout{
+                    layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+                    layout.scrollDirection = .horizontal
+                    layout.minimumLineSpacing = -standardMinimumLineSpacing
+        }
+
         
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
@@ -254,7 +256,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
             let current = self.proximalData[indexPath.row]
             cell.titleLabel.text = current.station.name
-            cell.distanceLabel.text = userLocation == nil ? "Unknown Distance" : "\(current.distanceToUser)mi"
+//            cell.distanceLabel.text = userLocation == nil ? "Unknown Distance" : "\(current.distanceToUser)mi"
             return cell
         case is FavoriteCollectionView:
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
@@ -438,9 +440,6 @@ extension HomeViewController {
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
             self.getAndScrubAllPersistenceSnapshots()
-            DispatchQueue.main.async {
-                self.favoritesCollectionView.reloadData()
-            }
         }
     }
 
@@ -491,6 +490,9 @@ extension HomeViewController {
                     
                     //append that key to favorites snapshots data
                     favoritesSnapshots.append(snapshot)
+                    DispatchQueue.main.async {
+                        self.favoritesCollectionView.reloadData()
+                    }
                 }
             }
         }

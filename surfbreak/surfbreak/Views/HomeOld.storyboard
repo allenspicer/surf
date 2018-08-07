@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TOs-xO-M58">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -12,30 +9,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Initial View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="InitialViewController" customModule="surfbreak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <connections>
-                        <segue destination="TOs-xO-M58" kind="showDetail" identifier="segueToHome" animates="NO" id="QJy-HC-ACJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="71" y="125"/>
-        </scene>
         <!--Home View Controller-->
         <scene sceneID="kbI-Xb-ZO8">
             <objects>
                 <viewController id="TOs-xO-M58" customClass="HomeViewController" customModule="surfbreak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jsS-dA-HR5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rFp-us-Te7" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
@@ -148,30 +127,18 @@
                     <connections>
                         <outlet property="favoritesCollectionView" destination="rFp-us-Te7" id="tww-LV-3Td"/>
                         <outlet property="proximalCollectionView" destination="af3-7x-K9q" id="pYC-2t-BTF"/>
-                        <segue destination="8SK-hn-cwu" kind="showDetail" identifier="segueToDetail" animates="NO" id="O4A-cT-dHl"/>
+                        <segue destination="jkB-Kt-WXI" kind="showDetail" identifier="segueToDetail" animates="NO" id="O4A-cT-dHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80R-9F-TT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="868" y="124.8768472906404"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="q9U-lr-nt9">
+        <!--UIViewController-8SK-hn-cwu-->
+        <scene sceneID="Ux9-xX-XKx">
             <objects>
-                <viewController id="8SK-hn-cwu" customClass="ViewController" customModule="surfbreak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="a7d-Ju-Jbc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="URm-cC-8YO"/>
-                    </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="segueDetailToInitial" animates="NO" id="3R7-vV-9zZ"/>
-                        <segue destination="5HG-b3-ZtX" kind="unwind" identifier="unwindToHomeSegue" unwindAction="unwindToVC1WithSegue:" id="e1Z-HR-s0l"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ISG-kL-VMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="5HG-b3-ZtX" userLabel="Exit" sceneMemberID="exit"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="UIViewController-8SK-hn-cwu" id="jkB-Kt-WXI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WYc-Pw-X0i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1574" y="126"/>
         </scene>

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		953502E6211A01F800E8DDA8 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953502E5211A01F800E8DDA8 /* Home.storyboard */; };
+		953502E6211A01F800E8DDA8 /* HomeOld.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953502E5211A01F800E8DDA8 /* HomeOld.storyboard */; };
+		953502E8211A045100E8DDA8 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953502E7211A045100E8DDA8 /* Home.storyboard */; };
 		953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F07EA210A575300E70E18 /* AppDelegate.swift */; };
 		953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F07EC210A575300E70E18 /* InitialViewController.swift */; };
 		953F07F0210A575300E70E18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953F07EE210A575300E70E18 /* Main.storyboard */; };
@@ -61,7 +62,8 @@
 		1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.debug.xcconfig"; sourceTree = "<group>"; };
 		539B07306F1516F7B31AF828 /* Pods-surfbreakTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.release.xcconfig"; sourceTree = "<group>"; };
-		953502E5211A01F800E8DDA8 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		953502E5211A01F800E8DDA8 /* HomeOld.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeOld.storyboard; sourceTree = "<group>"; };
+		953502E7211A045100E8DDA8 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		953F07E7210A575300E70E18 /* surfbreak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = surfbreak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953F07EA210A575300E70E18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		953F07EC210A575300E70E18 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +184,8 @@
 		9592EC4E210A5AF0004B0A82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				953502E5211A01F800E8DDA8 /* Home.storyboard */,
+				953502E5211A01F800E8DDA8 /* HomeOld.storyboard */,
+				953502E7211A045100E8DDA8 /* Home.storyboard */,
 				957471C72113F1DF0064DD3A /* CustomView.swift */,
 				959BD8762115575A0028F5F5 /* Proximal Collection */,
 				959BD875211557470028F5F5 /* Favorite Collection */,
@@ -367,8 +370,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */,
-				953502E6211A01F800E8DDA8 /* Home.storyboard in Resources */,
+				953502E6211A01F800E8DDA8 /* HomeOld.storyboard in Resources */,
 				953F07F5210A575400E70E18 /* Assets.xcassets in Resources */,
+				953502E8211A045100E8DDA8 /* Home.storyboard in Resources */,
 				95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */,
 				953F07F0210A575300E70E18 /* Main.storyboard in Resources */,
 			);
