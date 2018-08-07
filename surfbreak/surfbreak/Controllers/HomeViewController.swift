@@ -220,6 +220,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
 //                transitionView.center = centerPoint
 //                transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
 //                })
+                selectedSnapshot = favoritesSnapshots[indexPath.row]
                 self.performSegue(withIdentifier: "segueToDetail", sender: self)
             }
             
