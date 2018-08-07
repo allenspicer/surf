@@ -19,8 +19,8 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var favoritesSnapshots = [Snapshot]()
     private var proximalData = [ProximalStation]()
     var allStations = [Station]()
+    var userFavoritesForReturn = [Favorite]()
 
-    
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
@@ -433,4 +433,80 @@ extension HomeViewController {
             destinationVC.currentSnapShot = selectedSnapshot
         }
     }
+    
+    @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
+        DispatchQueue.global(qos:.utility).async {
+            self.getUserFavoritesFromPersistence()
+            self.getAndScrubAllPersistenceSnapshots()
+            DispatchQueue.main.async {
+                self.favoritesCollectionView.reloadData()
+            }
+        }
+    }
+
+    func getAndScrubAllPersistenceSnapshots(){
+        var allPersistenceSnapshots = [Snapshot]()
+        if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
+            var allSnapshots = [Snapshot]()
+            do {
+                allSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+            print("Favorite Snapshots before removing")
+            print(allSnapshots.count)
+            
+            allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
+            allSnapshots = allSnapshots.uniqueElements
+            allPersistenceSnapshots = allSnapshots
+            
+            print("Favorite Snapshots after removing")
+            print(allSnapshots.count)
+            
+            do {
+                try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
+            }catch{
+                print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+        }
+        for snapshot in allPersistenceSnapshots {
+            checkdownloadedSnapshotfor(key: snapshot.id, snapshots: allPersistenceSnapshots)
+        }
+        
+    }
+    
+    func checkdownloadedSnapshotfor(key:Int, snapshots: [Snapshot]){
+        
+        //check if key is in favorites
+        let ids = userFavoritesForReturn.map({$0.id})
+        if ids.contains(key){
+            
+            //if yes get the snapshot for the key from persistence
+            for snapshot in snapshots where snapshot.id == key{
+                
+                //if there is not already a snapshot for this location
+                if !favoritesSnapshots.map({$0.id}).contains(key){
+                    
+                    //append that key to favorites snapshots data
+                    favoritesSnapshots.append(snapshot)
+                }
+            }
+        }
+    }
+    
+    func getUserFavoritesFromPersistence(){
+        var favoritesArray = [Favorite]()
+        if Disk.exists(DefaultConstants.favorites, in: .caches) {
+            do{
+                favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
+            }catch{
+                print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
+            }
+            userFavoritesForReturn = favoritesArray
+        }
+    }
+    
+    
 }

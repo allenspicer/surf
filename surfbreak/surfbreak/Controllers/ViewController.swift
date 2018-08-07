@@ -207,7 +207,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func returnToTableView(){
-        self.performSegue(withIdentifier: "segueDetailToInitial", sender: self)
+        self.performSegue(withIdentifier: "unwindToHomeSegue", sender: self)
     }
     
     func setButton(){
