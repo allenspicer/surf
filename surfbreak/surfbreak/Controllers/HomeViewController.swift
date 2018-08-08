@@ -448,11 +448,18 @@ extension HomeViewController {
     func getAndScrubAllPersistenceSnapshots(){
         var allPersistenceSnapshots = [Snapshot]()
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
-            var allSnapshots = [Snapshot]()
+            var initialSnapshots = [Snapshot]()
             do {
-                allSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+                initialSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+            var allSnapshots = [Snapshot]()
+            for snapshot in initialSnapshots {
+                if userFavoritesForReturn.map({$0.id}).contains(snapshot.id){
+                    allSnapshots.append(snapshot)
+                }
             }
             
             print("Favorite Snapshots before removing")

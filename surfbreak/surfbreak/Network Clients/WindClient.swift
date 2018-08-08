@@ -38,7 +38,7 @@ final class WindClient: NSObject {
     private func windDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
-        let hoursNeeded = 24
+        let hoursNeeded = 1
         let stationId = "8658163"
         
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=wind&datum=msl&units=english&interval=h&time_zone=gmt&application=web_services&format=json"
@@ -78,8 +78,8 @@ final class WindClient: NSObject {
             guard let direction = Double(directionString) else { return }
             guard let cardinalDirection = dataObject["dr"] as? String else { return }
             
-            let tide = Wind.init(timeStamp: timeStamp, speed: speed, direction: direction, windDirectionString: cardinalDirection)
-            windArray.append(tide)
+            let wind = Wind.init(timeStamp: timeStamp, speed: speed, direction: direction, windDirectionString: cardinalDirection)
+            windArray.append(wind)
         }
         print("Wind Array Created with \(windArray.count) Wind Objects")
         if self.windArray.count > 0 {
@@ -133,12 +133,10 @@ final class WindClient: NSObject {
             }
         }
         
-        if let wind = windArray[nextWindIndex] as? Wind{
-            
-//            snapshot.windDirectionString = wind.windDirectionString
-//            snapshot.windSpd = wind.speed
-//            snapshot.windDir = wind.direction
-        }
+        let wind = windArray[nextWindIndex]
+        snapshot.windDirectionString = wind.windDirectionString
+        snapshot.windSpeed = Int(wind.speed)
+        snapshot.windCardinalDirection = Int(wind.direction)
         
         return snapshot
     }
