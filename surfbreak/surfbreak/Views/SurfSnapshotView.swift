@@ -57,6 +57,54 @@ class SurfSnapshotView: UIScrollView {
         self.sendSubview(toBack: backgroundView)
     }
     
+    private func addDetailContainerView(){
+        let containerStackView = UIStackView(frame: CGRect(x: self.bounds.size.width * 0.1, y: ( 6 * self.bounds.size.height / 10) , width: (self.bounds.size.width * 0.35), height: ( 2 * self.bounds.size.height / 10)))
+        containerStackView.axis = .horizontal
+        containerStackView.distribution = .fillEqually
+        let leftStack = getSubContainerStack()
+        leftStack.addArrangedSubview(addFrequencyImage())
+        leftStack.addArrangedSubview(addWaterTempImage())
+        leftStack.addArrangedSubview(addAirTempImage())
+
+        let leftCenterStack = getSubContainerStack()
+        leftCenterStack.addArrangedSubview(addFrequencyText())
+        leftCenterStack.addArrangedSubview(addWaterTempText())
+        leftCenterStack.addArrangedSubview(addAirTempText())
+        
+        containerStackView.addArrangedSubview(leftStack)
+        containerStackView.addArrangedSubview(leftCenterStack)
+        
+        
+        let secondContainerStackView = UIStackView(frame: CGRect(x: self.bounds.size.width * 0.55, y: ( 6 * self.bounds.size.height / 10) , width: (self.bounds.size.width * 0.35), height: ( 2 * self.bounds.size.height / 10)))
+        secondContainerStackView.axis = .horizontal
+        secondContainerStackView.distribution = .fillEqually
+        
+        let rightCenterStack = getSubContainerStack()
+        rightCenterStack.addArrangedSubview(addHighTideImage())
+        rightCenterStack.addArrangedSubview(addLowTideImage())
+        rightCenterStack.addArrangedSubview(addWindImage())
+        
+        let rightStack = getSubContainerStack()
+        rightStack.addArrangedSubview(addHighTideText())
+        rightStack.addArrangedSubview(addLowTideText())
+        rightStack.addArrangedSubview(addWindText())
+        
+        secondContainerStackView.addArrangedSubview(rightCenterStack)
+        secondContainerStackView.addArrangedSubview(rightStack)
+
+        self.addSubview(containerStackView)
+        self.addSubview(secondContainerStackView)
+
+    }
+    
+    func getSubContainerStack() -> UIStackView{
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillEqually
+        stack.spacing = 18
+        return stack
+    }
+    
     func addWaveHeightIndicator(){
         
         let centerY = self.bounds.height / 2
@@ -107,32 +155,14 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        label.text = "Loading..."
-        label.text = "\(currentSnapShot.windCardinalDirection) WIND \(currentSnapShot.windSpeed) \(windUnit)"
-        label.font = UIFont(name:"Damascus", size: 10.0)
+        label.text = "10mi"
+//        label.text = "\(currentSnapShot.) WIND \(currentSnapShot.windSpeed) \(windUnit)"
+        label.font = UIFont(name:"Damascus", size: 15.0)
         label.textColor =  textColor
         let yValue = (2 * self.frame.height/5) + 20
         label.center = CGPoint(x: self.frame.width/2, y:yValue)
         label.textAlignment = .center
         self.addSubview(label)
-        
-        let waveLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        if let direction = currentSnapShot.swellDirectionString as String?{
-            waveLabel.text =  direction + " SWELL"
-        }
-        waveLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waveLabel.textColor =  textColor
-        waveLabel.center = CGPoint(x: self.frame.width/2, y:yValue + 20)
-        waveLabel.textAlignment = .center
-        self.addSubview(waveLabel)
-        
-        let waterTempLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        waterTempLabel.text =  String(currentSnapShot.waterTemp) + "°F WATER"
-        waterTempLabel.font = UIFont(name:"Damascus", size: 10.0)
-        waterTempLabel.textColor =  textColor
-        waterTempLabel.center = CGPoint(x: self.frame.width/2, y: yValue + 40)
-        waterTempLabel.textAlignment = .center
-        self.addSubview(waterTempLabel)
     }
     
     private func addSpotTitleLabel(){
@@ -145,132 +175,94 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(titleLabel)
     }
     
-    private func addDetailContainerView(){
-        let containerStackView = UIStackView(frame: CGRect(x: 10, y: ( 6 * self.bounds.size.height / 10) , width: (self.bounds.size.width - 10), height: ( 2 * self.bounds.size.height / 10)))
-        containerStackView.axis = .horizontal
-        containerStackView.distribution = .fillEqually
-        let leftStack = UIStackView()
-        leftStack.axis = .vertical
-        leftStack.distribution = .fillEqually
-        leftStack.spacing = 20
-        leftStack.addArrangedSubview(addFrequencyStackView())
-        leftStack.addArrangedSubview(addAirTempStackView())
-        leftStack.addArrangedSubview(addWaterTempStackView())
-        let rightStack = UIStackView()
-        rightStack.axis = .vertical
-        rightStack.distribution = .fillEqually
-        rightStack.spacing = 20
-        rightStack.addArrangedSubview(addTideStackView())
-        rightStack.addArrangedSubview(addTideNextStackView())
-        rightStack.addArrangedSubview(addWindStackView())
-        
-        containerStackView.addArrangedSubview(leftStack)
-        containerStackView.addArrangedSubview(rightStack)
-        
-        self.addSubview(containerStackView)
+    private func addFrequencyImage() -> UIView {
+    let frequencyImageView = UIImageView(image: #imageLiteral(resourceName: "period"))
+    frequencyImageView.frame.size = CGSize(width: 40, height: 40)
+    frequencyImageView.contentMode = .scaleAspectFit
+        return frequencyImageView
     }
     
-    private func addFrequencyStackView() -> UIView {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.spacing = 8
-        let frequencyImageView = UIImageView(image: #imageLiteral(resourceName: "period"))
-        frequencyImageView.frame.size = CGSize(width: 40, height: 40)
-        frequencyImageView.contentMode = .scaleAspectFit
-        stack.addArrangedSubview(frequencyImageView)
+    private func addFrequencyText() -> UIView {
         let frequencyAmountLabel = UILabel()
         frequencyAmountLabel.text = "\(currentSnapShot.period) sec"
         frequencyAmountLabel.textColor = textColor
-        stack.addArrangedSubview(frequencyAmountLabel)
-        return stack
+        return frequencyAmountLabel
     }
     
-    private func addAirTempStackView() -> UIView {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.spacing = 8
+    private func addAirTempImage() -> UIView {
         let airTempImageView = UIImageView(image: #imageLiteral(resourceName: "wind_temp"))
         airTempImageView.contentMode = .scaleAspectFit
         airTempImageView.frame.size = CGSize(width: 40, height: 40)
-        stack.addArrangedSubview(airTempImageView)
+        return airTempImageView
+    }
+    
+    private func addAirTempText() -> UIView {
         let airTempLabel = UILabel()
         airTempLabel.text = "Loading..."
         airTempLabel.text = "\(currentSnapShot.airTemp)° F"
         airTempLabel.textColor = textColor
-        stack.addArrangedSubview(airTempLabel)
-        return stack
+        return airTempLabel
     }
     
-    private func addWaterTempStackView() -> UIView {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.distribution = .fill
-        stack.spacing = 8
+    private func addWaterTempImage() -> UIView {
         let waterImageView = UIImageView(image: #imageLiteral(resourceName: "water_temp"))
         waterImageView.contentMode = .scaleAspectFit
         waterImageView.frame.size = CGSize(width: 40, height: 40)
-        stack.addArrangedSubview(waterImageView)
+        return waterImageView
+    }
+    
+    private func addWaterTempText() -> UIView {
         let waterTempLabel = UILabel()
         waterTempLabel.text = "\(currentSnapShot.waterTemp)° F"
         waterTempLabel.textColor = textColor
-        stack.addArrangedSubview(waterTempLabel)
-        return stack
+        return waterTempLabel
     }
     
-    private func addTideStackView() -> UIView {
-        let stack = UIStackView()
-        stack.distribution = .fill
-        stack.axis = .horizontal
-        stack.spacing = 8
+    private func addHighTideImage() -> UIView {
         let tideImageView = UIImageView(image: #imageLiteral(resourceName: "high_tide"))
         tideImageView.contentMode = .scaleAspectFit
-        stack.addArrangedSubview(tideImageView)
+        return tideImageView
+    }
+    
+    private func addHighTideText() -> UIView {
         let tideDirectionLabel = UILabel()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let time = dateFormatter.string(from: currentSnapShot.nextTideTime)
         tideDirectionLabel.text = "\(time)"
         tideDirectionLabel.textColor = textColor
-        stack.addArrangedSubview(tideDirectionLabel)
-        return stack
+        return tideDirectionLabel
     }
     
-    private func addTideNextStackView() -> UIView {
-        let stack = UIStackView()
-        stack.distribution = .fillProportionally
-        stack.axis = .vertical
-        let nextTideLabel = UILabel()
-        nextTideLabel.text = "NEXT TIDE"
-        nextTideLabel.font = UIFont(name:"Damascus", size: 10.0)
-        nextTideLabel.textColor = textColor
-        stack.addArrangedSubview(nextTideLabel)
-        let nextTideContentLabel = UILabel()
+    private func addLowTideImage() -> UIView {
+        let tideImageView = UIImageView(image: #imageLiteral(resourceName: "high_tide"))
+        tideImageView.contentMode = .scaleAspectFit
+        return tideImageView
+    }
+    
+    private func addLowTideText() -> UIView {
+        let tideDirectionLabel = UILabel()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let time = dateFormatter.string(from: currentSnapShot.nextTideTime)
-        nextTideContentLabel.text = "\(currentSnapShot.nextTidePolar) @ \(time)"
-        nextTideContentLabel.textColor = textColor
-        stack.addArrangedSubview(nextTideContentLabel)
-        return stack
+        tideDirectionLabel.text = "\(time)"
+        tideDirectionLabel.textColor = textColor
+        return tideDirectionLabel
+    }
+
+    private func addWindImage() -> UIView {
+        let waterImageView = UIImageView(image: #imageLiteral(resourceName: "wind_direction"))
+        waterImageView.contentMode = .scaleAspectFit
+        waterImageView.frame.size = CGSize(width: 40, height: 40)
+        return waterImageView
     }
     
-    private func addWindStackView() -> UIView {
-        let stack = UIStackView()
-        stack.distribution = .fillProportionally
-        stack.axis = .vertical
-        let windLabel = UILabel()
-        windLabel.text = "WIND"
-        windLabel.textColor = textColor
-        windLabel.font = UIFont(name:"Damascus", size: 10.0)
-        stack.addArrangedSubview(windLabel)
-        let windContentLabel = UILabel()
-        windContentLabel.text = "Loading..."
-        windContentLabel.textColor = textColor
-        windContentLabel.text = "\(currentSnapShot.windDirectionString) \(currentSnapShot.windSpeed) MPH"
-        stack.addArrangedSubview(windContentLabel)
-        return stack
+    private func addWindText() -> UIView {
+        let waterTempLabel = UILabel()
+//        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
+        waterTempLabel.text = "\(currentSnapShot.windDirectionString)"
+        waterTempLabel.textColor = textColor
+        return waterTempLabel
     }
     
 }

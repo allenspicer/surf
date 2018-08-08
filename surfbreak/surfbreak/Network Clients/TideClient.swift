@@ -38,7 +38,7 @@ final class TideClient: NSObject {
     private func tideDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
-        let hoursNeeded = 24
+        let hoursNeeded = 12
         let stationId = "\(currentSnapshot.airWindTideId)"
 
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=lst_ldt&application=web_services&format=json"

@@ -124,13 +124,13 @@ final class SurfQuality: NSObject {
     
     func getDirectionFromDiff (_ diff : Double) -> Int{
         if diff > 0 && diff < 60 {
-            self.currentSnapshot.windDirectionString = "ONSHORE"
+            self.currentSnapshot.windDirectionString = "ON"
             return 1
         } else if diff > 90 {
-            self.currentSnapshot.windDirectionString = "OFFSHORE"
+            self.currentSnapshot.windDirectionString = "OFF"
             return 2
         }
-        self.currentSnapshot.windDirectionString = "SIDESHORE"
+        self.currentSnapshot.windDirectionString = "SIDE"
         return 3
     }
     

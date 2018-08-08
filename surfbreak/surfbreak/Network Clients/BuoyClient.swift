@@ -85,7 +85,9 @@ final class BuoyClient: NSObject {
 
         //water temp
         guard let currentWaterTemp = Double(bouy[14]) as Double? else {return}
-        let currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
+        var currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
+        currentWaterTempInFahrenheit = (currentWaterTempInFahrenheit*10).rounded()/10
+
         
        currentSnapshot.waveHeight = heightInFeet
        currentSnapshot.swellDirection = currentWaveDirectionDegrees
