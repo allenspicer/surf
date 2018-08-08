@@ -13,7 +13,8 @@
  "apd": 5.4,
  "wtmp": 18.5,
  "bfd": 108.0,
- "name": "Kure Beach, NC"
+ "name": "Kure Beach, NC",
+ "airWindTideId" : 8658163
  },
  {
  "station": 41110,
@@ -29,7 +30,8 @@
  "apd": 5.4,
  "wtmp": 18.5,
  "bfd": 105.0,
- "name": "Carolina Beach, NC"
+ "name": "Carolina Beach, NC",
+ "airWindTideId" : 8658163
  },
  {
  "station": 41110,
@@ -45,7 +47,8 @@
  "apd": 5.4,
  "wtmp": 18.5,
  "bfd": 115.0,
- "name": "Masonboro Island, NC"
+ "name": "Masonboro Island, NC",
+ "airWindTideId" : 8658163
  },
  {
  "station": 41110,
@@ -61,7 +64,8 @@
  "apd": 5.4,
  "wtmp": 18.5,
  "bfd": 121.0,
- "name": "Wrightsville, NC"
+ "name": "Wrightsville, NC",
+ "airWindTideId" : 8658163
  },
  {
  "station": 41110,
@@ -77,7 +81,8 @@
  "apd": 5.4,
  "wtmp": 18.5,
  "bfd": 148.0,
- "name": "Surf City, NC"
+ "name": "Surf City, NC",
+ "airWindTideId" : 8658163
  },
  {
     "station": 44056,
@@ -93,7 +98,8 @@
     "apd": 5.4,
     "wtmp": 18.5,
     "bfd": 72.0,
-    "name": "Duck, NC"
+    "name": "Duck, NC",
+    "airWindTideId" : 8651370
   },
   {
     "station": 44088,
@@ -109,7 +115,8 @@
     "apd": 5.5,
     "wtmp": 21.7,
     "bfd": 75.0,
-    "name": "Virginia Beach, VA"
+    "name": "Virginia Beach, VA",
+    "airWindTideId" : 8638901
   },
   {
     "station": 44095,
@@ -117,7 +124,8 @@
     "longitude": -75.330,
     "latitude": 35.750,
     "bfd": 88.0,
-    "name": "Hatteras, NC"
+    "name": "Hatteras, NC",
+    "airWindTideId" : 8654467
   },
  {
  "station": 41159,
@@ -125,6 +133,7 @@
  "longitude": -76.946 ,
  "latitude": 34.213,
  "bfd": 162.0,
- "name": "Emerald Isle, NC"
+ "name": "Emerald Isle, NC",
+ "airWindTideId" : 8656483
  }
 ]

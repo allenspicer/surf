@@ -38,8 +38,8 @@ final class WindClient: NSObject {
     private func windDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
-        let hoursNeeded = 1
-        let stationId = "8658163"
+        let hoursNeeded = 2
+        let stationId = "\(currentSnapshot.airWindTideId)"
         
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=wind&datum=msl&units=english&interval=h&time_zone=gmt&application=web_services&format=json"
         

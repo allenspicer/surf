@@ -96,7 +96,7 @@ final class BuoyClient: NSObject {
        currentSnapshot.id = currentStation.id
        currentSnapshot.stationId = currentStation.station
         currentSnapshot.stationName = currentStation.name
-        
+        currentSnapshot.airWindTideId = currentStation.airWindTideId
         
 //            currentSnapShot.nickname = name
 
