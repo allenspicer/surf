@@ -20,6 +20,7 @@ class SurfSnapshotView: UIScrollView {
     
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
+//        let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 1.3)
         super.init(frame: UIScreen.main.bounds)
         loadAllSubviews()
         return

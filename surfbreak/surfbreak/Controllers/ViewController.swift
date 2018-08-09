@@ -23,11 +23,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var favoriteButton = UIButton()
     var favoriteFlag = false
     var favoritesArray = [Favorite]()
+    var snapshotView : SurfSnapshotView? = nil
     var currentIndexInFavoritesArray = Int()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
-    
+    var mainView = UIView(frame: UIScreen.main.bounds)
+    var backgroundImageView = UIImageView()
     
     
     /// The `CAShapeLayer` that will contain the animated path
@@ -41,6 +43,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(mainView)
+        self.view.backgroundColor = .clear
+//        self.view.isOpaque = false
         loadFavoritesAndSetFavoriteButton()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
@@ -74,7 +79,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //            waterColor = color
 //            self.shapeLayer.strokeColor = waterColor
 //        }
-        self.view.layer.addSublayer(self.shapeLayer)
+        mainView.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
     }
     
@@ -84,14 +89,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //
     
     func setupGestureRecognizer() {
-        let touchDown = UILongPressGestureRecognizer(target:self, action: #selector(didTouchDown))
-        touchDown.minimumPressDuration = 0
-        touchDown.delegate = self
-        view.addGestureRecognizer(touchDown)
         
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeDown.direction = UISwipeGestureRecognizerDirection.down
-        view.addGestureRecognizer(swipeDown)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didSwipe))
+        panGesture.delegate = self
+        mainView.addGestureRecognizer(panGesture)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -106,50 +107,35 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    @objc func didTouchDown(gesture: UILongPressGestureRecognizer) {
-        if (gesture.state == .began){
-            for view in self.view.subviews as [UIView] {
-                if let snapshotView = view as? SurfSnapshotView {
-                    snapshotView.addWaveHeightIndicator()
-                    //                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
-                    //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: 30)
-                    //                    })
-                    //                    view.animateHide()
-                }
-            }
-        }
-        
-        if (gesture.state == .ended){
-            for view in self.view.subviews as [UIView] {
-                if let snapshotView = view as? SurfSnapshotView {
-                    snapshotView.removeWaveHeightIndicator()
-                    //                    view.animateShow()
-                    //                    UIView.animate(withDuration: 0.2, animations: { () -> Void in
-                    //                        self.view.backgroundColor = self.view.backgroundColor?.adjust(by: -30)
-                    //                    })
-                }
-            }
-        }
-    }
-    
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.down:
-                let pop2 = SystemSoundID(1520)
-                AudioServicesPlaySystemSoundWithCompletion(pop2, {
-                })
-                returnToTableView()
-            default:
-                break
-            }
-        }
-    }
-    
-    
     //
     //Animation Components
     //
+    
+    @objc func didSwipe(gesture: UIPanGestureRecognizer) {
+        let height = mainView.frame.height/2
+        
+        if gesture.state == .began || gesture.state == .changed {
+            let translation = gesture.translation(in: mainView)
+            if(gesture.view!.center.y < height + 100) && (gesture.view!.center.y >= height){
+                gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: gesture.view!.center.y + translation.y)
+            }else if (gesture.view!.center.y >= height + 100){
+                //height has hit max boundary
+                let pop2 = SystemSoundID(1520)
+                AudioServicesPlaySystemSoundWithCompletion(pop2, {})
+                returnToTableView()
+                self.backgroundImageView.removeFromSuperview()
+            }
+            gesture.setTranslation(CGPoint(x: 0, y: 0), in: mainView)
+        }
+        if gesture.state == .ended {
+
+            UIView.animate(withDuration: 0.2, delay: 0,  options: .curveEaseInOut , animations: {
+                gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: height)
+            }) { _ in
+            }
+        }
+
+    }
     
     
     /// Start the display link
@@ -187,19 +173,19 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /// - Returns: The `UIBezierPath` for a particular point of time.
     
     private func wave(at elapsed: Double, waveHeightMax: CGFloat) -> UIBezierPath {
-        let centerY = view.bounds.height / 2
+        let centerY = mainView.bounds.height / 2
         var amplitude = CGFloat(0)
         var frequency = elapsed * 2
         frequency = elapsed * 2 / currentSnapShot.period
         amplitude = CGFloat(waveHeightMax)
         
         func f(_ x: Int) -> CGFloat {
-            return sin(((CGFloat(x) / view.bounds.width) + CGFloat(frequency)) * .pi) * amplitude + centerY
+            return sin(((CGFloat(x) / mainView.bounds.width) + CGFloat(frequency)) * .pi) * amplitude + centerY
         }
         
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: f(0)))
-        for x in stride(from: 0, to: Int(view.bounds.width + 9), by: 10) {
+        for x in stride(from: 0, to: Int(mainView.bounds.width + 9), by: 10) {
             path.addLine(to: CGPoint(x: CGFloat(x), y: f(x)))
         }
         
@@ -215,13 +201,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func addFavoriteButton(){
-        favoriteButton.frame = CGRect(x: view.frame.width - 40.0, y: 32, width: 24, height: 37)
+        favoriteButton.frame = CGRect(x: mainView.frame.width - 40.0, y: 32, width: 24, height: 37)
         favoriteButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         setButton()
         favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
-        for view in self.view.subviews {
+        for view in mainView.subviews {
             if view is SurfSnapshotView {
-                view.addSubview(favoriteButton)
+                mainView.addSubview(favoriteButton)
             }
         }
     }
@@ -230,7 +216,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func favoriteButtonAction(){
         
-        let id = currentSnapShot.id
         if favoriteFlag {
             feedbackGenerator.notification.notificationOccurred(.warning)
             let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
@@ -296,15 +281,18 @@ extension ViewController{
         
         if isFirstLoad {
             let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-            self.view.addSubview(snapshotView)
+            mainView.addSubview(snapshotView)
+            backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "Bkgd_main"))
+            backgroundImageView.frame = mainView.frame
+            self.view.insertSubview(backgroundImageView, belowSubview: mainView)
             addFavoriteButton()
         }else{
-            for view in self.view.subviews {
+            for view in mainView.subviews {
                 if view is SurfSnapshotView {
                     view.removeFromSuperview()
                     let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-                    self.view.addSubview(snapshotView)
-                    self.view.layer.addSublayer(self.shapeLayer)
+                    mainView.addSubview(snapshotView)
+                    mainView.layer.addSublayer(self.shapeLayer)
                     addFavoriteButton()
                 }
             }

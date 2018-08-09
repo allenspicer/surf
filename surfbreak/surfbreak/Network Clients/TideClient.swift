@@ -139,14 +139,17 @@ final class TideClient: NSObject {
         //        snapshot.tideDirectionString = (tide.key == "H" ? dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) : dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp))
         
         guard let upcomingTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) else {return snapshot}
-        if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp){
-            snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
-            snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
-        }else if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex+1].timeStamp){
-            snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
-            snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
+        if nextTideIndex > 1 {
+            if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp){
+                snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
+                snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
+            }
+        }else if tideArray.count-1 < nextTideIndex{
+            if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex+1].timeStamp){
+                snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
+                snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
+            }
         }
-
         
         return snapshot
     }

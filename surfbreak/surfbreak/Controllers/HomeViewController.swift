@@ -188,18 +188,12 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
         cellSelectedIndex = indexPath.row
-        var selectedId = String()
-        var selectedName = String()
-        var selectedBFD = Double()
         
         switch collectionView {
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             idStationSelected = proximalData[cellSelectedIndex].station.id
-            selectedId = "\(proximalData[cellSelectedIndex].station.station)"
-            selectedName = proximalData[cellSelectedIndex].station.name
-            selectedBFD = Double(proximalData[cellSelectedIndex].station.bfd)
             if let snapshot = snapshotFromPersistence(proximalData[cellSelectedIndex].station.id){
                 selectedSnapshot = snapshot
                 DispatchQueue.main.async {
@@ -207,7 +201,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                     self.stopActivityIndicator()
                 }
             }else{
-                selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
+                selectedCellAction()
             }
         case is FavoriteCollectionView:
             idStationSelected = favoritesSnapshots[cellSelectedIndex].id
@@ -280,12 +274,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //
     
     
-    private func selectedCellAction (_ index : Int, selectedId : String, stationName : String, selectedBFD : Double){
+    private func selectedCellAction(){
         self.startActivityIndicator("Loading...")
         
         DispatchQueue.global(qos:.utility).async {
-            let id = Int(self.proximalData[index].station.id)
-            let buoyClient = BuoyClient(snapshotId: id, allStations: self.allStations)
+            let buoyClient = BuoyClient(snapshotId: self.idStationSelected, allStations: self.allStations)
             buoyClient.delegate = self
             buoyClient.createBuoyData()
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
@@ -392,6 +385,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             saveCompleteSnapshotToPersistence(with: [selectedSnapshot])
         }
     }
+    
     func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
         DispatchQueue.global(qos:.utility).async{
             if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
@@ -425,7 +419,9 @@ extension HomeViewController : BuoyClientDelegate{
                     //if no data respond with alertview
                     self.stopActivityIndicator()
                     let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .destructive)
+                    let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
+                        self.selectedCellAction()
+                    }
                     alert.addAction(retryAction)
                     let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
                         self.dataLoadFailedUseFallBackFromPersistence()
