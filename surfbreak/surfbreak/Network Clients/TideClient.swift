@@ -38,7 +38,7 @@ final class TideClient: NSObject {
     private func tideDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
-        let hoursNeeded = 12
+        let hoursNeeded = 24
         let stationId = "\(currentSnapshot.airWindTideId)"
 
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=lst_ldt&application=web_services&format=json"
@@ -133,11 +133,20 @@ final class TideClient: NSObject {
         //
         //
         
-//        if let tide = tideArray[nextTideIndex] as? Tide{
-//            snapshot.nextTidePolar = tide.key
-//            snapshot.nextTideTime = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
-//            snapshot.tideDirectionString = (tide.key == "H" ? "Rising" : "Dropping")
-//        }
+        //        let tide = tideArray[nextTideIndex]
+        //        snapshot.nextTidePolar = tide.key
+        //        snapshot.nextTideTime = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
+        //        snapshot.tideDirectionString = (tide.key == "H" ? dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) : dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp))
+        
+        guard let upcomingTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) else {return snapshot}
+        if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp){
+            snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
+            snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
+        }else if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex+1].timeStamp){
+            snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
+            snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
+        }
+
         
         return snapshot
     }

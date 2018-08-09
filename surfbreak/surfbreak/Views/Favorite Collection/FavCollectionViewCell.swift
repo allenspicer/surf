@@ -96,7 +96,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         locationLabel.backgroundColor = .clear
         locationLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
         locationLabel.textAlignment = .center
-        locationLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
+        locationLabel.font = UIFont(name: "Montserrat-SemiBold", size: 15)
         contentView.addSubview(locationLabel)
         
         let distanceLabelFrame = CGRect(x: 0.0, y: contentView.frame.height - 20, width: contentView.frame.width, height: 20.0)
@@ -104,7 +104,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         distanceLabel.backgroundColor = .clear
         distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
         distanceLabel.textAlignment = .center
-        distanceLabel.font = UIFont(name: "AdobeHeitiStd-Regular", size: 15)
+        distanceLabel.font = UIFont(name: "Montserrat-SemiBold", size: 15)
         distanceLabel.tag = 1
         contentView.addSubview(distanceLabel)
         
