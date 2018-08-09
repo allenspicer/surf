@@ -13,10 +13,18 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var allStations = [Station]()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let firstLaunch = UserDefaults.standard.bool(forKey: "FirstLaunchTimeStamp")
+        if !firstLaunch{
+            loadStationDataFromFile()
+            let _ = FallBackData(allStations: allStations)
+            UserDefaults.standard.set(NSDate(), forKey:"FirstLaunchTimeStamp")
+        }
+ 
         return true
     }
 
@@ -87,6 +95,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    
+    //Mark: - Initial Data Stations List
+    
+    func loadStationDataFromFile(){
+        let fileName = "regionalBuoyList"
+        guard let stations = loadJson(fileName) else {return}
+        allStations = stations
+    }
+    
+    func loadJson(_ fileName: String) -> [Station]? {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Station].self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        }
+        return nil
     }
 
 }

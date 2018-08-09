@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     private var proximalData = [ProximalStation]()
     var allStations = [Station]()
     var userFavoritesForReturn = [Favorite]()
+    var idStationSelected = Int()
 
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -195,6 +196,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
+            idStationSelected = proximalData[cellSelectedIndex].station.id
             selectedId = "\(proximalData[cellSelectedIndex].station.station)"
             selectedName = proximalData[cellSelectedIndex].station.name
             selectedBFD = Double(proximalData[cellSelectedIndex].station.bfd)
@@ -208,6 +210,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 selectedCellAction(indexPath.row, selectedId: selectedId, stationName: selectedName, selectedBFD: selectedBFD)
             }
         case is FavoriteCollectionView:
+            idStationSelected = favoritesSnapshots[cellSelectedIndex].id
             if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 currentCard = indexPath.row
@@ -421,12 +424,38 @@ extension HomeViewController : BuoyClientDelegate{
                 DispatchQueue.main.async {
                     //if no data respond with alertview
                     self.stopActivityIndicator()
-                    let alert = UIAlertController.init(title: "Not enough Data", message: "This bouy is not providing much data at the moment", preferredStyle: .alert)
-                    let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-                    alert.addAction(doneAction)
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
+                    let retryAction = UIAlertAction(title: "Retry", style: .destructive)
+                    alert.addAction(retryAction)
+                    let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
+                        self.dataLoadFailedUseFallBackFromPersistence()
+                        }
+                    alert.addAction(continueAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
+    }
+    
+    func dataLoadFailedUseFallBackFromPersistence(){
+        
+        var persistenceSnapshots = [Snapshot]()
+        
+        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+            do {
+                persistenceSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+            for persistenceSnapshot in persistenceSnapshots {
+                if persistenceSnapshot.id == idStationSelected {
+                    self.selectedSnapshot = persistenceSnapshot
+                    self.stopActivityIndicator()
+                    self.snapshotComponents = [String:Bool]()
+                    self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                }
+            }
+        }
     }
 }
 
@@ -446,20 +475,12 @@ extension HomeViewController {
     }
 
     func getAndScrubAllPersistenceSnapshots(){
-        var allPersistenceSnapshots = [Snapshot]()
+        var allSnapshots = [Snapshot]()
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
-            var initialSnapshots = [Snapshot]()
             do {
-                initialSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+                allSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
-            }
-            
-            var allSnapshots = [Snapshot]()
-            for snapshot in initialSnapshots {
-                if userFavoritesForReturn.map({$0.id}).contains(snapshot.id){
-                    allSnapshots.append(snapshot)
-                }
             }
             
             print("Favorite Snapshots before removing")
@@ -467,7 +488,6 @@ extension HomeViewController {
             
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
-            allPersistenceSnapshots = allSnapshots
             
             print("Favorite Snapshots after removing")
             print(allSnapshots.count)
@@ -479,8 +499,8 @@ extension HomeViewController {
             }
             
         }
-        for snapshot in allPersistenceSnapshots {
-            checkdownloadedSnapshotfor(key: snapshot.id, snapshots: allPersistenceSnapshots)
+        for snapshot in allSnapshots {
+            checkdownloadedSnapshotfor(key: snapshot.id, snapshots: allSnapshots)
         }
         
     }
