@@ -167,7 +167,9 @@ final class InitialViewController: UIViewController {
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
             
-            
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 5.0 * 60.0
+            allSnapshots = allSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"

@@ -298,6 +298,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }catch{
                 print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
             }
+            
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 5.0 * 60.0
+            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
+
             for persistenceSnapshot in persistenceSnapshots {
                 if persistenceSnapshot.id == snapshotId {
                     snapshot = persistenceSnapshot
@@ -306,25 +311,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return snapshot
         }
         return nil
-        
-        //TODO: scrub records - only time-relevant Snapshots should be used
-        
-        //
-        //            //scrub records: if a wave in persistence is more than 5 minutes old remove it from local and persistence
-        //            let fiveMinutes: TimeInterval = 5.0 * 60.0
-        //
-        //            for wave in waveDictionary {
-        //                guard let timestamp = wave.value.timestamp else {return}
-        //                if abs(timestamp.timeIntervalSinceNow) > fiveMinutes{
-        //                    DispatchQueue.main.async {
-        //                        self.context.delete(wave.value)
-        //                    }
-        //                    waveDictionary.removeValue(forKey: wave.key)
-        //                }
-        //            }
-        //            DispatchQueue.main.async {
-        //                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        //            }
     }
     
     
