@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         createProximalCellsFromStations()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
@@ -52,9 +53,13 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
             layout.minimumLineSpacing = -standardMinimumLineSpacing
         }
 
-        
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
+        
+        getUserFavoritesFromPersistence()
+        loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
+        
+        
         stopActivityIndicator()
     }
     
@@ -463,11 +468,11 @@ extension HomeViewController {
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
-            self.getAndScrubAllPersistenceSnapshots()
+            self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
         }
     }
 
-    func getAndScrubAllPersistenceSnapshots(){
+    func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
         var persistenceSnapshots = [Snapshot]()
         var fallbackSnapshots = [Snapshot]()
 
