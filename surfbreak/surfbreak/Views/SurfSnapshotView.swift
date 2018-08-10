@@ -150,7 +150,7 @@ class SurfSnapshotView: UIScrollView {
         let distanceFromTop = self.frame.size.height/5
         let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
         waveHeightLabel.text = "\(currentSnapShot.waveHeight)ft"
-        waveHeightLabel.font = UIFont(name:"Avenir Next Condensed-Medium", size: 75.0)
+        waveHeightLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
         waveHeightLabel.textColor =  textColor
         waveHeightLabel.center = CGPoint(x: self.frame.width/2, y: 200)
         waveHeightLabel.textAlignment = .center
