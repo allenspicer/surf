@@ -298,16 +298,23 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }catch{
                 print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
             }
-            
-            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 5.0 * 60.0
-            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
 
             for persistenceSnapshot in persistenceSnapshots {
                 if persistenceSnapshot.id == snapshotId {
                     snapshot = persistenceSnapshot
                 }
             }
+            
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 60.0 * 60.0
+            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
+            
+            do {
+                try Disk.save(persistenceSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
+            }catch{
+                print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
+            }
+            
             return snapshot
         }
         return nil

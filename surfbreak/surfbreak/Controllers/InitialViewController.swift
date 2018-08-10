@@ -168,7 +168,7 @@ final class InitialViewController: UIViewController {
             }
             
             //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 5.0 * 60.0
+            let timeLimit : TimeInterval = 60.0 * 60.0
             allSnapshots = allSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
             
             let dateFormatter = DateFormatter()
@@ -185,14 +185,7 @@ final class InitialViewController: UIViewController {
             for snapshot in allSnapshots{
                 print(dateFormatter.string(from: snapshot.timeStamp))
             }
-            
-            
-            
-            
-            
-            
 
-            
             do {
                 try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
             }catch{
