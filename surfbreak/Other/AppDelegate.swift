@@ -18,11 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let firstLaunch = UserDefaults.standard.bool(forKey: "FirstLaunchTimeStamp")
+        let firstLaunch = UserDefaults.standard.bool(forKey: "FirstLaunchBool")
         if !firstLaunch{
             loadStationDataFromFile()
             let _ = FallBackData(allStations: allStations)
-            UserDefaults.standard.set(NSDate(), forKey:"FirstLaunchTimeStamp")
+            UserDefaults.standard.set(true, forKey:"FirstLaunchBool")
         }
  
         return true

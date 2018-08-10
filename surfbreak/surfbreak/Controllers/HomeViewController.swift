@@ -468,60 +468,56 @@ extension HomeViewController {
     }
 
     func getAndScrubAllPersistenceSnapshots(){
-        var allSnapshots = [Snapshot]()
+        var persistenceSnapshots = [Snapshot]()
+        var fallbackSnapshots = [Snapshot]()
+
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
             do {
-                allSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+                persistenceSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
-            
-            
-            
-            
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "h:mm a"
-            print("\(allSnapshots.count) Favorite Snapshots Timestamps before removing")
-            for snapshot in allSnapshots{
-                print(dateFormatter.string(from: snapshot.timeStamp))
-            }
-            
-            allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
-            allSnapshots = allSnapshots.uniqueElements
-            
-            print("\(allSnapshots.count) Favorite Snapshots after removing")
-            for snapshot in allSnapshots{
-                print(dateFormatter.string(from: snapshot.timeStamp))
-            }
-            
-            
-            
-            
+ 
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 60.0 * 60.0
+            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow < timeLimit})
+            persistenceSnapshots = persistenceSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
+            persistenceSnapshots = persistenceSnapshots.uniqueElements
+
             do {
-                try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
+                try Disk.save(persistenceSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
             }catch{
                 print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
             }
-            
-        }
-        for snapshot in allSnapshots {
-            checkdownloadedSnapshotfor(key: snapshot.id, snapshots: allSnapshots)
         }
         
-    }
-    
-    func checkdownloadedSnapshotfor(key:Int, snapshots: [Snapshot]){
+        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+            do {
+                fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
+            }
+        }
         
-        //check if key is in favorites
-        let ids = userFavoritesForReturn.map({$0.id})
-        if ids.contains(key){
-            
-            //if yes get the snapshot for the key from persistence
-            for snapshot in snapshots where snapshot.id == key{
+        //for all the users favorites
+        for favorite in userFavoritesForReturn{
+
+            //if a snapshot record is not in the tableview data
+            if !favoritesSnapshots.map({$0.id}).contains(favorite.id){
                 
-                //if there is not already a snapshot for this location
-                if !favoritesSnapshots.map({$0.id}).contains(key){
+                //look in persistence
+                for snapshot in persistenceSnapshots where snapshot.id == favorite.id{
+                    
+                    //append that key to favorites snapshots data
+                    favoritesSnapshots.append(snapshot)
+                    DispatchQueue.main.async {
+                        self.favoritesCollectionView.reloadData()
+                    }
+                    return
+                }
+
+                //then fallback data
+                for snapshot in fallbackSnapshots where snapshot.id == favorite.id{
                     
                     //append that key to favorites snapshots data
                     favoritesSnapshots.append(snapshot)
@@ -542,8 +538,16 @@ extension HomeViewController {
                 print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
             }
             userFavoritesForReturn = favoritesArray
+            removePreviousFavoritesFromTableData()
         }
     }
     
     
+    
+    func removePreviousFavoritesFromTableData(){
+        favoritesSnapshots = favoritesSnapshots.filter({ userFavoritesForReturn.map({$0.id}).contains($0.id)})
+        DispatchQueue.main.async {
+            self.favoritesCollectionView.reloadData()
+        }
+    }
 }
