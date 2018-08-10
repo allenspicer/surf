@@ -167,15 +167,29 @@ final class InitialViewController: UIViewController {
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
             
-            print("Favorite Snapshots before removing")
-            print(allSnapshots.count)
+            
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            print("\(allSnapshots.count) Favorite Snapshots Timestamps before removing")
+            for snapshot in allSnapshots{
+                print(dateFormatter.string(from: snapshot.timeStamp))
+            }
             
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
-            allPersistenceSnapshots = allSnapshots
             
-            print("Favorite Snapshots after removing")
-            print(allSnapshots.count)
+            print("\(allSnapshots.count) Favorite Snapshots after removing")
+            for snapshot in allSnapshots{
+                print(dateFormatter.string(from: snapshot.timeStamp))
+            }
+            
+            
+            
+            
+            
+            
+
             
             do {
                 try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
@@ -285,6 +299,9 @@ extension InitialViewController : BuoyClientDelegate{
         componentsChecklist[snapshot.id]?.bouy = true
         componentsChecklist[snapshot.id]?.bouyTimeStamp = Date()
         componentsChecklist[snapshot.id]?.snapshot = snapshot
+        if let userLocation = userLocation {
+            buoyClient?.appendDistanceToUserWith(userLocation: userLocation)
+        }
         setDataClientsFor(snapshot: snapshot)
     }
 }
@@ -401,15 +418,3 @@ extension InitialViewController {
     }
 }
 
-
-public extension Sequence where Element: Equatable {
-    var uniqueElements: [Element] {
-        return self.reduce(into: []) {
-            uniqueElements, element in
-            
-            if !uniqueElements.contains(element) {
-                uniqueElements.append(element)
-            }
-        }
-    }
-}

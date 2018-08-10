@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var allStations = [Station]()
     var userFavoritesForReturn = [Favorite]()
     var idStationSelected = Int()
+    var distanceToUser = Int()
 
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -194,7 +195,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             startActivityIndicator("Loading")
             selectedStationOrFavorite = proximalData[cellSelectedIndex]
             idStationSelected = proximalData[cellSelectedIndex].station.id
-            if let snapshot = snapshotFromPersistence(proximalData[cellSelectedIndex].station.id){
+            distanceToUser = proximalData[cellSelectedIndex].distanceToUser
+            if var snapshot = snapshotFromPersistence(proximalData[cellSelectedIndex].station.id){
+                snapshot.distance = self.distanceToUser
                 selectedSnapshot = snapshot
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
@@ -261,7 +264,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
             cell.loadAllViews()
             let snapshot = self.favoritesSnapshots[indexPath.row]
-            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshot.stationName, distanceFromUser: 10.0)
+            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshot.stationName, distanceFromUser: snapshot.distance)
             return cell
         default:
             return UICollectionViewCell()
@@ -410,6 +413,7 @@ extension HomeViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
         print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
         self.selectedSnapshot = snapshot
+        self.selectedSnapshot.distance = self.distanceToUser
             //remove spinner for response:
             if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.waterTemp != 0.0) {
 //                self.selectedSnapshot.stationName = stationName
@@ -479,14 +483,27 @@ extension HomeViewController {
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
             
-            print("Favorite Snapshots before removing")
-            print(allSnapshots.count)
+            
+            
+            
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            print("\(allSnapshots.count) Favorite Snapshots Timestamps before removing")
+            for snapshot in allSnapshots{
+                print(dateFormatter.string(from: snapshot.timeStamp))
+            }
             
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
             
-            print("Favorite Snapshots after removing")
-            print(allSnapshots.count)
+            print("\(allSnapshots.count) Favorite Snapshots after removing")
+            for snapshot in allSnapshots{
+                print(dateFormatter.string(from: snapshot.timeStamp))
+            }
+            
+            
+            
             
             do {
                 try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)

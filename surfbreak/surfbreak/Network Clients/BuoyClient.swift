@@ -138,6 +138,20 @@ extension BuoyClient {
         let categoryInt: Int = Int((degrees + 11.25)/22.5)
         return directions[categoryInt % 16]
     }
+    
+    
+    func appendDistanceToUserWith(userLocation : UserLocation){
+        // Used to convert latitude and longitude into miles
+        // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
+        // number of miles is up to 69 at the equator and down to zero at the poles
+        let approxMilesToLon = 53.0
+        let approxMilesToLat = 69.0
+        let lon = userLocation.longitude
+        let lat = userLocation.latitude
+        let lonDiffAbs = abs(currentStation.longitude - lon) * approxMilesToLon
+        let latDiffAbs = abs(currentStation.latitude - lat) * approxMilesToLat
+        currentSnapshot.distance = Int((pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot())
+    }
 }
 
 

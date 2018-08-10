@@ -160,8 +160,7 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        label.text = "10mi"
-//        label.text = "\(currentSnapShot.) WIND \(currentSnapShot.windSpeed) \(windUnit)"
+        label.text = "\(currentSnapShot.distance)mi"
         label.font = UIFont(name:"Montserrat-Medium", size: 15.0)
         label.textColor =  textColor
         let yValue = 6 * self.frame.height/10 + 20

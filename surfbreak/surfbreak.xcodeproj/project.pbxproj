@@ -42,6 +42,7 @@
 		958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A810A211C929400103064 /* Montserrat-Medium.ttf */; };
 		958A8121211C929E00103064 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */; };
 		958A812A211CAB5F00103064 /* FallBackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958A8129211CAB5F00103064 /* FallBackData.swift */; };
+		958A812C211DEBC200103064 /* PublicExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958A812B211DEBC200103064 /* PublicExtensions.swift */; };
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
@@ -106,6 +107,7 @@
 		958A810A211C929400103064 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
 		958A8129211CAB5F00103064 /* FallBackData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FallBackData.swift; path = surfbreak/Assets/FallBackData.swift; sourceTree = SOURCE_ROOT; };
+		958A812B211DEBC200103064 /* PublicExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicExtensions.swift; sourceTree = "<group>"; };
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				953F07EC210A575300E70E18 /* InitialViewController.swift */,
+				958A812B211DEBC200103064 /* PublicExtensions.swift */,
 				957471BB2113EB840064DD3A /* HomeViewController.swift */,
 				957471B72113E4500064DD3A /* ViewController.swift */,
 			);
@@ -491,6 +494,7 @@
 				953F07F3210A575300E70E18 /* surfbreak.xcdatamodeld in Sources */,
 				957471BA2113E6650064DD3A /* DefaultConstants.swift in Sources */,
 				957471A021135BE30064DD3A /* SnapshotComponents.swift in Sources */,
+				958A812C211DEBC200103064 /* PublicExtensions.swift in Sources */,
 				957471A8211364E00064DD3A /* WindClient.swift in Sources */,
 				957471A4211362410064DD3A /* Tide.swift in Sources */,
 				953502EC211A0D5400E8DDA8 /* FavoriteFlowLayout.swift in Sources */,

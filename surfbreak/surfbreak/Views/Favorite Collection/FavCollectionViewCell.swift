@@ -25,7 +25,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setCellContent(waveHeight: Double, waveFrequency: Double, quality: Int, locationName: String, distanceFromUser: Double){
+    func setCellContent(waveHeight: Double, waveFrequency: Double, quality: Int, locationName: String, distanceFromUser: Int){
         heightLabel.text = "\(waveHeight) ft"
         frequencyLabel.text = "\(waveFrequency)s"
         locationLabel.text = locationName
