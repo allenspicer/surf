@@ -14,7 +14,6 @@ final class InitialViewController: UIViewController {
     
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var componentsChecklist = [Int : SnapshotComponents]()
 
     private var buoyClient : BuoyClient?
@@ -25,6 +24,7 @@ final class InitialViewController: UIViewController {
     
     var allStations : [Station]? = nil
     var allPersistenceSnapshots = [Snapshot]()
+    var fallbackSnapshots : [Snapshot]? = nil
 
 
     override func viewDidLoad() {
@@ -186,31 +186,23 @@ final class InitialViewController: UIViewController {
             for snapshot in allSnapshots{
                 print(dateFormatter.string(from: snapshot.timeStamp))
             }
-
             do {
                 try Disk.save(allSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
             }catch{
                 print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
             }
-            
         }
-        
     }
     
     
     
     func checkForDownloadedSnapshot(with key:Int)->Bool{
             
-            // remove snapshotcomponents entry where we have data from persistence
+            // update snapshotcomponents entry where we have data from persistence
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
                 
                 self.componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
-                self.componentsChecklist[savedSnapshot.id]?.bouy = true
-                self.componentsChecklist[savedSnapshot.id]?.air = true
-                self.componentsChecklist[savedSnapshot.id]?.tide = true
-                self.componentsChecklist[savedSnapshot.id]?.wind = true
-                self.componentsChecklist[savedSnapshot.id]?.quality = true
-
+                setTrueForAllComponents(with: savedSnapshot.id)
                 return true
             }
         return false
@@ -298,7 +290,12 @@ extension InitialViewController : BuoyClientDelegate{
         if let userLocation = userLocation {
             buoyClient?.appendDistanceToUserWith(userLocation: userLocation)
         }
-        setDataClientsFor(snapshot: snapshot)
+        
+        if snapshot.waveHeight != 0.0 && snapshot.period != 0.0 {
+            setDataClientsFor(snapshot: snapshot)
+        }else{
+            dataLoadFailedUseFallBackFromPersistence(key: snapshot.id)
+        }
     }
 }
 
@@ -425,5 +422,32 @@ extension InitialViewController {
 
         }
     }
+    
+    func dataLoadFailedUseFallBackFromPersistence(key : Int){
+        if fallbackSnapshots == nil{
+            if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+                do {
+                    fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+                }catch{
+                    print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
+                }
+            }
+        }
+        
+        guard let fallbackSnapshots = fallbackSnapshots else {return}
+        for snapshot in fallbackSnapshots where snapshot.id == key{
+            componentsChecklist[key]?.snapshot = snapshot
+            setTrueForAllComponents(with: key)
+        }
+    }
+    
+    func setTrueForAllComponents(with id:Int){
+        self.componentsChecklist[id]?.bouy = true
+        self.componentsChecklist[id]?.air = true
+        self.componentsChecklist[id]?.tide = true
+        self.componentsChecklist[id]?.wind = true
+        self.componentsChecklist[id]?.quality = true
+    }
+    
 }
 
