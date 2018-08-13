@@ -99,6 +99,7 @@ final class BuoyClient: NSObject {
        currentSnapshot.stationId = currentStation.station
         currentSnapshot.stationName = currentStation.name
         currentSnapshot.airWindTideId = currentStation.airWindTideId
+        currentSnapshot.windDirectionString = directionFromDegrees(degrees: Float(currentSnapshot.windCardinalDirection))
         
 //            currentSnapShot.nickname = name
 
