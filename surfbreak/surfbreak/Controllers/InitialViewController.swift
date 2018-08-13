@@ -177,7 +177,7 @@ final class InitialViewController: UIViewController {
             }
             
             //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 5.0 // 60.0 * 60.0
+            let timeLimit : TimeInterval = 60.0 //* 60.0
             allSnapshots = allSnapshots.filter({abs($0.timeStamp.timeIntervalSinceNow) < timeLimit})
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
@@ -347,20 +347,24 @@ extension InitialViewController {
         print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
         print("The component checklists are")
-        for key in componentsChecklist.keys {
-            print(key)
-            print(componentsChecklist[key]?.bouy)
-            print(componentsChecklist[key]?.air)
-            print(componentsChecklist[key]?.wind)
-            print(componentsChecklist[key]?.tide)
-            
-            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
-                return
+        if !componentsChecklist.isEmpty{
+            for key in componentsChecklist.keys {
+                print(key)
+                print(componentsChecklist[key]?.bouy)
+                print(componentsChecklist[key]?.air)
+                print(componentsChecklist[key]?.wind)
+                print(componentsChecklist[key]?.tide)
+                
+                if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
+                    return
+                }
+                guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
+                surfQuality = SurfQuality(currentSnapshot: (snapshot))
+                surfQuality?.delegate = self
+                self.surfQuality?.createSurfQualityAssesment()
             }
-            guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
-            surfQuality = SurfQuality(currentSnapshot: (snapshot))
-            surfQuality?.delegate = self
-            self.surfQuality?.createSurfQualityAssesment()
+        }else{
+            checkComponentsThenSegue()
         }
     }
     
