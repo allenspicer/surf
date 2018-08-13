@@ -42,12 +42,12 @@ final class InitialViewController: UIViewController {
             guard let stations = self.allStations else {return}
             
             //check persistence for user favorites
-            self.getUserFavoritesFromPersistence()
+            self.getUserFavoritesList()
             
             //check persistence for saved snapshots
             self.getAndScrubAllPersistenceSnapshots()
             
-            if self.componentsChecklist.count > 0 {
+            if !self.componentsChecklist.isEmpty {
                     
                 //for each favorite that does not have a snapshot
                 for key in self.componentsChecklist.keys {
@@ -57,9 +57,10 @@ final class InitialViewController: UIViewController {
                         self.setDataClientsForStation(snapshotId: key, allStations: stations)
                     }
                 }
+            }else{
+                //if no favorites, or if transition to home
+                self.checkComponentsThenSegue()
             }
-            //if no favorites, or if transition to home
-            self.checkComponentsThenSegue()
         }
     }
     
@@ -114,7 +115,7 @@ final class InitialViewController: UIViewController {
     //MARK: - Favorites from persistence
     //
     
-    private func getUserFavoritesFromPersistence (){
+    private func getUserFavoritesList(){
         var favoritesArray = [Favorite]()
         if Disk.exists(DefaultConstants.favorites, in: .caches) {
             do{

@@ -55,10 +55,9 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
-        
-        getUserFavoritesFromPersistence()
-        loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
-        
+//
+//        getUserFavoritesFromPersistence()
+//        loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
         
         stopActivityIndicator()
     }
