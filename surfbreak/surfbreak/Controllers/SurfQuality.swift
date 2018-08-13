@@ -27,6 +27,9 @@ final class SurfQuality: NSObject {
     
     func createSurfQualityAssesment(){
         DispatchQueue.global(qos:.utility).async {
+            
+            self.currentSnapshot.windDirectionString = self.windCardinalStringFrom(degrees: self.currentSnapshot.windCardinalDirection)
+            
             let windSpeed = self.currentSnapshot.windSpeed
             let windDirection = self.currentSnapshot.windCardinalDirection
             let faceDirection = self.currentSnapshot.beachFaceDirection
@@ -124,14 +127,21 @@ final class SurfQuality: NSObject {
     
     func getDirectionFromDiff (_ diff : Double) -> Int{
         if diff > 0 && diff < 60 {
-            self.currentSnapshot.windDirectionString = "ON"
+//            self.currentSnapshot.windDirectionString = "ON"
             return 1
         } else if diff > 90 {
-            self.currentSnapshot.windDirectionString = "OFF"
+//            self.currentSnapshot.windDirectionString = "OFF"
             return 2
         }
-        self.currentSnapshot.windDirectionString = "SIDE"
+//        self.currentSnapshot.windDirectionString = "SIDE"
         return 3
+    }
+    
+    func windCardinalStringFrom(degrees : Int) -> String {
+        let degreesDouble = Double(degrees)
+        let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+        let i: Int = Int((degreesDouble + 11.25)/22.5)
+        return directions[i % 16]
     }
     
     func getSnapshotWithSurfQuality ()-> Snapshot {

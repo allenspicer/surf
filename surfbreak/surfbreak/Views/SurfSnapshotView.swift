@@ -268,8 +268,8 @@ class SurfSnapshotView: UIScrollView {
     
     private func addWindText() -> UIView {
         let waterTempLabel = UILabel()
-//        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
-        waterTempLabel.text = "\(currentSnapShot.windDirectionString)"
+        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
+//        waterTempLabel.text = "\(currentSnapShot.windDirectionString)"
         waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         waterTempLabel.textColor = textColor
         return waterTempLabel
