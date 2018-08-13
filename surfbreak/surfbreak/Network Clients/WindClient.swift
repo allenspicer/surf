@@ -82,10 +82,8 @@ final class WindClient: NSObject {
             windArray.append(wind)
         }
         print("Wind Array Created with \(windArray.count) Wind Objects")
-        if self.windArray.count > 0 {
-            DispatchQueue.main.async {
-                self.didGetWindData()
-            }
+        DispatchQueue.main.async {
+            self.didGetWindData()
         }
     }
     

@@ -25,7 +25,6 @@ final class InitialViewController: UIViewController {
     
     var allStations : [Station]? = nil
     var allPersistenceSnapshots = [Snapshot]()
-    var favoriteSnapshots : [Snapshot]? = nil
 
 
     override func viewDidLoad() {
@@ -168,9 +167,7 @@ final class InitialViewController: UIViewController {
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
             
-            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 60.0 * 60.0
-            allSnapshots = allSnapshots.filter({$0.timeStamp.timeIntervalSinceNow < timeLimit})
+
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
@@ -179,6 +176,9 @@ final class InitialViewController: UIViewController {
                 print(dateFormatter.string(from: snapshot.timeStamp))
             }
             
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 5.0 // 60.0 * 60.0
+            allSnapshots = allSnapshots.filter({abs($0.timeStamp.timeIntervalSinceNow) < timeLimit})
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
             
@@ -204,13 +204,13 @@ final class InitialViewController: UIViewController {
             // remove snapshotcomponents entry where we have data from persistence
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
                 
-                //remove the entry from componentsChecklist
-                self.componentsChecklist.removeValue(forKey: Int(savedSnapshot.id))
-                
-                //then populate persistence snapshot into favoriteSnapshots array
-                if favoriteSnapshots?.append(savedSnapshot) == nil {
-                    favoriteSnapshots = [savedSnapshot]
-                }
+                self.componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
+                self.componentsChecklist[savedSnapshot.id]?.bouy = true
+                self.componentsChecklist[savedSnapshot.id]?.air = true
+                self.componentsChecklist[savedSnapshot.id]?.tide = true
+                self.componentsChecklist[savedSnapshot.id]?.wind = true
+                self.componentsChecklist[savedSnapshot.id]?.quality = true
+
                 return true
             }
         return false
@@ -283,14 +283,14 @@ extension InitialViewController : CLLocationManagerDelegate{
             }catch{
                 print("Saving to automatic storage with Disk failed. Error is: \(error)")
             }
-            self.checkComponentsThenSegue()
+            self.checkComponentsForCompletion()
         }
     }
 }
 
 extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
-        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+        print("The Buoy Client has returned with \(snapshot.waveHeight)ft waves at \(snapshot.period)sec")
         if (allStations == nil) { allStations = stations }
         componentsChecklist[snapshot.id]?.bouy = true
         componentsChecklist[snapshot.id]?.bouyTimeStamp = Date()
@@ -309,7 +309,7 @@ extension InitialViewController : TideClientDelegate{
         componentsChecklist[snapshot.id]?.tideTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
-        checkComponentsThenSegue()
+        checkComponentsForCompletion()
     }
 }
 
@@ -320,8 +320,6 @@ extension InitialViewController : WindClientDelegate{
         componentsChecklist[snapshot.id]?.windTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
-        self.surfQuality?.createSurfQualityAssesment()
-        surfQuality?.delegate = self
     }
 }
 
@@ -332,7 +330,7 @@ extension InitialViewController : AirTempDelegate{
         componentsChecklist[snapshot.id]?.airTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
-        checkComponentsThenSegue()
+        checkComponentsForCompletion()
     }
 }
 
@@ -340,8 +338,7 @@ extension InitialViewController : SurfQualityDelegate{
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
         componentsChecklist[snapshot.id]?.quality = true
         componentsChecklist[snapshot.id]?.completeTimestamp = Date()
-//        guard let currentSnapshot = componentsChecklist[100]?.snapshot else {return}
-//        componentsChecklist[100]?.snapshot = surfQuality?.getSnapshotWithSurfQuality()
+        componentsChecklist[snapshot.id]?.snapshot = snapshot
         checkComponentsThenSegue()
     }
     
@@ -349,9 +346,8 @@ extension InitialViewController : SurfQualityDelegate{
 
 extension InitialViewController {
     
-    func checkComponentsThenSegue(){
-        print("Beginning Transiton")
-        print("There are \(favoriteSnapshots?.count) snapshots to be sent to the Home Controller ")
+    func checkComponentsForCompletion(){
+        print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
         print("The component checklists are")
         for key in componentsChecklist.keys {
@@ -360,9 +356,27 @@ extension InitialViewController {
             print(componentsChecklist[key]?.air)
             print(componentsChecklist[key]?.wind)
             print(componentsChecklist[key]?.tide)
+            
+            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
+                return
+            }
+            guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
+            surfQuality = SurfQuality(currentSnapshot: (snapshot))
+            surfQuality?.delegate = self
+            self.surfQuality?.createSurfQualityAssesment()
+        }
+    }
+    
+    func checkComponentsThenSegue(){
+        print("Beginning Transiton")
+        print("There are \(componentsChecklist.count) componentsChecklists ")
+        print("The component checklists are")
+        for key in componentsChecklist.keys {
+            print(key)
+            print(componentsChecklist[key]?.quality)
             print(userLocation)
 
-            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || userLocation == nil{
+            if componentsChecklist[key]?.quality == false || userLocation == nil{
                 return
             }
         }
@@ -384,10 +398,9 @@ extension InitialViewController {
         guard let stations = allStations else {return}
         destinationVC.allStations = stations
         destinationVC.userLocation = userLocation
-        if let snapshots = favoriteSnapshots {
-            destinationVC.favoritesSnapshots = snapshots
-            saveCompleteSnapshotToPersistence(with: snapshots)
-        }
+        let snapshots = componentsChecklist.compactMap({$0.value.snapshot})
+        destinationVC.favoritesSnapshots = snapshots
+        saveCompleteSnapshotToPersistence(with: snapshots.filter({!$0.isFallback}))
     }
         
 }

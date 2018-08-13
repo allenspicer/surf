@@ -34,7 +34,7 @@ struct Snapshot : Codable, Equatable{
     var nextHighTide : Date
     var nextLowTide : Date
     var distance : Int
-
+    var isFallback : Bool
     
     init(waveHeight : Double = 0.0,
          swellDirection : Int = 0,
@@ -58,7 +58,8 @@ struct Snapshot : Codable, Equatable{
         airWindTideId : Int = 0,
         nextHighTide : Date = Date(),
         nextLowTide : Date = Date(),
-        distance : Int = 0
+        distance : Int = 0,
+        isFallback : Bool = false
         ) {
         self.waveHeight = waveHeight
         self.swellDirection = swellDirection
@@ -83,5 +84,6 @@ struct Snapshot : Codable, Equatable{
         self.nextHighTide = nextHighTide
         self.nextLowTide = nextLowTide
         self.distance = distance
+        self.isFallback = isFallback
     }
 }
