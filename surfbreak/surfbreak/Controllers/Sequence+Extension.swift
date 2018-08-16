@@ -1,5 +1,5 @@
 //
-//  PublicExtensions.swift
+//  Sequence+Extension.swift
 //  surfbreak
 //
 //  Created by Allen Spicer on 8/10/18.
