@@ -85,14 +85,14 @@ class SurfSnapshotView: UIScrollView {
         secondContainerStackView.spacing = -15
 
         let rightCenterStack = getSubContainerStack()
+        rightCenterStack.addArrangedSubview(addWindImage())
         rightCenterStack.addArrangedSubview(addHighTideImage())
         rightCenterStack.addArrangedSubview(addLowTideImage())
-        rightCenterStack.addArrangedSubview(addWindImage())
         
         let rightStack = getSubContainerStack()
+        rightStack.addArrangedSubview(addWindText())
         rightStack.addArrangedSubview(addHighTideText())
         rightStack.addArrangedSubview(addLowTideText())
-        rightStack.addArrangedSubview(addWindText())
         
         secondContainerStackView.addArrangedSubview(rightCenterStack)
         secondContainerStackView.addArrangedSubview(rightStack)
@@ -225,6 +225,21 @@ class SurfSnapshotView: UIScrollView {
         return waterTempLabel
     }
     
+    private func addWindImage() -> UIView {
+        let waterImageView = UIImageView(image: #imageLiteral(resourceName: "wind_direction"))
+        waterImageView.contentMode = .scaleAspectFit
+        waterImageView.frame.size = CGSize(width: 40, height: 40)
+        return waterImageView
+    }
+    
+    private func addWindText() -> UIView {
+        let waterTempLabel = UILabel()
+        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
+        waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
+        waterTempLabel.textColor = textColor
+        return waterTempLabel
+    }
+    
     private func addHighTideImage() -> UIView {
         let tideImageView = UIImageView(image: #imageLiteral(resourceName: "high_tide"))
         tideImageView.contentMode = .scaleAspectFit
@@ -257,22 +272,6 @@ class SurfSnapshotView: UIScrollView {
         tideDirectionLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         tideDirectionLabel.textColor = textColor
         return tideDirectionLabel
-    }
-
-    private func addWindImage() -> UIView {
-        let waterImageView = UIImageView(image: #imageLiteral(resourceName: "wind_direction"))
-        waterImageView.contentMode = .scaleAspectFit
-        waterImageView.frame.size = CGSize(width: 40, height: 40)
-        return waterImageView
-    }
-    
-    private func addWindText() -> UIView {
-        let waterTempLabel = UILabel()
-        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
-//        waterTempLabel.text = "\(currentSnapShot.windDirectionString)"
-        waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
-        waterTempLabel.textColor = textColor
-        return waterTempLabel
     }
     
 }
