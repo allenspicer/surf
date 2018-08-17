@@ -216,16 +216,18 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
                 currentCard = indexPath.row
             }else{
-//                guard let cell = collectionView.cellForItem(at: indexPath) else {return}
-//                let transitionView = createViewForTransition()
-//                self.view.addSubview(transitionView)
-//                self.view.bringSubview(toFront: transitionView)
-//                let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
-//                transitionView.center = centerPoint
-//                transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
-//                })
                 selectedSnapshot = favoritesSnapshots[indexPath.row]
-                self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                guard let cell = collectionView.cellForItem(at: indexPath) else {return}
+                let transitionView = createViewForTransition()
+                self.view.addSubview(transitionView)
+                self.view.bringSubview(toFront: transitionView)
+                let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
+                transitionView.center = centerPoint
+                transitionView.snapshot = selectedSnapshot
+                transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
+                    self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                    transitionView.removeFromSuperview()
+                })
             }
             
         default:

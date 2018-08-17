@@ -12,7 +12,7 @@ class CircleView: UIView {
     
     var circle = UIView()
     var isAnimating = false
-    let gradientLayer:CAGradientLayer = CAGradientLayer()
+    var snapshot = Snapshot()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,6 +26,7 @@ class CircleView: UIView {
     
     func resetCircle() {
         
+        
         var rectSide: CGFloat = 0
         if (frame.size.width > frame.size.height) {
             rectSide = frame.size.height
@@ -35,17 +36,25 @@ class CircleView: UIView {
         
         let circleRect = CGRect(x: (frame.size.width-rectSide)/2, y: (frame.size.height-rectSide)/2, width: rectSide, height: rectSide)
         circle = UIView(frame: circleRect)
-        circle.backgroundColor = #colorLiteral(red: 0.01176470588, green: 0.5294117647, blue: 0.5294117647, alpha: 1)
+        circle.backgroundColor = .clear
         circle.layer.cornerRadius = rectSide/2
         circle.layer.borderWidth = 4
-        circle.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.9882352941, blue: 0.5725490196, alpha: 1)
+        circle.layer.borderColor = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8196078431, alpha: 1)
         
-        gradientLayer.frame.size = circle.frame.size
-        let customYellow = #colorLiteral(red: 0.8666666667, green: 0.7529411765, blue: 0.1333333333, alpha: 1)
-        gradientLayer.colors = [customYellow.cgColor, UIColor.clear.cgColor]
-        circle.layer.addSublayer(gradientLayer)
-        circle.layer.masksToBounds = true
-        
+        switch snapshot.quality{
+        case 4:
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_4"))
+        case 3:
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_3"))
+        case 2:
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_2"))
+        case 1:
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_2"))
+        default:
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_4"))
+        }
+        self.layer.cornerRadius = self.frame.height/2
+        self.clipsToBounds = true
     }
     
     func resizeCircle (summand: CGFloat) {
@@ -59,7 +68,9 @@ class CircleView: UIView {
         circle.frame.size.height += summand
         circle.frame.size.width += summand
         
-        gradientLayer.frame.size = circle.frame.size
+        self.frame.size = circle.frame.size
+        self.layer.cornerRadius = self.frame.height/2
+        
     }
     
     func animateChangingCornerRadius (toValue: Any?, duration: TimeInterval) {

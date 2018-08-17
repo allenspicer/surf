@@ -141,7 +141,7 @@
                     <connections>
                         <outlet property="favoritesCollectionView" destination="GFB-mz-RHo" id="x23-jg-k64"/>
                         <outlet property="proximalCollectionView" destination="btx-0C-wgR" id="v25-So-auv"/>
-                        <segue destination="jEE-kG-wTj" kind="showDetail" identifier="segueToDetail" id="1T8-A3-0kL"/>
+                        <segue destination="jEE-kG-wTj" kind="showDetail" identifier="segueToDetail" animates="NO" id="1T8-A3-0kL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jap-Ur-G8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
