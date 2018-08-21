@@ -49,7 +49,7 @@ class CircleView: UIView {
         case 2:
             self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_2"))
         case 1:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_2"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_1"))
         default:
             self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_4"))
         }
