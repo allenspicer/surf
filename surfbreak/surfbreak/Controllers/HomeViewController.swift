@@ -27,10 +27,10 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     private var selectedSnapshot = Snapshot()
     private var selectedStationOrFavorite : Any? = nil
     
-    var tideClient : TideClient?
-    var windClient : WindClient?
-    var airTempClient : AirTempClient?
-    var surfQuality : SurfQuality?
+    private var tideClient : TideClient?
+    private var windClient : WindClient?
+    private var airTempClient : AirTempClient?
+    private var surfQuality : SurfQuality?
     var snapshotComponents = [String:Bool]()
 
     var userLocation : UserLocation? = nil
@@ -55,9 +55,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 
         //set current card
         if (favoritesSnapshots.count > 2) {currentCard = 1}
-//
-//        getUserFavoritesFromPersistence()
-//        loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
         
         stopActivityIndicator()
     }
@@ -548,7 +545,6 @@ extension HomeViewController {
             removePreviousFavoritesFromTableData()
         }
     }
-    
     
     
     func removePreviousFavoritesFromTableData(){
