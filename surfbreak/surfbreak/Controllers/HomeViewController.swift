@@ -223,8 +223,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 self.view.bringSubview(toFront: transitionView)
                 let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
                 transitionView.center = centerPoint
-                transitionView.snapshot = selectedSnapshot
-                transitionView.growCircleTo(800, duration: 1.2, completionBlock: {
+                transitionView.growCircleTo(850, duration: 1.2, completionBlock: {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
                     transitionView.removeFromSuperview()
                 })
@@ -242,6 +241,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func createViewForTransition()-> CircleView {
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
         let mainView = CircleView(frame: mainViewFrame)
+        mainView.snapshot = selectedSnapshot
+        mainView.setAndAssign()
         return mainView
     }
     

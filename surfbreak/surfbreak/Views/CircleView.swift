@@ -16,16 +16,18 @@ class CircleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        resetCircle()
-        addSubview(circle)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setAndAssign(){
+        resetCircle()
+        addSubview(circle)
+    }
+    
     func resetCircle() {
-        
         
         var rectSide: CGFloat = 0
         if (frame.size.width > frame.size.height) {
@@ -67,6 +69,10 @@ class CircleView: UIView {
         
         circle.frame.size.height += summand
         circle.frame.size.width += summand
+
+//        circle.frame.origin.y -= summand/4
+        frame.origin.y = frame.origin.y + 150
+
         
         self.frame.size = circle.frame.size
         self.layer.cornerRadius = self.frame.height/2
