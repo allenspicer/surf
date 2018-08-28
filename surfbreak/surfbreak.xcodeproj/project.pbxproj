@@ -35,7 +35,6 @@
 		957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */; };
 		957471C42113EF660064DD3A /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C32113EF660064DD3A /* CircleView.swift */; };
 		957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */; };
-		957471C82113F1DF0064DD3A /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C72113F1DF0064DD3A /* CustomView.swift */; };
 		957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */; };
 		958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */; };
 		958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A810A211C929400103064 /* Montserrat-Medium.ttf */; };
@@ -99,7 +98,6 @@
 		957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
 		957471C32113EF660064DD3A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFavoriteFlowLayout.swift; sourceTree = "<group>"; };
-		957471C72113F1DF0064DD3A /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		958A810A211C929400103064 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -205,11 +203,10 @@
 			isa = PBXGroup;
 			children = (
 				953502E7211A045100E8DDA8 /* Home.storyboard */,
-				957471C72113F1DF0064DD3A /* CustomView.swift */,
+				953F07EE210A575300E70E18 /* Main.storyboard */,
 				959BD8762115575A0028F5F5 /* Proximal Collection */,
 				959BD875211557470028F5F5 /* Favorite Collection */,
 				957471C32113EF660064DD3A /* CircleView.swift */,
-				953F07EE210A575300E70E18 /* Main.storyboard */,
 				957471AF211392BC0064DD3A /* GradientView.swift */,
 				957471B1211394080064DD3A /* ActivityIndicator.swift */,
 				95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */,
@@ -231,9 +228,9 @@
 			isa = PBXGroup;
 			children = (
 				953F07EC210A575300E70E18 /* InitialViewController.swift */,
-				958A812B211DEBC200103064 /* PublicExtensions.swift */,
 				957471BB2113EB840064DD3A /* HomeViewController.swift */,
 				957471B72113E4500064DD3A /* ViewController.swift */,
+				958A812B211DEBC200103064 /* PublicExtensions.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -500,7 +497,6 @@
 				957471B2211394080064DD3A /* ActivityIndicator.swift in Sources */,
 				958A812A211CAB5F00103064 /* FallBackData.swift in Sources */,
 				957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */,
-				957471C82113F1DF0064DD3A /* CustomView.swift in Sources */,
 				957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */,
 				957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */,
 				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
