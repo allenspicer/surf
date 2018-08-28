@@ -45,7 +45,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         self.view.addSubview(mainView)
         self.view.backgroundColor = .clear
-//        self.view.isOpaque = false
         loadFavoritesAndSetFavoriteButton()
         setupGestureRecognizer()
         setUIFromCurrentSnapshot(true)
