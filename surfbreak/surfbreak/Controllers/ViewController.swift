@@ -115,9 +115,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if gesture.state == .began || gesture.state == .changed {
             let translation = gesture.translation(in: mainView)
-            if(gesture.view!.center.y < height + 100) && (gesture.view!.center.y >= height){
+            if(gesture.view!.center.y < (height * 1.5)) && (gesture.view!.center.y >= height){
                 gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: gesture.view!.center.y + translation.y)
-            }else if (gesture.view!.center.y >= height + 100){
+            }else if (gesture.view!.center.y >= (height * 1.5)){
                 //height has hit max boundary
                 let pop2 = SystemSoundID(1520)
                 AudioServicesPlaySystemSoundWithCompletion(pop2, {})
