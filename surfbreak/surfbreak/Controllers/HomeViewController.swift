@@ -222,7 +222,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 transitionView.center = centerPoint
                 transitionView.growCircleTo(850, duration: 1.2, completionBlock: {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
-                    transitionView.removeFromSuperview()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        transitionView.removeFromSuperview()
+                    }
                 })
             }
             
