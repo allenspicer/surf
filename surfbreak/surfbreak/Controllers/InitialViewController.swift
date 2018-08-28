@@ -108,6 +108,10 @@ final class InitialViewController: UIViewController {
                 locationManager.requestLocation();
             }
         }
+        
+        #if targetEnvironment(simulator)
+            userLocation = UserLocation(latitude: 34.2428817, longitude: -77.8217321, timestamp: Date())
+        #endif
     }
     
     //
