@@ -209,8 +209,8 @@
 				957471C32113EF660064DD3A /* CircleView.swift */,
 				957471AF211392BC0064DD3A /* GradientView.swift */,
 				957471B1211394080064DD3A /* ActivityIndicator.swift */,
-				95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */,
 				957471B3211394420064DD3A /* SurfSnapshotView.swift */,
+				95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
