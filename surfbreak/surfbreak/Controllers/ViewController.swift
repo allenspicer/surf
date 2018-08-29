@@ -243,6 +243,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
             guard let textFields = alert.textFields, textFields.count > 0 else {return}
             if let text = textFields[0].text {
+                self.currentSnapShot.nickname = text
+                
+                for view in self.mainView.subviews {
+                    if view is SurfSnapshotView {
+                        if let surfView = view as? SurfSnapshotView{
+                            surfView.titleLabel.text = text
+                        }
+                    }
+                }                
                 self.saveStationAndNameToFavoritesDefaults(nickname: text)
             }
         }

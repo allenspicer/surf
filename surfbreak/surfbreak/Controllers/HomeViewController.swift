@@ -268,7 +268,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
             cell.loadAllViews()
             let snapshot = self.favoritesSnapshots[indexPath.row]
-            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshot.stationName, distanceFromUser: snapshot.distance)
+            let snapshotName = snapshot.nickname == "" ? snapshot.stationName : snapshot.nickname
+            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshotName, distanceFromUser: snapshot.distance)
             return cell
         default:
             return UICollectionViewCell()
@@ -508,8 +509,10 @@ extension HomeViewController {
             if !favoritesSnapshots.map({$0.id}).contains(favorite.id){
                 
                 //look in persistence
-                for snapshot in persistenceSnapshots where snapshot.id == favorite.id{
-                    
+                for var snapshot in persistenceSnapshots where snapshot.id == favorite.id{
+                    if (favorite.nickname != ""){
+                        snapshot.nickname = favorite.nickname
+                    }
                     //append that key to favorites snapshots data
                     favoritesSnapshots.append(snapshot)
                     DispatchQueue.main.async {
@@ -519,7 +522,11 @@ extension HomeViewController {
                 }
 
                 //then fallback data
-                for snapshot in fallbackSnapshots where snapshot.id == favorite.id{
+                for var snapshot in fallbackSnapshots where snapshot.id == favorite.id{
+                    
+                    if (favorite.nickname != ""){
+                        snapshot.nickname = favorite.nickname
+                    }
                     
                     //append that key to favorites snapshots data
                     favoritesSnapshots.append(snapshot)

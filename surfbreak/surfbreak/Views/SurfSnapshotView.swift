@@ -15,7 +15,8 @@ private var windUnit = "MPH"
 class SurfSnapshotView: UIScrollView {
     
     var currentSnapShot : Snapshot
-    var label = UILabel()
+    var heightLabel = UILabel()
+    var titleLabel = UILabel()
     let textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     
     init(snapshot: Snapshot) {
@@ -122,11 +123,11 @@ class SurfSnapshotView: UIScrollView {
         waveHeightLabel.textColor =  textColor
         waveHeightLabel.textAlignment = .left
         self.addSubview(waveHeightLabel)
-        label = waveHeightLabel
+        heightLabel = waveHeightLabel
     }
     
     func removeWaveHeightIndicator(){
-        label.removeFromSuperview()
+        heightLabel.removeFromSuperview()
     }
     
     private func addWaveHeightLabels(){
@@ -170,7 +171,7 @@ class SurfSnapshotView: UIScrollView {
     }
     
     private func addSpotTitleLabel(){
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
         titleLabel.text = currentSnapShot.nickname.isEmpty ? currentSnapShot.stationName : currentSnapShot.nickname
         titleLabel.font = UIFont(name:"Montserrat-Medium", size: 15.0)
         titleLabel.textColor =  #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
