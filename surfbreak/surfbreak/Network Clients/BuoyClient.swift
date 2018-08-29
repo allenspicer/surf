@@ -42,7 +42,6 @@ final class BuoyClient: NSObject {
     private func buoyDataServiceRequest(){
         
         var bouyDictionary : [Int : [String]] = [Int: [String]]()
-
         var dataString = String()
         guard let url = URL(string: urlString) else {return}
 
@@ -81,7 +80,7 @@ final class BuoyClient: NSObject {
         guard let currentWaveDirectionDegrees = Int(bouy[11]) as Int? else {return}
 
         //wave frequency/period
-        guard let waveAveragePeriod = Double(bouy[10]) as Double? else {return}
+        guard let waveAveragePeriod = Double(bouy[9]) as Double? else {return}
 
         //water temp
         guard let currentWaterTemp = Double(bouy[14]) as Double? else {return}

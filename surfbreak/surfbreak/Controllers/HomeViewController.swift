@@ -282,8 +282,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     
     private func selectedCellAction(){
-        self.startActivityIndicator("Loading...")
-        
         DispatchQueue.global(qos:.utility).async {
             let buoyClient = BuoyClient(snapshotId: self.idStationSelected, allStations: self.allStations)
             buoyClient.delegate = self
