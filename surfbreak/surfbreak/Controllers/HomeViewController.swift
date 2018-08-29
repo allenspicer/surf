@@ -25,7 +25,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
-    private var selectedStationOrFavorite : Any? = nil
     
     private var tideClient : TideClient?
     private var windClient : WindClient?
@@ -194,7 +193,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         switch collectionView {
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
-            selectedStationOrFavorite = proximalData[cellSelectedIndex]
             idStationSelected = proximalData[cellSelectedIndex].station.id
             distanceToUser = proximalData[cellSelectedIndex].distanceToUser
             if var snapshot = snapshotFromPersistence(proximalData[cellSelectedIndex].station.id){
