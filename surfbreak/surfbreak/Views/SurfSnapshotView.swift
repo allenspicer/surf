@@ -59,10 +59,10 @@ class SurfSnapshotView: UIScrollView {
     }
     
     private func addDetailContainerView(){
-        let widthIncement = self.bounds.size.width/10
-        let heightIncement = self.bounds.size.height/10
+        let widthIncrement = self.bounds.size.width/10
+        let heightIncrement = self.bounds.size.height/10
 
-        let containerStackView = UIStackView(frame: CGRect(x: widthIncement * 0.8, y: ( 7 * heightIncement) , width: (widthIncement * 3.5), height: ( 2 * self.bounds.size.height / 12)))
+        let containerStackView = UIStackView(frame: CGRect(x: widthIncrement * 0.8, y: ( 7 * heightIncrement) , width: (widthIncrement * 3.5), height: ( 2 * self.bounds.size.height / 12)))
         containerStackView.axis = .horizontal
         containerStackView.distribution = .fillEqually
         containerStackView.spacing = -15
@@ -80,7 +80,7 @@ class SurfSnapshotView: UIScrollView {
         containerStackView.addArrangedSubview(leftCenterStack)
         
         
-        let secondContainerStackView = UIStackView(frame: CGRect(x: widthIncement * 5.3, y: ( 7 * heightIncement) , width: (widthIncement * 3.7), height: ( 2 * self.bounds.size.height / 12)))
+        let secondContainerStackView = UIStackView(frame: CGRect(x: widthIncrement * 5.3, y: ( 7 * heightIncrement) , width: (widthIncrement * 3.7), height: ( 2 * self.bounds.size.height / 12)))
         secondContainerStackView.axis = .horizontal
         secondContainerStackView.distribution = .fillEqually
         secondContainerStackView.spacing = -15
