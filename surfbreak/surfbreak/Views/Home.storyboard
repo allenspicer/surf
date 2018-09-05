@@ -15,10 +15,13 @@
         <scene sceneID="sw6-lg-gYO">
             <objects>
                 <viewController storyboardIdentifier="homeViewController" id="A9z-NA-s0C" customClass="HomeViewController" customModule="surfbreak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="d0z-Ep-3rz">
+                    <view key="view" contentMode="center" id="d0z-Ep-3rz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bkgd_main" translatesAutoresizingMaskIntoConstraints="NO" id="klz-Z5-yWX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GFB-mz-RHo" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
                                 <rect key="frame" x="-0.5" y="20" width="375" height="500"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,12 +132,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.015686274510000001" green="0.65098039220000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="klz-Z5-yWX" secondAttribute="trailing" id="Aty-wG-9K7"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="leading" secondItem="ROK-kO-E69" secondAttribute="leading" id="M4P-jI-dUN"/>
                             <constraint firstItem="GFB-mz-RHo" firstAttribute="width" secondItem="ROK-kO-E69" secondAttribute="width" id="RJF-2W-Mlf"/>
+                            <constraint firstItem="klz-Z5-yWX" firstAttribute="top" secondItem="d0z-Ep-3rz" secondAttribute="top" id="bcA-2w-4Dy"/>
+                            <constraint firstItem="klz-Z5-yWX" firstAttribute="leading" secondItem="d0z-Ep-3rz" secondAttribute="leading" id="jF0-Zi-ewN"/>
                             <constraint firstItem="ROK-kO-E69" firstAttribute="top" secondItem="GFB-mz-RHo" secondAttribute="top" id="jVh-6g-5At"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="width" secondItem="ROK-kO-E69" secondAttribute="width" id="nDC-5P-ePt"/>
                             <constraint firstItem="GFB-mz-RHo" firstAttribute="centerX" secondItem="d0z-Ep-3rz" secondAttribute="centerX" id="o2n-aB-PkG"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="bottom" secondItem="ROK-kO-E69" secondAttribute="bottom" constant="-40" id="ul8-kZ-Smp"/>
+                            <constraint firstAttribute="bottom" secondItem="klz-Z5-yWX" secondAttribute="bottom" id="wu5-SC-m6j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ROK-kO-E69"/>
                     </view>
@@ -157,4 +164,7 @@
             <point key="canvasLocation" x="1281" y="-83"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Bkgd_main" width="414" height="812"/>
+    </resources>
 </document>

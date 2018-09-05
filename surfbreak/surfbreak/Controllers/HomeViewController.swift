@@ -43,7 +43,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         createProximalCellsFromStations()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
-        applyGradientToBackground()
         
         // Initial Flow Layout Setup
         if let layout = self.favoritesCollectionView.collectionViewLayout as? FavoriteFlowLayout{
@@ -57,15 +56,11 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         stopActivityIndicator()
     }
-    
-    private func applyGradientToBackground(){
-        let backgroundView = UIImageView(frame: self.view.frame)
-        backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
-        backgroundView.contentMode = .center
-        self.view.addSubview(backgroundView)
-        self.view.sendSubview(toBack: backgroundView)
-    }
-    
+}
+
+
+extension HomeViewController {
+
     //
     //MARK: - Location Services
     //
@@ -89,36 +84,16 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
             let proximalStation = ProximalStation(station: station, distanceToUser: distance)
             proximalData.append(proximalStation)
         }
-        sortTableObjectsByDistance()
-    }
-
-    func sortTableObjectsByDistance(){
         proximalData = proximalData.sorted(by: {$0.distanceToUser < $1.distanceToUser })
         proximalCollectionView.reloadData()
         stopActivityIndicator()
     }
+}
+
+extension HomeViewController {
     
     //
-    //MARK: - Buoy List for regional data station ids
-    //
-    
-    func loadJson(_ fileName: String) -> [Station]? {
-        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode([Station].self, from: data)
-                return jsonData
-            } catch {
-                print("error:\(error)")
-            }
-        }
-        return nil
-    }
-    
-    
-    //
-    //MARK: - Activty Indicator Triggers
+    //MARK: - Activty Indicator Controls
     //
     
     private func startActivityIndicator(_ message : String){
@@ -134,14 +109,9 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         }
     }
     
-}
-
-//
-//MARK: - Extension to handle Collection View and Delegates Assignment
-//
-
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
-    
+    //
+    //MARK: - User Interface helpers and fine tuning
+    //
     
     override func viewDidLayoutSubviews() {
         if favoritesSnapshots.count > 0 {
@@ -171,10 +141,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         currentCard = indexPath.row
     }
     
+}
+
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+
     //
-    //MARK: - Handling of Collection Views and Cell Display
+    //MARK: Collection View Needs and Delegate Assignments
     //
-    
     
     func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
@@ -231,9 +204,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    func currentFavoriteCellSelected(){
-        
-    }
     
     func createViewForTransition()-> CircleView {
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
@@ -242,7 +212,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         mainView.setAndAssign()
         return mainView
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -255,6 +224,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return 0
         }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
@@ -277,11 +247,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    //
-    //MARK: - Cell click action and data retreival delegates
-    //
-    
-    
     private func selectedCellAction(){
         DispatchQueue.global(qos:.utility).async {
             let buoyClient = BuoyClient(snapshotId: self.idStationSelected, allStations: self.allStations)
@@ -290,8 +255,15 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
         }
     }
+}
+
+
+extension HomeViewController {
     
-    
+    //
+    //MARK: - Retrieving and storage of data for proximal collection cells
+    //
+
     func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
         var snapshot : Snapshot? = nil
         var persistenceSnapshots = [Snapshot]()
@@ -433,9 +405,7 @@ extension HomeViewController : BuoyClientDelegate{
     }
     
     func dataLoadFailedUseFallBackFromPersistence(){
-        
         var persistenceSnapshots = [Snapshot]()
-        
         if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
             do {
                 persistenceSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
@@ -463,12 +433,14 @@ extension HomeViewController {
         }
     }
     
+    
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
             self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
         }
     }
+    
 
     func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
         var persistenceSnapshots = [Snapshot]()
@@ -537,6 +509,7 @@ extension HomeViewController {
             }
         }
     }
+    
     
     func getUserFavoritesFromPersistence(){
         var favoritesArray = [Favorite]()
