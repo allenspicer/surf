@@ -21,6 +21,7 @@ class SurfSnapshotView: UIScrollView {
     let textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     var mainState = Int()
     var mainStateTitleLabel = UILabel()
+    var mainStateSecondaryLabel = UILabel()
     
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
@@ -143,16 +144,23 @@ class SurfSnapshotView: UIScrollView {
         mainLabel.text = "\(currentSnapShot.waveHeight)ft"
         mainLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
         mainLabel.textColor =  textColor
-        mainLabel.center = CGPoint(x: self.frame.width/2, y: 200)
+        mainLabel.center = CGPoint(x: self.frame.width/2, y: 2.6 * self.frame.height/10)
         mainLabel.textAlignment = .center
         self.addSubview(mainLabel)
         
         mainStateTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
         mainStateTitleLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
         mainStateTitleLabel.textColor =  textColor
-        mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 120)
+        mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/10)
         mainStateTitleLabel.textAlignment = .center
         self.addSubview(mainStateTitleLabel)
+        
+        mainStateSecondaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        mainStateSecondaryLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        mainStateSecondaryLabel.textColor =  textColor
+        mainStateSecondaryLabel.center = CGPoint(x: self.frame.width/2, y: 3.2 * self.frame.height/10)
+        mainStateSecondaryLabel.textAlignment = .center
+        self.addSubview(mainStateSecondaryLabel)
         
     }
     
@@ -290,16 +298,20 @@ class SurfSnapshotView: UIScrollView {
         case 1:
             mainLabel.text = currentSnapShot.swellDirectionString
             mainStateTitleLabel.text = "SWELL"
+            mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(currentSnapShot.period) SEC"
         case 2:
             mainLabel.text  = "\(currentSnapShot.windSpeed)"
             mainStateTitleLabel.text = "WIND"
+            mainStateSecondaryLabel.text = currentSnapShot.windDirectionString
         case 3:
             mainLabel.text  = "\(currentSnapShot.period)"
             mainStateTitleLabel.text = "PERIOD"
+            mainStateSecondaryLabel.text = "SEC"
         default:
             mainState = 0
             mainLabel.text = "\(currentSnapShot.waveHeight)ft"
             mainStateTitleLabel.text = ""
+            mainStateSecondaryLabel.text = ""
         }
     }
     
