@@ -17,6 +17,7 @@ class SurfSnapshotView: UIScrollView {
     var currentSnapShot : Snapshot
     var heightLabel = UILabel()
     var titleLabel = UILabel()
+    var conditionString = String()
     let textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     
     init(snapshot: Snapshot) {
@@ -35,6 +36,7 @@ class SurfSnapshotView: UIScrollView {
         addWaveHeightLabels()
         addSpotDetails()
         addSpotTitleLabel()
+        addConditionQualityLabel()
         addDetailContainerView()
     }
     
@@ -44,14 +46,19 @@ class SurfSnapshotView: UIScrollView {
         switch currentSnapShot.quality{
         case 4:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
+            conditionString = "POOR CONDITIONS"
         case 3:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_3")
+            conditionString = "FAIR CONDITIONS"
         case 2:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_2")
+            conditionString = "CLEAN CONDITIONS"
         case 1:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_1")
+            conditionString = "IDEAL CONDITIONS"
         default:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
+            conditionString = "POOR CONDITIONS"
         }
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
@@ -178,6 +185,16 @@ class SurfSnapshotView: UIScrollView {
         titleLabel.center = CGPoint(x: self.frame.width/2, y: 6 * self.frame.height/10)
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
+    }
+    
+    private func addConditionQualityLabel(){
+        let conditionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 80))
+        conditionLabel.text = conditionString
+        conditionLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        conditionLabel.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        conditionLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/10)
+        conditionLabel.textAlignment = .center
+        self.addSubview(conditionLabel)
     }
     
     private func addFrequencyImage() -> UIView {
