@@ -81,6 +81,10 @@ final class InitialViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //
     //MARK: - location services
     //

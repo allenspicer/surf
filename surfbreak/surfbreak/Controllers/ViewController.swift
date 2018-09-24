@@ -57,6 +57,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         stopDisplayLink()
     }
     
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
     
     func loadFavoritesAndSetFavoriteButton(){
         

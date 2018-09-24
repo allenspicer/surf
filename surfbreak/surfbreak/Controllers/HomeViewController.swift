@@ -56,6 +56,10 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         stopActivityIndicator()
     }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 
