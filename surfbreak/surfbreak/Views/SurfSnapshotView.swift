@@ -15,10 +15,11 @@ private var windUnit = "MPH"
 class SurfSnapshotView: UIScrollView {
     
     var currentSnapShot : Snapshot
-    var heightLabel = UILabel()
+    var mainLabel = UILabel()
     var titleLabel = UILabel()
     var conditionString = String()
     let textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
+    var mainState = Int()
     
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
@@ -118,25 +119,6 @@ class SurfSnapshotView: UIScrollView {
         return stack
     }
     
-    func addWaveHeightIndicator(){
-        
-        let centerY = self.bounds.height / 2
-        var waveHeightMaxFloat: CGFloat = 0
-        waveHeightMaxFloat = CGFloat(self.currentSnapShot.waveHeight * 10)
-        let waveTop = centerY - waveHeightMaxFloat - 14
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: waveTop, width: 100, height: 20))
-        waveHeightLabel.text = "__ \(self.currentSnapShot.waveHeight)ft"
-        waveHeightLabel.font = UIFont(name:"Montserrat-SemiBold", size: 10.0)
-        waveHeightLabel.textColor =  textColor
-        waveHeightLabel.textAlignment = .left
-        self.addSubview(waveHeightLabel)
-        heightLabel = waveHeightLabel
-    }
-    
-    func removeWaveHeightIndicator(){
-        heightLabel.removeFromSuperview()
-    }
-    
     private func addWaveHeightLabels(){
         
         var waveHeightDigitCount = CGFloat(0)
@@ -156,13 +138,13 @@ class SurfSnapshotView: UIScrollView {
         
         let widthPixels = 150 * waveHeightDigitCount + 200
         let distanceFromTop = self.frame.size.height/5
-        let waveHeightLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
-        waveHeightLabel.text = "\(currentSnapShot.waveHeight)ft"
-        waveHeightLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
-        waveHeightLabel.textColor =  textColor
-        waveHeightLabel.center = CGPoint(x: self.frame.width/2, y: 200)
-        waveHeightLabel.textAlignment = .center
-        self.addSubview(waveHeightLabel)
+        mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        mainLabel.text = "\(currentSnapShot.waveHeight)ft"
+        mainLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
+        mainLabel.textColor =  textColor
+        mainLabel.center = CGPoint(x: self.frame.width/2, y: 200)
+        mainLabel.textAlignment = .center
+        self.addSubview(mainLabel)
     }
     
     
@@ -291,6 +273,21 @@ class SurfSnapshotView: UIScrollView {
         waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         waterTempLabel.textColor = textColor
         return waterTempLabel
+    }
+    
+    func toggleMainLabel(){
+        mainState = mainState + 1
+        switch mainState {
+        case 0:
+            mainLabel.text = currentSnapShot.swellDirectionString
+        case 1:
+            mainLabel.text  = "\(currentSnapShot.windSpeed)"
+        case 2:
+            mainLabel.text  = "\(currentSnapShot.period)"
+        default:
+            mainState = 0
+            mainLabel.text = "\(currentSnapShot.waveHeight)ft"
+        }
     }
     
 }

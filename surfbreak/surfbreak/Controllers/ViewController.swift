@@ -91,10 +91,12 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //
     
     func setupGestureRecognizer() {
-        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didSwipe))
         panGesture.delegate = self
         mainView.addGestureRecognizer(panGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        tapGesture.delegate = self
+        mainView.addGestureRecognizer(tapGesture)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -112,6 +114,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //
     //Animation Components
     //
+    
+    @objc func didTap(gesture: UITapGestureRecognizer) {
+        for subview in mainView.subviews {
+            if let view = subview as? SurfSnapshotView {
+                view.toggleMainLabel()
+            }
+        }
+    }
+
     
     @objc func didSwipe(gesture: UIPanGestureRecognizer) {
         let height = mainView.frame.height/2
@@ -291,8 +302,9 @@ extension ViewController{
     func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
         
         if isFirstLoad {
-            let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-            mainView.addSubview(snapshotView)
+            snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+            guard let view = snapshotView else {return}
+            mainView.addSubview(view)
             backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "Bkgd_main"))
             backgroundImageView.frame = mainView.frame
             self.view.insertSubview(backgroundImageView, belowSubview: mainView)
