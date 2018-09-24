@@ -15,6 +15,7 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
     private var componentsChecklist = [Int : SnapshotComponents]()
+    var userAcceptsFallback = false
 
     private var buoyClient : BuoyClient?
     private var tideClient : TideClient?
@@ -49,11 +50,11 @@ final class InitialViewController: UIViewController {
             if !self.componentsChecklist.isEmpty {
                     
                 //for each favorite that does not have a snapshot
-                for key in self.componentsChecklist.keys {
+                for snapshotId in self.componentsChecklist.keys {
                     
                     //if favorites check persistence for records
-                    if !self.checkForDownloadedSnapshot(with: key){
-                        self.setDataClientsForStation(snapshotId: key, allStations: stations)
+                    if !self.checkForDownloadedSnapshot(with: snapshotId){
+                        self.setDataClientsForStation(snapshotId: snapshotId, allStations: stations)
                     }
                 }
             }else{
@@ -206,7 +207,7 @@ final class InitialViewController: UIViewController {
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
                 
                 self.componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
-                setAllComponentsToTrueFor(id: savedSnapshot.id)
+                setAllComponentsTo(bool: true, For: savedSnapshot.id)
                 return true
             }
         return false
@@ -298,7 +299,26 @@ extension InitialViewController : BuoyClientDelegate{
         if snapshot.waveHeight != 0.0 && snapshot.period != 0.0 {
             setDataClientsFor(snapshot: snapshot)
         }else{
-            dataLoadFailedUseFallBackFromPersistence(key: snapshot.id)
+            self.dataLoadFailedUseFallBackFromPersistence(snapshotId: sender.snapshotId)
+                DispatchQueue.main.async {
+                    //if no data respond with alertview
+                    let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
+                    let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
+                        DispatchQueue.global(qos:.utility).async{
+                            self.setAllComponentsTo(bool: false, For: sender.snapshotId)
+                            self.setDataClientsForStation(snapshotId: sender.snapshotId, allStations: stations)
+                        }
+                    }
+                    alert.addAction(retryAction)
+                    let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
+                        DispatchQueue.global(qos:.utility).async{
+                            self.userAcceptsFallback = true
+                            self.checkComponentsThenSegue()
+                        }
+                    }
+                    alert.addAction(continueAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
         }
     }
 }
@@ -445,17 +465,19 @@ extension InitialViewController {
         guard let fallbackSnapshots = fallbackSnapshots else {return}
         for snapshot in fallbackSnapshots where snapshot.id == snapshotId{
             componentsChecklist[snapshotId]?.snapshot = snapshot
-            setAllComponentsToTrueFor(id: snapshotId)
+            setAllComponentsTo(bool: true, For: snapshotId)
         }
-        checkComponentsThenSegue()
+        if userAcceptsFallback {
+            checkComponentsThenSegue()
+        }
     }
     
-    func setAllComponentsToTrueFor(id:Int){
-        self.componentsChecklist[id]?.bouy = true
-        self.componentsChecklist[id]?.air = true
-        self.componentsChecklist[id]?.tide = true
-        self.componentsChecklist[id]?.wind = true
-        self.componentsChecklist[id]?.quality = true
+    func setAllComponentsTo(bool:Bool, For id:Int){
+        self.componentsChecklist[id]?.bouy = bool
+        self.componentsChecklist[id]?.air = bool
+        self.componentsChecklist[id]?.tide = bool
+        self.componentsChecklist[id]?.wind = bool
+        self.componentsChecklist[id]?.quality = bool
     }
     
 }
