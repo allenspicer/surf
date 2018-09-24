@@ -90,7 +90,7 @@ final class BuoyClient: NSObject {
         
        currentSnapshot.waveHeight = heightInFeet
        currentSnapshot.swellDirection = currentWaveDirectionDegrees
-//       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: currentWaveDirectionDegrees)
+       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: Float(currentWaveDirectionDegrees))
        currentSnapshot.period = waveAveragePeriod
        currentSnapshot.waterTemp = currentWaterTempInFahrenheit
        currentSnapshot.beachFaceDirection = currentStation.bfd

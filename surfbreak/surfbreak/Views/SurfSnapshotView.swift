@@ -20,6 +20,7 @@ class SurfSnapshotView: UIScrollView {
     var conditionString = String()
     let textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     var mainState = Int()
+    var mainStateTitleLabel = UILabel()
     
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
@@ -145,6 +146,14 @@ class SurfSnapshotView: UIScrollView {
         mainLabel.center = CGPoint(x: self.frame.width/2, y: 200)
         mainLabel.textAlignment = .center
         self.addSubview(mainLabel)
+        
+        mainStateTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        mainStateTitleLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        mainStateTitleLabel.textColor =  textColor
+        mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 120)
+        mainStateTitleLabel.textAlignment = .center
+        self.addSubview(mainStateTitleLabel)
+        
     }
     
     
@@ -278,15 +287,19 @@ class SurfSnapshotView: UIScrollView {
     func toggleMainLabel(){
         mainState = mainState + 1
         switch mainState {
-        case 0:
-            mainLabel.text = currentSnapShot.swellDirectionString
         case 1:
-            mainLabel.text  = "\(currentSnapShot.windSpeed)"
+            mainLabel.text = currentSnapShot.swellDirectionString
+            mainStateTitleLabel.text = "SWELL"
         case 2:
+            mainLabel.text  = "\(currentSnapShot.windSpeed)"
+            mainStateTitleLabel.text = "WIND"
+        case 3:
             mainLabel.text  = "\(currentSnapShot.period)"
+            mainStateTitleLabel.text = "PERIOD"
         default:
             mainState = 0
             mainLabel.text = "\(currentSnapShot.waveHeight)ft"
+            mainStateTitleLabel.text = ""
         }
     }
     
