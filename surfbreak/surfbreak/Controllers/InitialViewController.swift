@@ -206,7 +206,7 @@ final class InitialViewController: UIViewController {
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
                 
                 self.componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
-                setTrueForAllComponents(with: savedSnapshot.id)
+                setAllComponentsToTrueFor(id: savedSnapshot.id)
                 return true
             }
         return false
@@ -431,7 +431,7 @@ extension InitialViewController {
         }
     }
     
-    func dataLoadFailedUseFallBackFromPersistence(key : Int){
+    func dataLoadFailedUseFallBackFromPersistence(snapshotId : Int){
         if fallbackSnapshots == nil{
             if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
                 do {
@@ -443,13 +443,14 @@ extension InitialViewController {
         }
         
         guard let fallbackSnapshots = fallbackSnapshots else {return}
-        for snapshot in fallbackSnapshots where snapshot.id == key{
-            componentsChecklist[key]?.snapshot = snapshot
-            setTrueForAllComponents(with: key)
+        for snapshot in fallbackSnapshots where snapshot.id == snapshotId{
+            componentsChecklist[snapshotId]?.snapshot = snapshot
+            setAllComponentsToTrueFor(id: snapshotId)
         }
+        checkComponentsThenSegue()
     }
     
-    func setTrueForAllComponents(with id:Int){
+    func setAllComponentsToTrueFor(id:Int){
         self.componentsChecklist[id]?.bouy = true
         self.componentsChecklist[id]?.air = true
         self.componentsChecklist[id]?.tide = true
