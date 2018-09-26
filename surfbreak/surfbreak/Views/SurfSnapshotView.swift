@@ -22,7 +22,9 @@ class SurfSnapshotView: UIScrollView {
     var mainState = Int()
     var mainStateTitleLabel = UILabel()
     var mainStateSecondaryLabel = UILabel()
-    
+    var mainStateInnerRingImageView = UIImageView()
+    var mainStateOuterRingImageView  = UIImageView()
+
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
         super.init(frame: UIScreen.main.bounds)
@@ -40,6 +42,7 @@ class SurfSnapshotView: UIScrollView {
         addSpotDetails()
         addSpotTitleLabel()
         addConditionQualityLabel()
+        addMainStateRings()
         addDetailContainerView()
     }
     
@@ -66,6 +69,19 @@ class SurfSnapshotView: UIScrollView {
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
         self.sendSubview(toBack: backgroundView)
+    }
+    
+    private func addMainStateRings(){
+        let heightIncrement = 2.6 * self.frame.size.height/10
+        let center = self.frame.size.width/2
+        mainStateInnerRingImageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        mainStateInnerRingImageView.center = CGPoint(x: center, y: heightIncrement)
+        mainStateInnerRingImageView.image = #imageLiteral(resourceName: "ring_outer")
+        self.addSubview(mainStateInnerRingImageView)
+        mainStateOuterRingImageView.frame = CGRect(x: 0, y: 0, width: 225, height: 225)
+        mainStateOuterRingImageView.center = CGPoint(x: center, y: heightIncrement)
+        mainStateOuterRingImageView.image = #imageLiteral(resourceName: "ring_inner")
+        self.addSubview(mainStateOuterRingImageView)
     }
     
     private func addDetailContainerView(){
