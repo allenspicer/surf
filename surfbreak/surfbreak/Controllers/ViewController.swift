@@ -254,6 +254,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func addFavorite(){
+        self.feedbackGenerator.notification.notificationOccurred(.success)
         let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this break?", preferredStyle: .alert)
         alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
@@ -302,9 +303,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension ViewController{
     
-    
     func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
-        
         if isFirstLoad {
             snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             guard let view = snapshotView else {return}
