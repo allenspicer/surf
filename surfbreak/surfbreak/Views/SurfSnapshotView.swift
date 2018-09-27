@@ -22,8 +22,8 @@ class SurfSnapshotView: UIScrollView {
     var mainState = Int()
     var mainStateTitleLabel = UILabel()
     var mainStateSecondaryLabel = UILabel()
-    var mainStateInnerRingImageView = UIImageView()
-    var mainStateOuterRingImageView  = UIImageView()
+    var arrowInnerImageView = UIImageView()
+    var arrowOuterImageView  = UIImageView()
 
     init(snapshot: Snapshot) {
         self.currentSnapShot = snapshot
@@ -74,14 +74,30 @@ class SurfSnapshotView: UIScrollView {
     private func addMainStateRings(){
         let heightIncrement = 2.6 * self.frame.size.height/10
         let center = self.frame.size.width/2
-        mainStateInnerRingImageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        let mainStateInnerRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         mainStateInnerRingImageView.center = CGPoint(x: center, y: heightIncrement)
         mainStateInnerRingImageView.image = #imageLiteral(resourceName: "ring_outer")
         self.addSubview(mainStateInnerRingImageView)
-        mainStateOuterRingImageView.frame = CGRect(x: 0, y: 0, width: 225, height: 225)
+        
+        arrowInnerImageView.frame = mainStateInnerRingImageView.frame
+        arrowInnerImageView.image = #imageLiteral(resourceName: "inner_arrow_0")
+        self.addSubview(arrowInnerImageView)
+        
+        let mainStateOuterRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 225, height: 225))
         mainStateOuterRingImageView.center = CGPoint(x: center, y: heightIncrement)
         mainStateOuterRingImageView.image = #imageLiteral(resourceName: "ring_inner")
         self.addSubview(mainStateOuterRingImageView)
+        
+        arrowOuterImageView.frame = mainStateOuterRingImageView.frame
+        arrowOuterImageView.image = #imageLiteral(resourceName: "outer_Arrow_0")
+        self.addSubview(arrowOuterImageView)
+        
+        let innerArrowDegrees = CGFloat((Double.pi)/180 * Double(currentSnapShot.swellDirection))
+        let outerArrowDegrees = CGFloat((Double.pi)/180 * Double(currentSnapShot.windCardinalDirection))
+        UIView.animate(withDuration: 2.0) { [unowned self] in
+            self.arrowInnerImageView.transform = CGAffineTransform(rotationAngle: innerArrowDegrees)
+            self.arrowOuterImageView.transform = CGAffineTransform(rotationAngle: outerArrowDegrees)
+        }
     }
     
     private func addDetailContainerView(){
@@ -315,19 +331,32 @@ class SurfSnapshotView: UIScrollView {
             mainLabel.text = currentSnapShot.swellDirectionString
             mainStateTitleLabel.text = "SWELL"
             mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(currentSnapShot.period) SEC"
+            arrowOuterImageView.isHidden = true
+            arrowInnerImageView.isHidden = false
         case 2:
-            mainLabel.text  = "\(currentSnapShot.windSpeed)"
+//            let windSpeedAttributedText = NSMutableAttributedString.init(string: "\(currentSnapShot.windSpeed) mph")
+//            let mphRange = windSpeedAttributedText.mutableString.range(of: " mph", options: .caseInsensitive)
+//            windSpeedAttributedText.setAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)],
+//                                     range: mphRange)
+//            mainLabel.attributedText = windSpeedAttributedText
+            mainLabel.text = currentSnapShot.windDirectionString
             mainStateTitleLabel.text = "WIND"
-            mainStateSecondaryLabel.text = currentSnapShot.windDirectionString
+            mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) mph"
+            arrowOuterImageView.isHidden = false
+            arrowInnerImageView.isHidden = true
         case 3:
             mainLabel.text  = "\(currentSnapShot.period)"
             mainStateTitleLabel.text = "PERIOD"
             mainStateSecondaryLabel.text = "SEC"
+            arrowOuterImageView.isHidden = false
+            arrowInnerImageView.isHidden = false
         default:
             mainState = 0
             mainLabel.text = "\(currentSnapShot.waveHeight)ft"
             mainStateTitleLabel.text = ""
             mainStateSecondaryLabel.text = ""
+            arrowOuterImageView.isHidden = false
+            arrowInnerImageView.isHidden = false
         }
     }
     

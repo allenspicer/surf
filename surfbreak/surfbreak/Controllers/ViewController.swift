@@ -32,7 +32,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var mainView = UIView(frame: UIScreen.main.bounds)
     var backgroundImageView = UIImageView()
     
-    
     /// The `CAShapeLayer` that will contain the animated path
     private let shapeLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
@@ -122,7 +121,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 view.toggleMainLabel()
                 selectionFeedbackGenerator.prepare()
                 selectionFeedbackGenerator.selectionChanged()
-                
             }
         }
     }
