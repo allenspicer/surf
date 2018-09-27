@@ -24,7 +24,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var favoriteFlag = false
     var favoritesArray = [Favorite]()
     var snapshotView : SurfSnapshotView? = nil
-    var currentIndexInFavoritesArray = Int()
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
@@ -71,7 +70,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             for index in 0..<favoritesArray.count where favoritesArray[index].id == currentSnapShot.id {
                 favoriteFlag = true
-                currentIndexInFavoritesArray = index
             }
         }
     }
@@ -231,7 +229,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func favoriteButtonAction(){
         if favoriteFlag {
-            favoritesArray.remove(at: currentIndexInFavoritesArray)
             do{
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
                 feedbackGenerator.notification.notificationOccurred(.warning)
