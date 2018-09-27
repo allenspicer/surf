@@ -80,7 +80,8 @@ class SurfSnapshotView: UIScrollView {
         mainStateInnerRingImageView.image = #imageLiteral(resourceName: "ring_outer")
         self.addSubview(mainStateInnerRingImageView)
         
-        arrowInnerImageView.frame = mainStateInnerRingImageView.frame
+        arrowInnerImageView.frame = CGRect(x: 0, y: 0, width: 212, height: 212)
+        arrowInnerImageView.center = mainStateInnerRingImageView.center
         arrowInnerImageView.image = #imageLiteral(resourceName: "inner_arrow_0")
         self.addSubview(arrowInnerImageView)
         
@@ -89,9 +90,15 @@ class SurfSnapshotView: UIScrollView {
         mainStateOuterRingImageView.image = #imageLiteral(resourceName: "ring_inner")
         self.addSubview(mainStateOuterRingImageView)
         
-        arrowOuterImageView.frame = mainStateOuterRingImageView.frame
+        arrowOuterImageView.frame = CGRect(x: 0, y: 0, width: 235, height: 235)
+        arrowOuterImageView.center = mainStateOuterRingImageView.center
         arrowOuterImageView.image = #imageLiteral(resourceName: "outer_Arrow_0")
         self.addSubview(arrowOuterImageView)
+        
+        let mainStateMainRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 174, height: 174))
+        mainStateMainRingImageView.center = CGPoint(x: center, y: heightIncrement)
+        mainStateMainRingImageView.image = #imageLiteral(resourceName: "ring_main")
+        self.addSubview(mainStateMainRingImageView)
         
         let innerArrowDegrees = CGFloat((Double.pi)/180 * Double(currentSnapShot.swellDirection))
         let outerArrowDegrees = CGFloat((Double.pi)/180 * Double(currentSnapShot.windCardinalDirection))
@@ -105,7 +112,8 @@ class SurfSnapshotView: UIScrollView {
         let heightIncrement = 2.6 * self.frame.size.height/10
         let center = self.frame.size.width/2
         let image : UIImage = #imageLiteral(resourceName: "coastline")
-        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: image.size.width * 0.90, height: image.size.height * 0.90))
+        coastImageView.contentMode = .scaleAspectFit
         coastImageView.image = image
         coastImageView.center = CGPoint(x: center - 21, y: heightIncrement)
         self.insertSubview(coastImageView, at: 1)
