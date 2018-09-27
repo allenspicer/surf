@@ -43,6 +43,7 @@ class SurfSnapshotView: UIScrollView {
         addSpotTitleLabel()
         addConditionQualityLabel()
         addMainStateRings()
+        addCoastImage()
         addDetailContainerView()
     }
     
@@ -98,6 +99,16 @@ class SurfSnapshotView: UIScrollView {
             self.arrowInnerImageView.transform = CGAffineTransform(rotationAngle: innerArrowDegrees)
             self.arrowOuterImageView.transform = CGAffineTransform(rotationAngle: outerArrowDegrees)
         }
+    }
+
+    private func addCoastImage(){
+        let heightIncrement = 2.6 * self.frame.size.height/10
+        let center = self.frame.size.width/2
+        let image : UIImage = #imageLiteral(resourceName: "coastline")
+        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        coastImageView.image = image
+        coastImageView.center = CGPoint(x: center - 21, y: heightIncrement)
+        self.insertSubview(coastImageView, at: 1)
     }
     
     private func addDetailContainerView(){
