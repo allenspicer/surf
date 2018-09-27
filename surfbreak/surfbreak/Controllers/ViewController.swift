@@ -28,6 +28,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var mainView = UIView(frame: UIScreen.main.bounds)
     var backgroundImageView = UIImageView()
     
@@ -119,6 +120,9 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         for subview in mainView.subviews {
             if let view = subview as? SurfSnapshotView {
                 view.toggleMainLabel()
+                selectionFeedbackGenerator.prepare()
+                selectionFeedbackGenerator.selectionChanged()
+                
             }
         }
     }
@@ -228,26 +232,24 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     @objc func favoriteButtonAction(){
-        
         if favoriteFlag {
-            feedbackGenerator.notification.notificationOccurred(.warning)
-            let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
-            let doneAction = UIAlertAction(title: "Okay", style: .default)
-            alert.addAction(doneAction)
-            self.present(alert, animated: true, completion: nil)
             favoritesArray.remove(at: currentIndexInFavoritesArray)
             do{
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
+                feedbackGenerator.notification.notificationOccurred(.warning)
+                let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
+                let doneAction = UIAlertAction(title: "Okay", style: .default)
+                alert.addAction(doneAction)
+                self.present(alert, animated: true, completion: nil)
+                favoriteFlag = !favoriteFlag
+                setButton()
             }catch{
                 print("Removing from favorite automatic storage with Disk failed. Error is: \(error)")
             }
         }else{
             addFavorite()
-            feedbackGenerator.notification.notificationOccurred(.success)
         }
-        favoriteFlag = !favoriteFlag
-        setButton()
-        self.reloadInputViews()
+//        self.reloadInputViews()
     }
     
     
@@ -258,11 +260,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             guard let textFields = alert.textFields, textFields.count > 0 else {return}
             if let text = textFields[0].text {
                 self.currentSnapShot.nickname = text
-                
                 for view in self.mainView.subviews {
                     if view is SurfSnapshotView {
                         if let surfView = view as? SurfSnapshotView{
                             surfView.titleLabel.text = text
+                            self.favoriteFlag = !self.favoriteFlag
+                            self.setButton()
+                            self.feedbackGenerator.notification.notificationOccurred(.success)
                         }
                     }
                 }                
