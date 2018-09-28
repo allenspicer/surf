@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A9z-NA-s0C">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A9z-NA-s0C">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GFB-mz-RHo" customClass="FavoriteCollectionView" customModule="surfbreak" customModuleProvider="target">
-                                <rect key="frame" x="-0.5" y="20" width="375" height="500"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="500"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="z4G-78-chm"/>
@@ -93,13 +92,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u5-oV-gkQ">
-                                                    <rect key="frame" x="12.5" y="28.5" width="103" height="23.5"/>
+                                                    <rect key="frame" x="13" y="28.5" width="102" height="23.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20b-Ku-2Gs">
-                                                    <rect key="frame" x="12.5" y="86" width="103" height="20.5"/>
+                                                    <rect key="frame" x="13" y="86" width="102" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -149,6 +148,7 @@
                         <outlet property="favoritesCollectionView" destination="GFB-mz-RHo" id="x23-jg-k64"/>
                         <outlet property="proximalCollectionView" destination="btx-0C-wgR" id="v25-So-auv"/>
                         <segue destination="jEE-kG-wTj" kind="showDetail" identifier="segueToDetail" animates="NO" id="1T8-A3-0kL"/>
+                        <segue destination="bF5-A4-1zi" kind="show" identifier="segueHomeToInitial" id="pdA-K5-acu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jap-Ur-G8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -162,6 +162,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J6K-nn-DOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1281" y="-83"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="WsV-W8-lv9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="bF5-A4-1zi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EGw-aq-adt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1265" y="83"/>
         </scene>
     </scenes>
     <resources>

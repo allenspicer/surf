@@ -35,7 +35,7 @@ final class FallBackData: NSObject {
     func saveSnapshotsToPersistence(){
         DispatchQueue.global(qos:.utility).async{
             do {
-                try Disk.save(self.fallbackSnapshots, to: .caches, as: DefaultConstants.fallBackSnapshots)
+                try Disk.save(self.fallbackSnapshots, to: .documents, as: DefaultConstants.fallBackSnapshots)
             }catch{
                 print("Saving to automatic storage with Disk failed. Error is: \(error)")
             }

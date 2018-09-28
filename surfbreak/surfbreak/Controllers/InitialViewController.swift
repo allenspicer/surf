@@ -374,9 +374,9 @@ extension InitialViewController {
     func checkComponentsForCompletion(){
         print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
-        print("The component checklists are")
-        if !componentsChecklist.isEmpty{
+        if componentsChecklist.count > 0 {
             for key in componentsChecklist.keys {
+                print("The component checklists are")
                 print(key)
                 print(componentsChecklist[key]?.bouy)
                 print(componentsChecklist[key]?.air)
@@ -457,9 +457,9 @@ extension InitialViewController {
     
     func dataLoadFailedUseFallBackFromPersistence(snapshotId : Int){
         if fallbackSnapshots == nil{
-            if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+            if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
                 do {
-                    fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+                    fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .documents, as: [Snapshot].self)
                 }catch{
                     print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
                 }

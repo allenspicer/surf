@@ -43,6 +43,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         createProximalCellsFromStations()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
+        setupGestureRecognizer()
         
         // Initial Flow Layout Setup
         if let layout = self.favoritesCollectionView.collectionViewLayout as? FavoriteFlowLayout{
@@ -118,8 +119,12 @@ extension HomeViewController {
     //
     
     private func setFavoriteCollectionSelection (){
-        if favoritesSnapshots.count > 0 {
-            favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        if favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) != nil {
+                        favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+        }else{
+            if favoritesCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) != nil {
+                favoritesCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+            }
         }
     }
     
@@ -413,9 +418,9 @@ extension HomeViewController : BuoyClientDelegate{
     
     func dataLoadFailedUseFallBackFromPersistence(){
         var persistenceSnapshots = [Snapshot]()
-        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
             do {
-                persistenceSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+                persistenceSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .documents, as: [Snapshot].self)
             }catch{
                 print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
             }
@@ -429,6 +434,45 @@ extension HomeViewController : BuoyClientDelegate{
                 }
             }
         }
+    }
+    
+    
+    //
+    //Gesture Recognizer
+    //
+    
+    func setupGestureRecognizer() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
+        longPressGesture.minimumPressDuration = 4
+        longPressGesture.delegate = self
+        self.view.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc func didLongPress(gesture: UILongPressGestureRecognizer) {
+        let alert = UIAlertController.init(title: "Reset All Data?", message: "Would you like to delete your settings? This will clear all cached data including favorites, location and wave data", preferredStyle: .alert)
+        let resetAction = UIAlertAction(title: "Clear Data", style: .destructive){_ in
+                do {
+                    try Disk.clear(.caches)
+                    self.performSegue(withIdentifier: "segueHomeToInitial", sender: self)
+                }catch{
+                    print("Attempting to clear caches in automatic storage with Disk failed. Error is: \(error)")
+                }
+        }
+        alert.addAction(resetAction)
+        let returnAction = UIAlertAction(title: "Nevermind", style: .default){_ in }
+        alert.addAction(returnAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        if let viewTouched = touch.view{
+//            if viewTouched is UICollectionViewCell { return false }
+//        }
+//        return true
+//    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
@@ -445,8 +489,8 @@ extension HomeViewController {
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
             self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
-            self.setFavoriteCollectionSelection()
         }
+        self.setFavoriteCollectionSelection()
     }
     
 
@@ -474,9 +518,9 @@ extension HomeViewController {
             }
         }
         
-        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .caches) {
+        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
             do {
-                fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .caches, as: [Snapshot].self)
+                fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .documents, as: [Snapshot].self)
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
