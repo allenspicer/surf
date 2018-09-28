@@ -117,11 +117,14 @@ extension HomeViewController {
     //MARK: - User Interface helpers and fine tuning
     //
     
-    override func viewDidLayoutSubviews() {
+    private func setFavoriteCollectionSelection (){
         if favoritesSnapshots.count > 0 {
             favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
         }
-        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setFavoriteCollectionSelection()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -442,6 +445,7 @@ extension HomeViewController {
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
             self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
+            self.setFavoriteCollectionSelection()
         }
     }
     
