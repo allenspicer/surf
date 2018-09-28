@@ -17,6 +17,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
     var currentSnapShot = Snapshot()
+    var currentFavorite : Favorite? = nil
     var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     var activityIndicatorView = ActivityIndicatorView()
@@ -70,6 +71,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             for index in 0..<favoritesArray.count where favoritesArray[index].id == currentSnapShot.id {
                 favoriteFlag = true
+                currentFavorite = favoritesArray[index]
             }
         }
     }
@@ -229,9 +231,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func favoriteButtonAction(){
         if favoriteFlag {
+            if let favorite = currentFavorite {
+                favoritesArray = favoritesArray.filter({$0.id != favorite.id})
+            }
             do{
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
                 feedbackGenerator.notification.notificationOccurred(.warning)
+
                 let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
@@ -244,7 +250,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }else{
             addFavorite()
         }
-//        self.reloadInputViews()
     }
     
     
