@@ -256,7 +256,7 @@ class SurfSnapshotView: UIScrollView {
     
     private func addFrequencyText() -> UIView {
         let frequencyAmountLabel = UILabel()
-        frequencyAmountLabel.text = "\(currentSnapShot.period) sec"
+        frequencyAmountLabel.text = "\(Int(currentSnapShot.period)) sec"
         frequencyAmountLabel.textColor = textColor
         frequencyAmountLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         return frequencyAmountLabel
@@ -272,7 +272,7 @@ class SurfSnapshotView: UIScrollView {
     private func addAirTempText() -> UIView {
         let airTempLabel = UILabel()
         airTempLabel.text = "Loading..."
-        airTempLabel.text = "\(currentSnapShot.airTemp)° F"
+        airTempLabel.text = "\(Int(currentSnapShot.airTemp))° F"
         airTempLabel.textColor = textColor
         airTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         return airTempLabel
@@ -287,7 +287,7 @@ class SurfSnapshotView: UIScrollView {
     
     private func addWaterTempText() -> UIView {
         let waterTempLabel = UILabel()
-        waterTempLabel.text = "\(currentSnapShot.waterTemp)° F"
+        waterTempLabel.text = "\(Int(currentSnapShot.waterTemp))° F"
         waterTempLabel.textColor = textColor
         waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         return waterTempLabel
@@ -349,7 +349,7 @@ class SurfSnapshotView: UIScrollView {
         case 1:
             mainLabel.text = currentSnapShot.swellDirectionString
             mainStateTitleLabel.text = "SWELL"
-            mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(currentSnapShot.period) SEC"
+            mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
             arrowOuterImageView.isHidden = true
             arrowInnerImageView.isHidden = false
         case 2:
@@ -364,7 +364,7 @@ class SurfSnapshotView: UIScrollView {
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = true
         case 3:
-            mainLabel.text  = "\(currentSnapShot.period)"
+            mainLabel.text  = "\(Int(currentSnapShot.period))"
             mainStateTitleLabel.text = "PERIOD"
             mainStateSecondaryLabel.text = "SEC"
             arrowOuterImageView.isHidden = false
