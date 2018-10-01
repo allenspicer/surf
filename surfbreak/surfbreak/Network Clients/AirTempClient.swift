@@ -72,9 +72,9 @@ final class AirTempClient: NSObject {
     private func createArrayOfAirTempDataObjects(){
         for dataObject in dataArray {
             guard let timeStamp = dataObject["t"] as? String else { return }
-            guard let speedString = dataObject["v"] as? String else { return }
-            guard let speed = Double(speedString) else { return }
-            let airTemp = AirTemp.init(timeStamp: timeStamp, value: speed)
+            guard let temperatureString = dataObject["v"] as? String else { return }
+            guard let temp = Double(temperatureString) else { return }
+            let airTemp = AirTemp.init(timeStamp: timeStamp, value: temp)
             airTempArray.append(airTemp)
             
         }
