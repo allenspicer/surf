@@ -45,15 +45,15 @@ class CircleView: UIView {
         
         switch snapshot.quality{
         case 4:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_4"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Lrg_Bkgds_Poor"))
         case 3:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_3"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Lrg_Bkgd_Fair"))
         case 2:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_2"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Lrg_Bkgd_Good"))
         case 1:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_1"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Lrg_Bkgd_Ideal"))
         default:
-            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Bkgd_4"))
+            self.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "Lrg_Bkgds_Poor"))
         }
         self.layer.cornerRadius = self.frame.height/2
         self.clipsToBounds = true
