@@ -51,7 +51,12 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if currentSnapShot.waveHeight != 0.0 {
             setupAnimatedWaveWithBouyData()
         }
+        if let vc = UIApplication.topViewController() as? HomeViewController{
+            vc.transitionView.removeFromSuperview()
+        }
     }
+    
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         stopDisplayLink()

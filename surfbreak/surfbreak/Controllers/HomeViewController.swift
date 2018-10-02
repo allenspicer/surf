@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var userFavoritesForReturn = [Favorite]()
     var idStationSelected = Int()
     var distanceToUser = Int()
+    var transitionView = CircleView()
 
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -198,16 +199,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             }else{
                 selectedSnapshot = favoritesSnapshots[indexPath.row]
                 guard let cell = collectionView.cellForItem(at: indexPath) else {return}
-                let transitionView = createViewForTransition()
+                transitionView = createViewForTransition()
                 self.view.addSubview(transitionView)
                 self.view.bringSubview(toFront: transitionView)
                 let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
                 transitionView.center = centerPoint
                 transitionView.growCircleTo(950, duration: 1.2, completionBlock: {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        transitionView.removeFromSuperview()
-                    }
                 })
             }
             
