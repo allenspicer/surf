@@ -26,9 +26,12 @@ class FavCollectionViewCell: UICollectionViewCell {
     }
     
     func setCellContent(waveHeight: Double, waveFrequency: Double, quality: Int, locationName: String, distanceFromUser: Int){
+
         heightLabel.text = "\(Int(waveHeight)) ft"
+        heightLabel.addCharacterSpacing()
         frequencyLabel.text = "\(Int(waveFrequency))s"
-        locationLabel.text = locationName
+        locationLabel.text = locationName.uppercased()
+        locationLabel.addCharacterSpacing(kernValue: 1.50)
         distanceLabel.text = distanceFromUser == 0 ? "Unknown Distance" : "\(distanceFromUser)mi"
         
         switch waveHeight{
@@ -96,15 +99,15 @@ class FavCollectionViewCell: UICollectionViewCell {
         locationLabel.backgroundColor = .clear
         locationLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
         locationLabel.textAlignment = .center
-        locationLabel.font = UIFont(name: "Montserrat-SemiBold", size: 15)
+        locationLabel.font = UIFont(name: "Teko-Regular", size: 25)
         contentView.addSubview(locationLabel)
         
         let distanceLabelFrame = CGRect(x: 0.0, y: contentView.frame.height - 20, width: contentView.frame.width, height: 20.0)
         distanceLabel = UILabel(frame: distanceLabelFrame)
         distanceLabel.backgroundColor = .clear
-        distanceLabel.textColor = #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
+        distanceLabel.textColor = #colorLiteral(red: 0.8862745098, green: 0.8862745098, blue: 0.8862745098, alpha: 1)
         distanceLabel.textAlignment = .center
-        distanceLabel.font = UIFont(name: "Montserrat-SemiBold", size: 15)
+        distanceLabel.font = UIFont(name: "Montserrat-MediumItalic", size: 16)
         distanceLabel.tag = 1
         contentView.addSubview(distanceLabel)
         
