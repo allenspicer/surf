@@ -48,6 +48,7 @@
 		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
 		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
 		95B223992118EDA70060EDFD /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B223982118EDA70060EDFD /* UserLocation.swift */; };
+		95D5C1432162C5A70097A8F6 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */; };
 		C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */; };
 		D4A1F5B49AD5E7A61033EF0C /* Pods_surfbreak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B93F65BBDBCFDFE0FD199A0 /* Pods_surfbreak.framework */; };
 /* End PBXBuildFile section */
@@ -111,6 +112,7 @@
 		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
 		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95B223982118EDA70060EDFD /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Teko-Regular.ttf"; sourceTree = "<group>"; };
 		CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.release.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		958A8128211C92A700103064 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */,
 				958A810A211C929400103064 /* Montserrat-Medium.ttf */,
 				958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */,
 				958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */,
@@ -395,6 +398,7 @@
 				953502E8211A045100E8DDA8 /* Home.storyboard in Resources */,
 				95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */,
 				958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */,
+				95D5C1432162C5A70097A8F6 /* Teko-Regular.ttf in Resources */,
 				958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */,
 				953F07F0210A575300E70E18 /* Main.storyboard in Resources */,
 			);
@@ -453,10 +457,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BonMot/BonMot.framework",
 				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BonMot.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,10 +665,7 @@
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -679,10 +682,7 @@
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -699,11 +699,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -721,11 +717,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

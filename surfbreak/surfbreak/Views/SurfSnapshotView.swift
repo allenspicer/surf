@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import BonMot
 
 
 private var windUnit = "MPH"
@@ -207,12 +208,10 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(mainStateTitleLabel)
         
         mainStateSecondaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
-        mainStateSecondaryLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        mainStateSecondaryLabel.textAlignment = .center
         mainStateSecondaryLabel.textColor =  textColor
         mainStateSecondaryLabel.center = CGPoint(x: self.frame.width/2, y: 3.2 * self.frame.height/10)
-        mainStateSecondaryLabel.textAlignment = .center
         self.addSubview(mainStateSecondaryLabel)
-        
     }
     
     
@@ -350,23 +349,56 @@ class SurfSnapshotView: UIScrollView {
             mainLabel.text = currentSnapShot.swellDirectionString
             mainStateTitleLabel.text = "SWELL"
             mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
+            if let font = UIFont(name: "Teko-Regular", size: 18){
+                let stylizedText = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateSecondaryLabel.attributedText = stylizedText
+            }else{
+                mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
+            }
             arrowOuterImageView.isHidden = true
             arrowInnerImageView.isHidden = false
         case 2:
-//            let windSpeedAttributedText = NSMutableAttributedString.init(string: "\(currentSnapShot.windSpeed) mph")
-//            let mphRange = windSpeedAttributedText.mutableString.range(of: " mph", options: .caseInsensitive)
-//            windSpeedAttributedText.setAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20)],
-//                                     range: mphRange)
-//            mainLabel.attributedText = windSpeedAttributedText
             mainLabel.text = currentSnapShot.windDirectionString
             mainStateTitleLabel.text = "WIND"
             mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) mph"
+            if let font = UIFont(name: "Teko-Regular", size: 18){
+                let stylizedText = "\(currentSnapShot.windSpeed) mph"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateSecondaryLabel.attributedText = stylizedText
+            }else{
+                mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) mph"
+            }
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = true
         case 3:
             mainLabel.text  = "\(Int(currentSnapShot.period))"
             mainStateTitleLabel.text = "PERIOD"
-            mainStateSecondaryLabel.text = "SEC"
+            if let font = UIFont(name: "Teko-Regular", size: 18){
+                let stylizedText = "SEC"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateSecondaryLabel.attributedText = stylizedText
+            }else{
+                mainStateSecondaryLabel.text = "SEC"
+            }
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = false
         default:
