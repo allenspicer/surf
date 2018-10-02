@@ -203,9 +203,9 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 self.view.bringSubview(toFront: transitionView)
                 let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
                 transitionView.center = centerPoint
-                transitionView.growCircleTo(850, duration: 1.2, completionBlock: {
+                transitionView.growCircleTo(950, duration: 1.2, completionBlock: {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                         transitionView.removeFromSuperview()
                     }
                 })
