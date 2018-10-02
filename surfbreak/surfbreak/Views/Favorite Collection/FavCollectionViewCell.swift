@@ -26,10 +26,10 @@ class FavCollectionViewCell: UICollectionViewCell {
     }
     
     func setCellContent(waveHeight: Double, waveFrequency: Double, quality: Int, locationName: String, distanceFromUser: Int){
-        heightLabel.text = "\(waveHeight) ft"
-        frequencyLabel.text = "\(waveFrequency)s"
+        heightLabel.text = "\(Int(waveHeight)) ft"
+        frequencyLabel.text = "\(Int(waveFrequency))s"
         locationLabel.text = locationName
-        distanceLabel.text = "\(distanceFromUser)mi"
+        distanceLabel.text = distanceFromUser == 0 ? "Unknown Distance" : "\(distanceFromUser)mi"
         
         switch waveHeight{
         case ...0.5:
