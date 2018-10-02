@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var idStationSelected = Int()
     var distanceToUser = Int()
     var transitionView = CircleView()
+    var mainView = CircleView()
 
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
@@ -61,6 +62,12 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        for view in view.subviews where view is CircleView{
+            view.removeFromSuperview()
+        }
     }
 }
 
@@ -217,7 +224,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func createViewForTransition()-> CircleView {
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
-        let mainView = CircleView(frame: mainViewFrame)
+        mainView = CircleView(frame: mainViewFrame)
         mainView.snapshot = selectedSnapshot
         mainView.setAndAssign()
         return mainView
@@ -484,6 +491,9 @@ extension HomeViewController {
     
     
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
+        for view in view.subviews where view is CircleView{
+            view.removeFromSuperview()
+        }
         DispatchQueue.global(qos:.utility).async {
             self.getUserFavoritesFromPersistence()
             self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
