@@ -201,7 +201,7 @@ class SurfSnapshotView: UIScrollView {
         self.addSubview(mainLabel)
         
         mainStateTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
-        mainStateTitleLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        mainStateTitleLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
         mainStateTitleLabel.textColor =  textColor
         mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/10)
         mainStateTitleLabel.textAlignment = .center
@@ -238,8 +238,19 @@ class SurfSnapshotView: UIScrollView {
     
     private func addConditionQualityLabel(){
         let conditionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 80))
-        conditionLabel.text = conditionString
-        conditionLabel.font = UIFont(name:"Montserrat-SemiBold", size: 9.0)
+        if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
+            let stylizedText = conditionString
+                .styled(
+                    with:
+                    .tracking(.adobe(75)),
+                    .font(font),
+                    .alignment(.center),
+                    .adapt(.control)
+            )
+            conditionLabel.attributedText = stylizedText
+        }else{
+            conditionLabel.text = conditionString
+        }
         conditionLabel.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         conditionLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/10)
         conditionLabel.textAlignment = .center
@@ -347,7 +358,19 @@ class SurfSnapshotView: UIScrollView {
         switch mainState {
         case 1:
             mainLabel.text = currentSnapShot.swellDirectionString
-            mainStateTitleLabel.text = "SWELL"
+            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
+                let stylizedText = "SWELL"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateTitleLabel.attributedText = stylizedText
+            }else{
+                mainStateTitleLabel.text = "SWELL"
+            }
             mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
             if let font = UIFont(name: "Teko-Regular", size: 18){
                 let stylizedText = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
@@ -366,8 +389,19 @@ class SurfSnapshotView: UIScrollView {
             arrowInnerImageView.isHidden = false
         case 2:
             mainLabel.text = currentSnapShot.windDirectionString
-            mainStateTitleLabel.text = "WIND"
-            mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) mph"
+            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
+                let stylizedText = "WIND"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateTitleLabel.attributedText = stylizedText
+            }else{
+                mainStateTitleLabel.text = "WIND"
+            }
             if let font = UIFont(name: "Teko-Regular", size: 18){
                 let stylizedText = "\(currentSnapShot.windSpeed) mph"
                     .styled(
@@ -385,7 +419,19 @@ class SurfSnapshotView: UIScrollView {
             arrowInnerImageView.isHidden = true
         case 3:
             mainLabel.text  = "\(Int(currentSnapShot.period))"
-            mainStateTitleLabel.text = "PERIOD"
+            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
+                let stylizedText = "PERIOD"
+                    .styled(
+                        with:
+                        .tracking(.adobe(75)),
+                        .font(font),
+                        .alignment(.center),
+                        .adapt(.control)
+                )
+                mainStateTitleLabel.attributedText = stylizedText
+            }else{
+                mainStateTitleLabel.text = "PERIOD"
+            }
             if let font = UIFont(name: "Teko-Regular", size: 18){
                 let stylizedText = "SEC"
                     .styled(

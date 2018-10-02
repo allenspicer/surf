@@ -36,6 +36,7 @@
 		957471C42113EF660064DD3A /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C32113EF660064DD3A /* CircleView.swift */; };
 		957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */; };
 		957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */; };
+		957E5DEB2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */; };
 		958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */; };
 		958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A810A211C929400103064 /* Montserrat-Medium.ttf */; };
 		958A8121211C929E00103064 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */; };
@@ -100,6 +101,7 @@
 		957471C32113EF660064DD3A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFavoriteFlowLayout.swift; sourceTree = "<group>"; };
 		957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
+		957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		958A810A211C929400103064 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		958A8128211C92A700103064 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */,
 				95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */,
 				958A810A211C929400103064 /* Montserrat-Medium.ttf */,
 				958A810F211C929800103064 /* Montserrat-MediumItalic.ttf */,
@@ -400,6 +403,7 @@
 				958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */,
 				95D5C1432162C5A70097A8F6 /* Teko-Regular.ttf in Resources */,
 				958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */,
+				957E5DEB2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf in Resources */,
 				953F07F0210A575300E70E18 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,7 +669,10 @@
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -682,7 +689,10 @@
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -699,7 +709,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -717,7 +731,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM4Q5Z4QE8;
 				INFOPLIST_FILE = surfbreakTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = surfbreak.surfbreakTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
