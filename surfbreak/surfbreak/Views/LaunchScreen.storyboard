@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nRI-mr-tOL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nRI-mr-tOL">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,67 +14,19 @@
         <scene sceneID="4EU-dS-y5H">
             <objects>
                 <viewController id="nRI-mr-tOL" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QQT-YK-sVA">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="QQT-YK-sVA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_Flat" translatesAutoresizingMaskIntoConstraints="NO" id="04M-3s-jln">
-                                <rect key="frame" x="131" y="61" width="112" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="112" id="Igh-SW-nCj"/>
-                                    <constraint firstAttribute="height" constant="112" id="lrt-s2-UAD"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_wave" translatesAutoresizingMaskIntoConstraints="NO" id="NQe-Uy-FKp">
-                                <rect key="frame" x="131" y="554" width="112" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="112" id="t6P-Ja-k8g"/>
-                                    <constraint firstAttribute="height" constant="112" id="umr-ux-cEe"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bigwave" translatesAutoresizingMaskIntoConstraints="NO" id="3aI-et-ejg">
-                                <rect key="frame" x="131" y="696" width="112" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="Jtm-UM-lo5"/>
-                                    <constraint firstAttribute="width" constant="112" id="bPw-Af-ivK"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_bump" translatesAutoresizingMaskIntoConstraints="NO" id="P4R-vt-r2R">
-                                <rect key="frame" x="131" y="203" width="112" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="3gU-eF-vZE"/>
-                                    <constraint firstAttribute="width" constant="112" id="959-P9-bxT"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mini_littlewave" translatesAutoresizingMaskIntoConstraints="NO" id="QH5-3Y-0Ca">
-                                <rect key="frame" x="131" y="412" width="112" height="112"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="112" id="WHa-yr-83N"/>
-                                    <constraint firstAttribute="height" constant="112" id="vIt-eT-atX"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="surfbreak" translatesAutoresizingMaskIntoConstraints="NO" id="2Me-z6-ch4">
-                                <rect key="frame" x="61.666666666666657" y="345" width="251.99999999999997" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="Ezj-Ft-iJy"/>
-                                    <constraint firstAttribute="width" constant="252" id="LYM-26-f80"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="hd9-Ge-RhM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.050980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3aI-et-ejg" firstAttribute="top" secondItem="NQe-Uy-FKp" secondAttribute="bottom" constant="30" id="4sv-MV-lqh"/>
-                            <constraint firstItem="2Me-z6-ch4" firstAttribute="top" secondItem="P4R-vt-r2R" secondAttribute="bottom" constant="30" id="GVq-Di-3BH"/>
-                            <constraint firstItem="P4R-vt-r2R" firstAttribute="top" secondItem="04M-3s-jln" secondAttribute="bottom" constant="30" id="M8J-fl-IIq"/>
-                            <constraint firstItem="QH5-3Y-0Ca" firstAttribute="top" secondItem="2Me-z6-ch4" secondAttribute="bottom" constant="30" id="Y6h-hg-Icg"/>
-                            <constraint firstItem="2Me-z6-ch4" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="Zg3-BY-xxH"/>
-                            <constraint firstItem="NQe-Uy-FKp" firstAttribute="top" secondItem="QH5-3Y-0Ca" secondAttribute="bottom" constant="30" id="hTE-mi-PzS"/>
-                            <constraint firstItem="QH5-3Y-0Ca" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="qGS-qs-opy"/>
-                            <constraint firstItem="04M-3s-jln" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="rcQ-1t-dxd"/>
-                            <constraint firstItem="NQe-Uy-FKp" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="rvL-QY-osN"/>
-                            <constraint firstItem="VXH-3p-Bzy" firstAttribute="top" secondItem="04M-3s-jln" secondAttribute="top" constant="-17" id="tpe-Tj-6y8"/>
-                            <constraint firstItem="3aI-et-ejg" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="uc2-f9-z3K"/>
-                            <constraint firstItem="P4R-vt-r2R" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="v3Y-3t-Tqa"/>
+                            <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="3F7-Zn-zxy"/>
+                            <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerY" secondItem="QQT-YK-sVA" secondAttribute="centerY" id="9SB-1d-csV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VXH-3p-Bzy"/>
                     </view>
@@ -85,11 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Mini_Flat" width="25" height="25"/>
-        <image name="Mini_bigwave" width="25" height="25"/>
-        <image name="Mini_bump" width="25" height="25"/>
-        <image name="Mini_littlewave" width="25" height="25"/>
-        <image name="Mini_wave" width="25" height="25"/>
-        <image name="surfbreak" width="84" height="14"/>
+        <image name="splash" width="375" height="812"/>
     </resources>
 </document>
