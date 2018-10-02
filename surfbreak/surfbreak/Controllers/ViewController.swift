@@ -53,15 +53,6 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        if let vc = UIApplication.topViewController() as? HomeViewController{
-//            vc.transitionView.removeFromSuperview()
-////            vc.resignFirstResponder()
-////            vc.transitionView.isHidden = true
-////            vc.mainView.isHidden = true
-//        }
-//    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         stopDisplayLink()
     }
