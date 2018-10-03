@@ -24,7 +24,7 @@ public extension Sequence where Element: Equatable {
 
 
 extension UILabel {
-    func addCharacterSpacing(kernValue: Double = 3.0) {
+    func addCharacterSpacing(kernValue: Double = 2.0) {
         if let labelText = text, labelText.count > 0 {
             let attributedString = NSMutableAttributedString(string: labelText)
             attributedString.addAttribute(NSAttributedStringKey.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))

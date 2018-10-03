@@ -193,7 +193,7 @@ class SurfSnapshotView: UIScrollView {
         let widthPixels = 150 * waveHeightDigitCount + 200
         let distanceFromTop = self.frame.size.height/5
         mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
-        mainLabel.text = "\(currentSnapShot.waveHeight)ft"
+        mainLabel.text = "\(currentSnapShot.waveHeight)"
         mainLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
         mainLabel.textColor =  textColor
         mainLabel.center = CGPoint(x: self.frame.width/2, y: 2.6 * self.frame.height/10)
@@ -204,13 +204,18 @@ class SurfSnapshotView: UIScrollView {
         mainStateTitleLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
         mainStateTitleLabel.textColor =  textColor
         mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/10)
+        mainStateTitleLabel.text = "SWELL"
         mainStateTitleLabel.textAlignment = .center
+        mainStateTitleLabel.addCharacterSpacing()
         self.addSubview(mainStateTitleLabel)
         
         mainStateSecondaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
         mainStateSecondaryLabel.textAlignment = .center
         mainStateSecondaryLabel.textColor =  textColor
+        mainStateSecondaryLabel.font = UIFont(name:"Teko-Regular", size: 18.0)
+        mainStateSecondaryLabel.text = "FEET"
         mainStateSecondaryLabel.center = CGPoint(x: self.frame.width/2, y: 3.2 * self.frame.height/10)
+        mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
         self.addSubview(mainStateSecondaryLabel)
     }
     
@@ -238,19 +243,9 @@ class SurfSnapshotView: UIScrollView {
     
     private func addConditionQualityLabel(){
         let conditionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 80))
-        if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
-            let stylizedText = conditionString
-                .styled(
-                    with:
-                    .tracking(.adobe(75)),
-                    .font(font),
-                    .alignment(.center),
-                    .adapt(.control)
-            )
-            conditionLabel.attributedText = stylizedText
-        }else{
-            conditionLabel.text = conditionString
-        }
+        conditionLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
+        conditionLabel.text = conditionString
+        conditionLabel.addCharacterSpacing()
         conditionLabel.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         conditionLabel.center = CGPoint(x: self.frame.width/2, y: self.frame.height/10)
         conditionLabel.textAlignment = .center
@@ -347,7 +342,6 @@ class SurfSnapshotView: UIScrollView {
     private func addWindText() -> UIView {
         let waterTempLabel = UILabel()
         waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
-//        waterTempLabel.text = "\(currentSnapShot.windDirectionString)"
         waterTempLabel.font = UIFont(name:"Montserrat-SemiBold", size: 16.0)
         waterTempLabel.textColor = textColor
         return waterTempLabel
@@ -358,100 +352,35 @@ class SurfSnapshotView: UIScrollView {
         switch mainState {
         case 1:
             mainLabel.text = currentSnapShot.swellDirectionString
-            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
-                let stylizedText = "SWELL"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateTitleLabel.attributedText = stylizedText
-            }else{
-                mainStateTitleLabel.text = "SWELL"
-            }
+            mainStateTitleLabel.text = "SWELL"
+            mainStateTitleLabel.addCharacterSpacing()
             mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
-            if let font = UIFont(name: "Teko-Regular", size: 18){
-                let stylizedText = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateSecondaryLabel.attributedText = stylizedText
-            }else{
-                mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
-            }
+            mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
             arrowOuterImageView.isHidden = true
             arrowInnerImageView.isHidden = false
         case 2:
             mainLabel.text = currentSnapShot.windDirectionString
-            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
-                let stylizedText = "WIND"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateTitleLabel.attributedText = stylizedText
-            }else{
-                mainStateTitleLabel.text = "WIND"
-            }
-            if let font = UIFont(name: "Teko-Regular", size: 18){
-                let stylizedText = "\(currentSnapShot.windSpeed) mph"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateSecondaryLabel.attributedText = stylizedText
-            }else{
-                mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) mph"
-            }
+            mainStateTitleLabel.text = "WIND"
+            mainStateTitleLabel.addCharacterSpacing()
+            mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) MPH"
+            mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = true
         case 3:
             mainLabel.text  = "\(Int(currentSnapShot.period))"
-            if let font = UIFont(name: "Montserrat-BoldItalic", size: 9){
-                let stylizedText = "PERIOD"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateTitleLabel.attributedText = stylizedText
-            }else{
-                mainStateTitleLabel.text = "PERIOD"
-            }
-            if let font = UIFont(name: "Teko-Regular", size: 18){
-                let stylizedText = "SEC"
-                    .styled(
-                        with:
-                        .tracking(.adobe(75)),
-                        .font(font),
-                        .alignment(.center),
-                        .adapt(.control)
-                )
-                mainStateSecondaryLabel.attributedText = stylizedText
-            }else{
-                mainStateSecondaryLabel.text = "SEC"
-            }
+            mainStateTitleLabel.text = "PERIOD"
+            mainStateTitleLabel.addCharacterSpacing()
+            mainStateSecondaryLabel.text = "SEC"
+            mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = false
         default:
             mainState = 0
-            mainLabel.text = "\(currentSnapShot.waveHeight)ft"
-            mainStateTitleLabel.text = ""
-            mainStateSecondaryLabel.text = ""
+            mainLabel.text = "\(currentSnapShot.waveHeight)"
+            mainStateTitleLabel.text = "SWELL"
+            mainStateTitleLabel.addCharacterSpacing()
+            mainStateSecondaryLabel.text = "FEET"
+            mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
             arrowOuterImageView.isHidden = false
             arrowInnerImageView.isHidden = false
         }
