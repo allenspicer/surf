@@ -45,6 +45,7 @@
 		9592EC54210A7EF9004B0A82 /* BuoyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC53210A7EF9004B0A82 /* BuoyClient.swift */; };
 		9592EC57210A8064004B0A82 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592EC56210A8064004B0A82 /* Snapshot.swift */; };
 		9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 9592EC58210A89C2004B0A82 /* regionalBuoyList.json */; };
+		95981CAD21644856004EC69F /* Teko-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95981CAC21644832004EC69F /* Teko-Light.ttf */; };
 		959BD87A2118CB3B0028F5F5 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BD8792118CB3B0028F5F5 /* Favorite.swift */; };
 		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
 		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
@@ -110,6 +111,7 @@
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
+		95981CAC21644832004EC69F /* Teko-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Teko-Light.ttf"; sourceTree = "<group>"; };
 		959BD8792118CB3B0028F5F5 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
 		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		958A8128211C92A700103064 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				95981CAC21644832004EC69F /* Teko-Light.ttf */,
 				957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */,
 				95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */,
 				958A810A211C929400103064 /* Montserrat-Medium.ttf */,
@@ -395,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95981CAD21644856004EC69F /* Teko-Light.ttf in Resources */,
 				9592EC59210A89C2004B0A82 /* regionalBuoyList.json in Resources */,
 				958A8121211C929E00103064 /* Montserrat-MediumItalic.ttf in Resources */,
 				953F07F5210A575400E70E18 /* Assets.xcassets in Resources */,
@@ -461,12 +465,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BonMot/BonMot.framework",
 				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BonMot.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

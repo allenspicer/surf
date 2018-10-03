@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import BonMot
 
 
 private var windUnit = "MPH"
@@ -194,10 +193,11 @@ class SurfSnapshotView: UIScrollView {
         let distanceFromTop = self.frame.size.height/5
         mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
         mainLabel.text = "\(currentSnapShot.waveHeight)"
-        mainLabel.font = UIFont(name:"AvenirNext-Medium", size: 75.0)
+        mainLabel.font = UIFont(name:"Teko-Light", size: 85.0)
         mainLabel.textColor =  textColor
         mainLabel.center = CGPoint(x: self.frame.width/2, y: 2.6 * self.frame.height/10)
         mainLabel.textAlignment = .center
+        mainLabel.addCharacterSpacing()
         self.addSubview(mainLabel)
         
         mainStateTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
@@ -352,6 +352,7 @@ class SurfSnapshotView: UIScrollView {
         switch mainState {
         case 1:
             mainLabel.text = currentSnapShot.swellDirectionString
+            mainLabel.addCharacterSpacing()
             mainStateTitleLabel.text = "SWELL"
             mainStateTitleLabel.addCharacterSpacing()
             mainStateSecondaryLabel.text = "\(currentSnapShot.waveHeight) FT @ \(Int(currentSnapShot.period)) SEC"
@@ -360,6 +361,7 @@ class SurfSnapshotView: UIScrollView {
             arrowInnerImageView.isHidden = false
         case 2:
             mainLabel.text = currentSnapShot.windDirectionString
+            mainLabel.addCharacterSpacing()
             mainStateTitleLabel.text = "WIND"
             mainStateTitleLabel.addCharacterSpacing()
             mainStateSecondaryLabel.text = "\(currentSnapShot.windSpeed) MPH"
@@ -368,6 +370,7 @@ class SurfSnapshotView: UIScrollView {
             arrowInnerImageView.isHidden = true
         case 3:
             mainLabel.text  = "\(Int(currentSnapShot.period))"
+            mainLabel.addCharacterSpacing()
             mainStateTitleLabel.text = "PERIOD"
             mainStateTitleLabel.addCharacterSpacing()
             mainStateSecondaryLabel.text = "SEC"
@@ -377,6 +380,7 @@ class SurfSnapshotView: UIScrollView {
         default:
             mainState = 0
             mainLabel.text = "\(currentSnapShot.waveHeight)"
+            mainLabel.addCharacterSpacing()
             mainStateTitleLabel.text = "SWELL"
             mainStateTitleLabel.addCharacterSpacing()
             mainStateSecondaryLabel.text = "FEET"
