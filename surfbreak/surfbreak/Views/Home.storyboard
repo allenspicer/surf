@@ -84,21 +84,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n02-Mb-7VZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TinyWave_icon_20px" translatesAutoresizingMaskIntoConstraints="NO" id="n02-Mb-7VZ">
+                                                    <rect key="frame" x="98" y="10" width="20" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="128" id="3hO-Ep-bJI"/>
-                                                        <constraint firstAttribute="width" constant="128" id="ehv-Tw-GN8"/>
+                                                        <constraint firstAttribute="height" constant="20" id="3hO-Ep-bJI"/>
+                                                        <constraint firstAttribute="width" constant="20" id="ehv-Tw-GN8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u5-oV-gkQ">
-                                                    <rect key="frame" x="13" y="28.5" width="102" height="23.5"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u5-oV-gkQ">
+                                                    <rect key="frame" x="13" y="60" width="102" height="21"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Label">
+                                                            <attributes>
+                                                                <font key="NSFont" size="17" name="AvenirNextCondensed-Medium"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="0.90000000000000002" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20b-Ku-2Gs">
-                                                    <rect key="frame" x="13" y="86" width="102" height="20.5"/>
+                                                    <rect key="frame" x="13" y="38" width="102" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -106,13 +112,13 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="top" secondItem="5u5-oV-gkQ" secondAttribute="centerY" constant="-40" id="0ef-Xj-Zzb"/>
+                                            <constraint firstAttribute="top" secondItem="5u5-oV-gkQ" secondAttribute="top" constant="-60" id="0ef-Xj-Zzb"/>
                                             <constraint firstItem="5u5-oV-gkQ" firstAttribute="centerX" secondItem="9al-9H-avp" secondAttribute="centerX" id="3Zc-TR-Kua"/>
-                                            <constraint firstItem="n02-Mb-7VZ" firstAttribute="centerY" secondItem="9al-9H-avp" secondAttribute="centerY" id="AOh-hc-AGU"/>
                                             <constraint firstItem="5u5-oV-gkQ" firstAttribute="width" secondItem="9al-9H-avp" secondAttribute="width" multiplier="0.8" id="Cay-Vd-LDI"/>
                                             <constraint firstItem="20b-Ku-2Gs" firstAttribute="centerX" secondItem="5u5-oV-gkQ" secondAttribute="centerX" id="LYc-JR-VHU"/>
-                                            <constraint firstAttribute="bottom" secondItem="20b-Ku-2Gs" secondAttribute="centerY" constant="32" id="YM3-KK-Yd1"/>
-                                            <constraint firstItem="n02-Mb-7VZ" firstAttribute="centerX" secondItem="9al-9H-avp" secondAttribute="centerX" id="vZt-xI-ZkO"/>
+                                            <constraint firstAttribute="top" secondItem="20b-Ku-2Gs" secondAttribute="centerY" constant="-48" id="YM3-KK-Yd1"/>
+                                            <constraint firstItem="n02-Mb-7VZ" firstAttribute="top" secondItem="9al-9H-avp" secondAttribute="top" constant="10" id="civ-a8-6ZE"/>
+                                            <constraint firstAttribute="trailing" secondItem="n02-Mb-7VZ" secondAttribute="trailing" constant="10" id="mCw-4p-dFM"/>
                                             <constraint firstItem="20b-Ku-2Gs" firstAttribute="width" secondItem="5u5-oV-gkQ" secondAttribute="width" id="wWK-O4-d0C"/>
                                         </constraints>
                                         <size key="customSize" width="128" height="128"/>
@@ -174,5 +180,6 @@
     </scenes>
     <resources>
         <image name="Bkgd_main" width="414" height="812"/>
+        <image name="TinyWave_icon_20px" width="20" height="20"/>
     </resources>
 </document>
