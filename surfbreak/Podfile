@@ -6,7 +6,6 @@ target 'surfbreak' do
   use_frameworks!
   
   pod 'Disk', '~> 0.3.3'
-  pod 'BonMot'
 
   target 'surfbreakTests' do
     inherit! :search_paths
