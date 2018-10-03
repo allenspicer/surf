@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct Tide {
-    var timeStamp: String
+    var timeStamp: Date
     var value : Double
     var key : String
 }

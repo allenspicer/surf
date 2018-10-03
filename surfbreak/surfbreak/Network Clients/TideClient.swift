@@ -38,7 +38,7 @@ final class TideClient: NSObject {
     private func tideDataServiceRequest(){
         
         let currentDateString = formattedCurrentDateString()
-        let hoursNeeded = 24
+        let hoursNeeded = 36
         let stationId = "\(currentSnapshot.airWindTideId)"
 
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=lst_ldt&application=web_services&format=json"
@@ -74,11 +74,19 @@ final class TideClient: NSObject {
             guard let valueString = dataObject["v"] as? String else { return }
             guard let value = Double(valueString) else { return }
             guard let key = dataObject["type"] as? String else { return }
-            guard let timeStamp = dataObject["t"] as? String else { return }
+            guard let timeStampString = dataObject["t"] as? String else { return }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            dateFormatter.timeZone = TimeZone(abbreviation: "EST")
+            guard let timeStamp = dateFormatter.date(from: timeStampString) else { return }
             let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
             tideArray.append(tide)
         }
         print("Tide Array Created with \(tideArray.count) Tide Objects")
+        for tide in tideArray{
+            print("Tide:  \(tide)")
+
+        }
         if self.tideArray.count > 0 {
             DispatchQueue.main.async {
                 self.didGetTideData()
@@ -113,48 +121,27 @@ final class TideClient: NSObject {
     }
     
     func addTideDataToSnapshot(_ snapshotWithoutTide : Snapshot, tideArray : [Tide])-> Snapshot {
-        
         var snapshot = snapshotWithoutTide
-        var nextTideIndex = Int()
         let currentTimestamp = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let upcomingTides = tideArray.filter({$0.timeStamp > currentTimestamp})
         
-        //
-        //turn this into function for all these to use
-        for index in 0..<tideArray.count {
-            if let tideTimeStamp = dateFormatter.date(from: tideArray[index].timeStamp){
-                if tideTimeStamp > currentTimestamp {
-                    nextTideIndex = index
-                    break
+        //tides are in order from API 
+        //Take the lowest date stamp greater than current and add it plus the next tide based on their H/L key
+            if (upcomingTides[0].key == "H"){
+                snapshot.nextHighTide = upcomingTides[0].timeStamp
+                print(snapshot.nextHighTide)
+                if upcomingTides.indices.contains(1){
+                    snapshot.nextLowTide = upcomingTides[1].timeStamp
+                    print(snapshot.nextLowTide)
+                }else{
+                    snapshot.nextLowTide = upcomingTides[0].timeStamp
+                    if upcomingTides.indices.contains(1){
+                        snapshot.nextHighTide = upcomingTides[1].timeStamp
+                    }
                 }
             }
-        }
-        //
-        //
-        
-        //        let tide = tideArray[nextTideIndex]
-        //        snapshot.nextTidePolar = tide.key
-        //        snapshot.nextTideTime = dateFormatter.date(from: tideArray[nextTideIndex].timeStamp)
-        //        snapshot.tideDirectionString = (tide.key == "H" ? dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) : dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp))
-        
-        guard let upcomingTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex].timeStamp) else {return snapshot}
-        if nextTideIndex > 1 {
-            if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex-1].timeStamp){
-                snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
-                snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
-            }
-        }else if tideArray.count-1 < nextTideIndex{
-            if let previousTideTimestamp =  dateFormatter.date(from: tideArray[nextTideIndex+1].timeStamp){
-                snapshot.nextHighTide = tideArray[nextTideIndex].key == "H" ? upcomingTideTimestamp : previousTideTimestamp
-                snapshot.nextLowTide = tideArray[nextTideIndex].key == "L" ? upcomingTideTimestamp : previousTideTimestamp
-            }
-        }
-        
         return snapshot
     }
-    
-    
-}
 
+}
 
