@@ -222,28 +222,30 @@ class SurfSnapshotView: UIScrollView {
     
     private func addSpotDetails(){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        label.text = "\(currentSnapShot.distance)mi"
-        label.font = UIFont(name:"Montserrat-Medium", size: 15.0)
+        label.text = "\(currentSnapShot.distance) MI"
+        label.font = UIFont(name:"Montserrat-MediumItalic", size: 15.0)
         label.textColor =  textColor
         let yValue = 6 * self.frame.height/10 + 20
         label.center = CGPoint(x: self.frame.width/2, y:yValue)
         label.textAlignment = .center
+        label.addCharacterSpacing(kernValue: 1.4)
         self.addSubview(label)
     }
     
     private func addSpotTitleLabel(){
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 200))
-        titleLabel.text = currentSnapShot.nickname.isEmpty ? currentSnapShot.stationName : currentSnapShot.nickname
-        titleLabel.font = UIFont(name:"Montserrat-Medium", size: 15.0)
+        titleLabel.text = currentSnapShot.nickname.isEmpty ? currentSnapShot.stationName.uppercased() : currentSnapShot.nickname
+        titleLabel.font = UIFont(name:"Teko-Regular", size: 24.0)
         titleLabel.textColor =  #colorLiteral(red: 1, green: 0.9450980392, blue: 0.5058823529, alpha: 1)
         titleLabel.center = CGPoint(x: self.frame.width/2, y: 6 * self.frame.height/10)
         titleLabel.textAlignment = .center
+        titleLabel.addCharacterSpacing()
         self.addSubview(titleLabel)
     }
     
     private func addConditionQualityLabel(){
         let conditionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 80))
-        conditionLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
+        conditionLabel.font = UIFont(name:"Montserrat-SemiBoldItalic", size: 9.0)
         conditionLabel.text = conditionString
         conditionLabel.addCharacterSpacing()
         conditionLabel.textColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

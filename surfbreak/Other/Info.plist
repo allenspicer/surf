@@ -44,6 +44,7 @@
 	<string>This app uses your location to find the bouy data closest to you - as that is what our users will generally be interested in</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Montserrat-SemiBoldItalic.ttf</string>
 		<string>Teko-Light.ttf</string>
 		<string>Montserrat-BoldItalic.ttf</string>
 		<string>Teko-Regular.ttf</string>
