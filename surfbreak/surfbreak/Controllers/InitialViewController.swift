@@ -29,8 +29,8 @@ final class InitialViewController: UIViewController {
 
 
     override func viewDidLoad() {
-        //set up activity indicator
-        startActivityIndicator("Loading...")
+        //present identical screen to launch screen, then switch to activity indicator
+        startIntroScreenWithTimerToActivityIndicator()
         
         DispatchQueue.global(qos:.utility).async{
 
@@ -62,6 +62,28 @@ final class InitialViewController: UIViewController {
                 self.checkComponentsThenSegue()
             }
         }
+    }
+    
+    //
+    //MARK: - Intro Screen Handler
+    //
+    
+    private func startIntroScreenWithTimerToActivityIndicator(){
+//        let firstLaunch = UserDefaults.standard.bool(forKey: "FirstLaunchBool")
+//        if firstLaunch{
+        let introImageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
+        self.view.addSubview(introImageView)
+        introImageView.center = self.view.center
+    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            //when timer is complete remove the intro and set up activity indicator
+            introImageView.removeFromSuperview()
+            self.startActivityIndicator("Loading...")
+    }
+//        }else{
+//            //set up activity indicator
+//            startActivityIndicator("Loading...")
+//        }
     }
     
     //
