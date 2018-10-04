@@ -23,12 +23,48 @@ public extension Sequence where Element: Equatable {
 }
 
 
-extension UILabel {
+public extension UILabel {
     func addCharacterSpacing(kernValue: Double = 2.0) {
         if let labelText = text, labelText.count > 0 {
             let attributedString = NSMutableAttributedString(string: labelText)
             attributedString.addAttribute(NSAttributedStringKey.kern, value: kernValue, range: NSRange(location: 0, length: attributedString.length - 1))
             attributedText = attributedString
+        }
+    }
+}
+
+
+public extension UIView {
+    
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.topAnchor
+        } else {
+            return self.topAnchor
+        }
+    }
+    
+    var safeLeftAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *){
+            return self.safeAreaLayoutGuide.leftAnchor
+        }else {
+            return self.leftAnchor
+        }
+    }
+    
+    var safeRightAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *){
+            return self.safeAreaLayoutGuide.rightAnchor
+        }else {
+            return self.rightAnchor
+        }
+    }
+    
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return self.bottomAnchor
         }
     }
 }

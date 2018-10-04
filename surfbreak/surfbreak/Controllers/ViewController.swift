@@ -216,13 +216,16 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func addFavoriteButton(){
-        favoriteButton.frame = CGRect(x: mainView.frame.width - 40.0, y: 32, width: 24, height: 37)
-        favoriteButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         setButton()
         favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
         for view in mainView.subviews {
             if view is SurfSnapshotView {
                 mainView.addSubview(favoriteButton)
+                favoriteButton.heightAnchor.constraint(equalToConstant: 37).isActive = true
+                favoriteButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+                favoriteButton.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
+                favoriteButton.rightAnchor.constraint(equalTo: view.safeRightAnchor, constant: -20).isActive = true
             }
         }
     }
