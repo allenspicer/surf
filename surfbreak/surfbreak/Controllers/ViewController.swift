@@ -224,7 +224,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 mainView.addSubview(favoriteButton)
                 favoriteButton.heightAnchor.constraint(equalToConstant: 37).isActive = true
                 favoriteButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
-                favoriteButton.topAnchor.constraint(equalTo: view.safeTopAnchor).isActive = true
+                favoriteButton.topAnchor.constraint(equalTo: view.safeTopAnchor, constant: 8).isActive = true
                 favoriteButton.rightAnchor.constraint(equalTo: view.safeRightAnchor, constant: -20).isActive = true
             }
         }
