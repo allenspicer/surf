@@ -65,7 +65,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="btx-0C-wgR" customClass="ProximalCollectionView" customModule="surfbreak" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="427" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="447" width="375" height="200"/>
                                 <color key="backgroundColor" red="0.019607843137254902" green="0.019607843137254902" blue="0.050980392156862744" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="JSt-yB-Fc7"/>
@@ -145,7 +145,7 @@
                             <constraint firstItem="ROK-kO-E69" firstAttribute="top" secondItem="GFB-mz-RHo" secondAttribute="top" constant="50" id="jVh-6g-5At"/>
                             <constraint firstItem="btx-0C-wgR" firstAttribute="width" secondItem="ROK-kO-E69" secondAttribute="width" id="nDC-5P-ePt"/>
                             <constraint firstItem="GFB-mz-RHo" firstAttribute="centerX" secondItem="d0z-Ep-3rz" secondAttribute="centerX" id="o2n-aB-PkG"/>
-                            <constraint firstItem="btx-0C-wgR" firstAttribute="bottom" secondItem="ROK-kO-E69" secondAttribute="bottom" constant="-40" id="ul8-kZ-Smp"/>
+                            <constraint firstItem="btx-0C-wgR" firstAttribute="bottom" secondItem="ROK-kO-E69" secondAttribute="bottom" constant="-20" id="ul8-kZ-Smp"/>
                             <constraint firstAttribute="bottom" secondItem="klz-Z5-yWX" secondAttribute="bottom" id="wu5-SC-m6j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ROK-kO-E69"/>
