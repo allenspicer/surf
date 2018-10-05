@@ -94,7 +94,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didSwipe))
         panGesture.delegate = self
         mainView.addGestureRecognizer(panGesture)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(didTap))
+        tapGesture.minimumPressDuration = 0
         tapGesture.delegate = self
         mainView.addGestureRecognizer(tapGesture)
     }
@@ -115,12 +116,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     //Animation Components
     //
     
-    @objc func didTap(gesture: UITapGestureRecognizer) {
-        for subview in mainView.subviews {
-            if let view = subview as? SurfSnapshotView {
-                view.toggleMainLabel()
-                selectionFeedbackGenerator.prepare()
-                selectionFeedbackGenerator.selectionChanged()
+    @objc func didTap(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            for subview in mainView.subviews {
+                if let view = subview as? SurfSnapshotView {
+                    view.toggleMainLabel()
+                    selectionFeedbackGenerator.prepare()
+                    selectionFeedbackGenerator.selectionChanged()
+                }
             }
         }
     }
