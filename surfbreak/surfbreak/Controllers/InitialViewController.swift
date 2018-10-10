@@ -14,7 +14,7 @@ final class InitialViewController: UIViewController {
     
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
-    private var componentsChecklist = [Int : SnapshotComponents]()
+    private var componentsChecklist : [Int : SnapshotComponents] = [:]
     var userAcceptsFallback = false
 
     private var buoyClient : BuoyClient?
@@ -50,7 +50,7 @@ final class InitialViewController: UIViewController {
             if !self.componentsChecklist.isEmpty {
                     
                 //for each favorite that does not have a snapshot
-                for snapshotId in self.componentsChecklist.keys {
+                for snapshotId in self.componentsChecklist.keys{
                     
                     //if favorites check persistence for records
                     if !self.checkForDownloadedSnapshot(with: snapshotId){
@@ -125,7 +125,7 @@ final class InitialViewController: UIViewController {
         }
         
         if userLocation != nil{
-            print("User location available from persistence: \(userLocation)")
+            print("User location available from persistence: \(String(describing: userLocation))")
             
         }else{
             isAuthorizedtoGetUserLocation()
@@ -143,6 +143,26 @@ final class InitialViewController: UIViewController {
         #if targetEnvironment(simulator)
             userLocation = UserLocation(latitude: 34.2428817, longitude: -77.8217321, timestamp: Date())
         #endif
+    }
+    
+    func respondToLocationServicesDenial(){
+        DispatchQueue.main.async {
+            //if no data respond with alertview
+            let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        //try to get location again
+                        self.locationManager.requestLocation()
+                    })
+                }
+            }
+            alert.addAction(settingsAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //
@@ -216,6 +236,7 @@ final class InitialViewController: UIViewController {
             allSnapshots = allSnapshots.filter({abs($0.timeStamp.timeIntervalSinceNow) < timeLimit})
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
+            allPersistenceSnapshots = allSnapshots
             
             print("\(allSnapshots.count) Favorite Snapshots after removing")
             for snapshot in allSnapshots{
@@ -278,8 +299,6 @@ extension InitialViewController : CLLocationManagerDelegate{
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
-    
     
     //this method will be called each time a user changes his location access preference.
     internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -402,14 +421,13 @@ extension InitialViewController {
         print("There are \(componentsChecklist.count) componentsChecklists ")
         if componentsChecklist.count > 0 {
             for key in componentsChecklist.keys {
-                print("The component checklists are")
-                print(key)
-                print(componentsChecklist[key]?.bouy)
-                print(componentsChecklist[key]?.air)
-                print(componentsChecklist[key]?.wind)
-                print(componentsChecklist[key]?.tide)
-                
                 if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
+                    print("Exiting on checkComponentsForCompletion")
+                    print("Snapshot id \(key)")
+                    print("Buoy data present: \(String(describing: componentsChecklist[key]?.bouy))")
+                    print("Air data present: \(String(describing: componentsChecklist[key]?.air))")
+                    print("Wind data present: \(String(describing: componentsChecklist[key]?.wind))")
+                    print("Tide data present: \(String(describing: componentsChecklist[key]?.tide))")
                     return
                 }
                 guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
@@ -423,22 +441,19 @@ extension InitialViewController {
     }
     
     func checkComponentsThenSegue(){
-        print("Beginning Transiton")
-        print("There are \(componentsChecklist.count) componentsChecklists ")
-        print("The component checklists are")
         for key in componentsChecklist.keys {
-            print(key)
-            print(componentsChecklist[key]?.quality)
-            print(userLocation)
-
-            if componentsChecklist[key]?.quality == false || userLocation == nil{
+            if componentsChecklist[key]?.quality == false{
+                print("Exiting on checkComponentsThenSegue quality not available")
+                print("for snapshot id \(key)")
                 return
             }
         }
         
         if userLocation == nil {
+            print("Exiting on checkComponentsThenSegue userLocations not available")
             //try to get location again
             locationManager.requestLocation()
+            respondToLocationServicesDenial()
             return
         }
         
