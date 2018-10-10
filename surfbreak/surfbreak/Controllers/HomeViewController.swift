@@ -450,7 +450,7 @@ extension HomeViewController : BuoyClientDelegate{
     
     func setupGestureRecognizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
-        longPressGesture.minimumPressDuration = 4
+        longPressGesture.minimumPressDuration = 2
         longPressGesture.delegate = self
         self.view.addGestureRecognizer(longPressGesture)
     }
