@@ -39,7 +39,6 @@ final class InitialViewController: UIViewController {
             
             //get all stations from local file
             self.loadStationDataFromFile()
-            guard let stations = self.allStations else {return}
             
             //check persistence for user favorites
             self.getUserFavoritesList()
@@ -54,7 +53,7 @@ final class InitialViewController: UIViewController {
                     
                     //if favorites check persistence for records
                     if !self.checkForDownloadedSnapshot(with: snapshotId){
-                        self.setDataClientsForStation(snapshotId: snapshotId, allStations: stations)
+                        self.setDataClientsForStation(snapshotId: snapshotId)
                     }
                 }
             }else{
@@ -269,7 +268,11 @@ final class InitialViewController: UIViewController {
     //
     
     
-    func setDataClientsForStation(snapshotId : Int, allStations : [Station]){
+    func setDataClientsForStation(snapshotId : Int){
+        guard let allStations = self.allStations else {
+            print("failed to unwrap self.allStations \n No buoy client created for snapshot with id \(snapshotId)")
+            return
+        }
         buoyClient = BuoyClient(snapshotId: snapshotId, allStations : allStations)
         buoyClient?.delegate = self
         buoyClient?.createBuoyData()
@@ -355,7 +358,7 @@ extension InitialViewController : BuoyClientDelegate{
                     let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
                         DispatchQueue.global(qos:.utility).async{
                             self.setAllComponentsTo(bool: false, For: sender.snapshotId)
-                            self.setDataClientsForStation(snapshotId: sender.snapshotId, allStations: stations)
+                            self.setDataClientsForStation(snapshotId: sender.snapshotId)
                         }
                     }
                     alert.addAction(retryAction)
