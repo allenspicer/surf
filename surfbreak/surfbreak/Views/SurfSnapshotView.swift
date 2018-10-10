@@ -200,21 +200,19 @@ class SurfSnapshotView: UIScrollView {
         mainLabel.addCharacterSpacing()
         self.addSubview(mainLabel)
         
-        mainStateTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        mainStateTitleLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: 2.6 * self.frame.height/10 - 128, width: widthPixels, height: distanceFromTop))
         mainStateTitleLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
         mainStateTitleLabel.textColor =  textColor
-        mainStateTitleLabel.center = CGPoint(x: self.frame.width/2, y: 2 * self.frame.height/10)
         mainStateTitleLabel.text = "SWELL"
         mainStateTitleLabel.textAlignment = .center
         mainStateTitleLabel.addCharacterSpacing()
         self.addSubview(mainStateTitleLabel)
         
-        mainStateSecondaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        mainStateSecondaryLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: 2.6 * self.frame.height/10 - 43, width: widthPixels, height: distanceFromTop))
         mainStateSecondaryLabel.textAlignment = .center
         mainStateSecondaryLabel.textColor =  textColor
         mainStateSecondaryLabel.font = UIFont(name:"Teko-Regular", size: 18.0)
         mainStateSecondaryLabel.text = "FEET"
-        mainStateSecondaryLabel.center = CGPoint(x: self.frame.width/2, y: 3.2 * self.frame.height/10)
         mainStateSecondaryLabel.addCharacterSpacing(kernValue: 1.3)
         self.addSubview(mainStateSecondaryLabel)
     }
