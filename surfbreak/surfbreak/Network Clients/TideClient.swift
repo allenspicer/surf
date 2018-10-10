@@ -82,11 +82,6 @@ final class TideClient: NSObject {
             let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
             tideArray.append(tide)
         }
-        print("Tide Array Created with \(tideArray.count) Tide Objects")
-        for tide in tideArray{
-            print("Tide:  \(tide)")
-
-        }
         if self.tideArray.count > 0 {
             DispatchQueue.main.async {
                 self.didGetTideData()
