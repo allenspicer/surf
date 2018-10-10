@@ -27,6 +27,7 @@
                         <constraints>
                             <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="3F7-Zn-zxy"/>
                             <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerY" secondItem="QQT-YK-sVA" secondAttribute="centerY" id="9SB-1d-csV"/>
+                            <constraint firstItem="hd9-Ge-RhM" firstAttribute="leading" secondItem="QQT-YK-sVA" secondAttribute="leadingMargin" constant="-16" id="Eeq-Wo-nIW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VXH-3p-Bzy"/>
                     </view>

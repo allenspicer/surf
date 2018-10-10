@@ -73,7 +73,11 @@ final class InitialViewController: UIViewController {
 //        if firstLaunch{
         let introImageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
         self.view.addSubview(introImageView)
-        introImageView.center = self.view.center
+        introImageView.contentMode = .scaleAspectFill
+        introImageView.translatesAutoresizingMaskIntoConstraints = false
+        introImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        introImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        introImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
     
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             //when timer is complete remove the intro and set up activity indicator
