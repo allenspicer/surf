@@ -68,8 +68,6 @@ final class InitialViewController: UIViewController {
     //
     
     private func startIntroScreenWithTimerToActivityIndicator(){
-//        let firstLaunch = UserDefaults.standard.bool(forKey: "FirstLaunchBool")
-//        if firstLaunch{
         let introImageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
         self.view.addSubview(introImageView)
         introImageView.contentMode = .scaleAspectFill
@@ -82,11 +80,7 @@ final class InitialViewController: UIViewController {
             //when timer is complete remove the intro and set up activity indicator
             introImageView.removeFromSuperview()
             self.startActivityIndicator("Loading...")
-    }
-//        }else{
-//            //set up activity indicator
-//            startActivityIndicator("Loading...")
-//        }
+        }
     }
     
     //
