@@ -371,7 +371,10 @@ extension InitialViewController : MFMailComposeViewControllerDelegate{
         informationalFooter.append("\(iosVersion)")
         let mailController = MFMailComposeViewController()
         mailController.mailComposeDelegate = self
-        mailController.setToRecipients(["surfbreakapp@gmail.com"])
+        let mail = "surfbreakapp"
+        mail.append("@")
+        mail.append("gmail.com")
+        mailController.setToRecipients([mail])
         mailController.setSubject("Support Request")
         mailController.setMessageBody("""
             Name:
