@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Disk
+import MessageUI
 
 final class InitialViewController: UIViewController {
     
@@ -293,6 +294,10 @@ final class InitialViewController: UIViewController {
 
 }
 
+//
+//MARK: - Core Location
+//
+
 extension InitialViewController : CLLocationManagerDelegate{
     //if we have no permission to access user location, then ask user for permission.
     private func isAuthorizedtoGetUserLocation() {
@@ -330,10 +335,77 @@ extension InitialViewController : CLLocationManagerDelegate{
             }catch{
                 print("Saving to automatic storage with Disk failed. Error is: \(error)")
             }
-            self.checkComponentsForCompletion()
+            let maximumDistance = 10.0
+            let latDiff = abs(currentLocation.coordinate.latitude - 34.208)
+            let lonDiff = abs(currentLocation.coordinate.longitude - -77.796)
+            if (pow(lonDiff, 2) + pow(latDiff, 2)).squareRoot() > maximumDistance{
+                let alert = UIAlertController.init(title: "You're pretty far from our closest break", message: "For now, you won't have a lot of great info here to work with. Please email us now to let us know where you are and what breaks you're looking for and we'll add them to our 'To-Do' list", preferredStyle: .alert)
+                let emailAction = UIAlertAction(title: "Email Now", style: .default){_ in
+                    self.composeEmail()
+                }
+                alert.addAction(emailAction)
+                let ignoreAction = UIAlertAction(title: "Ignore", style: .cancel){_ in
+                    self.checkComponentsThenSegue()
+                }
+                alert.addAction(ignoreAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }
+
+//
+//MARK: - Email composition
+//
+
+extension InitialViewController : MFMailComposeViewControllerDelegate{
+    func composeEmail() {
+        var informationalFooter = ""
+        if let userLocation = userLocation {
+            informationalFooter = "\(userLocation.latitude).\(userLocation.longitude)."
+        }
+        if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String{
+            informationalFooter.append("v\(appVersion).")
+        }
+        let iosVersion = UIDevice.current.systemVersion
+        informationalFooter.append("\(iosVersion)")
+        let mailController = MFMailComposeViewController()
+        mailController.mailComposeDelegate = self
+        mailController.setToRecipients(["surfbreakapp@gmail.com"])
+        mailController.setSubject("Support Request")
+        mailController.setMessageBody("""
+            Name:
+            Contact Email:
+            City/State/Country:
+            Surf Spots I'm Looking For:
+            
+            Please add my spots to your supported surfbreaks!
+            
+            For support use: \(informationalFooter)
+            """, isHTML: false)
+        self.present(mailController, animated: true, completion: nil)
+    }
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            break
+        case .saved:
+            break
+        case .sent:
+            break
+        case .failed:
+            break
+        }
+        dismiss(animated: true, completion: {
+            self.checkComponentsThenSegue()
+        })
+    }
+}
+
+//
+//MARK: - Data Client Delegates
+//
 
 extension InitialViewController : BuoyClientDelegate{
     func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
@@ -380,7 +452,7 @@ extension InitialViewController : TideClientDelegate{
         componentsChecklist[snapshot.id]?.tideTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
-        checkComponentsForCompletion()
+        checkComponentsThenSegue()
     }
 }
 
