@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nRI-mr-tOL">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,26 +15,27 @@
             <objects>
                 <viewController id="nRI-mr-tOL" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="QQT-YK-sVA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="hd9-Ge-RhM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerX" secondItem="QQT-YK-sVA" secondAttribute="centerX" id="3F7-Zn-zxy"/>
+                            <constraint firstAttribute="bottom" secondItem="hd9-Ge-RhM" secondAttribute="bottom" id="3og-2A-wyK"/>
                             <constraint firstItem="hd9-Ge-RhM" firstAttribute="centerY" secondItem="QQT-YK-sVA" secondAttribute="centerY" id="9SB-1d-csV"/>
-                            <constraint firstItem="hd9-Ge-RhM" firstAttribute="leading" secondItem="QQT-YK-sVA" secondAttribute="leadingMargin" constant="-16" id="Eeq-Wo-nIW"/>
+                            <constraint firstItem="hd9-Ge-RhM" firstAttribute="leading" secondItem="QQT-YK-sVA" secondAttribute="leading" id="bFa-w3-BeP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VXH-3p-Bzy"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23d-my-q5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-431.19999999999999" y="23.645320197044335"/>
+            <point key="canvasLocation" x="-431.8840579710145" y="23.4375"/>
         </scene>
     </scenes>
     <resources>
