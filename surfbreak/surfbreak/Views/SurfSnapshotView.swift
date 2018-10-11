@@ -82,7 +82,7 @@ class SurfSnapshotView: UIScrollView {
         
         arrowInnerImageView.frame = CGRect(x: 0, y: 0, width: 212, height: 212)
         arrowInnerImageView.center = mainStateInnerRingImageView.center
-        arrowInnerImageView.image = #imageLiteral(resourceName: "inner_arrow_0")
+        arrowInnerImageView.image = #imageLiteral(resourceName: "arrow_inner")
         self.addSubview(arrowInnerImageView)
         
         let mainStateOuterRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 225, height: 225))
