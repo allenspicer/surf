@@ -111,7 +111,18 @@ class SurfSnapshotView: UIScrollView {
     private func addCoastImage(){
         let heightIncrement = 2.6 * self.frame.size.height/10
         let center = self.frame.size.width/2
-        let image : UIImage = #imageLiteral(resourceName: "CarolinaBeach")
+        var image = UIImage()
+        switch currentSnapShot.id {
+        case 100: image = Coastline.cb.image()
+        case 101: image = Coastline.cb.image()
+        case 102: image = Coastline.mase.image()
+        case 103: image = Coastline.wb.image()
+        case 104: image = Coastline.sc.image()
+        case 105: image = Coastline.duck.image()
+        case 106: image = Coastline.va.image()
+        case 107: image = Coastline.hat.image()
+        default: image = Coastline.ei.image()
+        }
         let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 174, height: 174))
         coastImageView.contentMode = .scaleAspectFit
         coastImageView.image = image
