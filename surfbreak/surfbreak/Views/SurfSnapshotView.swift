@@ -111,11 +111,11 @@ class SurfSnapshotView: UIScrollView {
     private func addCoastImage(){
         let heightIncrement = 2.6 * self.frame.size.height/10
         let center = self.frame.size.width/2
-        let image : UIImage = #imageLiteral(resourceName: "coastline")
-        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: image.size.width * 0.90, height: image.size.height * 0.90))
+        let image : UIImage = #imageLiteral(resourceName: "CarolinaBeach")
+        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 174, height: 174))
         coastImageView.contentMode = .scaleAspectFit
         coastImageView.image = image
-        coastImageView.center = CGPoint(x: center - 21, y: heightIncrement)
+        coastImageView.center = CGPoint(x: center, y: heightIncrement)
         self.insertSubview(coastImageView, at: 1)
     }
     
