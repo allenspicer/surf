@@ -201,17 +201,17 @@ class SurfSnapshotView: UIScrollView {
         }
         
         let widthPixels = 150 * waveHeightDigitCount + 200
-        let distanceFromTop = self.frame.size.height/5
-        mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: distanceFromTop))
+        let yCenter = 2.6 * self.frame.height/10
+        mainLabel = UILabel(frame: CGRect(x: 0, y: 0, width: widthPixels, height: 100))
         mainLabel.text = "\(currentSnapShot.waveHeight)"
         mainLabel.font = UIFont(name:"Teko-Light", size: 85.0)
         mainLabel.textColor =  textColor
-        mainLabel.center = CGPoint(x: self.frame.width/2, y: 2.6 * self.frame.height/10)
+        mainLabel.center = CGPoint(x: self.frame.width/2, y: yCenter)
         mainLabel.textAlignment = .center
         mainLabel.addCharacterSpacing()
         self.addSubview(mainLabel)
         
-        mainStateTitleLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: 2.6 * self.frame.height/10 - 128, width: widthPixels, height: distanceFromTop))
+        mainStateTitleLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: yCenter - 68, width: widthPixels, height: 40))
         mainStateTitleLabel.font = UIFont(name:"Montserrat-BoldItalic", size: 9.0)
         mainStateTitleLabel.textColor =  textColor
         mainStateTitleLabel.text = "SWELL"
@@ -219,7 +219,7 @@ class SurfSnapshotView: UIScrollView {
         mainStateTitleLabel.addCharacterSpacing()
         self.addSubview(mainStateTitleLabel)
         
-        mainStateSecondaryLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: 2.6 * self.frame.height/10 - 43, width: widthPixels, height: distanceFromTop))
+        mainStateSecondaryLabel = UILabel(frame: CGRect(x: self.frame.width/2 - widthPixels/2, y: yCenter + 20, width: widthPixels, height: 40))
         mainStateSecondaryLabel.textAlignment = .center
         mainStateSecondaryLabel.textColor =  textColor
         mainStateSecondaryLabel.font = UIFont(name:"Teko-Regular", size: 18.0)
