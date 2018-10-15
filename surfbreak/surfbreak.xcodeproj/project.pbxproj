@@ -50,7 +50,6 @@
 		95981CAF21644FE1004EC69F /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95981CAE21644FD2004EC69F /* Montserrat-SemiBoldItalic.ttf */; };
 		959BD87A2118CB3B0028F5F5 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959BD8792118CB3B0028F5F5 /* Favorite.swift */; };
 		95A474892114B604006409C8 /* ProximalStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A474882114B604006409C8 /* ProximalStation.swift */; };
-		95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */; };
 		95B223992118EDA70060EDFD /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B223982118EDA70060EDFD /* UserLocation.swift */; };
 		95D5C1432162C5A70097A8F6 /* Teko-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */; };
 		C9FECECD8F34B8F7F3F2D596 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07A274D837DF294AD07277C /* Pods_surfbreakTests.framework */; };
@@ -118,7 +117,6 @@
 		95981CAE21644FD2004EC69F /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		959BD8792118CB3B0028F5F5 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		95A474882114B604006409C8 /* ProximalStation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalStation.swift; sourceTree = "<group>"; };
-		95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95B223982118EDA70060EDFD /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		95D5C1422162C5A70097A8F6 /* Teko-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Teko-Regular.ttf"; sourceTree = "<group>"; };
 		CD5FE7737AA3661E9E389D2D /* Pods-surfbreakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreakTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreakTests/Pods-surfbreakTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				957471AF211392BC0064DD3A /* GradientView.swift */,
 				957471B1211394080064DD3A /* ActivityIndicator.swift */,
 				957471B3211394420064DD3A /* SurfSnapshotView.swift */,
-				95A4748A2114C64B006409C8 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,7 +407,6 @@
 				958A8121211C929E00103064 /* Montserrat-MediumItalic.ttf in Resources */,
 				953F07F5210A575400E70E18 /* Assets.xcassets in Resources */,
 				953502E8211A045100E8DDA8 /* Home.storyboard in Resources */,
-				95A4748B2114C64C006409C8 /* LaunchScreen.storyboard in Resources */,
 				958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */,
 				95D5C1432162C5A70097A8F6 /* Teko-Regular.ttf in Resources */,
 				958A811C211C929E00103064 /* Montserrat-Medium.ttf in Resources */,
@@ -675,6 +671,7 @@
 			baseConfigurationReference = 4C3E4A6F94758AFA11E35A9A /* Pods-surfbreak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
@@ -695,6 +692,7 @@
 			baseConfigurationReference = D0F27D15EAD97C47F195D2B2 /* Pods-surfbreak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
