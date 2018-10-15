@@ -78,12 +78,12 @@ class FavCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(mainView)
         
         
-        let heightLabelFrame = CGRect(x: 0.0, y: contentView.frame.height * 0.06, width: contentView.frame.width, height: 80.0)
+        let heightLabelFrame = CGRect(x: 0.0, y: 0.0, width: contentView.frame.width, height: 121.0)
         heightLabel = UILabel(frame: heightLabelFrame)
         heightLabel.backgroundColor = .clear
         heightLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         heightLabel.textAlignment = .center
-        heightLabel.font = UIFont(name: "Avenir Next Condensed", size: 58)
+        heightLabel.font = UIFont(name: "Teko-Light", size: 85)
         contentView.addSubview(heightLabel)
         
         let frequencyLabelFrame = CGRect(x: 0, y: contentView.frame.height * 0.50, width: contentView.frame.width - 30.0, height: 18.0)
@@ -91,7 +91,7 @@ class FavCollectionViewCell: UICollectionViewCell {
         frequencyLabel.backgroundColor = .clear
         frequencyLabel.textColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         frequencyLabel.textAlignment = .right
-        frequencyLabel.font = UIFont(name: "Gotham", size: 18)
+        frequencyLabel.font = UIFont(name: "Montserrat-SemiBold", size: 18)
         contentView.addSubview(frequencyLabel)
         
         let locationLabelFrame = CGRect(x: 0.0, y: contentView.frame.height - 40, width: contentView.frame.width, height: 20.0)
