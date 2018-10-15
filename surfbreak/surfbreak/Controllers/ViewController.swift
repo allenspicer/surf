@@ -279,7 +279,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //                        }
 //                    }
 //                }
-//                self.saveStationAndNameToFavoritesDefaults(nickname: text)
+//              self.saveStationAndNameToFavoritesDefaults(nickname: text)
+                self.saveStationAndNameToFavoritesDefaults(nickname: self.currentSnapShot.stationName)
 //            }
         }
         alert.addAction(okayAction)
