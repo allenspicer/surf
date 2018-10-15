@@ -75,27 +75,27 @@ class SurfSnapshotView: UIScrollView {
     private func addMainStateRings(){
         let heightIncrement = 2.6 * self.frame.size.height/10
         let center = self.frame.size.width/2
-        let mainStateInnerRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        let mainStateInnerRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 210, height: 210))
         mainStateInnerRingImageView.center = CGPoint(x: center, y: heightIncrement)
         mainStateInnerRingImageView.image = #imageLiteral(resourceName: "ring_outer")
         self.addSubview(mainStateInnerRingImageView)
         
-        arrowInnerImageView.frame = CGRect(x: 0, y: 0, width: 212, height: 212)
+        arrowInnerImageView.frame = CGRect(x: 0, y: 0, width: 224, height: 224)
         arrowInnerImageView.center = mainStateInnerRingImageView.center
         arrowInnerImageView.image = #imageLiteral(resourceName: "arrow_inner")
         self.addSubview(arrowInnerImageView)
         
-        let mainStateOuterRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 225, height: 225))
+        let mainStateOuterRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 230, height: 230))
         mainStateOuterRingImageView.center = CGPoint(x: center, y: heightIncrement)
         mainStateOuterRingImageView.image = #imageLiteral(resourceName: "ring_inner")
         self.addSubview(mainStateOuterRingImageView)
         
-        arrowOuterImageView.frame = CGRect(x: 0, y: 0, width: 235, height: 235)
+        arrowOuterImageView.frame = CGRect(x: 0, y: 0, width: 248, height: 248)
         arrowOuterImageView.center = mainStateOuterRingImageView.center
         arrowOuterImageView.image = #imageLiteral(resourceName: "outer_Arrow_0")
         self.addSubview(arrowOuterImageView)
         
-        let mainStateMainRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 174, height: 174))
+        let mainStateMainRingImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 190, height: 190))
         mainStateMainRingImageView.center = CGPoint(x: center, y: heightIncrement)
         mainStateMainRingImageView.image = #imageLiteral(resourceName: "ring_main")
         self.addSubview(mainStateMainRingImageView)
@@ -123,7 +123,7 @@ class SurfSnapshotView: UIScrollView {
         case 107: image = Coastline.hat.image()
         default: image = Coastline.ei.image()
         }
-        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 174, height: 174))
+        let coastImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 190, height: 190))
         coastImageView.contentMode = .scaleAspectFit
         coastImageView.image = image
         coastImageView.center = CGPoint(x: center, y: heightIncrement)
