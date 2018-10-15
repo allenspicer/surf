@@ -493,6 +493,7 @@ extension HomeViewController {
     
     
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
+        favoritesCollectionView.reloadData()
         for view in view.subviews where view is CircleView{
             view.removeFromSuperview()
         }
