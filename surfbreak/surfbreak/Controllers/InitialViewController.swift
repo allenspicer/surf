@@ -349,6 +349,8 @@ extension InitialViewController : CLLocationManagerDelegate{
                 }
                 alert.addAction(ignoreAction)
                 self.present(alert, animated: true, completion: nil)
+            }else{
+                ensureQualityAndLocationAreCompleteThenSegue()
             }
         }
     }
