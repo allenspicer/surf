@@ -16,7 +16,6 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
     private var componentsChecklist : [Int : SnapshotComponents] = [:]
-    var userAcceptsFallback = false
 
     private var buoyClient : BuoyClient?
     private var tideClient : TideClient?
@@ -54,12 +53,12 @@ final class InitialViewController: UIViewController {
                     
                     //if favorites check persistence for records
                     if !self.checkForDownloadedSnapshot(with: snapshotId){
-                        self.setDataClientsForStation(snapshotId: snapshotId)
+                        self.setBuoyClientForSnapshot(snapshotId: snapshotId)
                     }
                 }
             }else{
-                //if no favorites, or if transition to home
-                self.checkComponentsThenSegue()
+                //if no favorites are saved
+                self.ensureQualityAndLocationAreCompleteThenSegue()
             }
         }
     }
@@ -267,7 +266,7 @@ final class InitialViewController: UIViewController {
     //
     
     
-    func setDataClientsForStation(snapshotId : Int){
+    func setBuoyClientForSnapshot(snapshotId : Int){
         guard let allStations = self.allStations else {
             print("failed to unwrap self.allStations \n No buoy client created for snapshot with id \(snapshotId)")
             return
@@ -277,7 +276,7 @@ final class InitialViewController: UIViewController {
         buoyClient?.createBuoyData()
     }
     
-    func setDataClientsFor(snapshot : Snapshot){
+    func setSecondaryDataClientsFor(snapshot : Snapshot){
         
         tideClient = TideClient(currentSnapshot: snapshot)
         tideClient?.delegate = self
@@ -422,7 +421,7 @@ extension InitialViewController : BuoyClientDelegate{
         }
         
         if snapshot.waveHeight != 0.0 && snapshot.period != 0.0 {
-            setDataClientsFor(snapshot: snapshot)
+            setSecondaryDataClientsFor(snapshot: snapshot)
         }else{
             self.dataLoadFailedUseFallBackFromPersistence(snapshotId: sender.snapshotId)
                 DispatchQueue.main.async {
@@ -431,14 +430,13 @@ extension InitialViewController : BuoyClientDelegate{
                     let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
                         DispatchQueue.global(qos:.utility).async{
                             self.setAllComponentsTo(bool: false, For: sender.snapshotId)
-                            self.setDataClientsForStation(snapshotId: sender.snapshotId)
+                            self.setBuoyClientForSnapshot(snapshotId: sender.snapshotId)
                         }
                     }
                     alert.addAction(retryAction)
                     let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
                         DispatchQueue.global(qos:.utility).async{
-                            self.userAcceptsFallback = true
-                            self.checkComponentsThenSegue()
+                            self.ensureQualityAndLocationAreCompleteThenSegue()
                         }
                     }
                     alert.addAction(continueAction)
@@ -578,13 +576,13 @@ extension InitialViewController {
             }
         }
         
-        guard let fallbackSnapshots = fallbackSnapshots else {return}
+        guard let fallbackSnapshots = fallbackSnapshots else {
+            print("Exiting on dataLoadFailedUseFallBackFromPersistence fallbackSnapshots not available")
+            return
+        }
         for snapshot in fallbackSnapshots where snapshot.id == snapshotId{
             componentsChecklist[snapshotId]?.snapshot = snapshot
             setAllComponentsTo(bool: true, For: snapshotId)
-        }
-        if userAcceptsFallback {
-            checkComponentsThenSegue()
         }
     }
     
