@@ -6,6 +6,7 @@ target 'surfbreak' do
   use_frameworks!
   
   pod 'Disk', '~> 0.3.3'
+  pod 'Firebase/Core'
 
   target 'surfbreakTests' do
     inherit! :search_paths
