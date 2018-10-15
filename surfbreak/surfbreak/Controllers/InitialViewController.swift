@@ -328,7 +328,7 @@ extension InitialViewController : CLLocationManagerDelegate{
     private func setLocationDataFromResponse(){
         if  let currentLocation = locationManager.location{
             userLocation = UserLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, timestamp: Date())
-            print("User location available from gps: \(userLocation)")
+            print("User location available from gps: \(String(describing: userLocation))")
 
             do {
                 try Disk.save(userLocation, to: .caches, as: DefaultConstants.userLocation)
@@ -345,7 +345,7 @@ extension InitialViewController : CLLocationManagerDelegate{
                 }
                 alert.addAction(emailAction)
                 let ignoreAction = UIAlertAction(title: "Ignore", style: .cancel){_ in
-                    self.checkComponentsThenSegue()
+                    self.ensureQualityAndLocationAreCompleteThenSegue()
                 }
                 alert.addAction(ignoreAction)
                 self.present(alert, animated: true, completion: nil)
@@ -401,7 +401,7 @@ extension InitialViewController : MFMailComposeViewControllerDelegate{
             break
         }
         dismiss(animated: true, completion: {
-            self.checkComponentsThenSegue()
+            self.ensureQualityAndLocationAreCompleteThenSegue()
         })
     }
 }
@@ -455,7 +455,7 @@ extension InitialViewController : TideClientDelegate{
         componentsChecklist[snapshot.id]?.tideTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
-        checkComponentsThenSegue()
+        attemptToCreateQualityMeasureWithCompleteComponentChecklist()
     }
 }
 
@@ -476,7 +476,7 @@ extension InitialViewController : AirTempDelegate{
         componentsChecklist[snapshot.id]?.airTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
         componentsChecklist[snapshot.id]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
-        checkComponentsForCompletion()
+        attemptToCreateQualityMeasureWithCompleteComponentChecklist()
     }
 }
 
@@ -485,38 +485,34 @@ extension InitialViewController : SurfQualityDelegate{
         componentsChecklist[snapshot.id]?.quality = true
         componentsChecklist[snapshot.id]?.completeTimestamp = Date()
         componentsChecklist[snapshot.id]?.snapshot = snapshot
-        checkComponentsThenSegue()
+        ensureQualityAndLocationAreCompleteThenSegue()
     }
     
 }
 
 extension InitialViewController {
     
-    func checkComponentsForCompletion(){
+    func attemptToCreateQualityMeasureWithCompleteComponentChecklist(){
         print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
-        if componentsChecklist.count > 0 {
-            for key in componentsChecklist.keys {
-                if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
-                    print("Exiting on checkComponentsForCompletion")
-                    print("Snapshot id \(key)")
-                    print("Buoy data present: \(String(describing: componentsChecklist[key]?.bouy))")
-                    print("Air data present: \(String(describing: componentsChecklist[key]?.air))")
-                    print("Wind data present: \(String(describing: componentsChecklist[key]?.wind))")
-                    print("Tide data present: \(String(describing: componentsChecklist[key]?.tide))")
-                    return
-                }
-                guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
-                surfQuality = SurfQuality(currentSnapshot: (snapshot))
-                surfQuality?.delegate = self
-                self.surfQuality?.createSurfQualityAssesment()
+        for key in componentsChecklist.keys {
+            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
+                print("Exiting on checkComponentsForCompletion")
+                print("Snapshot id \(key)")
+                print("Buoy data present: \(String(describing: componentsChecklist[key]?.bouy))")
+                print("Air data present: \(String(describing: componentsChecklist[key]?.air))")
+                print("Wind data present: \(String(describing: componentsChecklist[key]?.wind))")
+                print("Tide data present: \(String(describing: componentsChecklist[key]?.tide))")
+                return
             }
-        }else{
-            checkComponentsThenSegue()
+            guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
+            surfQuality = SurfQuality(currentSnapshot: (snapshot))
+            surfQuality?.delegate = self
+            self.surfQuality?.createSurfQualityAssesment()
         }
     }
     
-    func checkComponentsThenSegue(){
+    func ensureQualityAndLocationAreCompleteThenSegue(){
         for key in componentsChecklist.keys {
             if componentsChecklist[key]?.quality == false{
                 print("Exiting on checkComponentsThenSegue quality not available")
