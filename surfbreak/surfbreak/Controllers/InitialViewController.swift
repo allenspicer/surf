@@ -46,16 +46,18 @@ final class InitialViewController: UIViewController {
             //check persistence for saved snapshots
             self.getAndScrubAllPersistenceSnapshots()
             
+            //if there are no favorites
             if !self.componentsChecklist.isEmpty {
-                    
-                //for each favorite that does not have a snapshot
-                for snapshotId in self.componentsChecklist.keys{
-                    
-                    //if favorites check persistence for records
-                    if !self.checkForDownloadedSnapshot(with: snapshotId){
-                        self.setBuoyClientForSnapshot(snapshotId: snapshotId)
+                    //for each favorite that does not have a snapshot
+                    for snapshotId in self.componentsChecklist.keys{
+                        
+                        //check persistence for records
+                        if !self.checkForDownloadedSnapshot(with: snapshotId){
+                            
+                            //if there is no snapshot in persistence for this favorite start the download process
+                            self.setBuoyClientForSnapshot(snapshotId: snapshotId)
+                        }
                     }
-                }
             }else{
                 //if no favorites are saved
                 self.ensureQualityAndLocationAreCompleteThenSegue()
@@ -218,7 +220,6 @@ final class InitialViewController: UIViewController {
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
-            
 
             
             let dateFormatter = DateFormatter()
@@ -253,9 +254,9 @@ final class InitialViewController: UIViewController {
             
             // update snapshotcomponents entry where we have data from persistence
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
-                
-                self.componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
+                componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
                 setAllComponentsTo(bool: true, For: savedSnapshot.id)
+                ensureQualityAndLocationAreCompleteThenSegue()
                 return true
             }
         return false
