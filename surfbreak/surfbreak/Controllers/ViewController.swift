@@ -244,7 +244,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
                 feedbackGenerator.notification.notificationOccurred(.warning)
 
-                let alert = UIAlertController.init(title: "This station has been removed from your favorites", message: nil, preferredStyle: .alert)
+                let alert = UIAlertController.init(title: "Success", message: "This station has been removed from your favorites", preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
                 self.present(alert, animated: true, completion: nil)
@@ -261,28 +261,30 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func addFavorite(){
         self.feedbackGenerator.notification.notificationOccurred(.success)
-        let alert = UIAlertController.init(title: "Pick a nickname", message: "What would you like to call this break?", preferredStyle: .alert)
-        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
+        self.favoriteFlag = !self.favoriteFlag
+        self.setButton()
+        let alert = UIAlertController.init(title: "Success", message: "This station has been added to your favorites", preferredStyle: .alert)
+//        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
-            guard let textFields = alert.textFields, textFields.count > 0 else {return}
-            if let text = textFields[0].text {
-                self.currentSnapShot.nickname = text
-                for view in self.mainView.subviews {
-                    if view is SurfSnapshotView {
-                        if let surfView = view as? SurfSnapshotView{
-                            surfView.titleLabel.text = text
-                            self.favoriteFlag = !self.favoriteFlag
-                            self.setButton()
+//            guard let textFields = alert.textFields, textFields.count > 0 else {return}
+//            if let text = textFields[0].text {
+//                self.currentSnapShot.nickname = text
+//                for view in self.mainView.subviews {
+//                    if view is SurfSnapshotView {
+//                        if let surfView = view as? SurfSnapshotView{
+//                            surfView.titleLabel.text = text
+//                            self.favoriteFlag = !self.favoriteFlag
+//                            self.setButton()
                             self.feedbackGenerator.notification.notificationOccurred(.success)
-                        }
-                    }
-                }                
-                self.saveStationAndNameToFavoritesDefaults(nickname: text)
-            }
+//                        }
+//                    }
+//                }
+//                self.saveStationAndNameToFavoritesDefaults(nickname: text)
+//            }
         }
         alert.addAction(okayAction)
-        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(doneAction)
+//        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+//        alert.addAction(doneAction)
         self.present(alert, animated: true, completion: nil)
     }
     
