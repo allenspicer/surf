@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let _ = FallBackData(allStations: allStations)
             UserDefaults.standard.set(true, forKey:"FirstLaunchBool")
         }
- 
+        FirebaseApp.configure()
         return true
     }
 
