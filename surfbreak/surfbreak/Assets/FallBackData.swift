@@ -25,7 +25,7 @@ final class FallBackData: NSObject {
         let date = Date()
         let nextDate = Calendar.current.date(byAdding: .hour, value: 6, to: date) ?? date
         for station in allStations{
-            let snapshot = Snapshot(waveHeight: 1.0, swellDirection: 264, period: 5.0, waterTemp: 70.0, beachFaceDirection: station.bfd, id: station.id, stationId: station.station, windSpeed: 10, windCardinalDirection: 264, windDirectionString: "W", swellDirectionString: "", nickname: station.name, stationName: station.name, airTemp: 80.0, nextTideTime: date, nextTidePolar: "H", tideDirectionString: "Rising", timeStamp: date, quality: 4, airWindTideId: 0, nextHighTide: date, nextLowTide: nextDate, distance: 10, isFallback: true)
+            let snapshot = Snapshot(waveHeight: 1.0, swellDirection: 94, period: 5.0, waterTemp: 70.0, beachFaceDirection: station.bfd, id: station.id, stationId: station.station, windSpeed: 10, windCardinalDirection: 264, windDirectionString: "W", swellDirectionString: "E", nickname: station.name, stationName: station.name, airTemp: 80.0, nextTideTime: date, nextTidePolar: "H", tideDirectionString: "Rising", timeStamp: date, quality: 4, airWindTideId: 0, nextHighTide: date, nextLowTide: nextDate, distance: 10, isFallback: true)
             fallbackSnapshots.append(snapshot)
         }
         saveSnapshotsToPersistence()
