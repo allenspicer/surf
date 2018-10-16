@@ -493,15 +493,33 @@ extension HomeViewController {
     
     
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) {
-        favoritesCollectionView.reloadData()
         for view in view.subviews where view is CircleView{
             view.removeFromSuperview()
         }
-        DispatchQueue.global(qos:.utility).async {
-            self.getUserFavoritesFromPersistence()
-            self.loadPersistenceAndFallbackSnapshotsAndPopulateFavorites()
+        if let sourceViewController = segue.source as? ViewController {
+            
+            //if there is a favorite to be removed or added
+            if let favorite = sourceViewController.favoriteForUnwind {
+                
+                //if favorite needs to be removed
+                if favoritesSnapshots.contains(where: {$0.id == favorite.id}){
+                    favoritesSnapshots = favoritesSnapshots.filter({$0.id != favorite.id})
+                    //reload and set when favorite is removed
+                    favoritesCollectionView.reloadData()
+                    self.setFavoriteCollectionSelection()
+
+                //if favorite needs to be added
+                }else{
+                    favoritesSnapshots.append(sourceViewController.currentSnapShot)
+                    
+                    //reload and set when favorite is added
+                    favoritesCollectionView.reloadData()
+                    self.setFavoriteCollectionSelection()
+                }
+                
+
+            }
         }
-        self.setFavoriteCollectionSelection()
     }
     
 
@@ -570,28 +588,6 @@ extension HomeViewController {
                     }
                 }
             }
-        }
-    }
-    
-    
-    func getUserFavoritesFromPersistence(){
-        var favoritesArray = [Favorite]()
-        if Disk.exists(DefaultConstants.favorites, in: .caches) {
-            do{
-                favoritesArray = try Disk.retrieve(DefaultConstants.favorites, from: .caches, as: [Favorite].self)
-            }catch{
-                print("Retrieving from favorite automatic storage with Disk failed. Error is: \(error)")
-            }
-            userFavoritesForReturn = favoritesArray
-            removePreviousFavoritesFromTableData()
-        }
-    }
-    
-    
-    func removePreviousFavoritesFromTableData(){
-        favoritesSnapshots = favoritesSnapshots.filter({ userFavoritesForReturn.map({$0.id}).contains($0.id)})
-        DispatchQueue.main.async {
-            self.favoritesCollectionView.reloadData()
         }
     }
 }

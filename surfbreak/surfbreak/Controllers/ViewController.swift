@@ -24,6 +24,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var favoriteButton = UIButton()
     var favoriteFlag = false
     var favoritesArray = [Favorite]()
+    var favoriteForUnwind : Favorite? = nil
     var snapshotView : SurfSnapshotView? = nil
     let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
@@ -234,16 +235,19 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    
     @objc func favoriteButtonAction(){
         if favoriteFlag {
             if let favorite = currentFavorite {
+                //remove the favorite from local data
                 favoritesArray = favoritesArray.filter({$0.id != favorite.id})
+                
+                //set up favorite removal for unwind segue
+                favoriteForUnwind = favorite
             }
             do{
+                //update persistence with local data to remove favorite
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
                 feedbackGenerator.notification.notificationOccurred(.warning)
-
                 let alert = UIAlertController.init(title: "Success", message: "This station has been removed from your favorites", preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
@@ -260,9 +264,11 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     func addFavorite(){
-        self.feedbackGenerator.notification.notificationOccurred(.success)
-        self.favoriteFlag = !self.favoriteFlag
-        self.setButton()
+        feedbackGenerator.notification.notificationOccurred(.success)
+        favoriteFlag = !favoriteFlag
+        setButton()
+        saveStationAndNameToFavoritesDefaults(nickname: currentSnapShot.stationName)
+
         let alert = UIAlertController.init(title: "Success", message: "This station has been added to your favorites", preferredStyle: .alert)
 //        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
@@ -280,7 +286,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //                    }
 //                }
 //              self.saveStationAndNameToFavoritesDefaults(nickname: text)
-                self.saveStationAndNameToFavoritesDefaults(nickname: self.currentSnapShot.stationName)
+            
 //            }
         }
         alert.addAction(okayAction)
@@ -292,16 +298,18 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func saveStationAndNameToFavoritesDefaults(nickname : String){
         DispatchQueue.global(qos:.utility).async{
             let id = self.currentSnapShot.id
-            let newFavoriteInArray = [Favorite(id: id, nickname: nickname)]
+            let newFavorite = Favorite(id: id, nickname: nickname)
+            self.currentFavorite = newFavorite
+            self.favoriteForUnwind = newFavorite
             if Disk.exists(DefaultConstants.favorites, in: .caches) {
                 do {
-                    try Disk.append(newFavoriteInArray, to: DefaultConstants.favorites, in: .caches)
+                    try Disk.append([newFavorite], to: DefaultConstants.favorites, in: .caches)
                 }catch{
                     print("Appending to automatic storage with Disk failed. Error is: \(error)")
                 }
             }else{
                 do {
-                    try Disk.save(newFavoriteInArray, to: .caches, as: DefaultConstants.favorites)
+                    try Disk.save([newFavorite], to: .caches, as: DefaultConstants.favorites)
                 }catch{
                     print("Saving to automatic storage with Disk failed. Error is: \(error)")
                 }
