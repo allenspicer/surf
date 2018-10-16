@@ -127,6 +127,7 @@ class SurfSnapshotView: UIScrollView {
         coastImageView.contentMode = .scaleAspectFit
         coastImageView.image = image
         coastImageView.center = CGPoint(x: center, y: heightIncrement)
+        coastImageView.alpha = 0.5
         self.insertSubview(coastImageView, at: 1)
     }
     

@@ -36,17 +36,17 @@ class FavCollectionViewCell: UICollectionViewCell {
         
         switch waveHeight{
         case ...0.5:
-            imageView.image = #imageLiteral(resourceName: "Flat")
+            imageView.image = #imageLiteral(resourceName: "flat_2pt_200px")
         case 0.5...1.0:
-            imageView.image = #imageLiteral(resourceName: "Bump")
+            imageView.image = #imageLiteral(resourceName: "bump_2pt_200px")
         case 1.0...3.0:
-            imageView.image = #imageLiteral(resourceName: "littlewave")
+            imageView.image = #imageLiteral(resourceName: "littlewave_2pt_200px")
         case 3.0...6.0:
-            imageView.image = #imageLiteral(resourceName: "wave")
+            imageView.image = #imageLiteral(resourceName: "wave_2pt_200px")
         case 6.0...:
-            imageView.image = #imageLiteral(resourceName: "bigwave")
+            imageView.image = #imageLiteral(resourceName: "bigwave_2pt_200px")
         default:
-            imageView.image = #imageLiteral(resourceName: "Flat")
+            imageView.image = #imageLiteral(resourceName: "littlewave_2pt_200px")
         }
         
         switch quality{
@@ -61,8 +61,6 @@ class FavCollectionViewCell: UICollectionViewCell {
         default:
             backgroundImageView.image = #imageLiteral(resourceName: "Bkgd_4")
         }
-
-        
     }
     
     func loadAllViews() {
