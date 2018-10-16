@@ -199,6 +199,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 selectedCellAction()
             }
         case is FavoriteCollectionView:
+            if favoritesSnapshots.count < 1 { return }
             idStationSelected = favoritesSnapshots[cellSelectedIndex].id
             if indexPath.row != currentCard {
                 collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
@@ -236,6 +237,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         case is ProximalCollectionView:
             return proximalData.count
         case is FavoriteCollectionView:
+            if favoritesSnapshots.count < 1 { return 1 }
             return favoritesSnapshots.count
         default:
             return 0
@@ -254,6 +256,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.distanceLabel.addCharacterSpacing(kernValue: 1.4)
             return cell
         case is FavoriteCollectionView:
+            if favoritesSnapshots.count < 1 {
+            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderFavoriteCollectionViewCell", for: indexPath) as! PlaceholderFavCollectionViewCell
+                return cell
+            }
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
             cell.loadAllViews()
             let snapshot = self.favoritesSnapshots[indexPath.row]

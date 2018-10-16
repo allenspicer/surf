@@ -29,8 +29,17 @@
                                 </constraints>
                                 <collectionViewLayout key="collectionViewLayout" id="qEu-aN-NC8" customClass="FavoriteFlowLayout" customModule="surfbreak" customModuleProvider="target"/>
                                 <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceholderFavoriteCollectionViewCell" id="nRt-Ah-TU0" customClass="PlaceholderFavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
+                                        <rect key="frame" x="82.5" y="0.0" width="210" height="210"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="210" height="210"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <size key="customSize" width="210" height="210"/>
+                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionViewCell" id="xq1-b2-HY3" customClass="FavCollectionViewCell" customModule="surfbreak" customModuleProvider="target">
-                                        <rect key="frame" x="82.5" y="0.0" width="210" height="264"/>
+                                        <rect key="frame" x="82.5" y="220" width="210" height="264"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="210" height="264"/>
