@@ -70,7 +70,16 @@ final class InitialViewController: UIViewController {
     //
     
     private func startIntroScreenWithTimerToActivityIndicator(){
+        
+        let allPngImagePaths = Bundle.main.paths(forResourcesOfType: "png", inDirectory: nil)
+        let launchImagePaths = allPngImagePaths.filter({$0.contains("LaunchImage")})
+        let launchImages = launchImagePaths.map({UIImage(named: $0)})
+        let launchImage = launchImages.filter({$0?.scale == UIScreen.main.scale && $0?.size == UIScreen.main.bounds.size})
+        
         let introImageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
+        if let image = launchImage[0]{
+            introImageView.image = image
+        }
         self.view.addSubview(introImageView)
         introImageView.contentMode = .scaleAspectFill
         introImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +87,7 @@ final class InitialViewController: UIViewController {
         introImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         introImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
     
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             //when timer is complete remove the intro and set up activity indicator
             introImageView.removeFromSuperview()
             self.startActivityIndicator("Loading...")
