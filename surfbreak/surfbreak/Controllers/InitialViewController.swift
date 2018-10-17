@@ -87,7 +87,7 @@ final class InitialViewController: UIViewController {
         introImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         introImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
     
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             //when timer is complete remove the intro and set up activity indicator
             introImageView.removeFromSuperview()
             self.startActivityIndicator("Loading...")
