@@ -493,6 +493,7 @@ extension HomeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let destinationVC = segue.destination as? ViewController {
+            favoritesCollectionView.collectionViewLayout.invalidateLayout()
             destinationVC.currentSnapShot = selectedSnapshot
         }
     }
