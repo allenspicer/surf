@@ -43,16 +43,12 @@ final class SurfQuality: NSObject {
             
             //use the wave height to set the quality measure - indicating better conditions
             switch waveHeight{
-            case ...0.5:
+            case ...2.0:
                 self.currentSnapshot.quality = 4
-            case 0.5...1.5:
+            case 2.0...3.0:
                 self.currentSnapshot.quality = 3
-            case 1.5...2.5:
-                self.currentSnapshot.quality = 2
-            case 2.5...5.0:
+            case 3.0...:
                 self.currentSnapshot.quality = 1
-            case 5.0...:
-                self.currentSnapshot.quality = 2
             default:
                 self.currentSnapshot.quality = 4
             }
@@ -60,13 +56,13 @@ final class SurfQuality: NSObject {
             //use the swell period to detract from the quality measure - indicating better conditions
             switch period{
             case ...4:
-                self.currentSnapshot.quality += 1
-            case 4...6:
-                self.currentSnapshot.quality -= 0
-            case 6...9:
+                self.currentSnapshot.quality += 10
+            case 4...7:
+                self.currentSnapshot.quality += 4
+            case 7...9:
                 self.currentSnapshot.quality -= 1
             case 9...:
-                self.currentSnapshot.quality -= 2
+                self.currentSnapshot.quality -= 3
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
@@ -80,19 +76,31 @@ final class SurfQuality: NSObject {
                 if windSpeed > 5{
                     self.currentSnapshot.quality += 4
                 }
+                if windSpeed < 5{
+                    self.currentSnapshot.quality -= 2
+                }
             case 2:
                 //if wind is offshore and greater than 20
                 if windSpeed > 20{
                     self.currentSnapshot.quality += 4
                 }
-                if 5 < windSpeed && windSpeed < 15{
+                if windSpeed > 15{
+                    self.currentSnapshot.quality += 1
+                }
+                if 5 < windSpeed && windSpeed < 10{
                     self.currentSnapshot.quality -= 1
+                }
+                if windSpeed < 5{
+                    self.currentSnapshot.quality -= 2
                 }
                 
             case 3:
                 //if wind is sideshore and greater than 10
                 if windSpeed > 5{
                     self.currentSnapshot.quality += 4
+                }
+                if windSpeed < 5{
+                    self.currentSnapshot.quality -= 2
                 }
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
