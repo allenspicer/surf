@@ -117,21 +117,13 @@ final class WindClient: NSObject {
     func addWindDataToSnapshot(_ snapshotWithoutWind : Snapshot, windArray : [Wind])-> Snapshot {
         
         var snapshot = snapshotWithoutWind
-        var nextWindIndex = Int()
-        let currentTimestamp = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        for index in 0..<windArray.count {
-            if let windTimeStamp = dateFormatter.date(from: windArray[index].timeStamp){
-                if windTimeStamp > currentTimestamp {
-                    nextWindIndex = index
-                    break
-                }
-            }
-        }
-        
-        let wind = windArray[nextWindIndex]
+        guard let timestamps = windArray.map({dateFormatter.date(from: $0.timeStamp)}) as? [Date] else {return snapshot}
+        let mostRecent = timestamps.reduce(timestamps[0], { $0.timeIntervalSince1970 > $1.timeIntervalSince1970 ? $0 : $1 } )
+        guard let indexOfMostRecent = timestamps.lastIndex(of: mostRecent) else {return snapshot}
+        let wind = windArray[indexOfMostRecent]
         snapshot.windDirectionString = wind.windDirectionString
         snapshot.windSpeed = Int(wind.speed)
         snapshot.windCardinalDirection = Int(wind.direction)
