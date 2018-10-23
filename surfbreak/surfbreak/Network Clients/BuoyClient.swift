@@ -65,8 +65,9 @@ final class BuoyClient: NSObject {
         heightInFeet = (heightInFeet*10).rounded()/10
 
         //wave direction
-        guard let currentWaveDirectionDegrees = Double(values[13]) as Double? else {return}
-        let waveDirectionInt = Int(currentWaveDirectionDegrees)
+        guard let waveToDirectionDegrees = Double(values[13]) as Double? else {return}
+        let waveToDirectionInt = Int(waveToDirectionDegrees)
+        let waveFromDirectionInt = abs(360 - waveToDirectionInt)
 
         //wave frequency/period
         guard let waveAveragePeriod = Double(values[7]) as Double? else {return}
@@ -78,8 +79,8 @@ final class BuoyClient: NSObject {
 
 
        currentSnapshot.waveHeight = heightInFeet
-       currentSnapshot.swellDirection = waveDirectionInt
-       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: Float(currentWaveDirectionDegrees))
+       currentSnapshot.swellDirection = waveFromDirectionInt
+       currentSnapshot.swellDirectionString = directionFromDegrees(degrees: Float(waveFromDirectionInt))
        currentSnapshot.period = waveAveragePeriod
 //       currentSnapshot.waterTemp = currentWaterTempInFahrenheit
        currentSnapshot.beachFaceDirection = currentStation.bfd
@@ -87,7 +88,7 @@ final class BuoyClient: NSObject {
        currentSnapshot.stationId = currentStation.station
         currentSnapshot.stationName = currentStation.name
         currentSnapshot.airWindTideId = currentStation.airWindTideId
-        currentSnapshot.windDirectionString = directionFromDegrees(degrees: Float(currentSnapshot.windCardinalDirection))
+//        currentSnapshot.windDirectionString = directionFromDegrees(degrees: Float(currentSnapshot.windCardinalDirection))
         
 //            currentSnapShot.nickname = name
 
