@@ -408,7 +408,7 @@ extension HomeViewController : BuoyClientDelegate{
         self.selectedSnapshot = snapshot
         self.selectedSnapshot.distance = self.distanceToUser
             //remove spinner for response:
-            if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.waterTemp != 0.0) {
+            if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.period != 0.0) {
 //                self.selectedSnapshot.stationName = stationName
                 self.setAdditonalDataClients()
             }else{
