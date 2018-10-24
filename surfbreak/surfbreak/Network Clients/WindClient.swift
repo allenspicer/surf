@@ -49,14 +49,11 @@ final class WindClient: NSObject {
             do {
                 
                 guard let theData = theData else { return }
-                print("tidesandcurrents.noaa.gov URL Request Succeeded")
+                print("tidesandcurrents.noaa.gov URL Request Succeeded for Wind")
                 
                 if let json = try JSONSerialization.jsonObject(with: theData, options: []) as? [String : Any]{
-                    print("Wind Client JSON Available")
-                    
                     guard let arrayOfDataObjects = json["data"] else { return }
                     guard let dataArray = arrayOfDataObjects as? [[String: Any]] else { return }
-                    print("Wind Client Array of Tide Values Available with \(dataArray.count) Objects")
                     self.dataArray = dataArray
                     self.createArrayOfWindDataObjects()
                 }

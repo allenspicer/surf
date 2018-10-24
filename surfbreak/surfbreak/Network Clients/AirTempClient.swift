@@ -49,14 +49,12 @@ final class AirTempClient: NSObject {
             do {
                 
                 guard let theData = theData else { return }
-                print("tidesandcurrents.noaa.gov URL Request Succeeded")
+                print("tidesandcurrents.noaa.gov URL Request Succeeded for Air Temp")
                 
                 if let json = try JSONSerialization.jsonObject(with: theData, options: []) as? [String : Any]{
-                    print("AirTemp Client JSON Available")
                     
                     guard let arrayOfDataObjects = json["data"] else { return }
                     guard let dataArray = arrayOfDataObjects as? [[String: Any]] else { return }
-                    print("AirTemp Client Array of Tide Values Available with \(dataArray.count) Objects")
                     self.dataArray = dataArray
                     self.createArrayOfAirTempDataObjects()
                 }

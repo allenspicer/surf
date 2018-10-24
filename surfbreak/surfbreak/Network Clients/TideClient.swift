@@ -49,14 +49,11 @@ final class TideClient: NSObject {
             do {
                 
                 guard let theData = theData else { return }
-                print("tidesandcurrents.noaa.gov URL Request Succeeded")
+                print("tidesandcurrents.noaa.gov URL Request Succeeded for Tide")
                 
                 if let json = try JSONSerialization.jsonObject(with: theData, options: []) as? [String : Any]{
-                    print("Tide Client JSON Available")
-                    
                     guard let arrayOfDataObjects = json["predictions"] else { return }
                     guard let dataArray = arrayOfDataObjects as? [[String: Any]] else { return }
-                    print("Tide Client Array of Tide Values Available with \(dataArray.count) Objects")
                     self.dataArray = dataArray
                     self.createArrayOfTideDataObjects()
                 }
@@ -82,6 +79,7 @@ final class TideClient: NSObject {
             let tide = Tide.init(timeStamp: timeStamp, value: value, key: key)
             tideArray.append(tide)
         }
+        print("Tide Array Created with \(tideArray.count) Tide Objects")
         if self.tideArray.count > 0 {
             DispatchQueue.main.async {
                 self.didGetTideData()
