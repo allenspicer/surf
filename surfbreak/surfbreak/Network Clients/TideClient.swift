@@ -124,15 +124,13 @@ final class TideClient: NSObject {
         //Take the lowest date stamp greater than current and add it plus the next tide based on their H/L key
             if (upcomingTides[0].key == "H"){
                 snapshot.nextHighTide = upcomingTides[0].timeStamp
-                print(snapshot.nextHighTide)
                 if upcomingTides.indices.contains(1){
                     snapshot.nextLowTide = upcomingTides[1].timeStamp
-                    print(snapshot.nextLowTide)
-                }else{
-                    snapshot.nextLowTide = upcomingTides[0].timeStamp
-                    if upcomingTides.indices.contains(1){
-                        snapshot.nextHighTide = upcomingTides[1].timeStamp
-                    }
+                }
+            }else{
+                snapshot.nextLowTide = upcomingTides[0].timeStamp
+                if upcomingTides.indices.contains(1){
+                    snapshot.nextHighTide = upcomingTides[1].timeStamp
                 }
             }
         return snapshot
