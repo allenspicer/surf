@@ -48,7 +48,7 @@ final class SurfQuality: NSObject {
             case 2.0...3.0:
                 self.currentSnapshot.quality = 3
             case 3.0...:
-                self.currentSnapshot.quality = 1
+                self.currentSnapshot.quality = 2
             default:
                 self.currentSnapshot.quality = 4
             }
