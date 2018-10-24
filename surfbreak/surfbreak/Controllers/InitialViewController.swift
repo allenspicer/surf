@@ -150,26 +150,22 @@ final class InitialViewController: UIViewController {
     }
     
     func respondToLocationServicesDenial(){
-        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
-            DispatchQueue.main.async {
-                //if no data respond with alertview
-                let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
-                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                        return
-                    }
-                    if UIApplication.shared.canOpenURL(settingsUrl) {
-                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                            //try to get location again
-                            self.locationManager.requestLocation()
-                        })
-                    }
+        //after delay display alert then send user to segue if they go into settings
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
                 }
-                alert.addAction(settingsAction)
-                self.present(alert, animated: true, completion: nil)
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        //try to get location again
+                        self.ensureQualityAndLocationAreCompleteThenSegue()
+                    })
+                }
             }
-        }else{
-            locationManager.requestLocation()
+            alert.addAction(settingsAction)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -534,8 +530,11 @@ extension InitialViewController {
         
         if userLocation == nil {
             print("Exiting on checkComponentsThenSegue userLocations not available")
-            //try to get location again
+            //start timer for user location to be found
             respondToLocationServicesDenial()
+            
+            //try to get location again
+            locationManager.requestLocation()
             return
         }
         
