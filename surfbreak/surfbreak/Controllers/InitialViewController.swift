@@ -151,7 +151,7 @@ final class InitialViewController: UIViewController {
     
     func respondToLocationServicesDenial(){
         //after delay display alert then send user to segue if they go into settings
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
                 let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
                 let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
