@@ -130,7 +130,7 @@ final class InitialViewController: UIViewController {
         
         if userLocation != nil{
             print("User location available from persistence: \(String(describing: userLocation))")
-            
+            locationManager.stopUpdatingLocation()
         }else{
             isAuthorizedtoGetUserLocation()
             
@@ -152,20 +152,24 @@ final class InitialViewController: UIViewController {
     func respondToLocationServicesDenial(){
         //after delay display alert then send user to segue if they go into settings
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
-            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                    return
+            if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+                let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                        return
+                    }
+                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            //try to get location again
+                            self.ensureQualityAndLocationAreCompleteThenSegue()
+                        })
+                    }
                 }
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                        //try to get location again
-                        self.ensureQualityAndLocationAreCompleteThenSegue()
-                    })
-                }
+                alert.addAction(settingsAction)
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                self.ensureQualityAndLocationAreCompleteThenSegue()
             }
-            alert.addAction(settingsAction)
-            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -314,6 +318,7 @@ extension InitialViewController : CLLocationManagerDelegate{
     
     //this method will be called each time a user changes his location access preference.
     internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        getUserLocation()
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             print("User allowed us to access location")
             locationManager.requestLocation()
@@ -528,19 +533,24 @@ extension InitialViewController {
             }
         }
         
-        if userLocation == nil {
-            print("Exiting on checkComponentsThenSegue userLocations not available")
-            //start timer for user location to be found
-            respondToLocationServicesDenial()
+        if CLLocationManager.locationServicesEnabled(){
+             if userLocation == nil {
+                print("Exiting on checkComponentsThenSegue userLocations not available")
+                //start timer for user location to be found
+                respondToLocationServicesDenial()
+                
+                //try to get location again
+                locationManager.requestLocation()
+                return
+            }
             
-            //try to get location again
-            locationManager.requestLocation()
-            return
-        }
+        locationManager.stopUpdatingLocation()
         
         //if nothing in componentsChecklist or if all components are downloaded segue
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)
+            }
+            
         }
     }
     
