@@ -40,7 +40,7 @@ class CircleView: UIView {
         circle = UIView(frame: circleRect)
         circle.backgroundColor = .clear
         circle.layer.cornerRadius = rectSide/2
-        circle.layer.borderWidth = 4
+        circle.layer.borderWidth = 2
         circle.layer.borderColor = #colorLiteral(red: 1, green: 0.9803921569, blue: 0.8196078431, alpha: 1)
         
         switch snapshot.quality{
