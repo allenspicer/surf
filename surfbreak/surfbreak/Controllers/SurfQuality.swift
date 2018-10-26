@@ -43,14 +43,18 @@ final class SurfQuality: NSObject {
             
             //use the wave height to set the quality measure - indicating better conditions
             switch waveHeight{
+            case ...1.5:
+                self.currentSnapshot.quality = 5
             case ...2.0:
                 self.currentSnapshot.quality = 4
             case 2.0...3.0:
-                self.currentSnapshot.quality = 3
-            case 3.0...:
+                self.currentSnapshot.quality = 2
+            case 3.0...15.0:
+                self.currentSnapshot.quality = 1
+            case 15.0...:
                 self.currentSnapshot.quality = 2
             default:
-                self.currentSnapshot.quality = 4
+                self.currentSnapshot.quality = self.currentSnapshot.quality
             }
             
             //use the swell period to detract from the quality measure - indicating better conditions
