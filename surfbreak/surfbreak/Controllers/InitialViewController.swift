@@ -77,8 +77,10 @@ final class InitialViewController: UIViewController {
         let launchImage = launchImages.filter({$0?.scale == UIScreen.main.scale && $0?.size == UIScreen.main.bounds.size})
         
         let introImageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
-        if let image = launchImage[0]{
-            introImageView.image = image
+        if launchImage.count > 1 {
+            if let image = launchImage[0]{
+                introImageView.image = image
+            }
         }
         self.view.addSubview(introImageView)
         introImageView.contentMode = .scaleAspectFill
