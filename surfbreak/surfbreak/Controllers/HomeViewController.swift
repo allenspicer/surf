@@ -210,7 +210,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 transitionView = createViewForTransition()
                 self.view.addSubview(transitionView)
                 self.view.bringSubview(toFront: transitionView)
-                let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y + 16)
+                let offset = self.view.frame.height/24
+                let centerPoint = CGPoint(x: self.view.center.x, y: cell.center.y - offset)
                 transitionView.center = centerPoint
                 transitionView.growCircleTo(950, duration: 0.8, completionBlock: {
                     self.performSegue(withIdentifier: "segueToDetail", sender: self)
