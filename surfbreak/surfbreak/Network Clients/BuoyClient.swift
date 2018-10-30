@@ -48,6 +48,7 @@ final class BuoyClient: NSObject {
             DispatchQueue.main.async {
                 self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
             }
+            return
         }
         
         var lines = dataString.components(separatedBy: "\n")
