@@ -281,7 +281,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //                            surfView.titleLabel.text = text
 //                            self.favoriteFlag = !self.favoriteFlag
 //                            self.setButton()
-                            self.feedbackGenerator.notification.notificationOccurred(.success)
+//                            self.feedbackGenerator.notification.notificationOccurred(.success)
 //                        }
 //                    }
 //                }
