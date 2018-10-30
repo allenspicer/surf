@@ -340,31 +340,33 @@ extension InitialViewController : CLLocationManagerDelegate{
     }
     
     private func setLocationDataFromResponse(){
-        if  let currentLocation = locationManager.location{
-            userLocation = UserLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, timestamp: Date())
-            print("User location available from gps: \(String(describing: userLocation))")
-
-            do {
-                try Disk.save(userLocation, to: .caches, as: DefaultConstants.userLocation)
-            }catch{
-                print("Saving to automatic storage with Disk failed. Error is: \(error)")
-            }
-            let maximumDistance = 10.0
-            let latDiff = abs(currentLocation.coordinate.latitude - 34.208)
-            let lonDiff = abs(currentLocation.coordinate.longitude - -77.796)
-            if (pow(lonDiff, 2) + pow(latDiff, 2)).squareRoot() > maximumDistance{
-                let alert = UIAlertController.init(title: "You're pretty far from our closest break", message: "For now, you won't have a lot of great info here to work with. Please email us now to let us know where you are and what breaks you're looking for and we'll add them to our 'To-Do' list", preferredStyle: .alert)
-                let emailAction = UIAlertAction(title: "Email Now", style: .default){_ in
-                    self.composeEmail()
+        if userLocation == nil{
+            if  let currentLocation = locationManager.location{
+                userLocation = UserLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, timestamp: Date())
+                print("User location available from gps: \(String(describing: userLocation))")
+                
+                do {
+                    try Disk.save(userLocation, to: .caches, as: DefaultConstants.userLocation)
+                }catch{
+                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
                 }
-                alert.addAction(emailAction)
-                let ignoreAction = UIAlertAction(title: "Ignore", style: .cancel){_ in
-                    self.ensureQualityAndLocationAreCompleteThenSegue()
+                let maximumDistance = 10.0
+                let latDiff = abs(currentLocation.coordinate.latitude - 34.208)
+                let lonDiff = abs(currentLocation.coordinate.longitude - -77.796)
+                if (pow(lonDiff, 2) + pow(latDiff, 2)).squareRoot() > maximumDistance{
+                    let alert = UIAlertController.init(title: "You're pretty far from our closest break", message: "For now, you won't have a lot of great info here to work with. Please email us now to let us know where you are and what breaks you're looking for and we'll add them to our 'To-Do' list", preferredStyle: .alert)
+                    let emailAction = UIAlertAction(title: "Email Now", style: .default){_ in
+                        self.composeEmail()
+                    }
+                    alert.addAction(emailAction)
+                    let ignoreAction = UIAlertAction(title: "Ignore", style: .cancel){_ in
+                        self.ensureQualityAndLocationAreCompleteThenSegue()
+                    }
+                    alert.addAction(ignoreAction)
+                    self.present(alert, animated: true, completion: nil)
+                }else{
+                    ensureQualityAndLocationAreCompleteThenSegue()
                 }
-                alert.addAction(ignoreAction)
-                self.present(alert, animated: true, completion: nil)
-            }else{
-                ensureQualityAndLocationAreCompleteThenSegue()
             }
         }
     }
