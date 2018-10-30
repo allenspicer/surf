@@ -117,6 +117,7 @@
 		9592EC53210A7EF9004B0A82 /* BuoyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuoyClient.swift; sourceTree = "<group>"; };
 		9592EC56210A8064004B0A82 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		9592EC58210A89C2004B0A82 /* regionalBuoyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = regionalBuoyList.json; path = ../../../surf/Data/regionalBuoyList.json; sourceTree = "<group>"; };
+		9594AAD421822D4700ECBF9E /* surfbreak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = surfbreak.entitlements; sourceTree = "<group>"; };
 		95981CAC21644832004EC69F /* Teko-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Teko-Light.ttf"; sourceTree = "<group>"; };
 		95981CAE21644FD2004EC69F /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		959BD8792118CB3B0028F5F5 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		953F07E9210A575300E70E18 /* surfbreak */ = {
 			isa = PBXGroup;
 			children = (
+				9594AAD421822D4700ECBF9E /* surfbreak.entitlements */,
 				9592EC55210A7F02004B0A82 /* Network Clients */,
 				9592EC50210A5B23004B0A82 /* Controllers */,
 				9592EC4E210A5AF0004B0A82 /* Views */,
@@ -223,9 +225,9 @@
 		9592EC4F210A5B1A004B0A82 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				953F07EA210A575300E70E18 /* AppDelegate.swift */,
 				953F07F9210A575400E70E18 /* Info.plist */,
 				95331BD921753CAA006345D6 /* GoogleService-Info.plist */,
-				953F07EA210A575300E70E18 /* AppDelegate.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -378,6 +380,11 @@
 				TargetAttributes = {
 					953F07E6210A575300E70E18 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					953F07FD210A575400E70E18 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -481,6 +488,7 @@
 				"${BUILT_PRODUCTS_DIR}/Disk/Disk.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -489,6 +497,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Disk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -709,6 +718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = surfbreak/surfbreak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
@@ -730,6 +740,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = surfbreak/surfbreak.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4VV96EYWM8;
 				INFOPLIST_FILE = "$(SRCROOT)/Other/Info.plist";
