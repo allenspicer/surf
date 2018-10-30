@@ -344,7 +344,7 @@ extension InitialViewController : CLLocationManagerDelegate{
             if  let currentLocation = locationManager.location{
                 userLocation = UserLocation(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, timestamp: Date())
                 print("User location available from gps: \(String(describing: userLocation))")
-                
+                locationManager.stopUpdatingLocation()
                 do {
                     try Disk.save(userLocation, to: .caches, as: DefaultConstants.userLocation)
                 }catch{
@@ -368,6 +368,8 @@ extension InitialViewController : CLLocationManagerDelegate{
                     ensureQualityAndLocationAreCompleteThenSegue()
                 }
             }
+        }else{
+            locationManager.stopUpdatingLocation()
         }
     }
 }
@@ -549,8 +551,6 @@ extension InitialViewController {
                 return
             }
             
-        locationManager.stopUpdatingLocation()
-        
         //if nothing in componentsChecklist or if all components are downloaded segue
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "segueToHome", sender: self)
