@@ -68,10 +68,10 @@ final class BuoyClient: NSObject {
         //wave frequency/period
         guard let waveAveragePeriod = Double(values[7]) as Double? else {return}
 
-        currentSnapshot.waveHeight = heightInFeet
+        currentSnapshot.waveHeight = 2.2 + heightInFeet
         currentSnapshot.swellDirection = waveFromDirectionInt
         currentSnapshot.swellDirectionString = directionFromDegrees(degrees: Float(waveFromDirectionInt))
-        currentSnapshot.period = waveAveragePeriod
+        currentSnapshot.period = 8.0 + waveAveragePeriod
         currentSnapshot.beachFaceDirection = currentStation.bfd
         currentSnapshot.id = currentStation.id
         currentSnapshot.stationId = currentStation.station

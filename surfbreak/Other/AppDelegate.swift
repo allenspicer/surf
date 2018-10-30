@@ -9,11 +9,12 @@
 import UIKit
 import CoreData
 import Firebase
+import Fingertips
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = MBFingerTipWindow(frame: UIScreen.main.bounds)
     var allStations = [Station]()
 
 

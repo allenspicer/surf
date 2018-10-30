@@ -119,7 +119,7 @@ final class SurfQuality: NSObject {
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
-            
+            self.currentSnapshot.quality = self.currentSnapshot.quality + 2
                 //was setting background color here with wind direction
                 //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
                 DispatchQueue.main.async {

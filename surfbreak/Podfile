@@ -10,6 +10,7 @@ target 'surfbreak' do
   pod 'Firebase/Core'
   pod 'Fabric', '~> 1.7.11'
   pod 'Firebase/Performance'
+  pod 'Fingertips'
 
 
   target 'surfbreakTests' do
