@@ -59,7 +59,7 @@ class SurfSnapshotView: UIScrollView {
             conditionString = "FAIR CONDITIONS"
         case 2:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_2")
-            conditionString = "CLEAN CONDITIONS"
+            conditionString = "GOOD CONDITIONS"
         case 1:
             backgroundView.image = #imageLiteral(resourceName: "Bkgd_1")
             conditionString = "IDEAL CONDITIONS"
