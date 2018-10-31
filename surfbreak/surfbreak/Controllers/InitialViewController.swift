@@ -327,8 +327,7 @@ extension InitialViewController : CLLocationManagerDelegate{
         }
     }
     
-    
-    //this method is called by the framework on         locationManager.requestLocation();
+    //this method is called by the framework on requestLocation()
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Did location updates called")
         setLocationDataFromResponse()
