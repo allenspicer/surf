@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 import Disk
 
 class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
@@ -163,7 +162,7 @@ extension HomeViewController {
     
 }
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
 
     //
     //MARK: Collection View Needs and Delegate Assignments
