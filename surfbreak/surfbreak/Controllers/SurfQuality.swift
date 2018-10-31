@@ -35,7 +35,7 @@ final class SurfQuality: NSObject {
             let absDiff = Double(abs(faceDirection - windDirection))
             let directionInt = self.getDirectionFromDiff(absDiff)
             self.currentSnapshot.quality = 1
-            
+            print("Surf Quality Analysis for Snapshot \(self.currentSnapshot.id)")
             //1 - ideal
             //2 - good
             //3 - fair
@@ -56,6 +56,7 @@ final class SurfQuality: NSObject {
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
+            print("Quality: \(self.currentSnapshot.quality)" + " for wave height @ \(waveHeight) feet")
             
             //use the swell period to detract from the quality measure - indicating better conditions
             switch period{
@@ -70,6 +71,8 @@ final class SurfQuality: NSObject {
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
+            print("Quality: \(self.currentSnapshot.quality)" + " from period @ \(period) seconds")
+
             
             //if the wind is strong or from a bad direction
             //heavily increment the quality measure to show
@@ -109,7 +112,8 @@ final class SurfQuality: NSObject {
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
-            
+            print("Quality: \(self.currentSnapshot.quality)" + " from swell direction with code \(directionInt) at \(windSpeed) mph")
+
             //ensure that the quality measure is within bounds
             switch self.currentSnapshot.quality{
             case ...1:
@@ -119,6 +123,7 @@ final class SurfQuality: NSObject {
             default:
                 self.currentSnapshot.quality = self.currentSnapshot.quality
             }
+            print("Quality: \(self.currentSnapshot.quality) after limiter")
             
                 //was setting background color here with wind direction
                 //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
