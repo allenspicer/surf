@@ -376,7 +376,7 @@ extension InitialViewController : CLLocationManagerDelegate{
 }
 
 //
-//MARK: - Email composition
+//MARK: - Support Email composition
 //
 
 extension InitialViewController : MFMailComposeViewControllerDelegate{
@@ -510,6 +510,10 @@ extension InitialViewController : SurfQualityDelegate{
     
 }
 
+//
+//MARK: - pre-check and segue logic
+//
+
 extension InitialViewController {
     
     func attemptToCreateQualityMeasureWithCompleteComponentChecklist(){
@@ -571,6 +575,10 @@ extension InitialViewController {
     }
         
 }
+
+//
+//MARK: - persistence and fallback data handling
+//
 
 extension InitialViewController {
     
