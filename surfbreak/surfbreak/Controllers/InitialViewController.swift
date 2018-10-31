@@ -438,9 +438,6 @@ extension InitialViewController : BuoyClientDelegate{
         componentsChecklist[snapshot.id]?.bouy = true
         componentsChecklist[snapshot.id]?.bouyTimeStamp = Date()
         componentsChecklist[snapshot.id]?.snapshot = snapshot
-        if let userLocation = userLocation {
-            buoyClient?.appendDistanceToUserWith(userLocation: userLocation)
-        }
         
         if snapshot.waveHeight != 0.0 && snapshot.period != 0.0 {
             setSecondaryDataClientsFor(snapshot: snapshot)
@@ -631,4 +628,3 @@ extension InitialViewController {
     }
     
 }
-

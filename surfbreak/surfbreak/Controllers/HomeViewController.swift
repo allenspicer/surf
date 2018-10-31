@@ -41,7 +41,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createProximalCellsFromStations()
+        setProximalAndFavoriteCellsWithUserLocation()
         setDelegatesAndDataSources()
         selectionFeedbackGenerator.prepare()
         setupGestureRecognizer()
@@ -74,32 +74,45 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 extension HomeViewController {
 
     //
-    //MARK: - Location Services
+    //MARK: - Applying User Location
     //
     
-    private func createProximalCellsFromStations(){
-        
-        // Used to convert latitude and longitude into miles
-        // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
-        // number of miles is up to 69 at the equator and down to zero at the poles
-        let approxMilesToLon = 53.0
-        let approxMilesToLat = 69.0
-        
+    private func setProximalAndFavoriteCellsWithUserLocation(){
         for index in 0..<allStations.count{
             let station = allStations[index]
-            var distance = 0
-            if let lon = userLocation?.longitude, let lat = userLocation?.latitude {
-                let lonDiffAbs = abs(station.longitude - lon) * approxMilesToLon
-                let latDiffAbs = abs(station.latitude - lat) * approxMilesToLat
-                distance = Int((pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot())
-            }
-            let proximalStation = ProximalStation(station: station, distanceToUser: distance)
+            let proximalStation = ProximalStation(station: station, distanceToUser: distanceFromUserWith(station))
             proximalData.append(proximalStation)
         }
         proximalData = proximalData.sorted(by: {$0.distanceToUser < $1.distanceToUser })
         proximalCollectionView.reloadData()
+        
+        //update distances for favorite snapshots
+        for index in 0..<favoritesSnapshots.count {
+            for station in allStations where favoritesSnapshots[index].stationId == station.station {
+                var snapshot = favoritesSnapshots[index]
+                snapshot.distance = distanceFromUserWith(station)
+                favoritesSnapshots[index] = snapshot
+            }
+        }
+        favoritesCollectionView.reloadData()
         stopActivityIndicator()
     }
+    
+    func distanceFromUserWith(_ station : Station) -> Int{
+        // Used to convert latitude and longitude into miles
+        // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
+        // number of miles is up to 69 at the equator and down to zero at the poles
+        guard let userLocation = userLocation else {return 0}
+        let lon = userLocation.longitude
+        let lat = userLocation.latitude
+        
+        let approxMilesToLon = 53.0
+        let approxMilesToLat = 69.0
+        let lonDiffAbs = abs(station.longitude - lon) * approxMilesToLon
+        let latDiffAbs = abs(station.latitude - lat) * approxMilesToLat
+        return Int((pow(lonDiffAbs, 2) + pow(latDiffAbs, 2)).squareRoot())
+    }
+    
 }
 
 extension HomeViewController {
