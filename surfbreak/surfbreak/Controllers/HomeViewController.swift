@@ -319,7 +319,8 @@ extension HomeViewController {
             }
             
             //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 60.0 * 60.0
+            let timeLimitInMinutes = 5.0
+            let timeLimit : TimeInterval = 60.0 * timeLimitInMinutes
             persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow > timeLimit})
             
             do {
