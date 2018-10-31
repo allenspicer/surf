@@ -335,7 +335,9 @@ extension InitialViewController : CLLocationManagerDelegate{
     
     internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Did location updates called but failed getting location \(error)")
-        locationManager.requestLocation()
+        if userLocation == nil {
+            locationManager.requestLocation()
+        }
     }
     
     private func setLocationDataFromResponse(){
