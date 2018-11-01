@@ -11,32 +11,30 @@ import Disk
 
 class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
-    var standardMinimumLineSpacing : CGFloat = 80.0
-    
     @IBOutlet weak var proximalCollectionView: UICollectionView!
     @IBOutlet weak var favoritesCollectionView: UICollectionView!
+    
     var favoritesSnapshots = [Snapshot]()
-    private var proximalData = [ProximalStation]()
+    var userLocation : UserLocation? = nil
     var allStations = [Station]()
-    var userFavoritesForReturn = [Favorite]()
-    var idStationSelected = Int()
-    var distanceToUser = Int()
-    var transitionView = CircleView()
-    var mainView = CircleView()
 
+    private var standardMinimumLineSpacing : CGFloat = 80.0
+    private var proximalData = [ProximalStation]()
+    private var userFavoritesForReturn = [Favorite]()
+    private var idStationSelected = Int()
+    private var distanceToUser = Int()
+    private var transitionView = CircleView()
+    private var mainView = CircleView()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
-    
     private var tideClient : TideClient?
     private var windClient : WindClient?
     private var airTempClient : AirTempClient?
     private var surfQuality : SurfQuality?
-    var snapshotComponents = [String:Bool]()
-
-    var userLocation : UserLocation? = nil
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-    let transitionComplete = Bool()
-    var currentCard: Int = 0
+    private var snapshotComponents = [String:Bool]()
+    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    private let transitionComplete = Bool()
+    private var currentCard: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
