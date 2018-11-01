@@ -180,7 +180,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
         cellSelectedIndex = indexPath.row
