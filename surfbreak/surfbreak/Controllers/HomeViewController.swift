@@ -344,27 +344,21 @@ extension HomeViewController {
     }
     
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
-        if let updatedSnapshot = sender.getSnapshotWithSurfQuality(){
-            selectedSnapshot = updatedSnapshot
-        }
+        selectedSnapshot = sender.getSnapshotWithSurfQuality()
         snapshotComponents["quality"] = true
         segueWhenAllComponenetsAreLoaded()
     }
     
     func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot: Snapshot) {
         print("View Controller Has Tide Array with \(tides.count) tides")
-        if let updatedSnapshot = sender.addTideDataToSnapshot(selectedSnapshot, tideArray: tides){
-            selectedSnapshot = updatedSnapshot
-        }
+        selectedSnapshot = sender.addTideDataToSnapshot(selectedSnapshot, tideArray: tides)
         snapshotComponents["tide"] = true
         segueWhenAllComponenetsAreLoaded()
     }
     
     func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot) {
         print("View Controller Has Wind Array with \(winds.count) winds")
-        if let updatedSnapshot = sender.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
-            selectedSnapshot = updatedSnapshot
-        }
+        selectedSnapshot = sender.addWindDataToSnapshot(selectedSnapshot, windArray: winds)
         snapshotComponents["wind"] = true
         let surfQuality = SurfQuality(currentSnapshot: selectedSnapshot)
         surfQuality.createSurfQualityAssesment()
@@ -373,9 +367,7 @@ extension HomeViewController {
     
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot: Snapshot) {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
-        if let updatedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps){
-            selectedSnapshot = updatedSnapshot
-        }
+        selectedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
         snapshotComponents["air"] = true
         segueWhenAllComponenetsAreLoaded()
     }
