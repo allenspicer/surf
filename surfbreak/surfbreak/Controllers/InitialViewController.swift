@@ -16,11 +16,6 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
     private var componentsChecklist : [Int : SnapshotComponents] = [:]
-    private var buoyClient : BuoyClient?
-    private var tideClient : TideClient?
-    private var windClient : WindClient?
-    private var airTempClient : AirTempClient?
-    private var surfQuality : SurfQuality?
     private var allStations : [Station]? = nil
     private var allPersistenceSnapshots = [Snapshot]()
     private var fallbackSnapshots : [Snapshot]? = nil
@@ -281,24 +276,23 @@ final class InitialViewController: UIViewController {
             print("failed to unwrap self.allStations \n No buoy client created for snapshot with id \(snapshotId)")
             return
         }
-        buoyClient = BuoyClient(snapshotId: snapshotId, allStations : allStations)
-        buoyClient?.delegate = self
-        buoyClient?.createBuoyData()
+        let buoyClient = BuoyClient(snapshotId: snapshotId, allStations : allStations)
+        buoyClient.delegate = self
+        buoyClient.createBuoyData()
     }
     
     private func setSecondaryDataClientsFor(snapshot : Snapshot){
-        
-        tideClient = TideClient(currentSnapshot: snapshot)
-        tideClient?.delegate = self
-        tideClient?.createTideData()
+        let tideClient = TideClient(currentSnapshot: snapshot)
+        tideClient.delegate = self
+        tideClient.createTideData()
 
-        windClient = WindClient(currentSnapshot: snapshot)
-        windClient?.delegate = self
-        windClient?.createWindData()
+        let windClient = WindClient(currentSnapshot: snapshot)
+        windClient.delegate = self
+        windClient.createWindData()
 
-        airTempClient = AirTempClient(currentSnapshot: snapshot)
-        airTempClient?.delegate = self
-        airTempClient?.createAirTempData()
+        let airTempClient = AirTempClient(currentSnapshot: snapshot)
+        airTempClient.delegate = self
+        airTempClient.createAirTempData()
     }
 
 }
@@ -468,7 +462,7 @@ extension InitialViewController : TideClientDelegate{
         componentsChecklist[snapshot.id]?.tide = true
         componentsChecklist[snapshot.id]?.tideTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
-        componentsChecklist[snapshot.id]?.snapshot = tideClient?.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
+        componentsChecklist[snapshot.id]?.snapshot = sender.addTideDataToSnapshot(currentSnapshot, tideArray: tides)
         attemptToCreateQualityMeasureWithCompleteComponentChecklist()
     }
 }
@@ -479,7 +473,7 @@ extension InitialViewController : WindClientDelegate{
         componentsChecklist[snapshot.id]?.wind = true
         componentsChecklist[snapshot.id]?.windTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
-        componentsChecklist[snapshot.id]?.snapshot = windClient?.addWindDataToSnapshot(currentSnapshot, windArray: winds)
+        componentsChecklist[snapshot.id]?.snapshot = sender.addWindDataToSnapshot(currentSnapshot, windArray: winds)
     }
 }
 
@@ -489,7 +483,7 @@ extension InitialViewController : AirTempDelegate{
         componentsChecklist[snapshot.id]?.air = true
         componentsChecklist[snapshot.id]?.airTimeStamp = Date()
         guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
-        componentsChecklist[snapshot.id]?.snapshot = airTempClient?.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
+        componentsChecklist[snapshot.id]?.snapshot = sender.addAirTempDataToSnapshot(currentSnapshot, AirTempArray: airTemps)
         attemptToCreateQualityMeasureWithCompleteComponentChecklist()
     }
 }
@@ -523,9 +517,9 @@ extension InitialViewController {
                 return
             }
             guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}
-            surfQuality = SurfQuality(currentSnapshot: (snapshot))
-            surfQuality?.delegate = self
-            self.surfQuality?.createSurfQualityAssesment()
+            let surfQuality = SurfQuality(currentSnapshot: (snapshot))
+            surfQuality.delegate = self
+            surfQuality.createSurfQualityAssesment()
         }
     }
     
