@@ -64,13 +64,11 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     }
 }
 
+//
+//MARK: - Applying User Location
+//
 
 extension HomeViewController {
-
-    //
-    //MARK: - Applying User Location
-    //
-    
     private func setProximalAndFavoriteCellsWithUserLocation(){
         for index in 0..<allStations.count{
             let station = allStations[index]
@@ -109,12 +107,11 @@ extension HomeViewController {
     
 }
 
+//
+//MARK: - Activty Indicator Controls
+//
+
 extension HomeViewController {
-    
-    //
-    //MARK: - Activty Indicator Controls
-    //
-    
     private func startActivityIndicator(_ message : String){
         let activityIndicatorView = ActivityIndicatorView().setupActivityIndicator(view: self.view, widthView: nil, backgroundColor:UIColor.black.withAlphaComponent(0.1), textColor: UIColor.gray, message: message)
         self.view.addSubview(activityIndicatorView)
@@ -128,9 +125,9 @@ extension HomeViewController {
         }
     }
     
-    //
-    //MARK: - User Interface helpers and fine tuning
-    //
+//
+//MARK: - User Interface helpers and fine tuning
+//
     
     private func setFavoriteCollectionSelection (){
         if favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) != nil {
@@ -169,12 +166,11 @@ extension HomeViewController {
     
 }
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+//
+//MARK: Collection View Needs and Delegate Assignments
+//
 
-    //
-    //MARK: Collection View Needs and Delegate Assignments
-    //
-    
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
@@ -289,13 +285,11 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
+//
+//MARK: - Retrieving and storage of data for proximal collection cells
+//
 
 extension HomeViewController {
-    
-    //
-    //MARK: - Retrieving and storage of data for proximal collection cells
-    //
-
     private func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
         var snapshot : Snapshot? = nil
         var persistenceSnapshots = [Snapshot]()
