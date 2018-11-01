@@ -16,17 +16,14 @@ final class InitialViewController: UIViewController {
     private var locationManager = CLLocationManager()
     private var userLocation : UserLocation? = nil
     private var componentsChecklist : [Int : SnapshotComponents] = [:]
-
     private var buoyClient : BuoyClient?
     private var tideClient : TideClient?
     private var windClient : WindClient?
     private var airTempClient : AirTempClient?
     private var surfQuality : SurfQuality?
-    
-    var allStations : [Station]? = nil
-    var allPersistenceSnapshots = [Snapshot]()
-    var fallbackSnapshots : [Snapshot]? = nil
-
+    private var allStations : [Station]? = nil
+    private var allPersistenceSnapshots = [Snapshot]()
+    private var fallbackSnapshots : [Snapshot]? = nil
 
     override func viewDidLoad() {
         //present identical screen to launch screen, then switch to activity indicator
@@ -200,13 +197,13 @@ final class InitialViewController: UIViewController {
     //MARK: - station list handling
     //
     
-    func loadStationDataFromFile(){
+    private func loadStationDataFromFile(){
         let fileName = "regionalBuoyList"
         guard let stations = loadJson(fileName) else {return}
         allStations = stations
     }
     
-    func loadJson(_ fileName: String) -> [Station]? {
+    private func loadJson(_ fileName: String) -> [Station]? {
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
@@ -223,7 +220,7 @@ final class InitialViewController: UIViewController {
     //
     //MARK: - check persistence for snapshot records
     //
-    func getAndScrubAllPersistenceSnapshots(){
+    private func getAndScrubAllPersistenceSnapshots(){
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
             var allSnapshots = [Snapshot]()
             do {
@@ -262,7 +259,7 @@ final class InitialViewController: UIViewController {
     
     
     
-    func checkForDownloadedSnapshot(with key:Int)->Bool{
+    private func checkForDownloadedSnapshot(with key:Int)->Bool{
             
             // update snapshotcomponents entry where we have data from persistence
             for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
@@ -279,7 +276,7 @@ final class InitialViewController: UIViewController {
     //
     
     
-    func setBuoyClientForSnapshot(snapshotId : Int){
+    private func setBuoyClientForSnapshot(snapshotId : Int){
         guard let allStations = self.allStations else {
             print("failed to unwrap self.allStations \n No buoy client created for snapshot with id \(snapshotId)")
             return
@@ -289,7 +286,7 @@ final class InitialViewController: UIViewController {
         buoyClient?.createBuoyData()
     }
     
-    func setSecondaryDataClientsFor(snapshot : Snapshot){
+    private func setSecondaryDataClientsFor(snapshot : Snapshot){
         
         tideClient = TideClient(currentSnapshot: snapshot)
         tideClient?.delegate = self
@@ -380,7 +377,7 @@ extension InitialViewController : CLLocationManagerDelegate{
 //
 
 extension InitialViewController : MFMailComposeViewControllerDelegate{
-    func composeEmail() {
+    private func composeEmail() {
         var informationalFooter = ""
         if let userLocation = userLocation {
             informationalFooter = "\(userLocation.latitude).\(userLocation.longitude)."
@@ -512,8 +509,7 @@ extension InitialViewController : SurfQualityDelegate{
 //
 
 extension InitialViewController {
-    
-    func attemptToCreateQualityMeasureWithCompleteComponentChecklist(){
+    private func attemptToCreateQualityMeasureWithCompleteComponentChecklist(){
         print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
         for key in componentsChecklist.keys {
@@ -533,7 +529,7 @@ extension InitialViewController {
         }
     }
     
-    func ensureQualityAndLocationAreCompleteThenSegue(){
+    private func ensureQualityAndLocationAreCompleteThenSegue(){
         for key in componentsChecklist.keys {
             if componentsChecklist[key]?.quality == false{
                 print("Exiting on checkComponentsThenSegue quality not available")
@@ -578,8 +574,7 @@ extension InitialViewController {
 //
 
 extension InitialViewController {
-    
-    func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
+    private func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
         DispatchQueue.global(qos:.utility).async{
             if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
                 do {
@@ -598,7 +593,7 @@ extension InitialViewController {
         }
     }
     
-    func dataLoadFailedUseFallBackFromPersistence(snapshotId : Int){
+    private func dataLoadFailedUseFallBackFromPersistence(snapshotId : Int){
         if fallbackSnapshots == nil{
             if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
                 do {
@@ -619,7 +614,7 @@ extension InitialViewController {
         }
     }
     
-    func setAllComponentsTo(bool:Bool, For id:Int){
+    private func setAllComponentsTo(bool:Bool, For id:Int){
         self.componentsChecklist[id]?.bouy = bool
         self.componentsChecklist[id]?.air = bool
         self.componentsChecklist[id]?.tide = bool
