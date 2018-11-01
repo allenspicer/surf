@@ -13,25 +13,26 @@ import Disk
 
 final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    var currentSnapShot = Snapshot()
+    var favoriteForUnwind : Favorite? = nil
+
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
     private var path: UIBezierPath!
-    var currentSnapShot = Snapshot()
-    var currentFavorite : Favorite? = nil
-    var stationName = String()
+    private var currentFavorite : Favorite? = nil
+    private var stationName = String()
     private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    var activityIndicatorView = ActivityIndicatorView()
-    var favoriteButton = UIButton()
-    var favoriteFlag = false
-    var favoritesArray = [Favorite]()
-    var favoriteForUnwind : Favorite? = nil
-    var snapshotView : SurfSnapshotView? = nil
-    let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
+    private var activityIndicatorView = ActivityIndicatorView()
+    private var favoriteButton = UIButton()
+    private var favoriteFlag = false
+    private var favoritesArray = [Favorite]()
+    private var snapshotView : SurfSnapshotView? = nil
+    private let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
         return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
     }()
-    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-    var mainView = UIView(frame: UIScreen.main.bounds)
-    var backgroundImageView = UIImageView()
+    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    private var mainView = UIView(frame: UIScreen.main.bounds)
+    private var backgroundImageView = UIImageView()
     
     /// The `CAShapeLayer` that will contain the animated path
     private let shapeLayer: CAShapeLayer = {
@@ -77,7 +78,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func setupAnimatedWaveWithBouyData(){
+    private func setupAnimatedWaveWithBouyData(){
 //        if let color = currentSnapShot.waterColor{
 //            waterColor = color
 //            self.shapeLayer.strokeColor = waterColor
@@ -211,15 +212,15 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return path
     }
     
-    func returnToTableView(){
+    private func returnToTableView(){
         self.performSegue(withIdentifier: "unwindToHomeSegue", sender: self)
     }
     
-    func setButton(){
+    private func setButton(){
         favoriteButton.setBackgroundImage(favoriteFlag ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "NonFavorite") , for: .normal)
     }
     
-    func addFavoriteButton(){
+    private func addFavoriteButton(){
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         setButton()
         favoriteButton.addTarget(self, action: #selector(favoriteButtonAction), for: .touchUpInside)
@@ -263,7 +264,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     
-    func addFavorite(){
+    private func addFavorite(){
         feedbackGenerator.notification.notificationOccurred(.success)
         favoriteFlag = !favoriteFlag
         setButton()
@@ -295,7 +296,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func saveStationAndNameToFavoritesDefaults(nickname : String){
+    private func saveStationAndNameToFavoritesDefaults(nickname : String){
         DispatchQueue.global(qos:.utility).async{
             let id = self.currentSnapShot.id
             let newFavorite = Favorite(id: id, nickname: nickname)
@@ -319,8 +320,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 extension ViewController{
-    
-    func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
+    private func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
         if isFirstLoad {
             snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
             guard let view = snapshotView else {return}
