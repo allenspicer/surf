@@ -92,7 +92,7 @@ extension HomeViewController {
         stopActivityIndicator()
     }
     
-    func distanceFromUserWith(_ station : Station) -> Int{
+    private func distanceFromUserWith(_ station : Station) -> Int{
         // Used to convert latitude and longitude into miles
         // both numbers are approximate. One longitude at 40 degrees is about 53 miles however the true
         // number of miles is up to 69 at the equator and down to zero at the poles
@@ -146,19 +146,19 @@ extension HomeViewController {
         setFavoriteCollectionSelection()
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    private func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView == favoritesCollectionView {
             if (!decelerate) {scrollingHasStopped()}
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    private func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == favoritesCollectionView {
             scrollingHasStopped()
         }
     }
     
-    func scrollingHasStopped(){
+    private func scrollingHasStopped(){
         var visibleRect = CGRect()
         visibleRect.origin = favoritesCollectionView.contentOffset
         visibleRect.size = favoritesCollectionView.bounds.size
@@ -175,7 +175,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //MARK: Collection View Needs and Delegate Assignments
     //
     
-    func setDelegatesAndDataSources(){
+    private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
         
@@ -184,7 +184,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectionFeedbackGenerator.prepare()
         selectionFeedbackGenerator.selectionChanged()
         cellSelectedIndex = indexPath.row
@@ -230,7 +230,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     
-    func createViewForTransition()-> CircleView {
+    private func createViewForTransition()-> CircleView {
         let mainViewFrame = CGRect(x: 0.0, y: 0.0, width: 207.0, height: 207.0)
         mainView = CircleView(frame: mainViewFrame)
         mainView.snapshot = selectedSnapshot
@@ -296,7 +296,7 @@ extension HomeViewController {
     //MARK: - Retrieving and storage of data for proximal collection cells
     //
 
-    func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
+    private func snapshotFromPersistence(_ snapshotId : Int)-> Snapshot?{
         var snapshot : Snapshot? = nil
         var persistenceSnapshots = [Snapshot]()
         if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
@@ -329,7 +329,7 @@ extension HomeViewController {
     }
     
     
-    func setAdditonalDataClients(){
+    private func setAdditonalDataClients(){
         let tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
         tideClient.delegate = self
         tideClient.createTideData()
@@ -372,7 +372,7 @@ extension HomeViewController {
         segueWhenAllComponenetsAreLoaded()
     }
     
-    func segueWhenAllComponenetsAreLoaded(){
+    private func segueWhenAllComponenetsAreLoaded(){
         if !snapshotComponents.values.contains(false){
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "segueToDetail", sender: self)
@@ -382,7 +382,7 @@ extension HomeViewController {
         }
     }
     
-    func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
+    private func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
         DispatchQueue.global(qos:.utility).async{
             if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
                 do {
@@ -429,7 +429,7 @@ extension HomeViewController : BuoyClientDelegate{
             }
     }
     
-    func dataLoadFailedUseFallBackFromPersistence(){
+    private func dataLoadFailedUseFallBackFromPersistence(){
         var persistenceSnapshots = [Snapshot]()
         if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
             do {
@@ -454,7 +454,7 @@ extension HomeViewController : BuoyClientDelegate{
     //Gesture Recognizer
     //
     
-    func setupGestureRecognizer() {
+    private func setupGestureRecognizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
         longPressGesture.minimumPressDuration = 2
         longPressGesture.delegate = self
@@ -484,7 +484,7 @@ extension HomeViewController : BuoyClientDelegate{
 //        return true
 //    }
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
@@ -530,7 +530,7 @@ extension HomeViewController {
     }
     
 
-    func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
+    private func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
         var persistenceSnapshots = [Snapshot]()
         var fallbackSnapshots = [Snapshot]()
 
