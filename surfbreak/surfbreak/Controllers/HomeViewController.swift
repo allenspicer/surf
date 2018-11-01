@@ -27,10 +27,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     private var mainView = CircleView()
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
-    private var tideClient : TideClient?
-    private var windClient : WindClient?
-    private var airTempClient : AirTempClient?
-    private var surfQuality : SurfQuality?
     private var snapshotComponents = [String:Bool]()
     private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let transitionComplete = Bool()
@@ -334,21 +330,21 @@ extension HomeViewController {
     
     
     func setAdditonalDataClients(){
-        tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
-        tideClient?.delegate = self
-        tideClient?.createTideData()
+        let tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
+        tideClient.delegate = self
+        tideClient.createTideData()
         
-        windClient = WindClient(currentSnapshot: self.selectedSnapshot)
-        windClient?.delegate = self
-        windClient?.createWindData()
+        let windClient = WindClient(currentSnapshot: self.selectedSnapshot)
+        windClient.delegate = self
+        windClient.createWindData()
         
-        airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
-        airTempClient?.delegate = self
-        airTempClient?.createAirTempData()
+        let airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
+        airTempClient.delegate = self
+        airTempClient.createAirTempData()
     }
     
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
-        if let updatedSnapshot = surfQuality?.getSnapshotWithSurfQuality(){
+        if let updatedSnapshot = sender.getSnapshotWithSurfQuality(){
             selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["quality"] = true
@@ -357,7 +353,7 @@ extension HomeViewController {
     
     func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot: Snapshot) {
         print("View Controller Has Tide Array with \(tides.count) tides")
-        if let updatedSnapshot = tideClient?.addTideDataToSnapshot(selectedSnapshot, tideArray: tides){
+        if let updatedSnapshot = sender.addTideDataToSnapshot(selectedSnapshot, tideArray: tides){
             selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["tide"] = true
@@ -366,18 +362,18 @@ extension HomeViewController {
     
     func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot) {
         print("View Controller Has Wind Array with \(winds.count) winds")
-        if let updatedSnapshot = windClient?.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
+        if let updatedSnapshot = sender.addWindDataToSnapshot(selectedSnapshot, windArray: winds){
             selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["wind"] = true
-        surfQuality = SurfQuality(currentSnapshot: selectedSnapshot)
-        self.surfQuality?.createSurfQualityAssesment()
-        surfQuality?.delegate = self
+        let surfQuality = SurfQuality(currentSnapshot: selectedSnapshot)
+        surfQuality.createSurfQualityAssesment()
+        surfQuality.delegate = self
     }
     
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot: Snapshot) {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
-        if let updatedSnapshot = airTempClient?.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps){
+        if let updatedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps){
             selectedSnapshot = updatedSnapshot
         }
         snapshotComponents["air"] = true
