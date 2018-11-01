@@ -13,13 +13,13 @@ protocol SurfQualityDelegate: AnyObject {
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot)
 }
 
-final class SurfQuality: NSObject {
+class SurfQuality: NSObject {
     
     var delegate : SurfQualityDelegate?
-    var surfQualityColor = UIColor()
-    var currentSnapshot : Snapshot
-    var isOnshore : Bool?
-    var windShoreDirection: String?
+    private var surfQualityColor = UIColor()
+    private var currentSnapshot : Snapshot
+    private var isOnshore : Bool?
+    private var windShoreDirection: String?
     
     init(currentSnapshot:Snapshot) {
         self.currentSnapshot = currentSnapshot
@@ -135,11 +135,11 @@ final class SurfQuality: NSObject {
         }
     }
     
-    func didFinishSurfQualityAssesment() {
+    private func didFinishSurfQualityAssesment() {
         self.delegate?.didFinishSurfQualityTask(sender: self, snapshot: self.currentSnapshot)
     }
     
-    func getDirectionFromDiff (_ diff : Double) -> Int{
+    private func getDirectionFromDiff (_ diff : Double) -> Int{
         if diff > 0 && diff < 60 {
 //            self.currentSnapshot.windDirectionString = "ON"
             return 1
