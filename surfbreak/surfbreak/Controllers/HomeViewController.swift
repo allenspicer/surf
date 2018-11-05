@@ -471,13 +471,6 @@ extension HomeViewController : BuoyClientDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        if let viewTouched = touch.view{
-//            if viewTouched is UICollectionViewCell { return false }
-//        }
-//        return true
-//    }
-    
     private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
