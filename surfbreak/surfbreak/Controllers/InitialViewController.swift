@@ -19,13 +19,13 @@ final class InitialViewController: UIViewController {
     private var allStations : [Station]? = nil
     private var allPersistenceSnapshots = [Snapshot]()
     private var fallbackSnapshots : [Snapshot]? = nil
-
+    
     override func viewDidLoad() {
         //present identical screen to launch screen, then switch to activity indicator
         startIntroScreenWithTimerToActivityIndicator()
         
         DispatchQueue.global(qos:.utility).async{
-
+            
             //trigger user location process
             self.getUserLocation()
             
@@ -40,16 +40,16 @@ final class InitialViewController: UIViewController {
             
             //if there are no favorites
             if !self.componentsChecklist.isEmpty {
-                    //for each favorite that does not have a snapshot
-                    for snapshotId in self.componentsChecklist.keys{
+                //for each favorite that does not have a snapshot
+                for snapshotId in self.componentsChecklist.keys{
+                    
+                    //check persistence for records
+                    if !self.checkForDownloadedSnapshot(with: snapshotId){
                         
-                        //check persistence for records
-                        if !self.checkForDownloadedSnapshot(with: snapshotId){
-                            
-                            //if there is no snapshot in persistence for this favorite start the download process
-                            self.setBuoyClientForSnapshot(snapshotId: snapshotId)
-                        }
+                        //if there is no snapshot in persistence for this favorite start the download process
+                        self.setBuoyClientForSnapshot(snapshotId: snapshotId)
                     }
+                }
             }else{
                 //if no favorites are saved
                 self.ensureQualityAndLocationAreCompleteThenSegue()
@@ -80,7 +80,7 @@ final class InitialViewController: UIViewController {
         introImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         introImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         introImageView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
-    
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
             //when timer is complete remove the intro and set up activity indicator
             introImageView.removeFromSuperview()
@@ -112,7 +112,7 @@ final class InitialViewController: UIViewController {
     //
     //MARK: - location services
     //
-
+    
     private func getUserLocation (){
         if Disk.exists(DefaultConstants.userLocation, in: .caches) {
             do {
@@ -139,7 +139,7 @@ final class InitialViewController: UIViewController {
         }
         
         #if targetEnvironment(simulator)
-            userLocation = UserLocation(latitude: 34.2428817, longitude: -77.8217321, timestamp: Date())
+        userLocation = UserLocation(latitude: 34.2428817, longitude: -77.8217321, timestamp: Date())
         #endif
     }
     
@@ -223,7 +223,7 @@ final class InitialViewController: UIViewController {
             }catch{
                 print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
             }
-
+            
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
@@ -255,14 +255,14 @@ final class InitialViewController: UIViewController {
     
     
     private func checkForDownloadedSnapshot(with key:Int)->Bool{
-            
-            // update snapshotcomponents entry where we have data from persistence
-            for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
-                componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
-                setAllComponentsTo(bool: true, For: savedSnapshot.id)
-                ensureQualityAndLocationAreCompleteThenSegue()
-                return true
-            }
+        
+        // update snapshotcomponents entry where we have data from persistence
+        for savedSnapshot in allPersistenceSnapshots where key == savedSnapshot.id {
+            componentsChecklist[savedSnapshot.id]?.snapshot = savedSnapshot
+            setAllComponentsTo(bool: true, For: savedSnapshot.id)
+            ensureQualityAndLocationAreCompleteThenSegue()
+            return true
+        }
         return false
     }
     
@@ -285,16 +285,16 @@ final class InitialViewController: UIViewController {
         let tideClient = TideClient(currentSnapshot: snapshot)
         tideClient.delegate = self
         tideClient.createTideData()
-
+        
         let windClient = WindClient(currentSnapshot: snapshot)
         windClient.delegate = self
         windClient.createWindData()
-
+        
         let airTempClient = AirTempClient(currentSnapshot: snapshot)
         airTempClient.delegate = self
         airTempClient.createAirTempData()
     }
-
+    
 }
 
 //
@@ -434,24 +434,24 @@ extension InitialViewController : BuoyClientDelegate{
             setSecondaryDataClientsFor(snapshot: snapshot)
         }else{
             self.dataLoadFailedUseFallBackFromPersistence(snapshotId: sender.snapshotId)
-                DispatchQueue.main.async {
-                    //if no data respond with alertview
-                    let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
-                        DispatchQueue.global(qos:.utility).async{
-                            self.setAllComponentsTo(bool: false, For: sender.snapshotId)
-                            self.setBuoyClientForSnapshot(snapshotId: sender.snapshotId)
-                        }
+            DispatchQueue.main.async {
+                //if no data respond with alertview
+                let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
+                    DispatchQueue.global(qos:.utility).async{
+                        self.setAllComponentsTo(bool: false, For: sender.snapshotId)
+                        self.setBuoyClientForSnapshot(snapshotId: sender.snapshotId)
                     }
-                    alert.addAction(retryAction)
-                    let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
-                        DispatchQueue.global(qos:.utility).async{
-                            self.ensureQualityAndLocationAreCompleteThenSegue()
-                        }
-                    }
-                    alert.addAction(continueAction)
-                    self.present(alert, animated: true, completion: nil)
                 }
+                alert.addAction(retryAction)
+                let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
+                    DispatchQueue.global(qos:.utility).async{
+                        self.ensureQualityAndLocationAreCompleteThenSegue()
+                    }
+                }
+                alert.addAction(continueAction)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -532,7 +532,7 @@ extension InitialViewController {
         }
         
         if CLLocationManager.locationServicesEnabled(){
-             if userLocation == nil {
+            if userLocation == nil {
                 print("Exiting on checkComponentsThenSegue userLocations not available")
                 //start timer for user location to be found
                 respondToLocationServicesDenial()
@@ -542,9 +542,9 @@ extension InitialViewController {
                 return
             }
             
-        //if nothing in componentsChecklist or if all components are downloaded segue
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "segueToHome", sender: self)
+            //if nothing in componentsChecklist or if all components are downloaded segue
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueToHome", sender: self)
             }
             
         }
@@ -559,7 +559,7 @@ extension InitialViewController {
         destinationVC.favoritesSnapshots = snapshots
         saveCompleteSnapshotToPersistence(with: snapshots.filter({!$0.isFallback}))
     }
-        
+    
 }
 
 //
@@ -582,7 +582,7 @@ extension InitialViewController {
                     print("Saving to automatic storage with Disk failed. Error is: \(error)")
                 }
             }
-
+            
         }
     }
     
