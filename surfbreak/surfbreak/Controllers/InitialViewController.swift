@@ -495,7 +495,6 @@ extension InitialViewController : SurfQualityDelegate{
         componentsChecklist[snapshot.id]?.snapshot = snapshot
         ensureQualityAndLocationAreCompleteThenSegue()
     }
-    
 }
 
 //
