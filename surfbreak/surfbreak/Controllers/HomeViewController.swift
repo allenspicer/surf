@@ -105,7 +105,6 @@ extension HomeViewController {
     
 }
 
-
 //
 //MARK: - Haptics
 //
@@ -117,8 +116,6 @@ extension HomeViewController {
         selectionFeedbackGenerator.selectionChanged()
     }
 }
-
-
 
 //
 //MARK: - Activty Indicator Controls
@@ -134,9 +131,9 @@ extension HomeViewController {
         for view in self.view.subviews {
             if view.isKind(of: ActivityIndicatorView.self){
                 view.removeFromSuperview()
-            }
         }
     }
+}
     
 //
 //MARK: - User Interface helpers and fine tuning
@@ -183,7 +180,7 @@ extension HomeViewController {
 //MARK: Collection View Needs and Delegate Assignments
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BuoyClientDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
     private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
@@ -334,6 +331,33 @@ extension HomeViewController {
     }
     
     
+    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
+        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
+        self.selectedSnapshot = snapshot
+        self.selectedSnapshot.distance = self.distanceToUser
+        //remove spinner for response:
+        if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.period != 0.0) {
+            //                self.selectedSnapshot.stationName = stationName
+            self.setAdditonalDataClients()
+        }else{
+            DispatchQueue.main.async {
+                //if no data respond with alertview
+                self.stopActivityIndicator()
+                let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
+                    self.selectedCellAction()
+                }
+                alert.addAction(retryAction)
+                let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
+                    self.dataLoadFailedUseFallBackFromPersistence()
+                }
+                alert.addAction(continueAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
     private func setAdditonalDataClients(){
         let tideClient = TideClient(currentSnapshot: self.selectedSnapshot)
         tideClient.delegate = self
@@ -348,11 +372,13 @@ extension HomeViewController {
         airTempClient.createAirTempData()
     }
     
+    
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
         selectedSnapshot = sender.getSnapshotWithSurfQuality()
         snapshotComponents["quality"] = true
         segueWhenAllComponenetsAreLoaded()
     }
+    
     
     func didFinishTideTask(sender: TideClient, tides: [Tide], snapshot: Snapshot) {
         print("View Controller Has Tide Array with \(tides.count) tides")
@@ -360,6 +386,7 @@ extension HomeViewController {
         snapshotComponents["tide"] = true
         segueWhenAllComponenetsAreLoaded()
     }
+    
     
     func didFinishWindTask(sender: WindClient, winds: [Wind], snapshot: Snapshot) {
         print("View Controller Has Wind Array with \(winds.count) winds")
@@ -370,70 +397,20 @@ extension HomeViewController {
         surfQuality.delegate = self
     }
     
+    
     func didFinishAirTempTask(sender: AirTempClient, airTemps: [AirTemp], snapshot: Snapshot) {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
         selectedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
         snapshotComponents["air"] = true
         segueWhenAllComponenetsAreLoaded()
     }
-    
-    private func segueWhenAllComponenetsAreLoaded(){
-        if !snapshotComponents.values.contains(false){
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "segueToDetail", sender: self)
-                self.stopActivityIndicator()
-            }
-            saveCompleteSnapshotToPersistence(with: [selectedSnapshot])
-        }
-    }
-    
-    private func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
-        DispatchQueue.global(qos:.utility).async{
-            if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
-                do {
-                    try Disk.append(snapshots, to: DefaultConstants.allSnapshots, in: .caches)
-                }catch{
-                    print("Appending to automatic storage with Disk failed. Error is: \(error)")
-                }
-            }else{
-                do {
-                    try Disk.save(snapshots, to: .caches, as: DefaultConstants.allSnapshots)
-                }catch{
-                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
-                }
-            }
-            
-        }
-    }
 }
 
-extension HomeViewController : BuoyClientDelegate{
-    func didFinishBuoyTask(sender: BuoyClient, snapshot: Snapshot, stations: [Station]) {
-        print("The Buoy Client has returned a populated snapshot. Contents are: \(snapshot)")
-        self.selectedSnapshot = snapshot
-        self.selectedSnapshot.distance = self.distanceToUser
-            //remove spinner for response:
-            if (self.selectedSnapshot.waveHeight != 0.0 && self.selectedSnapshot.period != 0.0) {
-//                self.selectedSnapshot.stationName = stationName
-                self.setAdditonalDataClients()
-            }else{
-                DispatchQueue.main.async {
-                    //if no data respond with alertview
-                    self.stopActivityIndicator()
-                    let alert = UIAlertController.init(title: "Not enough Data", message: "This data is a little old. The bouy you want is not providing much data at the moment.", preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .destructive){_ in
-                        self.selectedCellAction()
-                    }
-                    alert.addAction(retryAction)
-                    let continueAction = UIAlertAction(title: "Continue", style: .default){_ in
-                        self.dataLoadFailedUseFallBackFromPersistence()
-                        }
-                    alert.addAction(continueAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-    }
-    
+//
+//MARK: - Retrieving and saving snapshot data
+//
+
+extension HomeViewController{
     private func dataLoadFailedUseFallBackFromPersistence(){
         var persistenceSnapshots = [Snapshot]()
         if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
@@ -455,16 +432,107 @@ extension HomeViewController : BuoyClientDelegate{
     }
     
     
-    //
-    //Gesture Recognizer
-    //
+    private func saveCompleteSnapshotToPersistence(with snapshots: [Snapshot]){
+        DispatchQueue.global(qos:.utility).async{
+            if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
+                do {
+                    try Disk.append(snapshots, to: DefaultConstants.allSnapshots, in: .caches)
+                }catch{
+                    print("Appending to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }else{
+                do {
+                    try Disk.save(snapshots, to: .caches, as: DefaultConstants.allSnapshots)
+                }catch{
+                    print("Saving to automatic storage with Disk failed. Error is: \(error)")
+                }
+            }
+            
+        }
+    }
     
+    
+    private func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
+        var persistenceSnapshots = [Snapshot]()
+        var fallbackSnapshots = [Snapshot]()
+        
+        if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
+            do {
+                persistenceSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
+            }catch{
+                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
+            }
+            
+            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
+            let timeLimit : TimeInterval = 60.0 * 60.0
+            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow < timeLimit})
+            persistenceSnapshots = persistenceSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
+            persistenceSnapshots = persistenceSnapshots.uniqueElements
+            
+            do {
+                try Disk.save(persistenceSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
+            }catch{
+                print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
+            }
+        }
+        
+        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
+            do {
+                fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .documents, as: [Snapshot].self)
+            }catch{
+                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
+            }
+        }
+        
+        //for all the users favorites
+        for favorite in userFavoritesForReturn{
+            
+            //if a snapshot record is not in the tableview data
+            if !favoritesSnapshots.map({$0.id}).contains(favorite.id){
+                
+                //look in persistence
+                for var snapshot in persistenceSnapshots where snapshot.id == favorite.id{
+                    if (favorite.nickname != ""){
+                        snapshot.nickname = favorite.nickname
+                    }
+                    //append that key to favorites snapshots data
+                    favoritesSnapshots.append(snapshot)
+                    DispatchQueue.main.async {
+                        self.favoritesCollectionView.reloadData()
+                    }
+                    return
+                }
+                
+                //then fallback data
+                for var snapshot in fallbackSnapshots where snapshot.id == favorite.id{
+                    
+                    if (favorite.nickname != ""){
+                        snapshot.nickname = favorite.nickname
+                    }
+                    
+                    //append that key to favorites snapshots data
+                    favoritesSnapshots.append(snapshot)
+                    DispatchQueue.main.async {
+                        self.favoritesCollectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//MARK: - Gesture Recognizer for Data Reset
+//
+
+extension HomeViewController{
     private func setupGestureRecognizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
         longPressGesture.minimumPressDuration = 2
         longPressGesture.delegate = self
         self.view.addGestureRecognizer(longPressGesture)
     }
+    
     
     @objc func didLongPress(gesture: UILongPressGestureRecognizer) {
         let alert = UIAlertController.init(title: "Reset All Data?", message: "Would you like to delete your settings? This will clear all cached data including favorites, location and wave data", preferredStyle: .alert)
@@ -482,14 +550,29 @@ extension HomeViewController : BuoyClientDelegate{
         self.present(alert, animated: true, completion: nil)
     }
     
+    
     private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
 
+//
+//MARK: - Segue Handling
+//
+
 extension HomeViewController {
+    private func segueWhenAllComponenetsAreLoaded(){
+        if !snapshotComponents.values.contains(false){
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segueToDetail", sender: self)
+                self.stopActivityIndicator()
+            }
+            saveCompleteSnapshotToPersistence(with: [selectedSnapshot])
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let destinationVC = segue.destination as? ViewController {
             favoritesCollectionView.collectionViewLayout.invalidateLayout()
             destinationVC.currentSnapShot = selectedSnapshot
@@ -520,75 +603,6 @@ extension HomeViewController {
                     //reload and set when favorite is added
                     favoritesCollectionView.reloadData()
                     self.setFavoriteCollectionSelection()
-                }
-            }
-        }
-    }
-    
-
-    private func loadPersistenceAndFallbackSnapshotsAndPopulateFavorites(){
-        var persistenceSnapshots = [Snapshot]()
-        var fallbackSnapshots = [Snapshot]()
-
-        if Disk.exists(DefaultConstants.allSnapshots, in: .caches) {
-            do {
-                persistenceSnapshots = try Disk.retrieve(DefaultConstants.allSnapshots, from: .caches, as: [Snapshot].self)
-            }catch{
-                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
-            }
- 
-            //scrub records: if snapshot in persistence is older than an the time limit we should remove it
-            let timeLimit : TimeInterval = 60.0 * 60.0
-            persistenceSnapshots = persistenceSnapshots.filter({$0.timeStamp.timeIntervalSinceNow < timeLimit})
-            persistenceSnapshots = persistenceSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
-            persistenceSnapshots = persistenceSnapshots.uniqueElements
-
-            do {
-                try Disk.save(persistenceSnapshots, to: .caches, as: DefaultConstants.allSnapshots)
-            }catch{
-                print("Saving snapshots in automatic storage with Disk failed. Error is: \(error)")
-            }
-        }
-        
-        if Disk.exists(DefaultConstants.fallBackSnapshots, in: .documents) {
-            do {
-                fallbackSnapshots = try Disk.retrieve(DefaultConstants.fallBackSnapshots, from: .documents, as: [Snapshot].self)
-            }catch{
-                print("Retrieving snapshots from automatic storage with Disk failed. Error is: \(error)")
-            }
-        }
-        
-        //for all the users favorites
-        for favorite in userFavoritesForReturn{
-
-            //if a snapshot record is not in the tableview data
-            if !favoritesSnapshots.map({$0.id}).contains(favorite.id){
-                
-                //look in persistence
-                for var snapshot in persistenceSnapshots where snapshot.id == favorite.id{
-                    if (favorite.nickname != ""){
-                        snapshot.nickname = favorite.nickname
-                    }
-                    //append that key to favorites snapshots data
-                    favoritesSnapshots.append(snapshot)
-                    DispatchQueue.main.async {
-                        self.favoritesCollectionView.reloadData()
-                    }
-                    return
-                }
-
-                //then fallback data
-                for var snapshot in fallbackSnapshots where snapshot.id == favorite.id{
-                    
-                    if (favorite.nickname != ""){
-                        snapshot.nickname = favorite.nickname
-                    }
-                    
-                    //append that key to favorites snapshots data
-                    favoritesSnapshots.append(snapshot)
-                    DispatchQueue.main.async {
-                        self.favoritesCollectionView.reloadData()
-                    }
                 }
             }
         }
