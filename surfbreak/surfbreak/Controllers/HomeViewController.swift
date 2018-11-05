@@ -28,7 +28,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     private var cellSelectedIndex = Int()
     private var selectedSnapshot = Snapshot()
     private var snapshotComponents = [String:Bool]()
-    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private let transitionComplete = Bool()
     private var currentCard: Int = 0
     
@@ -37,7 +36,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
         
         setProximalAndFavoriteCellsWithUserLocation()
         setDelegatesAndDataSources()
-        selectionFeedbackGenerator.prepare()
         setupGestureRecognizer()
         
         // Initial Flow Layout Setup
@@ -106,6 +104,21 @@ extension HomeViewController {
     }
     
 }
+
+
+//
+//MARK: - Haptics
+//
+
+extension HomeViewController {
+    private func feedbackForSelection(){
+        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+    }
+}
+
+
 
 //
 //MARK: - Activty Indicator Controls
@@ -181,10 +194,8 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectionFeedbackGenerator.prepare()
-        selectionFeedbackGenerator.selectionChanged()
+        feedbackForSelection()
         cellSelectedIndex = indexPath.row
-        
         switch collectionView {
         case is ProximalCollectionView:
             startActivityIndicator("Loading")
@@ -510,8 +521,6 @@ extension HomeViewController {
                     favoritesCollectionView.reloadData()
                     self.setFavoriteCollectionSelection()
                 }
-                
-
             }
         }
     }
