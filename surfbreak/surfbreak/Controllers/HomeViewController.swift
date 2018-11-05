@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var favoritesSnapshots = [Snapshot]()
     var userLocation : UserLocation? = nil
     var allStations = [Station]()
-
+    
     private var proximalData = [ProximalStation]()
     private var userFavoritesForReturn = [Favorite]()
     private var idStationSelected = Int()
@@ -132,17 +132,17 @@ extension HomeViewController {
         for view in self.view.subviews {
             if view.isKind(of: ActivityIndicatorView.self){
                 view.removeFromSuperview()
+            }
         }
     }
-}
     
-//
-//MARK: - User Interface helpers and fine tuning
-//
+    //
+    //MARK: - User Interface helpers and fine tuning
+    //
     
     private func setFavoriteCollectionSelection (){
         if favoritesCollectionView.cellForItem(at: IndexPath(item: currentCard, section: 0)) != nil {
-                        favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
+            favoritesCollectionView.selectItem(at: IndexPath(item: currentCard, section: 0), animated: false, scrollPosition: .centeredHorizontally)
         }else{
             if favoritesCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) != nil {
                 favoritesCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
@@ -268,7 +268,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         case is FavoriteCollectionView:
             if favoritesSnapshots.count < 1 {
-            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderFavoriteCollectionViewCell", for: indexPath) as! PlaceholderFavCollectionViewCell
+                let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderFavoriteCollectionViewCell", for: indexPath) as! PlaceholderFavCollectionViewCell
                 return cell
             }
             let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
@@ -307,7 +307,7 @@ extension HomeViewController {
             }catch{
                 print("Retrieving from automatic storage with Disk failed. Error is: \(error)")
             }
-
+            
             for persistenceSnapshot in persistenceSnapshots {
                 if persistenceSnapshot.id == snapshotId {
                     snapshot = persistenceSnapshot
@@ -537,12 +537,12 @@ extension HomeViewController{
     @objc func didLongPress(gesture: UILongPressGestureRecognizer) {
         let alert = UIAlertController.init(title: "Reset All Data?", message: "Would you like to delete your settings? This will clear all cached data including favorites, location and wave data", preferredStyle: .alert)
         let resetAction = UIAlertAction(title: "Clear Data", style: .destructive){_ in
-                do {
-                    try Disk.clear(.caches)
-                    self.performSegue(withIdentifier: "segueHomeToInitial", sender: self)
-                }catch{
-                    print("Attempting to clear caches in automatic storage with Disk failed. Error is: \(error)")
-                }
+            do {
+                try Disk.clear(.caches)
+                self.performSegue(withIdentifier: "segueHomeToInitial", sender: self)
+            }catch{
+                print("Attempting to clear caches in automatic storage with Disk failed. Error is: \(error)")
+            }
         }
         alert.addAction(resetAction)
         let returnAction = UIAlertAction(title: "Nevermind", style: .default){_ in }
@@ -561,7 +561,7 @@ extension HomeViewController{
         }
         return true
     }
-
+    
 }
 
 //
@@ -603,8 +603,8 @@ extension HomeViewController {
                     //reload and set when favorite is removed
                     favoritesCollectionView.reloadData()
                     self.setFavoriteCollectionSelection()
-
-                //if favorite needs to be added
+                    
+                    //if favorite needs to be added
                 }else{
                     favoritesSnapshots.append(sourceViewController.currentSnapShot)
                     
