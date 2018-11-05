@@ -39,7 +39,6 @@
 		957471C02113EEB00064DD3A /* ProximalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */; };
 		957471C22113EEC80064DD3A /* FavoriteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */; };
 		957471C42113EF660064DD3A /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C32113EF660064DD3A /* CircleView.swift */; };
-		957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */; };
 		957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */; };
 		957E5DEB2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */; };
 		958A8117211C929E00103064 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */; };
@@ -106,7 +105,6 @@
 		957471BF2113EEB00064DD3A /* ProximalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCollectionView.swift; sourceTree = "<group>"; };
 		957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionView.swift; sourceTree = "<group>"; };
 		957471C32113EF660064DD3A /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
-		957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFavoriteFlowLayout.swift; sourceTree = "<group>"; };
 		957471C92113F2A60064DD3A /* ProxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxCollectionViewCell.swift; sourceTree = "<group>"; };
 		957E5DEA2163BEFA00AD90C1 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		958A8105211C928F00103064 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -289,7 +287,6 @@
 				957471C12113EEC80064DD3A /* FavoriteCollectionView.swift */,
 				957471BD2113ED9D0064DD3A /* FavCollectionViewCell.swift */,
 				95331BDC2176481E006345D6 /* PlaceholderFavCollectionViewCell.swift */,
-				957471C52113EFC60064DD3A /* OldFavoriteFlowLayout.swift */,
 				953502EB211A0D5400E8DDA8 /* FavoriteFlowLayout.swift */,
 			);
 			path = "Favorite Collection";
@@ -553,7 +550,6 @@
 				958A812A211CAB5F00103064 /* FallBackData.swift in Sources */,
 				957471CA2113F2A60064DD3A /* ProxCollectionViewCell.swift in Sources */,
 				957471BC2113EB840064DD3A /* HomeViewController.swift in Sources */,
-				957471C62113EFC60064DD3A /* OldFavoriteFlowLayout.swift in Sources */,
 				957471AA2113659A0064DD3A /* AirTemp.swift in Sources */,
 				953F07EB210A575300E70E18 /* AppDelegate.swift in Sources */,
 				957471B4211394420064DD3A /* SurfSnapshotView.swift in Sources */,
