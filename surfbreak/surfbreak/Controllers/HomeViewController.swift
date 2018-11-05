@@ -18,7 +18,6 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     var userLocation : UserLocation? = nil
     var allStations = [Station]()
 
-    private var standardMinimumLineSpacing : CGFloat = 80.0
     private var proximalData = [ProximalStation]()
     private var userFavoritesForReturn = [Favorite]()
     private var idStationSelected = Int()
@@ -33,28 +32,16 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setProximalAndFavoriteCellsWithUserLocation()
-        setDelegatesAndDataSources()
+        setupProximalAndFavoriteCollections()
         setupGestureRecognizer()
-        
-        // Initial Flow Layout Setup
-        if let layout = self.favoritesCollectionView.collectionViewLayout as? FavoriteFlowLayout{
-            layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = -standardMinimumLineSpacing
-        }
-
-        //set current card
-        if (favoritesSnapshots.count > 2) {currentCard = 1}
-        
-        stopActivityIndicator()
     }
+    
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
     
+    //in some instances the custom transition will leave a circleview object in the heirarchy
     override func viewWillAppear(_ animated: Bool) {
         for view in view.subviews where view is CircleView{
             view.removeFromSuperview()
@@ -67,7 +54,10 @@ class HomeViewController: UIViewController, UIGestureRecognizerDelegate{
 //
 
 extension HomeViewController {
-    private func setProximalAndFavoriteCellsWithUserLocation(){
+    private func setupProximalAndFavoriteCollections(){
+        // Assign data sources and delegate for collection views
+        setDelegatesAndDataSources()
+        
         for index in 0..<allStations.count{
             let station = allStations[index]
             let proximalStation = ProximalStation(station: station, distanceToUser: distanceFromUserWith(station))
@@ -85,6 +75,17 @@ extension HomeViewController {
             }
         }
         favoritesCollectionView.reloadData()
+        
+        // Initial Flow Layout Setup
+        if let layout = self.favoritesCollectionView.collectionViewLayout as? FavoriteFlowLayout{
+            let standardMinimumLineSpacing : CGFloat = 80.0
+            layout.estimatedItemSize = CGSize(width: 207.0, height: 264.0)
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = -standardMinimumLineSpacing
+        }
+        
+        //set current card
+        if (favoritesSnapshots.count > 2) {currentCard = 1}
         stopActivityIndicator()
     }
     
@@ -184,7 +185,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
-        
         favoritesCollectionView.dataSource = self
         proximalCollectionView.dataSource = self
     }
@@ -551,9 +551,17 @@ extension HomeViewController{
     }
     
     
-    private func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let viewTouched = touch.view{
+            if viewTouched is UICollectionViewCell { return false }
+        }
+        return true
+    }
+
 }
 
 //
