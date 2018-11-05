@@ -15,22 +15,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var currentSnapShot = Snapshot()
     var favoriteForUnwind : Favorite? = nil
-
+    
     private var displayLink: CADisplayLink?
     private var startTime: CFAbsoluteTime?
-    private var path: UIBezierPath!
     private var currentFavorite : Favorite? = nil
-    private var stationName = String()
-    private var waterColor: CGColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    private var activityIndicatorView = ActivityIndicatorView()
     private var favoriteButton = UIButton()
     private var favoriteFlag = false
     private var favoritesArray = [Favorite]()
-    private var snapshotView : SurfSnapshotView? = nil
-    private let feedbackGenerator: (notification: UINotificationFeedbackGenerator, impact: (light: UIImpactFeedbackGenerator, medium: UIImpactFeedbackGenerator, heavy: UIImpactFeedbackGenerator), selection: UISelectionFeedbackGenerator) = {
-        return (notification: UINotificationFeedbackGenerator(), impact: (light: UIImpactFeedbackGenerator(style: .light), medium: UIImpactFeedbackGenerator(style: .medium), heavy: UIImpactFeedbackGenerator(style: .heavy)), selection: UISelectionFeedbackGenerator())
-    }()
-    private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     private var mainView = UIView(frame: UIScreen.main.bounds)
     private var backgroundImageView = UIImageView()
     
@@ -79,10 +70,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setupAnimatedWaveWithBouyData(){
-//        if let color = currentSnapShot.waterColor{
-//            waterColor = color
-//            self.shapeLayer.strokeColor = waterColor
-//        }
+        //        if let color = currentSnapShot.waterColor{
+        //            waterColor = color
+        //            self.shapeLayer.strokeColor = waterColor
+        //        }
         mainView.layer.addSublayer(self.shapeLayer)
         self.startDisplayLink()
     }
@@ -123,13 +114,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             for subview in mainView.subviews {
                 if let view = subview as? SurfSnapshotView {
                     view.toggleMainLabel()
+                    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
                     selectionFeedbackGenerator.prepare()
                     selectionFeedbackGenerator.selectionChanged()
                 }
             }
         }
     }
-
+    
     
     @objc func didSwipe(gesture: UIPanGestureRecognizer) {
         let height = mainView.frame.height/2
@@ -148,13 +140,13 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             gesture.setTranslation(CGPoint(x: 0, y: 0), in: mainView)
         }
         if gesture.state == .ended {
-
+            
             UIView.animate(withDuration: 0.2, delay: 0,  options: .curveEaseInOut , animations: {
                 gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: height)
             }) { _ in
             }
         }
-
+        
     }
     
     
@@ -248,7 +240,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             do{
                 //update persistence with local data to remove favorite
                 try Disk.save(favoritesArray, to: .caches, as: DefaultConstants.favorites)
-                feedbackGenerator.notification.notificationOccurred(.warning)
+                UINotificationFeedbackGenerator().notificationOccurred(.warning)
                 let alert = UIAlertController.init(title: "Success", message: "This station has been removed from your favorites", preferredStyle: .alert)
                 let doneAction = UIAlertAction(title: "Okay", style: .default)
                 alert.addAction(doneAction)
@@ -265,34 +257,34 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     private func addFavorite(){
-        feedbackGenerator.notification.notificationOccurred(.success)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
         favoriteFlag = !favoriteFlag
         setButton()
         saveStationAndNameToFavoritesDefaults(nickname: currentSnapShot.stationName)
-
+        
         let alert = UIAlertController.init(title: "Success", message: "This station has been added to your favorites", preferredStyle: .alert)
-//        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
+        //        alert.addTextField { (textField) in textField.text = self.currentSnapShot.stationName}
         let okayAction = UIAlertAction(title: "Okay", style: .default){ (_) in
-//            guard let textFields = alert.textFields, textFields.count > 0 else {return}
-//            if let text = textFields[0].text {
-//                self.currentSnapShot.nickname = text
-//                for view in self.mainView.subviews {
-//                    if view is SurfSnapshotView {
-//                        if let surfView = view as? SurfSnapshotView{
-//                            surfView.titleLabel.text = text
-//                            self.favoriteFlag = !self.favoriteFlag
-//                            self.setButton()
-//                            self.feedbackGenerator.notification.notificationOccurred(.success)
-//                        }
-//                    }
-//                }
-//              self.saveStationAndNameToFavoritesDefaults(nickname: text)
+            //            guard let textFields = alert.textFields, textFields.count > 0 else {return}
+            //            if let text = textFields[0].text {
+            //                self.currentSnapShot.nickname = text
+            //                for view in self.mainView.subviews {
+            //                    if view is SurfSnapshotView {
+            //                        if let surfView = view as? SurfSnapshotView{
+            //                            surfView.titleLabel.text = text
+            //                            self.favoriteFlag = !self.favoriteFlag
+            //                            self.setButton()
+            //                            self.feedbackGenerator.notification.notificationOccurred(.success)
+            //                        }
+            //                    }
+            //                }
+            //              self.saveStationAndNameToFavoritesDefaults(nickname: text)
             
-//            }
+            //            }
         }
         alert.addAction(okayAction)
-//        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
-//        alert.addAction(doneAction)
+        //        let doneAction = UIAlertAction(title: "Cancel", style: .destructive)
+        //        alert.addAction(doneAction)
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -322,9 +314,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
 extension ViewController{
     private func setUIFromCurrentSnapshot(_ isFirstLoad : Bool){
         if isFirstLoad {
-            snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
-            guard let view = snapshotView else {return}
-            mainView.addSubview(view)
+            let snapshotView = SurfSnapshotView.init(snapshot: self.currentSnapShot)
+            mainView.addSubview(snapshotView)
             backgroundImageView = UIImageView(image: #imageLiteral(resourceName: "Bkgd_main"))
             backgroundImageView.frame = mainView.frame
             self.view.insertSubview(backgroundImageView, belowSubview: mainView)
