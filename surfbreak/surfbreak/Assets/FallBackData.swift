@@ -21,7 +21,6 @@ final class FallBackData: NSObject {
     }
     
     func createData(){
-        
         let date = Date()
         let nextDate = Calendar.current.date(byAdding: .hour, value: 6, to: date) ?? date
         for station in allStations{
