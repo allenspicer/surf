@@ -120,6 +120,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return nil
     }
-
 }
 
