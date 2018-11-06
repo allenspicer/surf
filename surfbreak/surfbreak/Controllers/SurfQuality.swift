@@ -125,12 +125,12 @@ class SurfQuality: NSObject {
             }
             print("Quality: \(self.currentSnapshot.quality) after limiter")
             
-                //was setting background color here with wind direction
-                //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
-                DispatchQueue.main.async {
-                    print("The Current Wind Direciton is \(windDirection)")
-                    print("The Beach Face Direciton is \(faceDirection)")
-                    self.didFinishSurfQualityAssesment()
+            //was setting background color here with wind direction
+            //                self.currentSnapshot.backgroundColor = self.getColorFromDiff(absDiff)
+            DispatchQueue.main.async {
+                print("The Current Wind Direciton is \(windDirection)")
+                print("The Beach Face Direciton is \(faceDirection)")
+                self.didFinishSurfQualityAssesment()
             }
         }
     }
@@ -141,13 +141,13 @@ class SurfQuality: NSObject {
     
     private func getDirectionFromDiff (_ diff : Double) -> Int{
         if diff > 0 && diff < 60 {
-//            self.currentSnapshot.windDirectionString = "ON"
+            //            self.currentSnapshot.windDirectionString = "ON"
             return 1
         } else if diff > 90 {
-//            self.currentSnapshot.windDirectionString = "OFF"
+            //            self.currentSnapshot.windDirectionString = "OFF"
             return 2
         }
-//        self.currentSnapshot.windDirectionString = "SIDE"
+        //        self.currentSnapshot.windDirectionString = "SIDE"
         return 3
     }
     
