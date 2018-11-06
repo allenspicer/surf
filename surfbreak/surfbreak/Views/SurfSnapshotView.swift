@@ -188,7 +188,7 @@ class SurfSnapshotView: UIScrollView {
         
         var waveHeightDigitCount = CGFloat(0)
         var waveHeight = 0.0
-            waveHeight = currentSnapShot.waveHeight
+        waveHeight = currentSnapShot.waveHeight
         
         switch waveHeight{
         case ...9:
@@ -265,15 +265,15 @@ class SurfSnapshotView: UIScrollView {
     }
     
     private func addFrequencyImage() -> UIView {
-    let frequencyImageView = UIImageView()
-    frequencyImageView.frame.size = CGSize(width: 40, height: 40)
-    frequencyImageView.contentMode = .scaleAspectFit
+        let frequencyImageView = UIImageView()
+        frequencyImageView.frame.size = CGSize(width: 40, height: 40)
+        frequencyImageView.contentMode = .scaleAspectFit
         return frequencyImageView
     }
     
     private func addFrequencyText() -> UIView {
         let frequencyAmountLabel = UILabel()
-//        frequencyAmountLabel.text = "\(Int(currentSnapShot.period)) sec"
+        //        frequencyAmountLabel.text = "\(Int(currentSnapShot.period)) sec"
         frequencyAmountLabel.textColor = textColor
         frequencyAmountLabel.font = UIFont(name:"Teko-Regular", size: 24.0)
         return frequencyAmountLabel
@@ -353,7 +353,7 @@ class SurfSnapshotView: UIScrollView {
     
     private func addWindText() -> UIView {
         let waterTempLabel = UILabel()
-//        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
+        //        waterTempLabel.text = "\(currentSnapShot.windDirectionString) @ \(currentSnapShot.windSpeed)"
         waterTempLabel.font = UIFont(name:"Teko-Regular", size: 24.0)
         waterTempLabel.textColor = textColor
         return waterTempLabel

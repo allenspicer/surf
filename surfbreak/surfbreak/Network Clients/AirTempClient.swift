@@ -40,7 +40,7 @@ final class AirTempClient: NSObject {
         let currentDateString = formattedCurrentDateString()
         let hoursNeeded = 2
         let stationId = "\(currentSnapshot.airWindTideId)"
-
+        
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=air_temperature&datum=msl&units=english&interval=h&time_zone=gmt&application=web_services&format=json"
         
         guard let url = URL(string: filePathString) else { return }

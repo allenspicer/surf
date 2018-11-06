@@ -17,7 +17,6 @@ struct Station : Decodable{
     var latitude = Double()
     var longitude = Double()
     var airWindTideId = Int()
-
 }
 
 

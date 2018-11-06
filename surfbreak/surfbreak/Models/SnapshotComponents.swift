@@ -21,20 +21,20 @@ struct SnapshotComponents {
     var quality : Bool
     var completeTimestamp: Date?
     var snapshot: Snapshot?
-
+    
     
     init(bouy : Bool = false,
-     bouyTimeStamp: Date? = nil,
-     tide : Bool = false,
-     tideTimeStamp: Date? = nil,
-     wind : Bool = false,
-     windTimeStamp: Date? = nil,
-     air : Bool = false,
-     airTimeStamp: Date? = nil,
-     quality : Bool = false,
-     completeTimestamp: Date? = nil,
-     snapshot: Snapshot? = nil
-     ) {
+         bouyTimeStamp: Date? = nil,
+         tide : Bool = false,
+         tideTimeStamp: Date? = nil,
+         wind : Bool = false,
+         windTimeStamp: Date? = nil,
+         air : Bool = false,
+         airTimeStamp: Date? = nil,
+         quality : Bool = false,
+         completeTimestamp: Date? = nil,
+         snapshot: Snapshot? = nil
+        ) {
         self.bouy = bouy
         self.bouyTimeStamp = bouyTimeStamp
         self.tide = tide

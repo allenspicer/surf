@@ -28,7 +28,6 @@ class CircleView: UIView {
     }
     
     func resetCircle() {
-        
         var rectSide: CGFloat = 0
         if (frame.size.width > frame.size.height) {
             rectSide = frame.size.height
@@ -60,7 +59,6 @@ class CircleView: UIView {
     }
     
     func resizeCircle (summand: CGFloat) {
-        
         frame.origin.x -= summand/2
         frame.origin.y -= summand/2
         
@@ -69,18 +67,14 @@ class CircleView: UIView {
         
         circle.frame.size.height += summand
         circle.frame.size.width += summand
-
-//        circle.frame.origin.y -= summand/4
-        frame.origin.y = frame.origin.y + 150
-
         
+        frame.origin.y = frame.origin.y + 150
         self.frame.size = circle.frame.size
         self.layer.cornerRadius = self.frame.height/2
         
     }
     
     func animateChangingCornerRadius (toValue: Any?, duration: TimeInterval) {
-        
         let animation = CABasicAnimation(keyPath:"cornerRadius")
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         animation.fromValue = circle.layer.cornerRadius
@@ -92,14 +86,12 @@ class CircleView: UIView {
     
     
     func growCircleTo(_ summand: CGFloat, duration: TimeInterval, completionBlock:@escaping ()->()) {
-        
         UIView.animate(withDuration: duration, delay: 0,  options: .curveEaseInOut, animations: {
             self.resizeCircle(summand: summand)
         }) { _ in
             completionBlock()
         }
         animateChangingCornerRadius(toValue: circle.frame.size.width/2, duration: duration)
-        
     }
     
 }

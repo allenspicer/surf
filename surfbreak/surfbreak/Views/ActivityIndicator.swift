@@ -20,7 +20,7 @@ class ActivityIndicatorView: UIView {
         let selfHeight = view.frame.height
         let loopImages = UIImageView()
         
-        let imageListArray = [#imageLiteral(resourceName: "Mini_Flat"),#imageLiteral(resourceName: "Mini_bump"),#imageLiteral(resourceName: "Mini_littlewave"),#imageLiteral(resourceName: "Mini_wave"),#imageLiteral(resourceName: "Mini_bigwave")] // Put your desired array of images in a specific order the way you want to display animation.
+        let imageListArray = [#imageLiteral(resourceName: "Mini_Flat"),#imageLiteral(resourceName: "Mini_bump"),#imageLiteral(resourceName: "Mini_littlewave"),#imageLiteral(resourceName: "Mini_wave"),#imageLiteral(resourceName: "Mini_bigwave")]
         
         loopImages.animationImages = imageListArray
         loopImages.animationDuration = TimeInterval(0.9)
@@ -40,10 +40,7 @@ class ActivityIndicatorView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .gray
-        //        label.font = UIFont(name: "SFUIDisplay-Regular", size: 17.0)! // Your Desired UIFont Style and Size
         label.numberOfLines = 0
-        //        label.text = message ?? ""
-        //        label.textColor = textColor ?? UIColor.clear
         
         //Config frame of label
         let labelFrameX = (selfWidth / 2) - 100

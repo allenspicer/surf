@@ -55,11 +55,11 @@ struct Snapshot : Codable, Equatable{
          tideDirectionString : String = "",
          timeStamp : Date = Date(),
          quality : Int = 0,
-        airWindTideId : Int = 0,
-        nextHighTide : Date = Date(),
-        nextLowTide : Date = Date(),
-        distance : Int = 0,
-        isFallback : Bool = false
+         airWindTideId : Int = 0,
+         nextHighTide : Date = Date(),
+         nextLowTide : Date = Date(),
+         distance : Int = 0,
+         isFallback : Bool = false
         ) {
         self.waveHeight = waveHeight
         self.swellDirection = swellDirection

@@ -40,7 +40,7 @@ final class TideClient: NSObject {
         let currentDateString = formattedCurrentDateString()
         let hoursNeeded = 36
         let stationId = "\(currentSnapshot.airWindTideId)"
-
+        
         let filePathString = "https://tidesandcurrents.noaa.gov/api/datagetter?begin_date=\(currentDateString)&range=\(hoursNeeded)&station=\(stationId)&product=predictions&datum=msl&units=english&interval=hilo&time_zone=lst_ldt&application=web_services&format=json"
         
         guard let url = URL(string: filePathString) else { return }
@@ -120,19 +120,19 @@ final class TideClient: NSObject {
         
         //tides are in order from API 
         //Take the lowest date stamp greater than current and add it plus the next tide based on their H/L key
-            if (upcomingTides[0].key == "H"){
-                snapshot.nextHighTide = upcomingTides[0].timeStamp
-                if upcomingTides.indices.contains(1){
-                    snapshot.nextLowTide = upcomingTides[1].timeStamp
-                }
-            }else{
-                snapshot.nextLowTide = upcomingTides[0].timeStamp
-                if upcomingTides.indices.contains(1){
-                    snapshot.nextHighTide = upcomingTides[1].timeStamp
-                }
+        if (upcomingTides[0].key == "H"){
+            snapshot.nextHighTide = upcomingTides[0].timeStamp
+            if upcomingTides.indices.contains(1){
+                snapshot.nextLowTide = upcomingTides[1].timeStamp
             }
+        }else{
+            snapshot.nextLowTide = upcomingTides[0].timeStamp
+            if upcomingTides.indices.contains(1){
+                snapshot.nextHighTide = upcomingTides[1].timeStamp
+            }
+        }
         return snapshot
     }
-
+    
 }
 
