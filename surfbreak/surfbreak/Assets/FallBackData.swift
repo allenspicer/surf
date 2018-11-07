@@ -11,8 +11,8 @@ import Disk
 
 final class FallBackData: NSObject {
     
-    var allStations = [Station]()
-    var fallbackSnapshots = [Snapshot]()
+    private var allStations = [Station]()
+    private var fallbackSnapshots = [Snapshot]()
 
     init(allStations : [Station]) {
         super.init()
@@ -20,7 +20,7 @@ final class FallBackData: NSObject {
         self.createData()
     }
     
-    func createData(){
+    private func createData(){
         let date = Date()
         let nextDate = Calendar.current.date(byAdding: .hour, value: 6, to: date) ?? date
         for station in allStations{
@@ -28,10 +28,9 @@ final class FallBackData: NSObject {
             fallbackSnapshots.append(snapshot)
         }
         saveSnapshotsToPersistence()
-
     }
     
-    func saveSnapshotsToPersistence(){
+    private func saveSnapshotsToPersistence(){
         DispatchQueue.global(qos:.utility).async{
             do {
                 try Disk.save(self.fallbackSnapshots, to: .documents, as: DefaultConstants.fallBackSnapshots)
