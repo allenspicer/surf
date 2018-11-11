@@ -18,6 +18,8 @@ struct SnapshotComponents {
     var windTimeStamp: Date?
     var air : Bool
     var airTimeStamp: Date?
+    var waterTemp : Bool
+    var waterTempTimeStamp: Date?
     var quality : Bool
     var completeTimestamp: Date?
     var snapshot: Snapshot?
@@ -31,6 +33,8 @@ struct SnapshotComponents {
          windTimeStamp: Date? = nil,
          air : Bool = false,
          airTimeStamp: Date? = nil,
+         waterTemp : Bool = false,
+         waterTempTimeStamp: Date? = nil,
          quality : Bool = false,
          completeTimestamp: Date? = nil,
          snapshot: Snapshot? = nil
@@ -43,6 +47,8 @@ struct SnapshotComponents {
         self.windTimeStamp = windTimeStamp
         self.air = air
         self.airTimeStamp = airTimeStamp
+        self.waterTemp = waterTemp
+        self.waterTempTimeStamp = waterTempTimeStamp
         self.quality = quality
         self.completeTimestamp = completeTimestamp
         self.snapshot = snapshot

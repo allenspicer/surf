@@ -293,6 +293,10 @@ final class InitialViewController: UIViewController {
         let airTempClient = AirTempClient(currentSnapshot: snapshot)
         airTempClient.delegate = self
         airTempClient.createAirTempData()
+        
+        let waterTempClient = WaterTempClient(currentSnapshot: snapshot)
+        waterTempClient.delegate = self
+        waterTempClient.createWaterTempData()
     }
     
 }
@@ -488,6 +492,18 @@ extension InitialViewController : AirTempDelegate{
     }
 }
 
+extension InitialViewController : WaterTempClientDelegate{
+    func didFinishWaterTempTask(sender: WaterTempClient, snapshot: Snapshot) {
+        print("The Water Temp Client has returned a water temperature")
+        componentsChecklist[snapshot.id]?.waterTemp = true
+        componentsChecklist[snapshot.id]?.waterTempTimeStamp = Date()
+        componentsChecklist[snapshot.id]?.snapshot = snapshot
+        guard let currentSnapshot = componentsChecklist[snapshot.id]?.snapshot else {return}
+        componentsChecklist[snapshot.id]?.snapshot = sender.addWaterTempDataToSnapshot(currentSnapshot, waterTemp: sender.waterTemp)
+        attemptToCreateQualityMeasureWithCompleteComponentChecklist()
+    }
+}
+
 extension InitialViewController : SurfQualityDelegate{
     func didFinishSurfQualityTask(sender: SurfQuality, snapshot: Snapshot) {
         componentsChecklist[snapshot.id]?.quality = true
@@ -506,13 +522,15 @@ extension InitialViewController {
         print("Checking for components needed for quality assesment")
         print("There are \(componentsChecklist.count) componentsChecklists ")
         for key in componentsChecklist.keys {
-            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false{
+            if componentsChecklist[key]?.bouy == false || componentsChecklist[key]?.air == false ||  componentsChecklist[key]?.wind == false || componentsChecklist[key]?.tide == false || componentsChecklist[key]?.waterTemp == false{
                 print("Exiting on checkComponentsForCompletion")
                 print("Snapshot id \(key)")
                 print("Buoy data present: \(String(describing: componentsChecklist[key]?.bouy))")
                 print("Air data present: \(String(describing: componentsChecklist[key]?.air))")
                 print("Wind data present: \(String(describing: componentsChecklist[key]?.wind))")
                 print("Tide data present: \(String(describing: componentsChecklist[key]?.tide))")
+                print("Water Temp data present: \(String(describing: componentsChecklist[key]?.waterTemp))")
+
                 return
             }
             guard let snapshot = (componentsChecklist[key]?.snapshot) else {return}

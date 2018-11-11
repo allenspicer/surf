@@ -10,26 +10,25 @@ import UIKit
 
 
 protocol WaterTempClientDelegate: AnyObject {
-    func didFinishBuoyTask(sender: WaterTempClient, snapshot : Snapshot, stations : [Station])
+    func didFinishWaterTempTask(sender: WaterTempClient, snapshot : Snapshot)
 }
 
 final class WaterTempClient: NSObject {
     
     var delegate : WaterTempClientDelegate?
     var currentSnapshot = Snapshot()
-    var snapshotId = Int()
-    var currentStation = Station()
-    var allStations = [Station]()
+    var waterTemp = Double()
     
-    
-    init(snapshotId:Int, allStations: [Station]) {
-        self.snapshotId = snapshotId
-        self.allStations = allStations
+    init(currentSnapshot:Snapshot) {
+        self.currentSnapshot = currentSnapshot
     }
     
-    func createBuoyData() {
+    func createWaterTempData() {
         DispatchQueue.global(qos:.utility).async {
-            self.setUrlStringFromSnapshotId()
+            let waterTempurlString = "https://sdf.ndbc.noaa.gov/sos/server.php?request=GetObservation&service=SOS&version=1.0.0&offering=urn:ioos:station:wmo:\(self.currentSnapshot.stationId)&observedproperty=sea_water_temperature&responseformat=text/csv&eventtime=latest"
+            guard let waterTempurl = URL(string: waterTempurlString) else {return}
+            
+            self.waterTempDataServiceRequestWith(waterTempurl: waterTempurl)
         }
     }
     
@@ -46,7 +45,7 @@ final class WaterTempClient: NSObject {
         }catch{
             print("Water Temp Data Retreival Error: \(error)")
             DispatchQueue.main.async {
-                self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
+                self.delegate?.didFinishWaterTempTask(sender: self, snapshot: self.currentSnapshot)
             }
         }
         
@@ -57,26 +56,10 @@ final class WaterTempClient: NSObject {
         guard let currentWaterTemp = Double(waterTempValues[6]) as Double? else {return}
         var currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
         currentWaterTempInFahrenheit = (currentWaterTempInFahrenheit*10).rounded()/10
-
-        currentSnapshot.waterTemp = currentWaterTempInFahrenheit
+        waterTemp = currentWaterTempInFahrenheit
 
         DispatchQueue.main.async {
-            self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
-        }
-    }
-    
-    func setUrlStringFromSnapshotId(){
-        //after getStationDataFromFileWithSnapshotId
-        //we have currentStation populated
-        //use the station Id to retrieve data
-        
-        for station in allStations where station.id == self.snapshotId {
-            currentStation = station
-            
-            let waterTempurlString = "https://sdf.ndbc.noaa.gov/sos/server.php?request=GetObservation&service=SOS&version=1.0.0&offering=urn:ioos:station:wmo:\(currentStation.station)&observedproperty=sea_water_temperature&responseformat=text/csv&eventtime=latest"
-            guard let waterTempurl = URL(string: waterTempurlString) else {return}
-            
-            waterTempDataServiceRequestWith(waterTempurl: waterTempurl)
+            self.delegate?.didFinishWaterTempTask(sender: self, snapshot: self.currentSnapshot)
         }
     }
 }
@@ -87,10 +70,15 @@ extension WaterTempClient {
     //MARK: - helpers to convert data
     //
     
-    
     func fahrenheitFromCelcius(temp : Double) -> (Double){
         let tempInF = (9.0 / 5.0 * (temp)) + 32.0
         return (tempInF)
+    }
+    
+    func addWaterTempDataToSnapshot(_ snapshotWithoutWaterTemp : Snapshot, waterTemp : Double)-> Snapshot {
+        var snapshot = snapshotWithoutWaterTemp
+        snapshot.waterTemp = waterTemp
+        return snapshot
     }
 }
 
