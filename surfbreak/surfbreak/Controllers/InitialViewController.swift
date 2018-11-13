@@ -234,7 +234,7 @@ final class InitialViewController: UIViewController {
             
             //scrub records: if snapshot in persistence is older than an the time limit we should remove it
             let timeLimitInMinutes = 5.0
-            let timeLimit : TimeInterval = 60.0 * timeLimitInMinutes
+            let timeLimit : TimeInterval = 5.0 //60.0 * timeLimitInMinutes
             allSnapshots = allSnapshots.filter({abs($0.timeStamp.timeIntervalSinceNow) < timeLimit})
             allSnapshots = allSnapshots.sorted(by: {$0.timeStamp < $1.timeStamp})
             allSnapshots = allSnapshots.uniqueElements
