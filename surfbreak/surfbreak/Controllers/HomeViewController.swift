@@ -181,7 +181,7 @@ extension HomeViewController {
 //MARK: Collection View Needs and Delegate Assignments
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BuoyClientDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BuoyClientDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, WaterTempDelegate, SurfQualityDelegate{
     private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
@@ -370,6 +370,10 @@ extension HomeViewController {
         let airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
         airTempClient.delegate = self
         airTempClient.createAirTempData()
+        
+        let waterTempClient = WaterTempClient(currentSnapshot: self.selectedSnapshot)
+        waterTempClient.delegate = self
+        waterTempClient.createWaterTempData()
     }
     
     
@@ -403,6 +407,11 @@ extension HomeViewController {
         selectedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
         snapshotComponents["air"] = true
         segueWhenAllComponenetsAreLoaded()
+    }
+    
+    func didFinishWaterTempTask(sender: WaterTempClient, snapshot: Snapshot) {
+        print("The Water Temp Client has returned a water temperature")
+
     }
 }
 

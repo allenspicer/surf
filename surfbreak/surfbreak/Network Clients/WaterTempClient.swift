@@ -9,13 +9,13 @@
 import UIKit
 
 
-protocol WaterTempClientDelegate: AnyObject {
+protocol WaterTempDelegate: AnyObject {
     func didFinishWaterTempTask(sender: WaterTempClient, snapshot : Snapshot)
 }
 
 final class WaterTempClient: NSObject {
     
-    var delegate : WaterTempClientDelegate?
+    var delegate : WaterTempDelegate?
     var currentSnapshot = Snapshot()
     var waterTemp = Double()
     
