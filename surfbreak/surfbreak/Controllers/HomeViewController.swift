@@ -288,7 +288,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let buoyClient = BuoyClient(snapshotId: self.idStationSelected, allStations: self.allStations)
             buoyClient.delegate = self
             buoyClient.createBuoyData()
-            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "water" : false, "quality" : false]
         }
     }
 }
