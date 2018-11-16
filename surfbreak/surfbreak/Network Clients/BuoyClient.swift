@@ -38,7 +38,7 @@ final class BuoyClient: NSObject {
     //
     
     
-    private func buoyDataServiceRequestWith(waveurl : URL, waterTempurl : URL){
+    private func buoyDataServiceRequestWith(waveurl : URL){
         
         var dataString = String()
         do {
@@ -78,26 +78,6 @@ final class BuoyClient: NSObject {
         currentSnapshot.stationId = currentStation.station
         currentSnapshot.stationName = currentStation.name
         currentSnapshot.airWindTideId = currentStation.airWindTideId
-        
-        var waterTempDataString = String()
-        do {
-            waterTempDataString = try String(contentsOf: waterTempurl)
-        }catch{
-            print("Water Temp Data Retreival Error: \(error)")
-            DispatchQueue.main.async {
-                self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
-            }
-        }
-        
-        let waterTempLines = waterTempDataString.components(separatedBy: "\n")
-        let waterTempValues = waterTempLines[1].components(separatedBy: ",")
-
-        //water temp
-        guard let currentWaterTemp = Double(waterTempValues[6]) as Double? else {return}
-        var currentWaterTempInFahrenheit = fahrenheitFromCelcius(temp: currentWaterTemp)
-        currentWaterTempInFahrenheit = (currentWaterTempInFahrenheit*10).rounded()/10
-
-        currentSnapshot.waterTemp = currentWaterTempInFahrenheit
 
         DispatchQueue.main.async {
             self.delegate?.didFinishBuoyTask(sender: self, snapshot: self.currentSnapshot, stations: self.allStations)
@@ -114,10 +94,7 @@ final class BuoyClient: NSObject {
             let urlString = "https://sdf.ndbc.noaa.gov/sos/server.php?request=GetObservation&service=SOS&version=1.0.0&offering=urn:ioos:station:wmo:\(currentStation.station)&observedproperty=Waves&responseformat=text/csv&eventtime=latest"
             guard let waveurl = URL(string: urlString) else {return}
             
-            let waterTempurlString = "https://sdf.ndbc.noaa.gov/sos/server.php?request=GetObservation&service=SOS&version=1.0.0&offering=urn:ioos:station:wmo:\(currentStation.station)&observedproperty=sea_water_temperature&responseformat=text/csv&eventtime=latest"
-            guard let waterTempurl = URL(string: waterTempurlString) else {return}
-            
-            buoyDataServiceRequestWith(waveurl: waveurl, waterTempurl: waterTempurl)
+            buoyDataServiceRequestWith(waveurl: waveurl)
         }
     }
 }
@@ -127,12 +104,6 @@ extension BuoyClient {
     //
     //MARK: - helpers to convert data
     //
-    
-    
-    func fahrenheitFromCelcius(temp : Double) -> (Double){
-        let tempInF = (9.0 / 5.0 * (temp)) + 32.0
-        return (tempInF)
-    }
     
     func directionFromDegrees(degrees : Float) -> String {
         let directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]

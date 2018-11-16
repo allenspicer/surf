@@ -181,7 +181,7 @@ extension HomeViewController {
 //MARK: Collection View Needs and Delegate Assignments
 //
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BuoyClientDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, SurfQualityDelegate{
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, BuoyClientDelegate, TideClientDelegate, WindClientDelegate, AirTempDelegate, WaterTempDelegate, SurfQualityDelegate{
     private func setDelegatesAndDataSources(){
         favoritesCollectionView.delegate = self
         proximalCollectionView.delegate = self
@@ -288,7 +288,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             let buoyClient = BuoyClient(snapshotId: self.idStationSelected, allStations: self.allStations)
             buoyClient.delegate = self
             buoyClient.createBuoyData()
-            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "quality" : false]
+            self.snapshotComponents = ["wave" : true, "tide" : false, "wind" : false, "air" : false, "water" : false, "quality" : false]
         }
     }
 }
@@ -370,6 +370,10 @@ extension HomeViewController {
         let airTempClient = AirTempClient(currentSnapshot: self.selectedSnapshot)
         airTempClient.delegate = self
         airTempClient.createAirTempData()
+        
+        let waterTempClient = WaterTempClient(currentSnapshot: self.selectedSnapshot)
+        waterTempClient.delegate = self
+        waterTempClient.createWaterTempData()
     }
     
     
@@ -402,6 +406,13 @@ extension HomeViewController {
         print("View Controller Has Air Temp Array with \(airTemps.count) air temps")
         selectedSnapshot = sender.addAirTempDataToSnapshot(selectedSnapshot, AirTempArray: airTemps)
         snapshotComponents["air"] = true
+        segueWhenAllComponenetsAreLoaded()
+    }
+    
+    func didFinishWaterTempTask(sender: WaterTempClient, snapshot: Snapshot) {
+        print("The Water Temp Client has returned a water temperature")
+        selectedSnapshot = sender.addWaterTempDataToSnapshot(snapshot, waterTemp: sender.waterTemp)
+        snapshotComponents["water"] = true
         segueWhenAllComponenetsAreLoaded()
     }
 }
