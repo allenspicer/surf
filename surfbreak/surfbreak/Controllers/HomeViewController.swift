@@ -411,7 +411,8 @@ extension HomeViewController {
     
     func didFinishWaterTempTask(sender: WaterTempClient, snapshot: Snapshot) {
         print("The Water Temp Client has returned a water temperature")
-
+        selectedSnapshot = sender.addWaterTempDataToSnapshot(snapshot, waterTemp: sender.waterTemp)
+        
     }
 }
 
