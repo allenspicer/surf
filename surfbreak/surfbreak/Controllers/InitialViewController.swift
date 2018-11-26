@@ -149,7 +149,7 @@ final class InitialViewController: UIViewController {
             if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
                 let alert = UIAlertController.init(title: "Location Not Found", message: "This app depends on location services to bring you relevant data. Please turn location services on so we can set your location.", preferredStyle: .alert)
                 let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                         return
                     }
                     if UIApplication.shared.canOpenURL(settingsUrl) {

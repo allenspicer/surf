@@ -71,10 +71,10 @@ class FavoriteFlowLayout: UICollectionViewFlowLayout {
     
     
     func setupCollectionView() {
-        self.collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+        self.collectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
         let collectionSize = collectionView!.bounds.size
         let xInset = (collectionSize.width - self.itemSize.width) / 2
-        self.sectionInset = UIEdgeInsetsMake(0, xInset, 0, xInset)
+        self.sectionInset = UIEdgeInsets.init(top: 0, left: xInset, bottom: 0, right: xInset)
     }
     
 }

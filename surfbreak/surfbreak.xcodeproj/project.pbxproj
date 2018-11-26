@@ -378,6 +378,7 @@
 				TargetAttributes = {
 					953F07E6210A575300E70E18 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					953F07FD210A575400E70E18 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -721,7 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -742,7 +743,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.break.surf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

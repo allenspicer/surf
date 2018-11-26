@@ -156,7 +156,7 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
         startTime = CFAbsoluteTimeGetCurrent()
         displayLink?.invalidate()
         displayLink = CADisplayLink(target: self, selector:#selector(handleDisplayLink(_:)))
-        displayLink?.add(to: RunLoop.current, forMode: .commonModes)
+        displayLink?.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
     }
     
     /// Stop the display link
