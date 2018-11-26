@@ -69,7 +69,7 @@ class SurfSnapshotView: UIScrollView {
         }
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
-        self.sendSubview(toBack: backgroundView)
+        self.sendSubviewToBack(backgroundView)
     }
     
     private func addMainStateRings(){

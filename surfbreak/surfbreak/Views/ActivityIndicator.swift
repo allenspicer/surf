@@ -64,7 +64,7 @@ class ActivityIndicatorView: UIView {
         backgroundView.image = #imageLiteral(resourceName: "Bkgd_main")
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
-        self.sendSubview(toBack: backgroundView)
+        self.sendSubviewToBack(backgroundView)
         
         return self
     }

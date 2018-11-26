@@ -76,7 +76,7 @@ class CircleView: UIView {
     
     func animateChangingCornerRadius (toValue: Any?, duration: TimeInterval) {
         let animation = CABasicAnimation(keyPath:"cornerRadius")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animation.fromValue = circle.layer.cornerRadius
         animation.toValue =  toValue
         animation.duration = duration

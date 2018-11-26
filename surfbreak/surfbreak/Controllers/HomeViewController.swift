@@ -220,7 +220,7 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
                 let cellCenter = cell.convert(cell.imageView.center, to: cell.superview?.superview)
                 transitionView = createViewForTransition()
                 self.view.addSubview(transitionView)
-                self.view.bringSubview(toFront: transitionView)
+                self.view.bringSubviewToFront(transitionView)
                 let centerPoint = CGPoint(x: self.view.center.x, y: cellCenter.y)
                 transitionView.center = centerPoint
                 transitionView.growCircleTo(850, duration: 0.8, completionBlock: {
