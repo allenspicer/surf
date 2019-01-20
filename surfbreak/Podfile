@@ -6,7 +6,7 @@ target 'surfbreak' do
   use_frameworks!
   
   pod 'Crashlytics', '~> 3.10.7'
-  pod 'Disk', '~> 0.3.3'
+  pod 'Disk', '~> 0.4.0'
   pod 'Firebase/Core'
   pod 'Fabric', '~> 1.7.11'
   pod 'Firebase/Performance'

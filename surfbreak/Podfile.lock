@@ -1,7 +1,7 @@
 PODS:
   - Crashlytics (3.10.9):
     - Fabric (~> 1.7.13)
-  - Disk (0.3.3)
+  - Disk (0.4.0)
   - Fabric (1.7.13)
   - Firebase/Core (5.11.0):
     - Firebase/CoreOnly
@@ -87,7 +87,7 @@ PODS:
 
 DEPENDENCIES:
   - Crashlytics (~> 3.10.7)
-  - Disk (~> 0.3.3)
+  - Disk (~> 0.4.0)
   - Fabric (~> 1.7.11)
   - Firebase/Core
   - Firebase/Performance
@@ -113,7 +113,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
-  Disk: d1f55cd61f6ca20f368232d0c6e37e3c3dfcb63e
+  Disk: ef2956657d5bb56034b38b29b352170165226440
   Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
@@ -129,6 +129,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 2f6a23698201aaa7037fd3e13a2b25444b5e8df9
+PODFILE CHECKSUM: df10356c706510d3d73d893450588dd833089cc3
 
 COCOAPODS: 1.5.3
