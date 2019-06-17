@@ -50,23 +50,9 @@ class SurfSnapshotView: UIScrollView {
     
     func setBackgroundGradient(){
         let backgroundView = UIImageView(frame: self.frame)
-        switch currentSnapShot.quality{
-        case 4:
-            backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
-            conditionString = "POOR CONDITIONS"
-        case 3:
-            backgroundView.image = #imageLiteral(resourceName: "Bkgd_3")
-            conditionString = "FAIR CONDITIONS"
-        case 2:
-            backgroundView.image = #imageLiteral(resourceName: "Bkgd_2")
-            conditionString = "GOOD CONDITIONS"
-        case 1:
-            backgroundView.image = #imageLiteral(resourceName: "Bkgd_1")
-            conditionString = "IDEAL CONDITIONS"
-        default:
-            backgroundView.image = #imageLiteral(resourceName: "Bkgd_4")
-            conditionString = "POOR CONDITIONS"
-        }
+        let condition = Condition.init(index: currentSnapShot.quality)
+        backgroundView.image = condition?.image
+        conditionString = condition?.title ?? "POOR CONDITIONS"
         backgroundView.contentMode = .center
         self.addSubview(backgroundView)
         self.sendSubviewToBack(backgroundView)
