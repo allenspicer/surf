@@ -21,7 +21,8 @@ final class InitialViewController: UIViewController {
     private var fallbackSnapshots : [Snapshot]? = nil
     
     override func viewDidLoad() {
-        //present identical screen to launch screen, then switch to activity indicator
+        
+        //present identical screen to launch screen and switch to activity indicator after timer
         startIntroScreenWithTimerToActivityIndicator()
         
         DispatchQueue.global(qos:.utility).async{
@@ -38,9 +39,9 @@ final class InitialViewController: UIViewController {
             //check persistence for saved snapshots
             self.getAndScrubAllPersistenceSnapshots()
             
-            //if there are no favorites
+            //if any favorites are saved
             if !self.componentsChecklist.isEmpty {
-                //for each favorite that does not have a snapshot
+                //for each favorite
                 for snapshotId in self.componentsChecklist.keys{
                     
                     //check persistence for records
