@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02D4743A1A7E92A5D6C82AB9 /* Pods_surfbreakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8096E4B82E233FB702BCD186 /* Pods_surfbreakTests.framework */; };
+		9532FACF22B71B51001503B3 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9532FACE22B71B51001503B3 /* Condition.swift */; };
 		95331BD0217043CE006345D6 /* PublicEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95331BCF217043CE006345D6 /* PublicEnums.swift */; };
 		95331BDA21753CAA006345D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95331BD921753CAA006345D6 /* GoogleService-Info.plist */; };
 		95331BDB21753CAA006345D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95331BD921753CAA006345D6 /* GoogleService-Info.plist */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		51FD2424FA41B446D5B4662C /* Pods-surfbreak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-surfbreak.debug.xcconfig"; path = "Pods/Target Support Files/Pods-surfbreak/Pods-surfbreak.debug.xcconfig"; sourceTree = "<group>"; };
 		8096E4B82E233FB702BCD186 /* Pods_surfbreakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_surfbreakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9532FACE22B71B51001503B3 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		95331BCF217043CE006345D6 /* PublicEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicEnums.swift; sourceTree = "<group>"; };
 		95331BD921753CAA006345D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		95331BDC2176481E006345D6 /* PlaceholderFavCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderFavCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		9592EC52210A5B5B004B0A82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9532FACE22B71B51001503B3 /* Condition.swift */,
 				959BD8792118CB3B0028F5F5 /* Favorite.swift */,
 				95B223982118EDA70060EDFD /* UserLocation.swift */,
 				9592EC56210A8064004B0A82 /* Snapshot.swift */,
@@ -534,6 +537,7 @@
 				957471A6211364BC0064DD3A /* Wind.swift in Sources */,
 				957471B0211392BC0064DD3A /* GradientView.swift in Sources */,
 				95A474892114B604006409C8 /* ProximalStation.swift in Sources */,
+				9532FACF22B71B51001503B3 /* Condition.swift in Sources */,
 				953F07ED210A575300E70E18 /* InitialViewController.swift in Sources */,
 				95B223992118EDA70060EDFD /* UserLocation.swift in Sources */,
 				957471AE211366AD0064DD3A /* SurfQuality.swift in Sources */,
