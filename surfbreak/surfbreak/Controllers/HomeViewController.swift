@@ -259,24 +259,29 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case is ProximalCollectionView:
-            let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as! ProxCollectionViewCell
-            let current = self.proximalData[indexPath.row]
-            cell.titleLabel.text = current.station.name
-            cell.titleLabel.addCharacterSpacing(kernValue: 1.3)
-            cell.distanceLabel.text = current.distanceToUser == 0 ? "Unknown Distance" : "\(current.distanceToUser)mi"
-            cell.distanceLabel.addCharacterSpacing(kernValue: 1.4)
-            return cell
-        case is FavoriteCollectionView:
-            if favoritesSnapshots.count < 1 {
-                let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderFavoriteCollectionViewCell", for: indexPath) as! PlaceholderFavCollectionViewCell
+            if let cell = proximalCollectionView.dequeueReusableCell(withReuseIdentifier: "ProximalCollectionViewCell", for: indexPath) as? ProxCollectionViewCell {
+                let current = self.proximalData[indexPath.row]
+                cell.titleLabel.text = current.station.name
+                cell.titleLabel.addCharacterSpacing(kernValue: 1.3)
+                cell.distanceLabel.text = current.distanceToUser == 0 ? "Unknown Distance" : "\(current.distanceToUser)mi"
+                cell.distanceLabel.addCharacterSpacing(kernValue: 1.4)
                 return cell
             }
-            let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavCollectionViewCell
-            cell.loadAllViews()
-            let snapshot = self.favoritesSnapshots[indexPath.row]
-            let snapshotName = snapshot.nickname == "" ? snapshot.stationName : snapshot.nickname
-            cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshotName, distanceFromUser: snapshot.distance)
-            return cell
+            fallthrough
+        case is FavoriteCollectionView:
+            if favoritesSnapshots.count < 1 {
+                if let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderFavoriteCollectionViewCell", for: indexPath) as? PlaceholderFavCollectionViewCell {
+                    return cell
+                }
+            }
+            if let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as? FavCollectionViewCell {
+                cell.loadAllViews()
+                let snapshot = self.favoritesSnapshots[indexPath.row]
+                let snapshotName = snapshot.nickname == "" ? snapshot.stationName : snapshot.nickname
+                cell.setCellContent(waveHeight: snapshot.waveHeight, waveFrequency: snapshot.period, quality: snapshot.quality, locationName: snapshotName, distanceFromUser: snapshot.distance)
+                return cell
+            }
+            fallthrough
         default:
             return UICollectionViewCell()
         }

@@ -124,13 +124,14 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     @objc func didSwipe(gesture: UIPanGestureRecognizer) {
+        guard let view = gesture.view else {return}
         let height = mainView.frame.height/2
         
         if gesture.state == .began || gesture.state == .changed {
             let translation = gesture.translation(in: mainView)
-            if(gesture.view!.center.y < (height * 1.5)) && (gesture.view!.center.y >= height){
-                gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: gesture.view!.center.y + translation.y)
-            }else if (gesture.view!.center.y >= (height * 1.5)){
+            if(view.center.y < (height * 1.5)) && (view.center.y >= height){
+                view.center = CGPoint(x: view.center.x, y: view.center.y + translation.y)
+            }else if (view.center.y >= (height * 1.5)){
                 //height has hit max boundary
                 let pop2 = SystemSoundID(1520)
                 AudioServicesPlaySystemSoundWithCompletion(pop2, {})
@@ -139,10 +140,10 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }
             gesture.setTranslation(CGPoint(x: 0, y: 0), in: mainView)
         }
+        
         if gesture.state == .ended {
-            
             UIView.animate(withDuration: 0.2, delay: 0,  options: .curveEaseInOut , animations: {
-                gesture.view!.center = CGPoint(x: gesture.view!.center.x, y: height)
+                view.center = CGPoint(x: view.center.x, y: height)
             }) { _ in
             }
         }
@@ -170,7 +171,8 @@ final class ViewController: UIViewController, UIGestureRecognizerDelegate {
     /// - Parameter displayLink: The display link.
     
     @objc func handleDisplayLink(_ displayLink: CADisplayLink) {
-        let elapsed = CFAbsoluteTimeGetCurrent() - startTime!
+        guard let startTime = startTime else {return}
+        let elapsed = CFAbsoluteTimeGetCurrent() - startTime
         var waveHeightFloat :CGFloat = 0.0
         let rounded = (currentSnapShot.waveHeight * 10).rounded() / 10
         waveHeightFloat = CGFloat(rounded * 10)
